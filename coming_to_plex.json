@@ -1,34 +1,34 @@
 [
   {
-        title: 'La mer au loin',
-        release_date: '2025-06-18',
-        plex_release: '18 Juin 2025',
-        tmdb_id: 1126731,
-        poster_path: '/nU9LCxgBQiDhd2ZQ8JNssW1UBkL.jpg',
-        trailer_key: 'dfcX69qwJqk'
+    "title": "La mer au loin",
+    "release_date": "2025-06-18",
+    "plex_release": "18 Juin 2025",
+    "tmdb_id": 1126731,
+    "poster_path": "/nU9LCxgBQiDhd2ZQ8JNssW1UBkL.jpg",
+    "trailer_key": "dfcX69qwJqk"
   },
   {
-        title: 'Strip-tease intégral',
-        release_date: '2025-06-18',
-        plex_release: '18 Juin 2025',
-        tmdb_id: 1103987,
-        poster_path: '/n1WDe4XNAGzm6lrwyo5PvX61U96.jpg',
-        trailer_key: '3sAB33OL0qA'
+    "title": "Strip-tease intégral",
+    "release_date": "2025-06-18",
+    "plex_release": "18 Juin 2025",
+    "tmdb_id": 1103987,
+    "poster_path": "/n1WDe4XNAGzm6lrwyo5PvX61U96.jpg",
+    "trailer_key": "3sAB33OL0qA"
   },
   {
-        title: 'Avec ou sans enfants ?',
-        release_date: '2025-06-19',
-        plex_release: '19 Juin 2025',
-        tmdb_id: 1108331,
-        poster_path: '/Ap9gsArLK21ciTatVg2QaKLmhAX.jpg',
-        trailer_key: 'q-I3yd9KGLU'
+    "title": "Avec ou sans enfants ?",
+    "release_date": "2025-06-19",
+    "plex_release": "19 Juin 2025",
+    "tmdb_id": 1108331,
+    "poster_path": "/Ap9gsArLK21ciTatVg2QaKLmhAX.jpg",
+    "trailer_key": "q-I3yd9KGLU"
   },
   {
-        title: 'Dominique',
-        release_date: '2025-06-19',
-        plex_release: '19 Juin 2025',
-        tmdb_id: 1144673,
-        poster_path: '/jvug7Esd89yNLJwGvUfeQ9j69cE.jpg',
-        trailer_key: 'mQqxeHdP5bg'
+    "title": "Dominique",
+    "release_date": "2025-06-19",
+    "plex_release": "19 Juin 2025",
+    "tmdb_id": 1144673,
+    "poster_path": "/jvug7Esd89yNLJwGvUfeQ9j69cE.jpg",
+    "trailer_key": "mQqxeHdP5bg"
   }
 ]
