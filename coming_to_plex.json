@@ -1,10 +1,26 @@
 [
   {
-    "title": "Délocalisés",
-    "release_date": "2025-07-10",
-    "plex_release": "10 Juillet 2025",
-    "tmdb_id": 1245678,
-    "poster_path": "/nzjeS5v4UoOfprRWQ6WIxIXWaiR.jpg",
-    "trailer_key": "JQDzUpyBvuE"
+    "title": "Lads",
+    "release_date": "2025-07-02",
+    "plex_release": "2 Juillet 2025",
+    "tmdb_id": 1245679,
+    "poster_path": "/gVDel3jezR5VJd4dvXgXrAwae0c.jpg",
+    "trailer_key": "nWbNNHg9YWk"
+  },
+ {
+    "title": "Le Secret de Khéops",
+    "release_date": "2025-07-02",
+    "plex_release": "2 Juillet 2025",
+    "tmdb_id": 1245680,
+    "poster_path": "/9mfnxGRTS8TMjhhoKMTM1RlVAQQ.jpg",
+    "trailer_key": "ZwwmEHy2NxU"
+  },
+ {
+    "title": "Prosper",
+    "release_date": "2025-07-02",
+    "plex_release": "2 Juillet 2025",
+    "tmdb_id": 1245681,
+    "poster_path": "/7siQLbBArdLKZ8Zz6Uz8C1hb7sI.jpg",
+    "trailer_key": "LmXCBakc4QQ"
   }
 ]
