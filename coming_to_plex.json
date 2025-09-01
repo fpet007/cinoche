@@ -6,5 +6,21 @@
     "tmdb_id": 1078605,
     "poster_path": "/3eRJV97oZDY6LORwPNdWlfdPLnd.jpg",
     "trailer_key": "IU19tsMKi2Q"
-  }
+  },
+  {
+    "title": "Eden",
+    "release_date": "2025-09-19",
+    "plex_release": "19 Septembre 2025",
+    "tmdb_id": 1042834,
+    "poster_path": "/jbFEESMVbpJU8IjZBjiWGJdEsxR.jpg",
+    "trailer_key": "nC9nM5nBiJ0"
+  },
+  {
+    "title": "Americana",
+    "release_date": "2025-09-16",
+    "plex_release": "16 Septembre 2025",
+    "tmdb_id": 934456,
+    "poster_path": "/FgViA2C8C3iYxuDvdxAd4VsCiR.jpg",
+    "trailer_key": "ulZoLec80fs"
+   }
 ]
