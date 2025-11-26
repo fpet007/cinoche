@@ -1,19 +1,26 @@
 [
-  {
-    "title": "Smashing Machine",
-    "release_date": "2025-11-04",
-    "plex_release": "4 Novembre 2025",
-    "tmdb_id": 760329,
-    "poster_path": "/nDLjwQHKbtJTNYbTdhjIbTuBfgG.jpg",
-    "trailer_key": "uDU-yYSa4lY"
-  },
-  {
-    "title": "Une bataille après l'autre",
-    "release_date": "2025-11-25",
-    "plex_release": "25 Novembre 2025",
-    "tmdb_id": 1054867,
-    "poster_path": "/qOlG4JqEdK3qK42WwWt8SlxlnIt.jpg",
-    "trailer_key": "FxiaNwYr_cQ"
-  }
+      {
+        "title": "Tron: Ares",
+        "release_date": "2025-12-02",
+        "plex_release": "2 Décembre 2025",
+        "tmdb_id": 533533,
+        "poster_path": "/tkILExgVXhNLoxy4KNgCk9PC4lU.jpg",
+        "trailer_key": "KTVi0I-7uRE"
+      },
+      {
+        "title": "Predator: Badlands",
+        "release_date": "2025-12-09",
+        "plex_release": "9 Décembre 2025",
+        "tmdb_id": 1242898,
+        "poster_path": "/empQGO0pCVTndCpihyVpNfaLebl.jpg",
+        "trailer_key": "R2n_TZgmmPo"
+      },
+      {
+        "title": "Insaisissables 3",
+        "release_date": "2025-12-16",
+        "plex_release": "16 Décembre 2025",
+        "tmdb_id": 425274,
+        "poster_path": "/rfjuf6kNLVnH8qOk6UZJBHQHKlF.jpg",
+        "trailer_key": "1dXBv54N5FY"
+      }
 ]
-
