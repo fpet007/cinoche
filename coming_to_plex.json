@@ -1,11 +1,10 @@
 [
-      {
-        "title": "The Running Man",
-        "release_date": "2025-12-16",
-        "plex_release": "16 Décembre 2025",
-        "tmdb_id": 798645,
-        "poster_path": "/7IwZANZ0V9ygf0LM7NsRVeIKZJR.jpg",
-        "trailer_key": "dxKk_QRfQzM"
-      }
+  {
+    "title": "The Running Man",
+    "release_date": "2025-12-16",
+    "plex_release": "16 Décembre 2025",
+    "tmdb_id": 798645,
+    "poster_path": "/7IwZANZ0V9ygf0LM7NsRVeIKZJR.jpg",
+    "trailer_key": "dxKk_QRfQzM"
+  }
 ]
-
