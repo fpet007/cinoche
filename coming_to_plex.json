@@ -1,10 +1,18 @@
 [
   {
-    "title": "Sisu : le chemin de la vengeance",
-    "release_date": "2025-12-13",
-    "plex_release": "13 Décembre 2025",
-    "tmdb_id": 1223601,
-    "poster_path": "/ia3sN97RPKWeFEZlrlJvMqP9mt6.jpg",
-    "trailer_key": "7lTKffZL5jU"
+    "title": "Predator: Badlands",
+    "release_date": "2025-12-23",
+    "plex_release": "23 Décembre 2025",
+    "tmdb_id": 1242898,
+    "poster_path": "/empQGO0pCVTndCpihyVpNfaLebl.jpg",
+    "trailer_key": "R2n_TZgmmPo"
+  },
+  {
+    "title": "Five Nights at Freddy’s 2",
+    "release_date": "2025-12-23",
+    "plex_release": "23 Décembre 2025",
+    "tmdb_id": 1228246,
+    "poster_path": "/enRyaRthhsuAqBwzYKqb7VfCJg.jpg",
+    "trailer_key": "JMY_CLX84pk"
   }
 ]
