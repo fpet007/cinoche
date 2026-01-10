@@ -1,18 +1,26 @@
 [
   {
-    "title": "Predator: Badlands",
-    "release_date": "2026-01-06",
-    "plex_release": "6 Janvier 2026",
-    "tmdb_id": 1242898,
-    "poster_path": "/empQGO0pCVTndCpihyVpNfaLebl.jpg",
-    "trailer_key": "R2n_TZgmmPo"
+    "title": "Le sang et la boue",
+    "release_date": "2026-01-13",
+    "plex_release": "13 Janvier 2026",
+    "tmdb_id": 1108782,
+    "poster_path": "/nrlLcvB9xi2MjXP8UjGEIygkEoE.jpg",
+    "trailer_key": "lQqmOjPDlWg"
   },
   {
-    "title": "Bob l'éponge, le film : Un pour tous, tous pirates !",
-    "release_date": "2026-01-20",
-    "plex_release": "20 Janvier 2026",
-    "tmdb_id": 991494,
-    "poster_path": "/1WSOiU7XmLoEnYyADAEMQfGe9eN.jpg",
-    "trailer_key": "edh6n3VSqwg"
+    "title": "Dust Bunny",
+    "release_date": "2026-01-13",
+    "plex_release": "13 Janvier 2026",
+    "tmdb_id": 1043197,
+    "poster_path": "/jMcT1Quf34qZWNNE1rAqep8f9DW.jpg",
+    "trailer_key": "lQqmOjPDlWg"
+  },
+  {
+    "title": "Rental Family",
+    "release_date": "2026-01-13",
+    "plex_release": "13 Janvier 2026",
+    "tmdb_id": 1208348,
+    "poster_path": "/dGRZ55srJoK6TcjPTfHe701UWq0.jpg",
+    "trailer_key": "WQYbHhdYxC4"
   }
 ]
