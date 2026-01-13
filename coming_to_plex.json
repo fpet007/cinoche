@@ -1,26 +1,27 @@
 [
   {
-    "title": "Le sang et la boue",
-    "release_date": "2026-01-13",
-    "plex_release": "13 Janvier 2026",
-    "tmdb_id": 1108782,
-    "poster_path": "/nrlLcvB9xi2MjXP8UjGEIygkEoE.jpg",
-    "trailer_key": "lQqmOjPDlWg"
-  },
-  {
-    "title": "Dust Bunny",
-    "release_date": "2026-01-13",
-    "plex_release": "13 Janvier 2026",
-    "tmdb_id": 1043197,
-    "poster_path": "/jMcT1Quf34qZWNNE1rAqep8f9DW.jpg",
-    "trailer_key": "lQqmOjPDlWg"
-  },
-  {
-    "title": "Rental Family",
-    "release_date": "2026-01-13",
-    "plex_release": "13 Janvier 2026",
-    "tmdb_id": 1208348,
-    "poster_path": "/dGRZ55srJoK6TcjPTfHe701UWq0.jpg",
-    "trailer_key": "WQYbHhdYxC4"
-  }
+        "title": "Rembrandt",
+        "release_date": "2026-01-14",
+        "plex_release": "14 Janvier 2026",
+        "tmdb_id": 1001043,
+        "poster_path": "/lufarLotFboQC86LRH5wUVh7JMw.jpg",
+        "trailer_key": "K_T6lQVPPXs"
+      },
+      {
+        "title": "Regarde",
+        "release_date": "2026-01-15",
+        "plex_release": "15 Janvier 2026",
+        "tmdb_id": 1242426,
+        "poster_path": "/80XxGJZJNryIfffPF1g2iv6Vcgt.jpg",
+        "trailer_key": "9GRIQLr1o-U"
+      },
+      {
+        "title": "Renoir",
+        "release_date": "2026-01-15",
+        "plex_release": "15 Janvier 2026",
+        "tmdb_id": 1392527,
+        "poster_path": "/nmPiNvaGFluHNH0ZNi4EWtk06DA.jpg",
+        "trailer_key": "8XMZnaK9eQQ"
+      }
 ]
+
