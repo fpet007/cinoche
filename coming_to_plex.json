@@ -1,29 +1,38 @@
 [
   {
-        "title": "Super Grand Prix",
-        "release_date": "2026-01-20",
-        "plex_release": "20 Janvier 2026",
-        "tmdb_id": 1316147,
-        "poster_path": "/8hiiGCVdJmfOspFodHOSOy9xCVl.jpg",
-        "trailer_key": "7294y4arzhE"
+        "title": "Classe moyenne",
+        "release_date": "2026-01-22",
+        "plex_release": "22 Janvier 2026",
+        "tmdb_id": 1313211,
+        "poster_path": "/2TznRLhTEzMVS8JibDU5tKzTMkl.jpg",
+        "trailer_key": "FZzjItbKqOI"
       },
       {
-        "title": "Nuremberg",
-        "release_date": "2026-01-20",
-        "plex_release": "20 Janvier 2026",
-        "tmdb_id": 1214931,
-        "poster_path": "/6iYLH0TjqCyEkCYadpLUMHr9S8J.jpg",
-        "trailer_key": "A7ZUQRHlJnk"
+        "title": "Le secret des mésanges",
+        "release_date": "2026-01-22",
+        "plex_release": "22 Janvier 2026",
+        "tmdb_id": 989246,
+        "poster_path": "/3y4ht5GM03SuNSbNuVz60i32MDf.jpg",
+        "trailer_key": "pnNQ74iNNyY"
       },
       {
-        "title": "L’Homme qui a vu l’ours qui a vu l’homme",
-        "release_date": "2026-01-21",
-        "plex_release": "21 Janvier 2026",
-        "tmdb_id": 1312312,
-        "poster_path": "/nVtJKQ034b3blVitW3DIClf2r83.jpg",
-        "trailer_key": "yBz4F98uwG8"
+        "title": "Moi qui t’aimais",
+        "release_date": "2026-01-29",
+        "plex_release": "29 Janvier 2026",
+        "tmdb_id": 1383266,
+        "poster_path": "/5di70jwhpO98IcBIBiFvIrNUr1R.jpg",
+        "trailer_key": "VmyJqSkxWUo"
+      },
+      {
+        "title": "Stups",
+        "release_date": "2026-01-30",
+        "plex_release": "30 Janvier 2026",
+        "tmdb_id": 1456479,
+        "poster_path": "/k3MZLdhrik4RUaLMoLcVWHH3Ra5.jpg",
+        "trailer_key": "OGuqIZZzmo4"
       }
 ]
+
 
 
 
