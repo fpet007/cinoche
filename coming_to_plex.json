@@ -1,10 +1,26 @@
 [
   {
-        "title": "Primate",
-        "release_date": "2026-02-10",
-        "plex_release": "10 Février 2026",
-        "tmdb_id": 1315303,
-        "poster_path": "/seHZ5tcGX08Bprm3qvwzFwSd39r.jpg",
-        "trailer_key": "jeWaSH_qDbs"
+        "title": "Marcel et Monsieur Pagnol",
+        "release_date": "2026-02-14",
+        "plex_release": "14 Février 2026",
+        "tmdb_id": 840873,
+        "poster_path": "/3kvKO2pcUOKF180ySMx4xmiVH9u.jpg",
+        "trailer_key": "BjhZdM-9drY"
+      },
+      {
+        "title": "Reconnu coupable",
+        "release_date": "2026-02-17",
+        "plex_release": "17 Février 2026",
+        "tmdb_id": 1236153,
+        "poster_path": "/fk5igdZhR9p3N9t9Y7zM6UX2XOJ.jpg",
+        "trailer_key": "Lkiqm5JvTOE"
+      },
+      {
+        "title": "28 ans plus tard : Le Temple des morts",
+        "release_date": "2026-02-17",
+        "plex_release": "17 Février 2026",
+        "tmdb_id": 1272837,
+        "poster_path": "/9Q1KexhHbHJFbiKjV4PUeMFt64N.jpg",
+        "trailer_key": "1cjnNE8SB2o"
       }
 ]
