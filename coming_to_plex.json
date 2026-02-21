@@ -1,26 +1,19 @@
 [
   {
-        "title": "Marcel et Monsieur Pagnol",
-        "release_date": "2026-02-14",
-        "plex_release": "14 Février 2026",
-        "tmdb_id": 840873,
-        "poster_path": "/3kvKO2pcUOKF180ySMx4xmiVH9u.jpg",
-        "trailer_key": "BjhZdM-9drY"
+        "title": "Le secret des mésanges",
+        "release_date": "2026-02-22",
+        "plex_release": "22 Février 2026",
+        "tmdb_id": 989246,
+        "poster_path": "/3y4ht5GM03SuNSbNuVz60i32MDf.jpg",
+        "trailer_key": "pnNQ74iNNyY"
       },
       {
-        "title": "Reconnu coupable",
-        "release_date": "2026-02-17",
-        "plex_release": "17 Février 2026",
-        "tmdb_id": 1236153,
-        "poster_path": "/fk5igdZhR9p3N9t9Y7zM6UX2XOJ.jpg",
-        "trailer_key": "Lkiqm5JvTOE"
-      },
-      {
-        "title": "28 ans plus tard : Le Temple des morts",
-        "release_date": "2026-02-17",
-        "plex_release": "17 Février 2026",
-        "tmdb_id": 1272837,
-        "poster_path": "/9Q1KexhHbHJFbiKjV4PUeMFt64N.jpg",
-        "trailer_key": "1cjnNE8SB2o"
+        "title": "Shelter",
+        "release_date": "2026-02-22",
+        "plex_release": "22 Février 2026",
+        "tmdb_id": 1290821,
+        "poster_path": "/9IMI2957lMIQ0ovHspmpJtMN3nu.jpg",
+        "trailer_key": "NARdg5Qz3zY"
       }
 ]
+
