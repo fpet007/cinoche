@@ -1,19 +1,28 @@
 [
   {
-        "title": "Le secret des mésanges",
-        "release_date": "2026-02-22",
-        "plex_release": "22 Février 2026",
-        "tmdb_id": 989246,
-        "poster_path": "/3y4ht5GM03SuNSbNuVz60i32MDf.jpg",
-        "trailer_key": "pnNQ74iNNyY"
+        "title": "L'Étranger",
+        "release_date": "2026-03-01",
+        "plex_release": "1 Mars 2026",
+        "tmdb_id": 1429348,
+        "poster_path": "/1O6jXFzPO3LBThgmrJDqoUZ61Ik.jpg",
+        "trailer_key": "PJANslPWsh0"
       },
       {
-        "title": "Shelter",
-        "release_date": "2026-02-22",
-        "plex_release": "22 Février 2026",
-        "tmdb_id": 1290821,
-        "poster_path": "/9IMI2957lMIQ0ovHspmpJtMN3nu.jpg",
-        "trailer_key": "NARdg5Qz3zY"
+        "title": "Le Sifflet",
+        "release_date": "2026-03-03",
+        "plex_release": "3 Mars 2026",
+        "tmdb_id": 1193501,
+        "poster_path": "/8fxmvHpLAt8nZatuqy0DPBG7XdV.jpg",
+        "trailer_key": "dYYzD-NjGiM"
+      },
+      {
+        "title": "T’as pas changé",
+        "release_date": "2026-03-05",
+        "plex_release": "5 Mars 2026",
+        "tmdb_id": 1302848,
+        "poster_path": "/1FFRm0hJzB7bOyGVkBH1DGXhw1Q.jpg",
+        "trailer_key": "jJBSQ5EperU"
       }
 ]
+
 
