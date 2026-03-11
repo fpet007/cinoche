@@ -1,35 +1,36 @@
 [
   {
-        "title": "Les Intrus : Chapitre 3",
-        "release_date": "2026-03-06",
-        "plex_release": "6 Mars 2026",
-        "tmdb_id": 1010755,
-        "poster_path": "/yPHwX78mcwJw3I6YOJ9qh2wQBFr.jpg",
-        "trailer_key": "B2fZEIHamVs"
-      },
-      {
-        "title": "Les aigles de la république",
-        "release_date": "2026-03-11",
-        "plex_release": "11 Mars 2026",
-        "tmdb_id": 1220566,
-        "poster_path": "/aohnANrzvGo2WkZsuHqinQhKkwU.jpg",
-        "trailer_key": "2_uBrWb8bWo"
-      },
-      {
-        "title": "Le Gang des Amazones",
-        "release_date": "2026-03-11",
-        "plex_release": "11 Mars 2026",
-        "tmdb_id": 1266816,
-        "poster_path": "/nkcOY9SMzYbaHlf04Ai5WxlglRL.jpg",
-        "trailer_key": "pYaW-PCEEqo"
-      },
-      {
-        "title": "L'Incroyable femme des neiges",
+        "title": "La bonne étoile",
         "release_date": "2026-03-12",
         "plex_release": "12 Mars 2026",
-        "tmdb_id": 1221711,
-        "poster_path": "/t4z9IUdnpDGdvK3UfOrzRLS1WrC.jpg",
-        "trailer_key": "QIPcokpcphs"
+        "tmdb_id": 1255778,
+        "poster_path": "/hurLECr5mu4QA2NuDIKp5Z7GXDS.jpg",
+        "trailer_key": "j-G0rpTzdXo"
+      },
+      {
+        "title": "Les Rêveurs",
+        "release_date": "2026-03-12",
+        "plex_release": "12 Mars 2026",
+        "tmdb_id": 1221724,
+        "poster_path": "/v9xNYxNxh3Dj3nWLTp40sUz6vKQ.jpg",
+        "trailer_key": "2JItttYeVFk"
+      },
+      {
+        "title": "On vous croit",
+        "release_date": "2026-03-19",
+        "plex_release": "19 Mars 2026",
+        "tmdb_id": 1091196,
+        "poster_path": "/igXPchdekOO4oKOlaatfkj04qZL.jpg",
+        "trailer_key": "Eirqx1xq2YY"
+      },
+      {
+        "title": "Dossier 137",
+        "release_date": "2026-03-25",
+        "plex_release": "25 Mars 2026",
+        "tmdb_id": 1294698,
+        "poster_path": "/frEovFFQ6CcGnAPmtLRAKRLoPa1.jpg",
+        "trailer_key": "Ll17lAq0MWY"
       }
 ]
+
 
