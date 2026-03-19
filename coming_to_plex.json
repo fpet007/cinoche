@@ -1,28 +1,4 @@
 [
-  {
-        "title": "La bonne étoile",
-        "release_date": "2026-03-12",
-        "plex_release": "12 Mars 2026",
-        "tmdb_id": 1255778,
-        "poster_path": "/hurLECr5mu4QA2NuDIKp5Z7GXDS.jpg",
-        "trailer_key": "j-G0rpTzdXo"
-      },
-      {
-        "title": "Les Rêveurs",
-        "release_date": "2026-03-12",
-        "plex_release": "12 Mars 2026",
-        "tmdb_id": 1221724,
-        "poster_path": "/v9xNYxNxh3Dj3nWLTp40sUz6vKQ.jpg",
-        "trailer_key": "2JItttYeVFk"
-      },
-      {
-        "title": "On vous croit",
-        "release_date": "2026-03-19",
-        "plex_release": "19 Mars 2026",
-        "tmdb_id": 1091196,
-        "poster_path": "/igXPchdekOO4oKOlaatfkj04qZL.jpg",
-        "trailer_key": "Eirqx1xq2YY"
-      },
       {
         "title": "Dossier 137",
         "release_date": "2026-03-25",
@@ -30,6 +6,21 @@
         "tmdb_id": 1294698,
         "poster_path": "/frEovFFQ6CcGnAPmtLRAKRLoPa1.jpg",
         "trailer_key": "Ll17lAq0MWY"
+      },
+      {
+        "title": "Avatar : De feu et de cendres",
+        "release_date": "2026-03-24",
+        "plex_release": "24 Mars 2026",
+        "tmdb_id": 83533,
+        "poster_path": "/5BnOt0PRymp5mXuoKv1unQ9x8I8.jpg",
+        "trailer_key": "Zegl3vxOPjM"
+      },
+      {
+        "title": "Scream 7",
+        "release_date": "2026-03-31",
+        "plex_release": "31 Mars 2026",
+        "tmdb_id": 1159559,
+        "poster_path": "/j6Y7vqULt8tRlXVFXHK5aj3nCo4.jpg",
+        "trailer_key": "OpfQIv7lOmg"
       }
 ]
-
