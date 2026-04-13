@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cinoche FR - Streaming de Films</title>
+<style>
+  body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #141414;
+    color: #ffffff;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  /* Header & Recherche */
+  .header {
+    background-color: #000000;
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+  }
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  .logo {
+    font-size: 26px;
+    font-weight: bold;
+    color: #e50914;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .search-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  .search-bar {
+    display: flex;
+    align-items: center;
+    background: #2b2b2b;
+    border-radius: 4px;
+    padding: 5px 10px;
+    border: 1px solid transparent;
+    transition: border 0.3s;
+  }
+  .search-bar:focus-within {
+    border: 1px solid #e50914;
+  }
+  .search-input {
+    background: transparent;
+    padding: 8px;
+    border: none;
+    color: white;
+    width: 250px;
+    outline: none;
+    font-size: 14px;
+  }
+  .search-options {
+    display: flex;
+    gap: 10px;
+    margin-top: 5px;
+    font-size: 12px;
+    color: #bbb;
+  }
+  .search-options label {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  /* Catégories */
+  .categories {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 25px 0;
+    flex-wrap: wrap;
+  }
+  .category-button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .category-button:hover, .category-button.active {
+    background-color: #e50914;
+    transform: translateY(-2px);
+  }
+
+  /* Grille de Films */
+  .movie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+  }
+  .movie-card {
+    background-color: #1f1f1f;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+  }
+  .movie-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  }
+  .movie-poster {
+    width: 100%;
+    aspect-ratio: 2/3;
+    object-fit: cover;
+    background-color: #333;
+    display: block;
+  }
+  .movie-info {
+    padding: 12px;
+  }
+  .movie-title {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .movie-plex-release {
+    color: #ffa500;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  .movie-rating {
+    color: #ffd700;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 13px;
+  }
+
+  /* MODAL AJUSTÉ POUR LA VISIBILITÉ */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.95);
+    backdrop-filter: blur(5px);
+    overflow: hidden; /* Empêche le scroll de toute la page */
+  }
+  .modal-content {
+    background-color: #181818;
+    margin: 2vh auto; /* 2% de la hauteur de l'écran */
+    padding: 0;
+    border-radius: 12px;
+    max-width: 850px;
+    width: 95%;
+    max-height: 94vh; /* Prend max 94% de la hauteur de l'écran */
+    overflow-y: auto; /* SCROLL INTERNE SI TROP LONG */
+    position: relative;
+    box-shadow: 0 0 40px rgba(0,0,0,0.8);
+  }
+  /* Style de la barre de scroll interne */
+  .modal-content::-webkit-scrollbar {
+    width: 8px;
+  }
+  .modal-content::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 10px;
+  }
+  .modal-content::-webkit-scrollbar-thumb:hover {
+    background: #e50914;
+  }
+
+  .close {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    color: #fff;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10;
+    text-shadow: 0 0 10px rgba(0,0,0,0.8);
+    transition: color 0.3s;
+  }
+  .close:hover {
+    color: #e50914;
+  }
+  .video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    background-color: #000;
+  }
+  .video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .movie-details {
+    padding: 25px; /* Réduit un peu pour gagner de la place */
+    line-height: 1.5;
+  }
+  .movie-details h2 {
+    margin-top: 0;
+    font-size: 24px;
+    color: #e50914;
+    margin-bottom: 15px;
+  }
+  .detail-grid {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 15px;
+    color: #aaa;
+    font-size: 13px;
+  }
+  .detail-label {
+    color: #fff;
+    font-weight: bold;
+  }
+  .synopsis {
+    margin-top: 10px;
+    color: #eee;
+    font-size: 14px;
+    border-top: 1px solid #333;
+    padding-top: 15px;
+  }
+</style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">Cinoche FR</div>
+      <div class="search-container">
+        <div class="search-bar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="text" id="searchInput" class="search-input" placeholder="Recherche instantanée...">
+        </div>
+        <div class="search-options">
+          <label><input type="radio" name="searchType" value="movie" checked> Films</label>
+          <label><input type="radio" name="searchType" value="tv"> Séries</label>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="categories" id="categories">
+      <button class="category-button active" data-category="popular">Films Populaires</button>
+      <button class="category-button" data-category="popular_series">Séries populaires</button>
+      <button class="category-button" data-category="upcoming">À venir au cinéma</button>
+      <button class="category-button" data-category="coming_to_plex">À venir sur Plex</button>
+      <a href="https://discord.gg/mej5QrpnNb" target="_blank" class="category-button">Nous rejoindre</a>
+    </div>
+    
+    <div id="statusMessage" style="text-align: center; color: #888; display: none; margin-bottom: 20px; font-size: 14px;"></div>
+    
+    <div class="movie-grid" id="movieGrid"></div>
+  </div>
+
+  <div id="movieModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div class="video-container">
+        <iframe id="movieTrailer" src="" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <div class="movie-details" id="movieDetails"></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+document.addEventListener('DOMContentLoaded', function () {
+  const API_KEY = '3fd2be6f0c70a2a598f084ddfb75487c';
+  const BASE_URL = 'https://api.themoviedb.org/3';
+  const IMG_URL = 'https://image.tmdb.org/t/p/w500';
+
+  const plexMovies = [
+    { "title": "Les enfants vont bien", "plex_release": "2 Avril 2026", "tmdb_id": 1277882, "poster_path": "/yNtWCh8HyamzUStLQdEgJ7xxBPX.jpg" },
+    { "title": "The Shadow's Edge", "plex_release": "4 Avril 2026", "tmdb_id": 1419406, "poster_path": "/t1PFVsGYdUHtPv0Xowoc9b4PAap.jpg" },
+    { "title": "La Condition", "plex_release": "7 Avril 2026", "tmdb_id": 1119548, "poster_path": "/5yxwpcK0OHR0fBB6CBS80YWHoAC.jpg" },
+    { "title": "À la poursuite du Père Noël !", "plex_release": "9 Avril 2026", "tmdb_id": 1432812, "poster_path": "/jQev7aQ6iVJnR0BAliIoxy0kuSL.jpg" },
+    { "title": "Chasse gardée 2", "plex_release": "9 Avril 2026", "tmdb_id": 1437985, "poster_path": "/9PJrHGp41hRTq2kkPWU2j6zzjat.jpg" },
+    { "title": "Louise", "plex_release": "10 Avril 2026", "tmdb_id": 1197125, "poster_path": "/62GcSVw9fE8paRDTCHDycZvQ26p.jpg" },
+    { "title": "Animal Totem", "plex_release": "10 Avril 2026", "tmdb_id": 1266816, "poster_path": "/5mQOefrjyMEq8qaFagEVX2i4SH8.jpg" },
+    { "title": "Qui brille au combat", "plex_release": "15 Avril 2026", "tmdb_id": 1221711, "poster_path": "/yv7esvFjaIbCzu3LViHAFmXviCB.jpg" },
+    { "title": "Greenland : Migration", "plex_release": "15 Avril 2026", "tmdb_id": 840464, "poster_path": "/mu05wZK0MH2bYmuO7hXwZECqC1X.jpg" },
+    { "title": "La pire mère au monde", "plex_release": "16 Avril 2026", "tmdb_id": 1235277, "poster_path": "/aM3ZwratInjyFyckQzXE4owylgk.jpg" },
+    { "title": "L’Âme Idéale", "plex_release": "17 Avril 2026", "tmdb_id": 1166170, "poster_path": "/ws9wCKrqMsS700OOScv8L52wJMa.jpg" },
+    { "title": "Projet dernière chance", "plex_release": "28 Avril 2026", "tmdb_id": 687163, "poster_path": "/wzyy8ZrsuHfAt4iz4iH3rT0tdoT.jpg" }
+  ];
+
+  async function fetchMovies(category = 'popular') {
+    try {
+      let items = [];
+      const status = document.getElementById('statusMessage');
+      status.style.display = 'none';
+
+      if (category === 'coming_to_plex') {
+        items = plexMovies;
+      } else if (category === 'popular_series') {
+        const res = await axios.get(`${BASE_URL}/tv/popular?api_key=${API_KEY}&language=fr-FR`);
+        items = res.data.results.map(i => ({...i, media_type: 'tv'}));
+      } else {
+        const res = await axios.get(`${BASE_URL}/movie/${category}?api_key=${API_KEY}&language=fr-FR&region=FR`);
+        items = res.data.results.map(i => ({...i, media_type: 'movie'}));
+      }
+      displayMovies(items, category);
+    } catch (err) {
+      console.error('Erreur fetch:', err);
+    }
+  }
+
+  function displayMovies(items, category) {
+    const grid = document.getElementById('movieGrid');
+    grid.innerHTML = '';
+
+    if (items.length === 0) {
+      grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #666; margin-top: 50px;">Aucun résultat trouvé.</p>';
+      return;
+    }
+
+    items.forEach(item => {
+      const card = document.createElement('div');
+      card.classList.add('movie-card');
+      
+      const title = item.title || item.name;
+      const poster = item.poster_path ? IMG_URL + item.poster_path : 'https://via.placeholder.com/500x750?text=Pas+d%27image';
+      const isTV = item.media_type === 'tv' || category === 'popular_series';
+      
+      let html = `<img src="${poster}" alt="${title}" class="movie-poster">
+                  <div class="movie-info">
+                    <div class="movie-title">${title}</div>`;
+      
+      if (category === 'coming_to_plex' && item.plex_release) {
+        html += `<div class="movie-plex-release">${item.plex_release}</div>`;
+      } else {
+        const rating = item.vote_average ? item.vote_average.toFixed(1) : 'N/A';
+        html += `<div class="movie-rating">
+                  <svg style="width:14px;height:14px" viewBox="0 0 24 24"><path fill="#ffd700" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                  ${rating}
+                 </div>`;
+      }
+      html += `</div>`;
+      card.innerHTML = html;
+
+      card.addEventListener('click', () => {
+        openDetailsModal(item.tmdb_id || item.id, isTV ? 'tv' : 'movie');
+      });
+      grid.appendChild(card);
+    });
+  }
+
+  async function openDetailsModal(id, type = 'movie') {
+    const modal = document.getElementById('movieModal');
+    const trailerEl = document.getElementById('movieTrailer');
+    const detailsEl = document.getElementById('movieDetails');
+
+    detailsEl.innerHTML = '<p style="padding:20px; text-align:center">Chargement des informations...</p>';
+    trailerEl.src = '';
+    modal.style.display = 'block';
+
+    try {
+      const res = await axios.get(`${BASE_URL}/${type}/${id}?api_key=${API_KEY}&append_to_response=videos&language=fr-FR`);
+      const data = res.data;
+
+      let trailerKey = '';
+      if (data.videos && data.videos.results) {
+        const trailer = data.videos.results.find(v => v.type === 'Trailer' && v.site === 'YouTube') || 
+                        data.videos.results.find(v => v.site === 'YouTube');
+        trailerKey = trailer ? trailer.key : '';
+      }
+
+      trailerEl.src = trailerKey ? `https://www.youtube.com/embed/${trailerKey}?autoplay=1` : '';
+
+      const title = data.title || data.name;
+      const release = data.release_date || data.first_air_date || 'Inconnue';
+      const runtime = data.runtime ? `${data.runtime} min` : (data.episode_run_time && data.episode_run_time.length ? `${data.episode_run_time[0]} min` : 'N/A');
+      const note = data.vote_average ? `${data.vote_average.toFixed(1)}/10` : 'N/A';
+      const overview = data.overview || "Synopsis non disponible en français.";
+
+      detailsEl.innerHTML = `
+        <h2>${title}</h2>
+        <div class="detail-grid">
+          <div><span class="detail-label">Sortie :</span> ${release}</div>
+          <div><span class="detail-label">Durée :</span> ${runtime}</div>
+          <div><span class="detail-label">Note :</span> ${note}</div>
+        </div>
+        <div class="synopsis">${overview}</div>
+      `;
+    } catch (err) {
+      detailsEl.innerHTML = '<p style="padding:20px; text-align:center">Impossible de charger les détails.</p>';
+    }
+  }
+
+  function debounce(func, timeout = 300) {
+    let timer;
+    return (...args) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => { func.apply(this, args); }, timeout);
+    };
+  }
+
+  const handleSearch = debounce(async () => {
+    const query = document.getElementById('searchInput').value.trim();
+    const type = document.querySelector('input[name="searchType"]:checked').value;
+    const status = document.getElementById('statusMessage');
+
+    if (query.length < 2) {
+      if (query.length === 0) fetchMovies('popular');
+      return;
+    }
+
+    document.querySelectorAll('.category-button').forEach(btn => btn.classList.remove('active'));
+    status.style.display = 'block';
+    status.innerText = `Résultats pour : "${query}"`;
+
+    try {
+      const res = await axios.get(`${BASE_URL}/search/${type}?api_key=${API_KEY}&query=${query}&language=fr-FR`);
+      displayMovies(res.data.results.map(i => ({...i, media_type: type})), 'search');
+    } catch (err) {
+      console.error('Erreur recherche:', err);
+    }
+  });
+
+  document.getElementById('searchInput').addEventListener('input', handleSearch);
+  
+  document.querySelectorAll('input[name="searchType"]').forEach(radio => {
+    radio.addEventListener('change', () => {
+      if (document.getElementById('searchInput').value.trim().length >= 2) handleSearch();
+    });
+  });
+
+  document.querySelectorAll('.category-button').forEach(button => {
+    button.addEventListener('click', function() {
+      if (this.dataset.category) {
+        document.getElementById('searchInput').value = ''; 
+        document.querySelectorAll('.category-button').forEach(btn => btn.classList.remove('active'));
+        this.classList.add('active');
+        fetchMovies(this.dataset.category);
+      }
+    });
+  });
+
+  document.querySelector('.close').onclick = () => {
+    document.getElementById('movieModal').style.display = 'none';
+    document.getElementById('movieTrailer').src = '';
+  };
+
+  window.onclick = (e) => {
+    if (e.target.classList.contains('modal')) {
+      document.getElementById('movieModal').style.display = 'none';
+      document.getElementById('movieTrailer').src = '';
+    }
+  };
+
+  fetchMovies();
+});
+</script>
+</body>
+</html>
