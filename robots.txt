@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://plex.cinochefr.space/sitemap.xml
