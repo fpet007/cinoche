@@ -1,15 +1,23 @@
 /**
- * updateVOD.js
- * ============
- * Génère la liste des films disponibles en VOD pour le MOIS EN COURS.
- * - Films français (production FR) : délai légal de 4 mois (120 jours min) après sortie ciné
- * - Films américains / internationaux : délai de 45 jours après sortie ciné
- * - Priorité toujours donnée aux dates officielles TMDB si disponibles
- * - Exclut les VF/doublages : on veut les films originaux avec sortie FR
- * - Se remet à zéro automatiquement au 1er de chaque mois
+ * updateVOD.js  —  v3
+ * ===================
+ * Génère la liste des films VOD du MOIS EN COURS pour un serveur Plex FR.
  *
- * Usage : node updateVOD.js
- * Cron recommandé : 0 2 * * * (tous les soirs à 2h)
+ * Règles métier :
+ *  - Films français (prod. FR ou langue fr) : délai légal 120 jours (4 mois) après sortie ciné
+ *  - Films US / internationaux             : délai standard 45 jours après sortie ciné
+ *  - Dates officielles TMDB (type 4)       : priorité absolue sur la prédiction
+ *  - Filtre qualité                        : le film DOIT avoir eu une sortie ciné en France
+ *                                            (release_type 3 = theatrical) → élimine les films
+ *                                            sans distribution FR, les films chinois/indiens
+ *                                            sortis uniquement dans leur pays, etc.
+ *  - Scan FR élargi                        : 6 endpoints dédiés aux productions françaises
+ *                                            pour ne rien manquer
+ *  - Remise à zéro automatique             : le 1er de chaque mois, les résultats du mois
+ *                                            précédent sont écrasés
+ *
+ * Usage  : node updateVOD.js
+ * Cron   : 0 2 * * *   (tous les soirs à 2h du matin)
  */
 
 'use strict';
@@ -22,35 +30,19 @@ const path = require('path');
 const TMDB_API_KEY = process.env.TMDB_API_KEY || '3fd2be6f0c70a2a598f084ddfb75487c';
 const DATA_PATH    = path.join(__dirname, '../data/plex-upcoming.json');
 
-// Délais VOD en jours après sortie cinéma
 const DELAYS = {
-  FRENCH:        120,   // Obligation légale française : 4 mois minimum
-  AMERICAN:       45,   // Standard US (PVOD / SVOD)
-  DEFAULT:        45,
+  FRENCH  : 120,   // Obligation légale France : 4 mois minimum
+  AMERICAN:  45,   // Standard PVOD/SVOD international
 };
 
-// IDs TMDB des grands studios américains (pour info, non utilisé pour les délais)
-const STUDIO_IDS = {
-  UNIVERSAL : [33, 12248],
-  WARNER    : [174, 2734],
-  DISNEY    : [2, 420, 3, 1632],
-  SONY      : [5, 34],
-  PARAMOUNT : [4, 60],
-  NETFLIX   : [213],
-  AMAZON    : [1024, 20580],
-  APPLE     : [2251690],
-};
-
-// Délai entre chaque appel TMDB pour éviter le rate-limit (40 req / 10s)
-const API_DELAY_MS = 120;
+// Délai entre appels TMDB — ne pas descendre sous 100ms (limite : 40 req/10s)
+const API_DELAY_MS = 130;
 
 // ─── HELPERS ───────────────────────────────────────────────────────────────────
 
-const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-/**
- * Fetch avec retry automatique (3 tentatives, backoff exponentiel)
- */
+/** fetch avec retry x3 + backoff exponentiel */
 async function fetchWithRetry(url, retries = 3) {
   for (let attempt = 1; attempt <= retries; attempt++) {
     try {
@@ -59,36 +51,69 @@ async function fetchWithRetry(url, retries = 3) {
       return await res.json();
     } catch (err) {
       if (attempt === retries) throw err;
-      const wait = attempt * 500;
-      console.warn(`  ⚠️  Tentative ${attempt} échouée (${err.message}), retry dans ${wait}ms...`);
-      await sleep(wait);
+      await sleep(attempt * 600);
     }
   }
 }
 
-/**
- * Retourne true si le film est une production française
- * (pays de production FR OU langue originale française)
- */
+/** Récupère toutes les pages d'un endpoint discover (max maxPages) */
+async function fetchAllPages(baseUrl, maxPages = 6) {
+  const movies = [];
+  for (let page = 1; page <= maxPages; page++) {
+    const data = await fetchWithRetry(`${baseUrl}&page=${page}`);
+    if (!data.results?.length) break;
+    movies.push(...data.results);
+    if (page >= data.total_pages) break;
+    await sleep(API_DELAY_MS);
+  }
+  return movies;
+}
+
+/** Le film est-il une production française ? */
 function isFrenchProduction(details) {
-  const hasFRCountry = details.production_countries?.some(
-    (c) => c.iso_3166_1 === 'FR'
+  return (
+    details.original_language === 'fr' ||
+    details.production_countries?.some((c) => c.iso_3166_1 === 'FR')
   );
-  const isFrLang = details.original_language === 'fr';
-  return hasFRCountry || isFrLang;
 }
 
 /**
- * Cherche une date de sortie officielle digitale (type 4 = Digital)
- * en priorité sur FR, puis US.
+ * Le film a-t-il eu une sortie ciné EN FRANCE (type 3 = theatrical) ?
+ * C'est notre filtre principal contre les films sans distribution FR.
+ * On accepte aussi type 2 (limited theatrical) pour les films d'auteur.
+ */
+function hasTheatricalReleaseFR(releaseDates) {
+  if (!releaseDates?.results) return false;
+  const fr = releaseDates.results.find((r) => r.iso_3166_1 === 'FR');
+  if (!fr) return false;
+  return fr.release_dates.some((rd) => rd.type === 3 || rd.type === 2);
+}
+
+/**
+ * Date de sortie CINÉ en France (type 3 ou 2).
+ * Si disponible, on l'utilise à la place de release_date global
+ * pour un calcul VOD plus précis.
+ */
+function getTheatricalDateFR(releaseDates) {
+  if (!releaseDates?.results) return null;
+  const fr = releaseDates.results.find((r) => r.iso_3166_1 === 'FR');
+  if (!fr) return null;
+  const theatrical = fr.release_dates
+    .filter((rd) => rd.type === 3 || rd.type === 2)
+    .sort((a, b) => new Date(a.release_date) - new Date(b.release_date))[0];
+  if (!theatrical?.release_date) return null;
+  const d = new Date(theatrical.release_date);
+  return isNaN(d) ? null : d;
+}
+
+/**
+ * Date de sortie digitale officielle (type 4) — priorité FR puis US.
  */
 function getOfficialDigitalDate(releaseDates) {
   if (!releaseDates?.results) return null;
-
   for (const region of ['FR', 'US']) {
     const entry = releaseDates.results.find((r) => r.iso_3166_1 === region);
     if (!entry) continue;
-
     const digital = entry.release_dates.find((rd) => rd.type === 4);
     if (digital?.release_date) {
       const d = new Date(digital.release_date);
@@ -98,112 +123,113 @@ function getOfficialDigitalDate(releaseDates) {
   return null;
 }
 
-/**
- * Calcule la date VOD prédictive à partir de la date ciné
- */
+/** Calcule la date VOD prédictive */
 function predictVODDate(cinemDate, isFrench) {
-  const delay = isFrench ? DELAYS.FRENCH : DELAYS.AMERICAN;
-  const vod   = new Date(cinemDate);
-  vod.setDate(vod.getDate() + delay);
+  const vod = new Date(cinemDate);
+  vod.setDate(vod.getDate() + (isFrench ? DELAYS.FRENCH : DELAYS.AMERICAN));
   return vod;
 }
 
-/**
- * Formate une date en français lisible
- */
+/** Formate une date en "29 avril 2026" — format attendu par index.html */
 function formatDateFR(date) {
   return date.toLocaleDateString('fr-FR', {
-    day  : 'numeric',
-    month: 'long',
-    year : 'numeric',
+    day: 'numeric', month: 'long', year: 'numeric',
   });
 }
 
-// ─── RÉCUPÉRATION DES FILMS ────────────────────────────────────────────────────
+// ─── CONSTRUCTION DES FENÊTRES DE SCAN ────────────────────────────────────────
 
 /**
- * Récupère toutes les pages d'un endpoint TMDB discover (jusqu'à 5 pages max)
- */
-async function fetchAllPages(baseUrl, maxPages = 5) {
-  const movies = [];
-  for (let page = 1; page <= maxPages; page++) {
-    const url  = `${baseUrl}&page=${page}`;
-    const data = await fetchWithRetry(url);
-    if (!data.results?.length) break;
-    movies.push(...data.results);
-    if (page >= data.total_pages) break;
-    await sleep(API_DELAY_MS);
-  }
-  return movies;
-}
-
-/**
- * Construit les endpoints de scan en fonction du mois cible.
+ * Construit tous les endpoints TMDB à scanner pour le mois cible.
  *
- * Logique :
- * - Films FR : sortie ciné entre (mois_cible - 5 mois) et (mois_cible - 4 mois)
- *   car délai légal = 4 mois → on scanne les sorties ciné qui arrivent à échéance ce mois
- * - Films US  : sortie ciné entre (mois_cible - 2 mois) et (mois_cible - 1 mois)
- *   car délai = 45 jours (~1.5 mois)
+ * VOLET FR (6 endpoints) — productions françaises & francophones
+ *   Délai légal = 120 jours → fenêtre ciné : (mois - 5.5 mois) à (mois - 3 mois)
+ *
+ * VOLET INTL (2 endpoints) — films avec sortie ciné en France
+ *   Délai standard = 45 jours → fenêtre ciné : (mois - 3 mois) à (mois - 1 mois)
+ *   Filtre : region=FR + with_release_type=3 → uniquement distribués en salle en France
  */
-function buildScanWindows(targetYear, targetMonth) {
-  // targetMonth est 0-indexed (JS)
+function buildScanEndpoints(targetYear, targetMonth) {
   const startOfTarget = new Date(targetYear, targetMonth, 1);
-
-  // Fenêtre films FR : ciné sorti 5→4 mois avant le début du mois cible
-  const frStart = new Date(startOfTarget); frStart.setMonth(frStart.getMonth() - 5);
-  const frEnd   = new Date(startOfTarget); frEnd.setMonth(frEnd.getMonth() - 3);   // un peu de marge
-
-  // Fenêtre films US : ciné sorti 3→1 mois avant le début du mois cible
-  const usStart = new Date(startOfTarget); usStart.setMonth(usStart.getMonth() - 3);
-  const usEnd   = new Date(startOfTarget); usEnd.setMonth(usEnd.getMonth() - 1);
-
   const fmt = (d) => d.toISOString().split('T')[0];
 
-  const base = `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=fr-FR&sort_by=popularity.desc&vote_count.gte=10`;
+  // Fenêtre FR
+  const frStart = new Date(startOfTarget); frStart.setDate(frStart.getDate() - 167); // ~5.5 mois
+  const frEnd   = new Date(startOfTarget); frEnd.setMonth(frEnd.getMonth() - 3);
+
+  // Fenêtre internationale
+  const usStart = new Date(startOfTarget); usStart.setMonth(usStart.getMonth() - 3);
+  const usEnd   = new Date(startOfTarget); usEnd.setDate(usEnd.getDate() - 30);
+
+  const base = `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=fr-FR`;
 
   return [
-    // Films de production française
-    `${base}&region=FR&with_origin_country=FR&primary_release_date.gte=${fmt(frStart)}&primary_release_date.lte=${fmt(frEnd)}`,
-    // Films internationaux sortis en France
-    `${base}&region=FR&primary_release_date.gte=${fmt(usStart)}&primary_release_date.lte=${fmt(usEnd)}`,
-    // Filet de sécurité : films populaires récents sans filtre région
-    `${base}&primary_release_date.gte=${fmt(usStart)}&primary_release_date.lte=${fmt(usEnd)}&with_release_type=3|2`,
+    // ── VOLET FR : 6 endpoints pour maximiser la couverture ──────────────────
+
+    // 1. Prod FR (filtre pays) — popularité
+    `${base}&with_origin_country=FR&primary_release_date.gte=${fmt(frStart)}&primary_release_date.lte=${fmt(frEnd)}&sort_by=popularity.desc`,
+
+    // 2. Prod FR (filtre pays) — mieux notés (rattrape les films d'auteur)
+    `${base}&with_origin_country=FR&primary_release_date.gte=${fmt(frStart)}&primary_release_date.lte=${fmt(frEnd)}&sort_by=vote_average.desc&vote_count.gte=20`,
+
+    // 3. Langue fr (co-productions francophones : Belgique, Suisse, Québec…)
+    `${base}&with_original_language=fr&primary_release_date.gte=${fmt(frStart)}&primary_release_date.lte=${fmt(frEnd)}&sort_by=popularity.desc`,
+
+    // 4. Langue fr — mieux notés
+    `${base}&with_original_language=fr&primary_release_date.gte=${fmt(frStart)}&primary_release_date.lte=${fmt(frEnd)}&sort_by=vote_average.desc&vote_count.gte=15`,
+
+    // 5. Sortie theatrical en FR sur la fenêtre FR (filet de sécurité)
+    `${base}&region=FR&with_original_language=fr&primary_release_date.gte=${fmt(frStart)}&primary_release_date.lte=${fmt(frEnd)}&with_release_type=3|2&sort_by=popularity.desc`,
+
+    // 6. Prod FR sans limite basse stricte — rattrape les sorties tardives
+    `${base}&with_origin_country=FR&primary_release_date.gte=${fmt(frStart)}&sort_by=release_date.desc`,
+
+    // ── VOLET INTL : distribués en salle en France uniquement ────────────────
+
+    // 7. Populaires — sortis en salle en France
+    `${base}&region=FR&with_release_type=3&primary_release_date.gte=${fmt(usStart)}&primary_release_date.lte=${fmt(usEnd)}&sort_by=popularity.desc&vote_count.gte=30`,
+
+    // 8. Bien notés — sortis en salle en France
+    `${base}&region=FR&with_release_type=3&primary_release_date.gte=${fmt(usStart)}&primary_release_date.lte=${fmt(usEnd)}&sort_by=vote_average.desc&vote_count.gte=50`,
   ];
 }
 
 // ─── MAIN ──────────────────────────────────────────────────────────────────────
 
 async function updateVOD() {
-  console.log('🎬 Démarrage updateVOD...');
+  console.log('🎬  updateVOD v3 — démarrage...\n');
 
   const today       = new Date();
-  const targetMonth = today.getMonth();      // 0-indexed
+  const targetMonth = today.getMonth();
   const targetYear  = today.getFullYear();
 
-  // Bornes du mois cible (du 1er au dernier jour)
   const monthStart = new Date(targetYear, targetMonth, 1);
   const monthEnd   = new Date(targetYear, targetMonth + 1, 0, 23, 59, 59);
 
-  console.log(`📅 Mois cible : ${formatDateFR(monthStart)} → ${formatDateFR(monthEnd)}`);
+  console.log(`📅  Mois cible : ${formatDateFR(monthStart)} → ${formatDateFR(monthEnd)}\n`);
 
-  // 1. Collecte des films bruts
-  const endpoints = buildScanWindows(targetYear, targetMonth);
+  // ── 1. Collecte brute ───────────────────────────────────────────────────────
+  const endpoints = buildScanEndpoints(targetYear, targetMonth);
   let rawMovies   = [];
 
-  for (const endpoint of endpoints) {
-    console.log('  🔎 Scan endpoint...');
-    const results = await fetchAllPages(endpoint, 5);
-    rawMovies.push(...results);
+  for (let i = 0; i < endpoints.length; i++) {
+    console.log(`  🔎  Endpoint ${i + 1}/${endpoints.length}...`);
+    try {
+      const results = await fetchAllPages(endpoints[i], 6);
+      rawMovies.push(...results);
+      console.log(`      → ${results.length} films récupérés`);
+    } catch (err) {
+      console.warn(`      ⚠️  Échec endpoint ${i + 1} : ${err.message}`);
+    }
     await sleep(API_DELAY_MS);
   }
 
-  // Déduplication par ID TMDB
   const uniqueMovies = Array.from(new Map(rawMovies.map((m) => [m.id, m])).values());
-  console.log(`  📦 ${uniqueMovies.length} films uniques récupérés, analyse en cours...`);
+  console.log(`\n  📦  ${uniqueMovies.length} films uniques — analyse détaillée...\n`);
 
-  // 2. Analyse détaillée film par film
+  // ── 2. Analyse film par film ────────────────────────────────────────────────
   const finalResults = [];
+  let skipped = 0;
 
   for (const movie of uniqueMovies) {
     await sleep(API_DELAY_MS);
@@ -214,41 +240,53 @@ async function updateVOD() {
         `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${TMDB_API_KEY}&language=fr-FR&append_to_response=release_dates`
       );
     } catch (err) {
-      console.warn(`  ⚠️  Impossible de récupérer les détails de "${movie.title}" : ${err.message}`);
+      console.warn(`  ⚠️  Détails indisponibles pour tmdb:${movie.id} — ignoré`);
+      skipped++;
       continue;
     }
 
-    // Vérifications de base
-    if (!details.release_date) continue;
+    if (!details.release_date) { skipped++; continue; }
 
-    const cinemDate = new Date(details.release_date);
-    if (isNaN(cinemDate)) continue;
+    const isFrench = isFrenchProduction(details);
+    const minDelay = isFrench ? DELAYS.FRENCH : DELAYS.AMERICAN;
 
-    const isFrench  = isFrenchProduction(details);
-    const minDelay  = isFrench ? DELAYS.FRENCH : DELAYS.AMERICAN;
+    // ── FILTRE PRINCIPAL : sortie ciné en France obligatoire pour les films INTL ──
+    // Les films français sont conservés même si TMDB manque de données FR,
+    // car les petites sorties nationales ne sont pas toujours bien renseignées.
+    const hasFRRelease = hasTheatricalReleaseFR(details.release_dates);
+    if (!isFrench && !hasFRRelease) {
+      skipped++;
+      continue;
+    }
 
-    // Calcul de la date VOD
-    const officialDate = getOfficialDigitalDate(details.release_dates);
+    // ── Calcul de la date VOD ─────────────────────────────────────────────────
+    // Priorité à la date de sortie ciné FR (plus précise que la date globale)
+    const cinemDateGlobal = new Date(details.release_date);
+    const cinemDateFR     = getTheatricalDateFR(details.release_dates);
+    const cinemDate       = cinemDateFR ?? cinemDateGlobal;
+
+    if (isNaN(cinemDate)) { skipped++; continue; }
+
+    const officialDate  = getOfficialDigitalDate(details.release_dates);
     const predictedDate = predictVODDate(cinemDate, isFrench);
-    const vodDate = officialDate ?? predictedDate;
+    const vodDate       = officialDate ?? predictedDate;
 
-    // Sécurité : vérifier que le délai minimum légal est respecté
-    const actualDelay = (vodDate - cinemDate) / (1000 * 3600 * 24);
-    if (actualDelay < minDelay) continue;
+    // Sécurité : délai minimum légal
+    const actualDelay = (vodDate - cinemDate) / 86400000;
+    if (actualDelay < minDelay) { skipped++; continue; }
 
-    // Filtre : la date VOD doit tomber dans le mois cible
-    if (vodDate < monthStart || vodDate > monthEnd) continue;
+    // Filtre : date VOD dans le mois cible
+    if (vodDate < monthStart || vodDate > monthEnd) { skipped++; continue; }
 
-    // Genres
     const genres = details.genres?.map((g) => g.name) ?? [];
 
     finalResults.push({
-      // ⚠️  Ces noms de champs sont imposés par index.html — ne pas renommer
-      title          : details.title || movie.title,
-      plex_release   : formatDateFR(vodDate),       // lu par daysUntil() et renderCards()
-      tmdb_id        : movie.id,                    // lu par plexMovies.find()
-      poster_path    : movie.poster_path,           // lu par renderCards()
-      // Champs bonus (non utilisés par le front actuel, mais utiles pour l'avenir)
+      // Champs obligatoires pour index.html — NE PAS RENOMMER
+      title        : details.title || movie.title,
+      plex_release : formatDateFR(vodDate),
+      tmdb_id      : movie.id,
+      poster_path  : movie.poster_path,
+      // Champs enrichis (utilisables par le front pour badges, filtres, etc.)
       original_title : details.original_title,
       cinema_date    : formatDateFR(cinemDate),
       overview       : details.overview,
@@ -259,28 +297,43 @@ async function updateVOD() {
       _sort          : vodDate.getTime(),
     });
 
-    console.log(`  ✅ ${details.title} → VOD le ${formatDateFR(vodDate)} (${isFrench ? 'FR' : 'US'}, ${officialDate ? 'date officielle' : 'prédiction'})`);
+    const flag = isFrench ? '🇫🇷' : '🌍';
+    const src  = officialDate ? '✓ officielle' : '~ prédite';
+    console.log(`  ${flag}  ${details.title}  →  ${formatDateFR(vodDate)}  [${src}]`);
   }
 
-  // 3. Tri par date VOD + déduplication par titre
+  // ── 3. Tri chronologique + déduplication par titre ──────────────────────────
   finalResults.sort((a, b) => a._sort - b._sort);
 
   const deduped = Array.from(
-    new Map(finalResults.map((m) => [m.title.toLowerCase(), m])).values()
+    new Map(finalResults.map((m) => [m.title.toLowerCase().trim(), m])).values()
   );
 
-  // Suppression du champ interne _sort
   const output = deduped.map(({ _sort, ...rest }) => rest);
 
-  // 4. Écriture du fichier JSON
+  // ── 4. Écriture du fichier JSON ─────────────────────────────────────────────
   fs.mkdirSync(path.dirname(DATA_PATH), { recursive: true });
   fs.writeFileSync(DATA_PATH, JSON.stringify(output, null, 2), 'utf8');
 
-  console.log(`\n✅ Terminé ! ${output.length} films VOD pour ${today.toLocaleString('fr-FR', { month: 'long', year: 'numeric' })}`);
-  console.log(`📁 Fichier écrit : ${DATA_PATH}`);
+  // ── 5. Rapport final ────────────────────────────────────────────────────────
+  const frCount  = output.filter((m) => m.is_french).length;
+  const intCount = output.length - frCount;
+  const offic    = output.filter((m) => m.source === 'officielle').length;
+  const pred     = output.filter((m) => m.source === 'prédite').length;
+
+  console.log(`
+╔══════════════════════════════════════════════════╗
+║  ✅  ${output.length} films VOD — ${today.toLocaleString('fr-FR', { month: 'long', year: 'numeric' })}
+║  🇫🇷  Productions françaises : ${frCount}
+║  🌍  Films internationaux   : ${intCount}
+║  ✓   Dates officielles      : ${offic}
+║  ~   Dates prédites         : ${pred}
+║  ⏭   Films ignorés/filtrés  : ${skipped}
+║  📁  ${DATA_PATH}
+╚══════════════════════════════════════════════════╝`);
 }
 
 updateVOD().catch((err) => {
-  console.error('❌ Erreur fatale :', err);
+  console.error('❌  Erreur fatale :', err);
   process.exit(1);
 });
