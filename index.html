@@ -83,7 +83,6 @@ img { max-width: 100%; display: block; }
 button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
 a { color: inherit; text-decoration: none; }
 
-/* GRAIN cinéma */
 body::after {
   content: '';
   position: fixed;
@@ -95,7 +94,6 @@ body::after {
   opacity: 0.6;
 }
 
-/* ==================== INTRO LOADER ==================== */
 #intro {
   position: fixed; inset: 0; z-index: 10000;
   background: #000;
@@ -147,7 +145,6 @@ body::after {
 @keyframes introTag { from { opacity: 0; letter-spacing: 2px;} to { opacity: 0.7; letter-spacing: 6px;} }
 @keyframes introBar { 0% { transform: translateX(-100px);} 100% { transform: translateX(260px);} }
 
-/* ==================== NAV ==================== */
 nav {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -216,7 +213,6 @@ nav.scrolled {
 }
 .btn-discord-nav:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(88,101,242,0.4); }
 
-/* ==================== HERO CINÉMATOGRAPHIQUE ==================== */
 .hero {
   position: relative;
   min-height: 100vh;
@@ -231,7 +227,6 @@ nav.scrolled {
   isolation: isolate;
 }
 
-/* === BACKDROP CAROUSEL : LE WOW === */
 .hero-backdrops {
   position: absolute; inset: 0;
   z-index: -3;
@@ -248,31 +243,23 @@ nav.scrolled {
 }
 .hero-backdrop.active {
   opacity: 1;
-  /* Ken Burns slow zoom — reste figée à la fin grâce à forwards */
   animation: kenBurns 14s linear forwards;
 }
-/* Slide qui s'en va : le JS lui assigne un transform inline qui correspond à sa position courante,
-   on lui dit juste de fade out sans toucher au transform */
 .hero-backdrop.leaving {
   opacity: 0;
   animation: none;
-  /* le transform est défini en inline-style par le JS au moment du switch */
 }
 @keyframes kenBurns {
   0%   { transform: scale(1.0) translate(0, 0); }
   100% { transform: scale(1.18) translate(-2%, 1%); }
 }
 
-/* === Couches d'overlay sur les backdrops === */
 .hero-overlay {
   position: absolute; inset: 0;
   z-index: -2;
   background:
-    /* Vignette top → assombrissement haut */
     linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 25%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0.95) 100%),
-    /* Spot doré subtil au centre */
     radial-gradient(ellipse 70% 50% at 50% 45%, rgba(212,168,67,0.10) 0%, transparent 60%),
-    /* Vignette latérale */
     radial-gradient(ellipse 90% 70% at 50% 50%, transparent 0%, rgba(0,0,0,0.65) 100%);
   pointer-events: none;
 }
@@ -284,7 +271,6 @@ nav.scrolled {
   opacity: 0.4;
 }
 
-/* === Filmstrips perforations cinéma === */
 .filmstrip {
   position: absolute; left: 0; right: 0; height: 22px;
   z-index: -1;
@@ -297,7 +283,6 @@ nav.scrolled {
 .filmstrip.top { top: 0; }
 .filmstrip.bottom { bottom: 0; transform: scaleY(-1); }
 
-/* === Featured movie info (titre du film en fond) === */
 .hero-featured {
   position: absolute;
   bottom: 110px;
@@ -342,7 +327,6 @@ nav.scrolled {
 }
 .hero-featured-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--text3);}
 
-/* === Hero content === */
 .hero-inner {
   max-width: 880px;
   position: relative;
@@ -388,10 +372,8 @@ nav.scrolled {
   width: clamp(320px, 62vw, 720px);
   height: auto;
   display: block;
-  /* margin négative pour grignoter les bandes noires (transparentes maintenant) du PNG */
   margin-top: -8%;
   margin-bottom: -10%;
-  /* Filtre SVG : rend le fond noir de l'image transparent + glow néon pulsant */
   filter:
     url(#removeBlack)
     drop-shadow(0 0 14px rgba(61,217,232,0.45))
@@ -491,7 +473,6 @@ nav.scrolled {
   transform: translateY(-2px);
 }
 
-/* === Stats hero premium === */
 .hero-stats {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -553,7 +534,6 @@ nav.scrolled {
   letter-spacing: 1px;
 }
 
-/* === Scroll indicator === */
 .scroll-indicator {
   position: absolute;
   bottom: 32px; left: 50%;
@@ -585,7 +565,6 @@ nav.scrolled {
 @keyframes scrollDot { 0% {top: -14px; opacity:0;} 30%{opacity:1;} 100% {top:28px; opacity:0;} }
 @keyframes fadeIn { to { opacity: 0.7; } }
 
-/* ==================== TICKER ==================== */
 .ticker {
   background: linear-gradient(90deg, var(--bg2), var(--bg3), var(--bg2));
   padding: 16px 0;
@@ -624,7 +603,6 @@ nav.scrolled {
 }
 @keyframes tickerScroll { from { transform: translateX(0);} to { transform: translateX(-50%);} }
 
-/* ==================== SECTIONS GENERIC ==================== */
 section { padding: 120px 40px; position: relative; }
 .section-label {
   display: inline-block;
@@ -660,7 +638,6 @@ section { padding: 120px 40px; position: relative; }
   line-height: 1.6;
 }
 
-/* ==================== REVEAL ==================== */
 .reveal {
   opacity: 0;
   transform: translateY(30px);
@@ -671,7 +648,6 @@ section { padding: 120px 40px; position: relative; }
   transform: translateY(0);
 }
 
-/* ==================== FEATURES SECTION ==================== */
 .features-section { max-width: 1200px; margin: 0 auto; }
 .features-grid {
   display: grid;
@@ -744,28 +720,6 @@ section { padding: 120px 40px; position: relative; }
   line-height: 1.55;
 }
 
-/* ==================== POSTERS PARALLAX BG ==================== */
-.posters-strip-bg {
-  position: absolute;
-  left: -10%; right: -10%;
-  pointer-events: none;
-  opacity: 0.06;
-  z-index: 0;
-  display: flex; gap: 14px;
-  animation: postersFlow 60s linear infinite;
-  will-change: transform;
-}
-.posters-strip-bg.top { top: -40px; }
-.posters-strip-bg.bottom { bottom: -40px; animation-direction: reverse; }
-.posters-strip-bg img {
-  height: 220px;
-  width: auto;
-  border-radius: 6px;
-  filter: grayscale(100%) contrast(1.2);
-}
-@keyframes postersFlow { from { transform: translateX(0);} to { transform: translateX(-50%);} }
-
-/* ==================== CATALOG ==================== */
 .catalog-section {
   background: var(--bg2);
   padding: 100px 0;
@@ -867,7 +821,6 @@ section { padding: 120px 40px; position: relative; }
   background-position: right 12px center;
 }
 
-/* GRILLE catalogue */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
@@ -925,7 +878,6 @@ section { padding: 120px 40px; position: relative; }
 .card-badge.plex { background: var(--plex); color: #000; }
 .card-badge.dispo { background: var(--green); color: #000; }
 
-/* Bande date sous le poster (visible en permanence sur les films à venir Plex) */
 .card-plex-date {
   position: absolute;
   bottom: 0; left: 0; right: 0;
@@ -988,7 +940,6 @@ section { padding: 120px 40px; position: relative; }
 .btn-load-more:hover { background: var(--gold); color: #000; border-color: var(--gold); transform: translateY(-1px); }
 .btn-load-more:disabled { opacity: 0.5; pointer-events: none; }
 
-/* ==================== DISCORD SECTION ==================== */
 .discord-section { max-width: 1200px; margin: 0 auto; }
 .discord-layout {
   display: grid;
@@ -1076,7 +1027,6 @@ section { padding: 120px 40px; position: relative; }
   cursor: pointer;
 }
 
-/* === Switch de vues entre channels === */
 .dm-view { display: none; }
 .dm-view.active { display: block; animation: viewIn 0.4s ease both; }
 @keyframes viewIn {
@@ -1087,7 +1037,6 @@ section { padding: 120px 40px; position: relative; }
 .dm-channel { cursor: pointer; }
 .dm-channel[data-view] { transition: background 0.15s, color 0.15s; }
 
-/* === Bloc stats Plex (style "fiche bot") === */
 .dm-time { font-size: 11px; color: #949ba4; font-weight: 400; margin-left: 4px; }
 .dm-stats-block {
   margin-top: 6px;
@@ -1173,7 +1122,6 @@ section { padding: 120px 40px; position: relative; }
 .ch-badge.vip { background: rgba(212,168,67,0.15); color: var(--gold); }
 .ch-badge.free { background: rgba(255,255,255,0.06); color: var(--text2); }
 
-/* ==================== PRICING ==================== */
 .pricing-section {
   background: var(--bg2);
   padding: 120px 40px;
@@ -1286,7 +1234,6 @@ section { padding: 120px 40px; position: relative; }
 .sponsor-title { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
 .sponsor-desc { font-size: 13px; color: var(--text2); line-height: 1.5; }
 
-/* ==================== HOW IT WORKS ==================== */
 .how-section { max-width: 1100px; margin: 0 auto; text-align: center; }
 .steps {
   display: grid;
@@ -1323,7 +1270,6 @@ section { padding: 120px 40px; position: relative; }
 .step-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
 .step-desc { font-size: 13px; color: var(--text2); line-height: 1.55; }
 
-/* ==================== REVIEWS ==================== */
 .reviews-section { background: var(--bg2); padding: 120px 40px; }
 .reviews-inner { max-width: 1200px; margin: 0 auto; text-align: center; }
 .reviews-grid {
@@ -1359,7 +1305,6 @@ section { padding: 120px 40px; position: relative; }
 .review-name { font-size: 14px; font-weight: 600; color: var(--text); }
 .review-since { font-size: 11px; color: var(--text3); }
 
-/* ==================== CTA ==================== */
 .cta-section {
   padding: 140px 40px;
   text-align: center;
@@ -1398,7 +1343,6 @@ section { padding: 120px 40px; position: relative; }
 .btn-cta-main:hover { transform: translateY(-2px); box-shadow: 0 16px 50px rgba(88,101,242,0.55); }
 .cta-note { font-size: 13px; color: var(--text2); }
 
-/* ==================== FOOTER ==================== */
 footer {
   padding: 60px 40px 40px;
   border-top: 1px solid var(--border);
@@ -1434,7 +1378,6 @@ footer {
 .footer-links a { color: var(--text2); font-size: 13px; transition: color 0.2s; }
 .footer-links a:hover { color: var(--gold); }
 
-/* ==================== MODAL ==================== */
 .modal { position: fixed; inset: 0; z-index: 1000; opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s; }
 .modal.open { opacity: 1; visibility: visible; }
 .modal-bg { position: absolute; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
@@ -1502,7 +1445,6 @@ footer {
 .modal-trailer-wrap { margin: 20px 28px 28px; aspect-ratio: 16/9; border-radius: 10px; overflow: hidden; background: #000; }
 .modal-trailer-wrap iframe { width: 100%; height: 100%; border: none; }
 
-/* ==================== SIDE PANEL (Ma Liste) ==================== */
 .panel-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(6px); z-index: 998; opacity: 0; visibility: hidden; transition: all 0.3s; }
 .panel-overlay.active { opacity: 1; visibility: visible; }
 .side-panel {
@@ -1530,7 +1472,6 @@ footer {
 .saved-item-remove { position: absolute; top: 8px; right: 8px; width: 22px; height: 22px; background: rgba(255,255,255,0.06); border-radius: 50%; font-size: 16px; color: var(--text2); display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
 .saved-item-remove:hover { background: var(--red); color: #fff; }
 
-/* ==================== TOAST ==================== */
 #toast-container { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); z-index: 10001; display: flex; flex-direction: column; gap: 8px; align-items: center; pointer-events: none; }
 .toast {
   display: flex; align-items: center; gap: 10px;
@@ -1554,7 +1495,6 @@ footer {
 .toast.info span:first-child { color: var(--gold); }
 @keyframes toastIn { from { opacity: 0; transform: translateY(20px);} to { opacity: 1; transform: translateY(0);} }
 
-/* ==================== MOBILE ==================== */
 @media (max-width: 900px) {
   nav { padding: 0 20px; }
   .nav-links { display: none; }
@@ -1562,9 +1502,7 @@ footer {
   .nav-logo img { height: 38px; }
   .btn-discord-nav { padding: 8px 14px; font-size: 12px; }
   .hero { padding: 100px 20px 60px; min-height: 90vh; min-height: 90svh; }
-  /* Mobile : annuler la marge négative top du title (qui chevauchait le badge sur PC) */
   .hero-title { margin-top: 0; margin-bottom: 14px; }
-  /* Marges négatives de l'image moins agressives sur mobile (canvas du PNG plus visible en petit) */
   .hero-title-img { margin-top: -4%; margin-bottom: -6%; }
   .hero-title .line2 { margin-top: -2px; }
   .hero-stats { grid-template-columns: 1fr 1fr; gap: 10px; max-width: 460px; }
@@ -1603,7 +1541,6 @@ footer {
   .catalog-inner { padding: 0 20px; }
   .section-label { font-size: 10px; letter-spacing: 3px; }
 
-  /* Catalogue : 3 onglets côte-à-côte sur mobile */
   .tabs {
     gap: 6px;
     flex-wrap: nowrap;
@@ -1618,7 +1555,6 @@ footer {
   }
   .tabs .tab.plex-tab { gap: 5px; }
 
-  /* === Catalog tools mobile : layout compact 2 lignes === */
   .catalog-header-top { gap: 16px; }
   .catalog-tools {
     width: 100%;
@@ -1629,7 +1565,6 @@ footer {
   }
   .search-wrap { width: 100%; }
   .search-input { width: 100%; }
-  /* 2e ligne : toggle Films/Séries à gauche (flex:1), bookmark à droite (auto) */
   .catalog-tools-row {
     display: flex;
     gap: 10px;
@@ -1651,7 +1586,6 @@ footer {
   .steps { grid-template-columns: 1fr; }
 }
 
-/* ==================== ACCESSIBILITY ==================== */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -2306,19 +2240,16 @@ footer {
 <script>
 'use strict';
 
-// ============== INTRO LOADER ==============
 window.addEventListener('load', () => {
   setTimeout(() => {
     document.getElementById('intro').classList.add('hidden');
   }, 1500);
 });
 
-// ============== SCROLL NAV ==============
 window.addEventListener('scroll', () => {
   document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 30);
 }, { passive: true });
 
-// ============== REVEALS ==============
 const revealEls = document.querySelectorAll('.reveal');
 const revealObs = new IntersectionObserver((entries) => {
   entries.forEach((e, i) => {
@@ -2330,7 +2261,6 @@ const revealObs = new IntersectionObserver((entries) => {
 }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 revealEls.forEach(el => revealObs.observe(el));
 
-// ============== STAT COUNTERS (time-based, identique PC/mobile) ==============
 (function initStatCounters() {
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const counters = document.querySelectorAll('.stat-number[data-target]');
@@ -2372,7 +2302,6 @@ revealEls.forEach(el => revealObs.observe(el));
   counters.forEach(c => counterObs.observe(c));
 })();
 
-// ============== HERO BACKDROPS CAROUSEL (LE WOW) ==============
 (function initHeroBackdrops() {
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const API_KEY = '3fd2be6f0c70a2a598f084ddfb75487c';
@@ -2382,7 +2311,6 @@ revealEls.forEach(el => revealObs.observe(el));
   const titleEl = document.getElementById('heroFeaturedTitle');
   const metaEl = document.getElementById('heroFeaturedMeta');
 
-  // Fallback : gradients de secours si l'API échoue
   function injectFallback() {
     const div = document.createElement('div');
     div.className = 'hero-backdrop active';
@@ -2393,14 +2321,12 @@ revealEls.forEach(el => revealObs.observe(el));
   fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=fr-FR&page=1`)
     .then(r => r.ok ? r.json() : Promise.reject())
     .then(data => {
-      // On garde les films avec un beau backdrop horizontal
       const movies = data.results
         .filter(m => m.backdrop_path && m.vote_average > 6)
         .slice(0, 6);
 
       if (movies.length === 0) { injectFallback(); return; }
 
-      // Création des backdrops
       movies.forEach((m, i) => {
         const div = document.createElement('div');
         div.className = 'hero-backdrop' + (i === 0 ? ' active' : '');
@@ -2411,13 +2337,11 @@ revealEls.forEach(el => revealObs.observe(el));
         container.appendChild(div);
       });
 
-      // Préchargement des images suivantes (browser prend la suite)
       movies.slice(1).forEach(m => {
         const img = new Image();
         img.src = `${IMG_BASE}${m.backdrop_path}`;
       });
 
-      // Affichage des infos du film actif
       function updateFeatured(m) {
         if (!m) return;
         titleEl.textContent = m.title || m.original_title || '';
@@ -2428,42 +2352,34 @@ revealEls.forEach(el => revealObs.observe(el));
       }
       updateFeatured(movies[0]);
 
-      // Carousel auto (à un rythme cinéma)
       if (reduced) return;
       let current = 0;
       const slides = container.querySelectorAll('.hero-backdrop');
-      const ROTATE_MS = 7000; // 7s par slide
-      const FADE_MS = 1600;   // doit matcher la transition opacity du CSS
+      const ROTATE_MS = 7000;
+      const FADE_MS = 1600;
 
       setInterval(() => {
         const outgoing = slides[current];
         const nextIdx = (current + 1) % slides.length;
         const incoming = slides[nextIdx];
 
-        // 1) CAPTURE la position EXACTE de la slide sortante au moment T (au milieu du zoom Ken Burns)
-        //    getComputedStyle lit la valeur calculée en temps réel par le navigateur.
         const currentTransform = window.getComputedStyle(outgoing).transform;
 
-        // 2) On retire .active (stoppe l'animation) puis on FIGE le transform à sa valeur courante
-        //    via inline style — comme ça AUCUN saut visible : ni vers le début ni vers la fin.
         outgoing.classList.remove('active');
         outgoing.style.transform = currentTransform;
         outgoing.classList.add('leaving');
 
-        // 3) La slide entrante démarre son Ken Burns frais depuis scale(1)
-        void incoming.offsetWidth; // force reflow pour relancer l'animation
-        incoming.style.transform = ''; // nettoie un éventuel inline-style résiduel
+        void incoming.offsetWidth;
+        incoming.style.transform = '';
         incoming.classList.add('active');
 
         current = nextIdx;
 
-        // 4) Quand le fade out est fini, on nettoie tout
         setTimeout(() => {
           outgoing.classList.remove('leaving');
           outgoing.style.transform = '';
         }, FADE_MS + 50);
 
-        // Update featured info avec un fade
         featuredEl.classList.remove('show');
         setTimeout(() => updateFeatured(movies[current]), 400);
       }, ROTATE_MS);
@@ -2471,24 +2387,14 @@ revealEls.forEach(el => revealObs.observe(el));
     .catch(() => injectFallback());
 })();
 
-// ============== CATALOGUE INTERACTIF ==============
-(function() {
+(async function() {
   const API_KEY = '3fd2be6f0c70a2a598f084ddfb75487c';
   const BASE = 'https://api.themoviedb.org/3';
   const IMG_W = 'https://image.tmdb.org/t/p/w500';
   const IMG_ORIG = 'https://image.tmdb.org/t/p/original';
   const IMG_FALLBACK = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='750' viewBox='0 0 500 750'%3E%3Crect fill='%231a1a24' width='500' height='750'/%3E%3Ctext x='50%25' y='50%25' fill='%23a09d96' font-size='18' text-anchor='middle' dominant-baseline='middle' font-family='sans-serif'%3EPas d%27image%3C/text%3E%3C/svg%3E";
 
-  const plexMovies = [
-    { title:"Le Pays d’Arto", plex_release:"30 Avril 2026", tmdb_id:1308910, poster_path:"/4kdxpg8WtjDQfLo45YDhkg4hPA1.jpg" },
-    { title:"Super Mario Galaxy, le film", plex_release:"5 Mai 2026", tmdb_id:1226863, poster_path:"/aSQktALDmbunDbwkuZbZFMEWVFr.jpg" },
-    { title:"Ma frère", plex_release:"7 Mai 2026", tmdb_id:1290436, poster_path:"/j4p4TaoK4LrlLgCK0m0pBUT5CcB.jpg" },
-    { title:"La pire mère au monde", plex_release:"7 Mai 2026", tmdb_id:1235277, poster_path:"/aM3ZwratInjyFyckQzXE4owylgk.jpg" },
-    { title:"L’affaire Bojarski", plex_release:"14 Mai 2026", tmdb_id:1376415, poster_path:"/v12qqT8GrLjdGj4mnp4iMik7kvx.jpg" },
-    { title:"Le Réveil de la Momie", plex_release:"19 Mai 2026", tmdb_id:1304313, poster_path:"/f77yGBGOjainowvlGHU70CCQrjV.jpg" },
-    { title:"Le Mage du Kremlin", plex_release:"21 Mai 2026", tmdb_id:1291659, poster_path:"/efxlwMqMiZzDF2DABswC5VWptRC.jpg" },
-    { title:"Gourou", plex_release:"28 Mai 2026", tmdb_id:1259983, poster_path:"/gLEnkNw8BTudY3DpKICeqcxgrXV.jpg" }
-  ];
+  let plexMovies = [];
 
   let state = { category: 'popular', type: 'movie', page: 1, totalPages: 1, currentItems: [], sort: 'default', loading: false };
 
@@ -2618,10 +2524,8 @@ revealEls.forEach(el => revealObs.observe(el));
       if (isPlex || plexEntry) {
         const releaseStr = isPlex ? item.plex_release : (plexEntry ? plexEntry.plex_release : null);
         if (days !== null && days <= 0) {
-          // Film déjà sorti sur Plex → badge DISPO vert
           badgeHTML = `<div class="card-badge dispo">DISPO</div>`;
         } else if (days !== null && days > 0) {
-          // Film à venir : badge PLEX orange + date sous le titre
           badgeHTML = `<div class="card-badge plex">PLEX</div>`;
           const label = days === 1 ? 'Demain' : `Dans ${days} j`;
           if (releaseStr) {
@@ -2792,7 +2696,6 @@ revealEls.forEach(el => revealObs.observe(el));
         saveBtn.addEventListener('click', () => {
           toggleList({ id, title, poster: data.poster_path, year, rating, media: mediaType });
           saveBtn.textContent = isInList(id) ? '✓ Dans ma liste' : '+ Ma liste';
-          // Update card if visible
           const card = document.querySelector(`.card[data-id="${id}"]`);
           if (card) card.classList.toggle('saved', isInList(id));
         });
@@ -2809,7 +2712,6 @@ revealEls.forEach(el => revealObs.observe(el));
     document.getElementById('modalContent').innerHTML = '';
   }
 
-  // Recherche debounced
   let searchTimer;
   function debounce(fn, delay = 350) { return (...args) => { clearTimeout(searchTimer); searchTimer = setTimeout(() => fn(...args), delay); }; }
   const handleSearch = debounce(async () => {
@@ -2831,7 +2733,6 @@ revealEls.forEach(el => revealObs.observe(el));
     } catch(err) { toast('Erreur lors de la recherche', 'warning'); }
   });
 
-  // Events
   document.getElementById('searchInput').addEventListener('input', handleSearch);
   document.querySelectorAll('input[name="searchType"]').forEach(r => r.addEventListener('change', handleSearch));
 
@@ -2872,12 +2773,19 @@ revealEls.forEach(el => revealObs.observe(el));
   document.getElementById('closePanelBtn').addEventListener('click', closeSidePanel);
   document.getElementById('panelOverlay').addEventListener('click', closeSidePanel);
 
-  // Init
   updateListBadge();
+
+  // CHARGEMENT DYNAMIQUE DU JSON GÉNÉRÉ PAR GITHUB ACTIONS
+  try {
+    const res = await fetch('./data/plex-upcoming.json');
+    if (res.ok) plexMovies = await res.json();
+  } catch(e) {
+    console.warn("Fichier VOD non trouvé, utilisation d'une liste vide.");
+  }
+
   fetchData();
 })();
 
-// ============== DISCORD CHANNEL SWITCHER ==============
 (function initDiscordChannels() {
   const channels = document.querySelectorAll('.dm-channel[data-view]');
   const views = document.querySelectorAll('.dm-view');
@@ -2886,17 +2794,14 @@ revealEls.forEach(el => revealObs.observe(el));
   channels.forEach(ch => {
     ch.addEventListener('click', () => {
       const target = ch.dataset.view;
-      // Update active state on channels
       channels.forEach(c => c.classList.remove('active'));
       ch.classList.add('active');
-      // Switch view
       views.forEach(v => v.classList.toggle('active', v.dataset.view === target));
-      // Re-trigger msg animation by removing and re-adding active
       const activeView = document.querySelector(`.dm-view[data-view="${target}"]`);
       if (activeView) {
         activeView.querySelectorAll('.dm-message').forEach(m => {
           m.style.animation = 'none';
-          void m.offsetWidth; // force reflow
+          void m.offsetWidth;
           m.style.animation = '';
         });
       }
@@ -2904,7 +2809,6 @@ revealEls.forEach(el => revealObs.observe(el));
   });
 })();
 
-// Animation spin pour le loader
 const spinKeyframes = document.createElement('style');
 spinKeyframes.textContent = `@keyframes spin { to { transform: rotate(360deg); } }`;
 document.head.appendChild(spinKeyframes);
