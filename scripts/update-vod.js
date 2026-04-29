@@ -11,20 +11,24 @@ async function updateVOD() {
     const nextMonth = (currentMonth + 1) % 12;
     const currentYear = today.getFullYear();
 
-    // On cherche les films sortis au ciné depuis 6 mois pour couvrir toutes les fenêtres VOD
-    const sixMonthsAgo = new Date();
-    sixMonthsAgo.setMonth(today.getMonth() - 6);
-    const dateStr = sixMonthsAgo.toISOString().split('T')[0];
-
-    const url = `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=fr-FR&sort_by=primary_release_date.desc&primary_release_date.gte=${dateStr}&include_video=false&page=1`;
+    // 1. On récupère deux listes : les nouveautés ET les films populaires
+    const urls = [
+      `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=fr-FR&sort_by=popularity.desc&primary_release_date.gte=${new Date(today.getFullYear() - 1, today.getMonth(), 1).toISOString().split('T')[0]}&include_video=false&page=1`,
+      `https://api.themoviedb.org/3/movie/popular?api_key=${TMDB_API_KEY}&language=fr-FR&page=1`
+    ];
     
-    const response = await fetch(url);
-    const data = await response.json();
-    const movies = data.results || [];
+    let allMovies = [];
+    for (const url of urls) {
+      const res = await fetch(url);
+      const data = await res.json();
+      if (data.results) allMovies = allMovies.concat(data.results);
+    }
 
+    // Supprimer les doublons par ID
+    const uniqueMovies = Array.from(new Map(allMovies.map(m => [m.id, m])).values());
     const upcomingList = [];
 
-    for (const movie of movies) {
+    for (const movie of uniqueMovies) {
       const detailUrl = `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${TMDB_API_KEY}&append_to_response=release_dates`;
       const detailRes = await fetch(detailUrl);
       const details = await detailRes.json();
@@ -35,35 +39,39 @@ async function updateVOD() {
 
       if (isNaN(releaseDate)) continue;
 
+      // Calcul prédictif par défaut
       let vodDate = new Date(releaseDate);
-
-      // Calcul prédictif
       if (isFrench) {
-        vodDate.setDate(vodDate.getDate() + 121); // 4 mois
+        vodDate.setDate(vodDate.getDate() + 121); // Chronologie France : 4 mois
       } else {
-        vodDate.setDate(vodDate.getDate() + 45);  // 45 jours
+        vodDate.setDate(vodDate.getDate() + 45);  // Standard US : 45 jours
       }
 
-      // Overwrite si une date digitale réelle existe
+      // Vérification d'une date VOD/Digital officielle dans TMDB
       const releaseResults = details.release_dates?.results || [];
       for (const country of releaseResults) {
         for (const release of country.release_dates) {
-          if (release.type === 4) {
+          if (release.type === 4 || release.type === 5) { // 4 = Digital, 5 = Physical
             const realVod = new Date(release.release_date);
-            if (!isNaN(realVod)) vodDate = realVod;
+            if (!isNaN(realVod)) {
+                // On privilégie la date officielle si elle existe
+                vodDate = realVod;
+            }
           }
         }
       }
 
-      // --- FILTRE : MOIS EN COURS OU MOIS PROCHAIN ---
-      const isCurrentMonth = (vodDate.getMonth() === currentMonth && vodDate.getFullYear() === currentYear);
-      const isNextMonth = (vodDate.getMonth() === nextMonth && vodDate.getFullYear() === (nextMonth === 0 ? currentYear + 1 : currentYear));
+      // FILTRE : On accepte le mois en cours (Avril) et le mois suivant (Mai)
+      const m = vodDate.getMonth();
+      const y = vodDate.getFullYear();
+      
+      const isThisMonth = (m === currentMonth && y === currentYear);
+      const isNextMonth = (m === nextMonth && (nextMonth === 0 ? y === currentYear + 1 : y === currentYear));
 
-      if (isCurrentMonth || isNextMonth) {
-        const options = { day: 'numeric', month: 'long', year: 'numeric' };
+      if (isThisMonth || isNextMonth) {
         upcomingList.push({
           title: movie.title,
-          plex_release: vodDate.toLocaleDateString('fr-FR', options),
+          plex_release: vodDate.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }),
           tmdb_id: movie.id,
           poster_path: movie.poster_path,
           sort_date: vodDate.toISOString().split('T')[0]
@@ -71,18 +79,18 @@ async function updateVOD() {
       }
     }
 
-    // Tri par date
+    // Tri chronologique
     upcomingList.sort((a, b) => new Date(a.sort_date) - new Date(b.sort_date));
 
-    // Sauvegarde
+    // Sauvegarde avec dossier auto-généré
     const dir = path.dirname(DATA_PATH);
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
     
     fs.writeFileSync(DATA_PATH, JSON.stringify(upcomingList, null, 2), 'utf8');
-    console.log(`✅ Succès : ${upcomingList.length} films trouvés (Avril & Mai).`);
+    console.log(`✅ Terminé : ${upcomingList.length} films enregistrés.`);
 
   } catch (error) {
-    console.error('❌ Erreur :', error);
+    console.error('❌ Erreur critique :', error);
     process.exit(1);
   }
 }
