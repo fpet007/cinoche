@@ -1,98 +1,106 @@
 const fs = require('fs');
 const path = require('path');
 
-const TMDB_API_KEY = process.env.TMDB_API_KEY;
-const DATA_PATH = path.join(__dirname, '../data/plex-upcoming.json');
+const TMDB_API_KEY = process.env.TMDB_API_KEY || '3fd2be6f0c70a2a598f084ddfb75487c'; // Clé TMDB
+const BASE_URL = 'https://api.themoviedb.org/3';
 
-async function updateVOD() {
-  try {
-    const today = new Date();
-    const currentMonth = today.getMonth();
-    const nextMonth = (currentMonth + 1) % 12;
-    const currentYear = today.getFullYear();
+// Studios IDs TMDB communs
+const STUDIOS = {
+    UNIVERSAL: [33],
+    WARNER: [174, 2734],
+    DISNEY: [2, 420, 3, 1632] // Walt Disney, Marvel, Pixar, Lucasfilm
+};
 
-    // 1. On récupère deux listes : les nouveautés ET les films populaires
-    const urls = [
-      `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=fr-FR&sort_by=popularity.desc&primary_release_date.gte=${new Date(today.getFullYear() - 1, today.getMonth(), 1).toISOString().split('T')[0]}&include_video=false&page=1`,
-      `https://api.themoviedb.org/3/movie/popular?api_key=${TMDB_API_KEY}&language=fr-FR&page=1`
-    ];
-    
-    let allMovies = [];
-    for (const url of urls) {
-      const res = await fetch(url);
-      const data = await res.json();
-      if (data.results) allMovies = allMovies.concat(data.results);
-    }
+const moisFrancais = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
 
-    // Supprimer les doublons par ID
-    const uniqueMovies = Array.from(new Map(allMovies.map(m => [m.id, m])).values());
-    const upcomingList = [];
-
-    for (const movie of uniqueMovies) {
-      const detailUrl = `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${TMDB_API_KEY}&append_to_response=release_dates`;
-      const detailRes = await fetch(detailUrl);
-      const details = await detailRes.json();
-
-      const countries = details.production_countries || [];
-      const isFrench = countries.some(c => c.iso_3166_1 === 'FR');
-      const releaseDate = new Date(details.release_date);
-
-      if (isNaN(releaseDate)) continue;
-
-      // Calcul prédictif par défaut
-      let vodDate = new Date(releaseDate);
-      if (isFrench) {
-        vodDate.setDate(vodDate.getDate() + 121); // Chronologie France : 4 mois
-      } else {
-        vodDate.setDate(vodDate.getDate() + 45);  // Standard US : 45 jours
-      }
-
-      // Vérification d'une date VOD/Digital officielle dans TMDB
-      const releaseResults = details.release_dates?.results || [];
-      for (const country of releaseResults) {
-        for (const release of country.release_dates) {
-          if (release.type === 4 || release.type === 5) { // 4 = Digital, 5 = Physical
-            const realVod = new Date(release.release_date);
-            if (!isNaN(realVod)) {
-                // On privilégie la date officielle si elle existe
-                vodDate = realVod;
-            }
-          }
-        }
-      }
-
-      // FILTRE : On accepte le mois en cours (Avril) et le mois suivant (Mai)
-      const m = vodDate.getMonth();
-      const y = vodDate.getFullYear();
-      
-      const isThisMonth = (m === currentMonth && y === currentYear);
-      const isNextMonth = (m === nextMonth && (nextMonth === 0 ? y === currentYear + 1 : y === currentYear));
-
-      if (isThisMonth || isNextMonth) {
-        upcomingList.push({
-          title: movie.title,
-          plex_release: vodDate.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }),
-          tmdb_id: movie.id,
-          poster_path: movie.poster_path,
-          sort_date: vodDate.toISOString().split('T')[0]
-        });
-      }
-    }
-
-    // Tri chronologique
-    upcomingList.sort((a, b) => new Date(a.sort_date) - new Date(b.sort_date));
-
-    // Sauvegarde avec dossier auto-généré
-    const dir = path.dirname(DATA_PATH);
-    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-    
-    fs.writeFileSync(DATA_PATH, JSON.stringify(upcomingList, null, 2), 'utf8');
-    console.log(`✅ Terminé : ${upcomingList.length} films enregistrés.`);
-
-  } catch (error) {
-    console.error('❌ Erreur critique :', error);
-    process.exit(1);
-  }
+function formatDateFR(dateObj) {
+    return `${dateObj.getDate()} ${moisFrancais[dateObj.getMonth()]} ${dateObj.getFullYear()}`;
 }
 
-updateVOD();
+async function fetchTMDB(endpoint) {
+    const res = await fetch(`${BASE_URL}${endpoint}&api_key=${TMDB_API_KEY}&language=fr-FR`);
+    return res.json();
+}
+
+async function updatePlexVOD() {
+    console.log("🎬 Début de l'analyse des prédictions VOD...");
+    let upcomingVODs = [];
+
+    try {
+        // 1. Récupérer les films actuellement en salle (International et France)
+        const nowPlaying = await fetchTMDB('/movie/now_playing?region=FR&page=1');
+        const movies = nowPlaying.results;
+
+        for (const movie of movies) {
+            // 2. Récupérer les détails complets (pour avoir les studios et le pays d'origine)
+            const details = await fetchTMDB(`/movie/${movie.id}?append_to_response=release_dates`);
+            
+            if (!details.release_date) continue;
+            
+            const releaseDate = new Date(details.release_date);
+            let vodDelayDays = 45; // Base standard
+
+            const isFrench = details.origin_country && details.origin_country.includes('FR');
+            const companyIds = details.production_companies.map(c => c.id);
+
+            // 3. APPLIQUER TA MÉTHODE MATHÉMATIQUE
+            if (isFrench) {
+                // Chronologie des médias FR (VOD achat = 4 mois)
+                vodDelayDays = 120;
+            } else if (companyIds.some(id => STUDIOS.UNIVERSAL.includes(id))) {
+                vodDelayDays = 25; // Universal est très rapide
+            } else if (companyIds.some(id => STUDIOS.WARNER.includes(id))) {
+                vodDelayDays = 35; // Warner
+            } else if (companyIds.some(id => STUDIOS.DISNEY.includes(id))) {
+                vodDelayDays = 55; // Disney
+            }
+
+            // Calcul de la date estimée
+            const predictedVODDate = new Date(releaseDate);
+            predictedVODDate.setDate(predictedVODDate.getDate() + vodDelayDays);
+
+            // On vérifie si on a une date OFFICIELLE numérique (Type 4 sur TMDB) pour corriger la prédiction
+            let officialVOD = null;
+            if (details.release_dates && details.release_dates.results) {
+                const usReleases = details.release_dates.results.find(r => r.iso_3166_1 === 'US' || r.iso_3166_1 === 'FR');
+                if (usReleases) {
+                    const digitalRelease = usReleases.release_dates.find(r => r.type === 4);
+                    if (digitalRelease) officialVOD = new Date(digitalRelease.release_date);
+                }
+            }
+
+            const finalDate = officialVOD || predictedVODDate;
+            const today = new Date();
+            
+            // On ne garde que les films dont la date VOD est dans le futur (ou sortie il y a moins de 3 jours)
+            const diffTime = finalDate - today;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+            if (diffDays >= -3 && diffDays <= 120) {
+                upcomingVODs.push({
+                    title: movie.title,
+                    plex_release: formatDateFR(finalDate),
+                    tmdb_id: movie.id,
+                    poster_path: movie.poster_path,
+                    _sortDate: finalDate.getTime() // Pour le tri
+                });
+            }
+        }
+
+        // Trier par date de sortie la plus proche
+        upcomingVODs.sort((a, b) => a._sortDate - b._sortDate);
+        
+        // Nettoyer l'objet avant la sauvegarde
+        upcomingVODs = upcomingVODs.map(({_sortDate, ...rest}) => rest);
+
+        // 4. Sauvegarder dans le fichier JSON
+        const outputPath = path.join(__dirname, '../data/plex-upcoming.json');
+        fs.writeFileSync(outputPath, JSON.stringify(upcomingVODs, null, 2));
+        console.log(`✅ Succès ! ${upcomingVODs.length} films mis à jour dans plex-upcoming.json`);
+
+    } catch (error) {
+        console.error("❌ Erreur lors de la mise à jour :", error);
+    }
+}
+
+updatePlexVOD();
