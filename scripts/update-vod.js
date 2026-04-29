@@ -18,22 +18,16 @@ async function updateVOD() {
         const currentMonth = today.getMonth();
         const currentYear = today.getFullYear();
 
-        console.log(`🔍 Scan ciblé : Sorties VOD de ${today.toLocaleDateString('fr-FR', {month: 'long', year: 'numeric'})}`);
-
-        // Fenêtre pour la France (Cinéma + 4 mois) : on cherche les films sortis il y a ~120 jours
+        // Fenêtre pour les films français (sortis il y a 4 mois)
         const dateDebutFR = new Date(); dateDebutFR.setMonth(today.getMonth() - 5);
         const dateFinFR = new Date(); dateFinFR.setMonth(today.getMonth() - 3);
-        
-        // Fenêtre pour l'International (Cinéma + 45 jours) : on cherche les films sortis il y a ~2 mois
-        const dateDebutINT = new Date(); dateDebutINT.setMonth(today.getMonth() - 3);
 
         const endpoints = [
-            // 1. SCAN SPÉCIFIQUE FRANCE (On force la recherche sur les films français uniquement)
-            `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=fr-FR&region=FR&with_origin_country=FR&primary_release_date.gte=${dateDebutFR.toISOString().split('T')[0]}&primary_release_date.lte=${dateFinFR.toISOString().split('T')[0]}&sort_by=primary_release_date.desc&page=1`,
-            // 2. SCAN POPULARITÉ FRANCE (Pour les gros succès FR et sorties récentes)
-            `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=fr-FR&region=FR&primary_release_date.gte=${dateDebutFR.toISOString().split('T')[0]}&sort_by=popularity.desc&page=1`,
-            // 3. SCAN INTERNATIONAL (Blockbusters US)
-            `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=fr-FR&region=US&primary_release_date.gte=${dateDebutINT.toISOString().split('T')[0]}&sort_by=popularity.desc&page=1`
+            // 1. SCAN DÉDIÉ CINÉMA FRANÇAIS (On fouille 3 pages pour trouver les pépites)
+            `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=fr-FR&region=FR&with_origin_country=FR&primary_release_date.gte=${dateDebutFR.toISOString().split('T')[0]}&primary_release_date.lte=${dateFinFR.toISOString().split('T')[0]}&sort_by=popularity.desc&page=1`,
+            `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=fr-FR&region=FR&with_origin_country=FR&primary_release_date.gte=${dateDebutFR.toISOString().split('T')[0]}&primary_release_date.lte=${dateFinFR.toISOString().split('T')[0]}&sort_by=popularity.desc&page=2`,
+            // 2. SCAN BLOCKBUSTERS (Les plus populaires de ces 3 derniers mois)
+            `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=fr-FR&region=FR&primary_release_date.gte=${dateDebutFR.toISOString().split('T')[0]}&sort_by=popularity.desc&page=1`
         ];
 
         let allMovies = [];
@@ -43,7 +37,6 @@ async function updateVOD() {
             if (data.results) allMovies = allMovies.concat(data.results);
         }
 
-        // Déduplication par ID
         const uniqueMovies = Array.from(new Map(allMovies.map(m => [m.id, m])).values());
         let finalResults = [];
 
@@ -57,24 +50,24 @@ async function updateVOD() {
             const isFrench = details.production_countries?.some(c => c.iso_3166_1 === 'FR') || details.original_language === 'fr';
             const companyIds = details.production_companies?.map(c => c.id) || [];
 
-            // --- CALCUL DE LA DATE VOD ---
+            // --- CALCUL PRÉDICTIF ---
             let delay = 45; 
             if (isFrench) {
-                delay = 121; // Chronologie des médias FR : 4 mois
+                delay = 121; // 4 mois exacts pour la France
             } else if (companyIds.some(id => STUDIOS.UNIVERSAL.includes(id))) {
-                delay = 28;
-            } else if (companyIds.some(id => STUDIOS.WARNER.includes(id)) || companyIds.some(id => STUDIOS.SONY.includes(id))) {
-                delay = 40;
+                delay = 25; // Universal est très rapide
+            } else if (companyIds.some(id => STUDIOS.WARNER.includes(id))) {
+                delay = 35;
             } else if (companyIds.some(id => STUDIOS.DISNEY.includes(id))) {
-                delay = 60;
+                delay = 55;
             }
 
             let vodDate = new Date(releaseCinema);
             vodDate.setDate(vodDate.getDate() + delay);
 
-            // Vérification date officielle Digital (Type 4)
-            const releaseResults = details.release_dates?.results || [];
-            const digitalData = releaseResults.find(r => r.iso_3166_1 === 'FR' || r.iso_3166_1 === 'US')
+            // Priorité à la date digitale réelle sur TMDB
+            const digitalData = details.release_dates?.results
+                .find(r => r.iso_3166_1 === 'FR' || r.iso_3166_1 === 'US')
                 ?.release_dates.find(rd => rd.type === 4);
 
             if (digitalData) {
@@ -82,14 +75,12 @@ async function updateVOD() {
                 if (!isNaN(officialDate)) vodDate = officialDate;
             }
 
-            // --- FILTRE STRICT : MOIS EN COURS ---
+            // --- FILTRES FINAUX ---
             const isTargetMonth = (vodDate.getMonth() === currentMonth && vodDate.getFullYear() === currentYear);
-            
-            // Sécurité pour éviter les erreurs de date de sortie cinéma
             const diffDays = (vodDate - releaseCinema) / (1000 * 3600 * 24);
-            const securityCheck = isFrench ? diffDays > 115 : diffDays > 15;
-
-            if (isTargetMonth && securityCheck) {
+            
+            // Sécurité : au moins 20 jours après le ciné (évite les erreurs de synchro)
+            if (isTargetMonth && diffDays > 20) {
                 finalResults.push({
                     title: movie.title,
                     plex_release: vodDate.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }),
@@ -100,21 +91,15 @@ async function updateVOD() {
             }
         }
 
-        // Tri par date
         finalResults.sort((a, b) => a._sort - b._sort);
-        
-        // Nettoyage des doublons de titres
         const cleanResults = Array.from(new Map(finalResults.map(m => [m.title, m])).values())
                                   .map(({_sort, ...rest}) => rest);
 
-        const dir = path.dirname(DATA_PATH);
-        if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
         fs.writeFileSync(DATA_PATH, JSON.stringify(cleanResults, null, 2), 'utf8');
-
-        console.log(`✅ Terminé : ${cleanResults.length} films pour ce mois.`);
+        console.log(`✅ Mise à jour réussie : ${cleanResults.length} films.`);
 
     } catch (e) {
-        console.error("Erreur critique :", e);
+        console.error("Erreur :", e);
     }
 }
 
