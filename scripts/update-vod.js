@@ -7,7 +7,7 @@ const DATA_PATH = path.join(__dirname, '../data/plex-upcoming.json');
 const STUDIOS = {
     UNIVERSAL: [33, 12248],
     WARNER: [174, 2734],
-    DISNEY: [2, 420, 3, 1632, 6125],
+    DISNEY: [2, 420, 3, 1632],
     SONY: [5, 34],
     PARAMOUNT: [4, 60]
 };
@@ -18,14 +18,16 @@ async function updateVOD() {
         const currentMonth = today.getMonth();
         const currentYear = today.getFullYear();
 
-        // On élargit le scan pour trouver les sorties US de février/mars qui deviennent VOD en Avril
+        // Fenêtre de scan large pour ne rien rater
         const dateDebutScan = new Date(); dateDebutScan.setMonth(today.getMonth() - 5);
 
         const endpoints = [
-            // 1. SCAN FILMS FRANÇAIS (Sortis il y a 4 mois)
+            // 1. SCAN FRANCE (Pour tes films français)
             `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=fr-FR&region=FR&with_origin_country=FR&primary_release_date.gte=${dateDebutScan.toISOString().split('T')[0]}&sort_by=popularity.desc&page=1`,
-            // 2. SCAN BLOCKBUSTERS INTERNATIONAUX (Sortis il y a 45-60 jours)
-            `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=fr-FR&region=US&primary_release_date.gte=${dateDebutScan.toISOString().split('T')[0]}&sort_by=popularity.desc&page=1`
+            // 2. SCAN INTERNATIONAL (Pour la VFQ et blockbusters)
+            `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=fr-FR&region=US&primary_release_date.gte=${dateDebutScan.toISOString().split('T')[0]}&sort_by=popularity.desc&page=1`,
+            // 3. SCAN GÉNÉRAL POPULAIRE
+            `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=fr-FR&primary_release_date.gte=${dateDebutScan.toISOString().split('T')[0]}&sort_by=popularity.desc&page=1`
         ];
 
         let allMovies = [];
@@ -45,29 +47,26 @@ async function updateVOD() {
             if (!details.release_date) continue;
 
             const releaseCinema = new Date(details.release_date);
-            // On vérifie si c'est une pure production française (pour les 4 mois)
-            const isPureFrench = details.production_countries?.some(c => c.iso_3166_1 === 'FR') && details.original_language === 'fr';
+            const isFrench = details.production_countries?.some(c => c.iso_3166_1 === 'FR') || details.original_language === 'fr';
             const companyIds = details.production_companies?.map(c => c.id) || [];
 
-            // --- CALCUL DU DÉLAI VOD (Option VFQ/US) ---
-            let delay = 45; // Par défaut 45 jours (Sortie Digitale US/Canada)
-
-            if (isPureFrench) {
-                delay = 121; // On garde les 4 mois pour les films 100% FR (VFF)
+            // --- LOGIQUE DE DÉLAI VFQ ---
+            let delay = 45; // Standard VFQ/International
+            
+            if (isFrench) {
+                delay = 121; // Priorité 4 mois pour les films FR (VFF)
             } else if (companyIds.some(id => STUDIOS.UNIVERSAL.includes(id))) {
-                delay = 30; // Universal sort souvent ses VFQ en 30 jours
+                delay = 30;
             } else if (companyIds.some(id => STUDIOS.WARNER.includes(id))) {
-                delay = 45;
-            } else if (companyIds.some(id => STUDIOS.DISNEY.includes(id))) {
-                delay = 60;
+                delay = 40;
             }
 
             let vodDate = new Date(releaseCinema);
             vodDate.setDate(vodDate.getDate() + delay);
 
-            // Vérification si une date digitale officielle existe déjà (Type 4)
+            // On check s'il y a une date digitale officielle (type 4)
             const digitalData = details.release_dates?.results
-                .find(r => r.iso_3166_1 === 'US' || r.iso_3166_1 === 'CA' || r.iso_3166_1 === 'FR')
+                .find(r => r.iso_3166_1 === 'US' || r.iso_3166_1 === 'FR' || r.iso_3166_1 === 'CA')
                 ?.release_dates.find(rd => rd.type === 4);
 
             if (digitalData) {
@@ -75,13 +74,11 @@ async function updateVOD() {
                 if (!isNaN(officialDate)) vodDate = officialDate;
             }
 
-            // --- FILTRE MOIS EN COURS ---
+            // Filtre : uniquement ce mois-ci
             const isTargetMonth = (vodDate.getMonth() === currentMonth && vodDate.getFullYear() === currentYear);
-            
-            // Sécurité : On accepte le film si la VOD est au moins 20 jours après le ciné
             const diffDays = (vodDate - releaseCinema) / (1000 * 3600 * 24);
 
-            if (isTargetMonth && diffDays >= 20) {
+            if (isTargetMonth && diffDays > 20) {
                 finalResults.push({
                     title: movie.title,
                     plex_release: vodDate.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }),
@@ -97,7 +94,7 @@ async function updateVOD() {
                                   .map(({_sort, ...rest}) => rest);
 
         fs.writeFileSync(DATA_PATH, JSON.stringify(cleanResults, null, 2), 'utf8');
-        console.log(`✅ Scan terminé : ${cleanResults.length} films (Incluant VFQ/US).`);
+        console.log(`✅ Retour à la version complète : ${cleanResults.length} films trouvés.`);
 
     } catch (e) {
         console.error("Erreur :", e);
