@@ -1,20 +1,5 @@
 [
   {
-    "title": "Les filles de Caleb: l'histoire d'une passion",
-    "plex_release": "1 avril 2026",
-    "tmdb_id": 1591680,
-    "poster_path": "/h0QPr3kZR0NLmxcNg5cPUaItJZY.jpg",
-    "original_title": "Les filles de Caleb: l'histoire d'une passion",
-    "cinema_date": "2 décembre 2025",
-    "overview": "Quarante ans après le roman et trente-cinq ans après la série, Marina Orsini célèbre Les filles de Caleb, saga culte qui continue d’émouvoir et de marquer les esprits.",
-    "vote_average": 8,
-    "genres": [
-      "Documentaire"
-    ],
-    "is_french": true,
-    "source": "prédite"
-  },
-  {
     "title": "Mektoub, My Love: Canto Due",
     "plex_release": "2 avril 2026",
     "tmdb_id": 661568,
@@ -78,68 +63,6 @@
     "source": "prédite"
   },
   {
-    "title": "Bardot",
-    "plex_release": "2 avril 2026",
-    "tmdb_id": 977168,
-    "poster_path": "/tFxgFiJsclpN55ZCRx3vfwmBvxO.jpg",
-    "original_title": "Bardot",
-    "cinema_date": "3 décembre 2025",
-    "overview": "Jamais vraiment dans une case, muse de cinéastes finissant par sacrifier tout à la cause animale, Brigitte Bardot est une femme libre mais sans doute incomprise. BARDOT revient sur les aspects si contradictoires de sa vie, de sa carrière artistique légendaire à sa célèbre fondation. Elle qui bouscula l’image des femmes et fut en avance sur la conscience écologique et le bien-être animal qui semblent, enfin, pour tous une évidence.",
-    "vote_average": 8.2,
-    "genres": [
-      "Documentaire"
-    ],
-    "is_french": true,
-    "source": "prédite"
-  },
-  {
-    "title": "Il A Suffi D'Une Nuit",
-    "plex_release": "2 avril 2026",
-    "tmdb_id": 1595305,
-    "poster_path": "/70GroCqPLUwg5RnFQqL7Xd1SfqB.jpg",
-    "original_title": "Il A Suffi D'Une Nuit",
-    "cinema_date": "3 décembre 2025",
-    "overview": "1989, j’avais 20 ans quand on m’a annoncé ma séropositivité. Avec Amel, Alice, Nicolas et  Eder, mes sœurs et frères « en Sida », nous racontons un bout de cette histoire commune.  Une histoire de rage et de désir de vivre, un cri pour enfin sortir du silence.",
-    "vote_average": 7,
-    "genres": [
-      "Documentaire"
-    ],
-    "is_french": true,
-    "source": "prédite"
-  },
-  {
-    "title": "Souvent l’hiver se mutine",
-    "plex_release": "2 avril 2026",
-    "tmdb_id": 1504439,
-    "poster_path": "/5pyzjrYBRb7QASYqjH0lIskJbU9.jpg",
-    "original_title": "Souvent l’hiver se mutine",
-    "cinema_date": "3 décembre 2025",
-    "overview": "À travers un trésor d’archives rares, Souvent l’hiver se mutine nous immerge dans la vie paysanne du Poitou au XXe siècle — ses gestes, ses luttes, ses rituels. Les voix de celles et ceux qui ont façonné cette terre s’élèvent en chants, dévoilant une mémoire vive : celle d’une communauté dominée mais résistante, qui construisait un patrimoine culturel unique. Un monde disparu reprend vie sous nos yeux, dans une fresque sensible et politique.",
-    "vote_average": 0,
-    "genres": [
-      "Documentaire"
-    ],
-    "is_french": true,
-    "source": "prédite"
-  },
-  {
-    "title": "Les Baronnes",
-    "plex_release": "2 avril 2026",
-    "tmdb_id": 1255792,
-    "poster_path": "/uqNr7Ju19L5zasdC0tYrSn9pfwF.jpg",
-    "original_title": "Les Baronnes",
-    "cinema_date": "3 décembre 2025",
-    "overview": "Fatima, 65 ans, découvre que son mari mène une double vie au Maroc depuis dix ans. Déterminée à reprendre sa vie en main, elle forme avec ses amies Mériem, Romaissa et Inès, trois autres grand-mères de Molenbeek, les “Baronnes”, et prend une décision qui bouleversera leurs vies, leur quartier et leur entourage.",
-    "vote_average": 5.8,
-    "genres": [
-      "Comédie",
-      "Drame",
-      "Fantastique"
-    ],
-    "is_french": true,
-    "source": "prédite"
-  },
-  {
     "title": "Iron Lung",
     "plex_release": "5 avril 2026",
     "tmdb_id": 1116201,
@@ -172,37 +95,6 @@
     ],
     "is_french": false,
     "source": "officielle"
-  },
-  {
-    "title": "EPiC: Elvis Presley in Concert",
-    "plex_release": "7 avril 2026",
-    "tmdb_id": 1445363,
-    "poster_path": "/2K2NH5dforjT9kLcUC0eeBpdZkC.jpg",
-    "original_title": "EPiC: Elvis Presley in Concert",
-    "cinema_date": "18 février 2026",
-    "overview": "Des images longtemps perdues de la résidence légendaire d'Elvis Presley à Las Vegas dans les années 1970, associées à des images rares en 16mm d'Elvis en tournée et en 8mm provenant des archives de Graceland, ainsi qu'à des enregistrements d'Elvis racontant « sa version de l'histoire », redécouverts lors des recherches menées par Baz Luhrmann pour son film Elvis, sorti en 2022.",
-    "vote_average": 7.926,
-    "genres": [
-      "Musique",
-      "Documentaire"
-    ],
-    "is_french": false,
-    "source": "officielle"
-  },
-  {
-    "title": "Portrait of Norma Jeane",
-    "plex_release": "8 avril 2026",
-    "tmdb_id": 1525895,
-    "poster_path": "/caeesqEBIu2Lz6XODT8IS12EMBy.jpg",
-    "original_title": "Portrait of Norma Jeane",
-    "cinema_date": "9 décembre 2025",
-    "overview": "Un poème cinématographique sur la vie de Norma Jeane Baker alias Marilyn Monroe, sex symbol des années 50 et 60.",
-    "vote_average": 0,
-    "genres": [
-      "Documentaire"
-    ],
-    "is_french": true,
-    "source": "prédite"
   },
   {
     "title": "Love Me Tender",
@@ -297,80 +189,33 @@
     "source": "prédite"
   },
   {
-    "title": "Elle entend pas la moto",
-    "plex_release": "9 avril 2026",
-    "tmdb_id": 1544483,
-    "poster_path": "/2A5T576hcmKoznPv8Dxbmy93qOt.jpg",
-    "original_title": "Elle entend pas la moto",
-    "cinema_date": "10 décembre 2025",
-    "overview": "À la veille d’une célébration familiale, Manon, jeune femme sourde et lumineuse, rejoint ses parents en Haute-Savoie. Dans la beauté des paysages alpestres, l’histoire du clan se redéploie entre archives familiales et images filmées par la réalisatrice depuis 25 ans. Porté par la force intérieure de Manon, le film trace un chemin d’épreuve et de résilience. La parole émerge enfin, là où le silence a longtemps régné.",
-    "vote_average": 7.5,
-    "genres": [
-      "Documentaire"
-    ],
-    "is_french": true,
-    "source": "prédite"
-  },
-  {
-    "title": "Cimarron",
-    "plex_release": "9 avril 2026",
-    "tmdb_id": 1443009,
-    "poster_path": "/q8uXXkISDzuJ8FgldENg3wmWPMt.jpg",
-    "original_title": "Cimarron",
-    "cinema_date": "10 décembre 2025",
-    "overview": "Martinique, 18ème siècle. Pour avoir tenté de s’enfuir pour la troisième fois avec sa femme et son enfant, Mathieu, un esclave travaillant dans une plantation de cannes à sucre, est condamné à mort. Le juge lui propose toutefois d’y échapper à condition qu’il accepte de partir pour le Canada afin d’y travailler comme bourreau. N’ayant pas d’autres choix, le jeune homme accepte.",
-    "vote_average": 6,
-    "genres": [
-      "Animation"
-    ],
-    "is_french": true,
-    "source": "prédite"
-  },
-  {
-    "title": "L'ascension de Lizzie Le Blond",
-    "plex_release": "10 avril 2026",
-    "tmdb_id": 1601938,
-    "poster_path": "/cmiaZPPp83c91E3DkDivokN75xv.jpg",
-    "original_title": "L'ascension de Lizzie Le Blond",
-    "cinema_date": "11 décembre 2025",
-    "overview": "À l’aube du XXe siècle, l’alpiniste Lizzie Le Blond fut l’une des premières à avoir photographié la montagne et filmé les sports d’hiver dans les Alpes.  Figure oubliée de l’Histoire, Lizzie a pourtant fondé le premier club alpin  féminin et documenté ses exploits dans sept livres et des milliers de photographies. Son œuvre hors du commun, renaît à travers ce film et porte avec elle toutes les femmes dont la mémoire a été effacée.",
-    "vote_average": 0,
-    "genres": [
-      "Documentaire"
-    ],
-    "is_french": true,
-    "source": "prédite"
-  },
-  {
-    "title": "Juste Xavier",
+    "title": "Rue Málaga",
     "plex_release": "11 avril 2026",
-    "tmdb_id": 1440456,
-    "poster_path": "/QL8t87Qyq4BGPJgERRpnuenKhs.jpg",
-    "original_title": "Juste Xavier",
-    "cinema_date": "12 décembre 2025",
-    "overview": "Xavier, avocat transgenre, retrouve sa famille à Noël pour la première fois depuis sa transition. Entre l'enthousiasme de son père, une idylle naissante avec Ariane et ses relations tendues avec sa mère et ses sœurs, ce dîner de fête peu traditionnel devient une occasion haute en couleur de retrouvailles.",
-    "vote_average": 0,
+    "tmdb_id": 1399462,
+    "poster_path": "/qvfwPBIL4tGoJM2tzOVvrzmRJFd.jpg",
+    "original_title": "Calle Málaga",
+    "cinema_date": "25 février 2026",
+    "overview": "Maria Angeles, une Espagnole de 79 ans, vit seule à Tanger, dans le nord du Maroc, où elle profite de sa ville et de son quotidien. Sa vie bascule lorsque sa fille Clara arrive de Madrid pour vendre l’appartement dans lequel elle a toujours vécu. Déterminée à rester dans cette ville qui l'a vue grandir, elle met tout en œuvre pour garder sa maison et récupérer les objets d'une vie. Contre toute attente, elle redécouvre en chemin l’amour et le désir.",
+    "vote_average": 7.25,
     "genres": [
-      "Comédie",
       "Drame"
     ],
-    "is_french": true,
+    "is_french": false,
     "source": "prédite"
   },
   {
-    "title": "Rumba Royale",
+    "title": "Justa",
     "plex_release": "11 avril 2026",
-    "tmdb_id": 1455103,
-    "poster_path": "/lHWo5q8WipfW8yLSpT8yAGz2mWp.jpg",
-    "original_title": "Rumba Royale",
-    "cinema_date": "12 décembre 2025",
-    "overview": "",
+    "tmdb_id": 1168710,
+    "poster_path": "/t5urffG7WtzCUIvTpUJBkwecYav.jpg",
+    "original_title": "Justa",
+    "cinema_date": "25 février 2026",
+    "overview": "En 2017, une région du Portugal est ravagée par de gigantesques incendies qui emportent des forêts entières… et des vies. Quelques mois plus tard, un groupe de survivants — Justa, une fillette, son père gravement brûlé, une femme âgée devenue aveugle, un adolescent — tente tant bien que mal de se reconstruire. Chacun affronte ses traumatismes, ses silences, ses fantômes. Mais certaines expériences demeurent impossibles à partager pour ceux qui ne les ont pas traversées.",
     "vote_average": 0,
     "genres": [
-      "Drame",
-      "Thriller"
+      "Drame"
     ],
-    "is_french": true,
+    "is_french": false,
     "source": "prédite"
   },
   {
@@ -389,21 +234,6 @@
     "source": "prédite"
   },
   {
-    "title": "Panique au grand magasin",
-    "plex_release": "14 avril 2026",
-    "tmdb_id": 1589647,
-    "poster_path": "/j9gmkvIFCtqKuYWLYzM6sTRMixk.jpg",
-    "original_title": "Panique au grand magasin",
-    "cinema_date": "15 décembre 2025",
-    "overview": "L'année dernière, la boîte de nuit le Passo Club était au bord de la fermeture, mais fut sauvé in extremis et même relancé par Arnaud (Arnaud Ducret), aidé par toute sa famille.  Cette année, c'est le Grand Magasin de la région qui est au bord de la fermeture. Entre crise générale et pression du e-commerce, ce rendez-vous mythique du shopping pourrait voir fermer ses portes, sous la pression de la banquière.  Pour l'aider dans cette lourde tâche, le patron du Grand Magasin fait appel à un nouveau Golden Boy : Arnaud qui, en un an, s'est métamorphosé. Fusion de Bernard Tapie et de Philippe Etchebest, il sauve tout ce qu'il touche : une auto-école, une usine, un restaurant... Sa mission : sauver ce Grand Magasin et utiliser les fêtes de Noël pour réaliser son chiffre d'affaires et relancer la dynamique. Epaulé par son bras droit (Tom Villa), ses parents (Michèle Bernier et Lionnel Astier) et une pléiade de Stars qui vont l'aider dans ce \" PANIQUE AU GRAND MAGASIN \"!",
-    "vote_average": 5.6,
-    "genres": [
-      "Comédie"
-    ],
-    "is_french": true,
-    "source": "prédite"
-  },
-  {
     "title": "L’Âme Idéale",
     "plex_release": "16 avril 2026",
     "tmdb_id": 1166170,
@@ -416,51 +246,6 @@
       "Comédie",
       "Romance",
       "Fantastique"
-    ],
-    "is_french": true,
-    "source": "prédite"
-  },
-  {
-    "title": "Le Chant des forêts",
-    "plex_release": "16 avril 2026",
-    "tmdb_id": 1309373,
-    "poster_path": "/yDXpL3L7ZRMIkwIYwrbvDaJocPi.jpg",
-    "original_title": "Le Chant des forêts",
-    "cinema_date": "17 décembre 2025",
-    "overview": "Un homme marche, sac au dos, bâton à la main, veste lourde et chaude sur les épaules, vers les profondeurs d’une vieille forêt moussue. Ni le vent, ni la brume, ni même la neige ne l’arrêteront dans son élan pour rejoindre son affût, sa planque : un sapin. En se glissant sous ses branches basses, l’homme s’efface et un monde s’éveille. Celui des bêtes. Le vieux sage nous invite à partager des émotions puissantes à ses côtés, celles qu’il a ressenties au cours de milliers d’affuts. Le moment est venu pour lui d’ouvrir son savoir, ses souvenirs de ses plus belles rencontres sauvages. Au cours d’un voyage dans nos forêts proches, il nous éveillera au \"sensible\", où plus précisément à la poésie du monde sauvage, celle qu’il a transmise à son fils dès l’âge de 12 ans et qu’il transmettra peut-être à son petit-fils.",
-    "vote_average": 7.973,
-    "genres": [
-      "Documentaire"
-    ],
-    "is_french": true,
-    "source": "prédite"
-  },
-  {
-    "title": "Histoires de la bonne vallée",
-    "plex_release": "16 avril 2026",
-    "tmdb_id": 1457842,
-    "poster_path": "/vB8WLfHFsKBoQsoEZKHNqZVIqcx.jpg",
-    "original_title": "Historias del buen valle",
-    "cinema_date": "17 décembre 2025",
-    "overview": "En marge de Barcelone, Vallbona est une enclave entourée par une rivière, des voies ferrées et une autoroute. Antonio, fils d'ouvriers catalans, y cultive des fleurs depuis près de 90 ans. Il est rejoint par Makome, Norma, Tatiana, venus de tous horizons… Au rythme de la musique, des baignades interdites et des amours naissants, une forme poétique de résistance émerge face aux conflits urbains, sociaux et identitaires du monde.",
-    "vote_average": 7,
-    "genres": [
-      "Documentaire"
-    ],
-    "is_french": true,
-    "source": "prédite"
-  },
-  {
-    "title": "B•Max, 10 ans de Broadcast - Le documentaire inédit",
-    "plex_release": "17 avril 2026",
-    "tmdb_id": 1604846,
-    "poster_path": "/nZH7FXFeWQIQ2pxWnp4AHYBlcNE.jpg",
-    "original_title": "B•Max, 10 ans de Broadcast - Le documentaire inédit",
-    "cinema_date": "18 décembre 2025",
-    "overview": "En cette fin d'année 2025, B-Max fête ses 10 ans.  À cette occasion, nous vous proposons ce documentaire exceptionnel, pour partager ensemble une décennie de créativité, de défis et de transmission, racontée par ceux qui l'ont vécue.  Depuis dix ans, chaque promotion écrit à sa manière l'histoire de la chaîne officielle du BTS Audiovisuel de Boulogne-Billancourt.  Chaque année, la chaîne passe entre les mains des étudiants, comme un véritable relais: on hérite, on apprend, on transforme, puis on transmet.  Pendant 52 minutes, revivez la naissance de B.News en 2016, le passage à B•Max en 2019, et toutes ces années de partage et d'émotions, à travers des archives, des images inédites et des témoignages exceptionnels.",
-    "vote_average": 0,
-    "genres": [
-      "Documentaire"
     ],
     "is_french": true,
     "source": "prédite"
@@ -497,18 +282,18 @@
     "source": "prédite"
   },
   {
-    "title": "F#%*! 2025 - Le Roast de l'année Juste pour rire",
-    "plex_release": "29 avril 2026",
-    "tmdb_id": 1606604,
-    "poster_path": "/o78drvdcBcwGrgi6SFAEBBoqzOh.jpg",
-    "original_title": "F#%*! 2025 - Le Roast de l'année Juste pour rire",
-    "cinema_date": "30 décembre 2025",
-    "overview": "",
-    "vote_average": 0,
+    "title": "Orphelin",
+    "plex_release": "25 avril 2026",
+    "tmdb_id": 803208,
+    "poster_path": "/c9V1tdienNzLD98NfHOMx4Qh2dk.jpg",
+    "original_title": "Árva",
+    "cinema_date": "11 mars 2026",
+    "overview": "Budapest 1957, après l'échec de l'insurrection contre le régime communiste. Andor, un jeune garçon juif, vit seul avec sa mère Klara qui l'élève dans le souvenir de son mari disparu dans les camps. Mais quand un homme rustre tout juste arrivé de la campagne prétend être son vrai père, le monde d’Andor vole soudain en éclats…",
+    "vote_average": 5.8,
     "genres": [
-      "Comédie"
+      "Drame"
     ],
-    "is_french": true,
+    "is_french": false,
     "source": "prédite"
   },
   {
@@ -554,37 +339,6 @@
       "Fantastique",
       "Comédie",
       "Horreur"
-    ],
-    "is_french": true,
-    "source": "prédite"
-  },
-  {
-    "title": "Soleil Pâle",
-    "plex_release": "30 avril 2026",
-    "tmdb_id": 1628844,
-    "poster_path": "/1y7gjDfbSzvcwgVx5KRfqtueQj4.jpg",
-    "original_title": "Soleil Pâle",
-    "cinema_date": "31 décembre 2025",
-    "overview": "",
-    "vote_average": 0,
-    "genres": [
-      "Drame"
-    ],
-    "is_french": true,
-    "source": "prédite"
-  },
-  {
-    "title": "Sol vivant",
-    "plex_release": "30 avril 2026",
-    "tmdb_id": 1431142,
-    "poster_path": "/6KUHhcIcWGHGlvMeflAdhWdZUQS.jpg",
-    "original_title": "Sol vivant",
-    "cinema_date": "31 décembre 2025",
-    "overview": "",
-    "vote_average": 0,
-    "genres": [
-      "Thriller",
-      "Drame"
     ],
     "is_french": true,
     "source": "prédite"
