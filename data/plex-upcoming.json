@@ -7,6 +7,7 @@
     "original_title": "Mektoub, My Love: Canto Due",
     "cinema_date": "3 décembre 2025",
     "vote_average": 7.3,
+    "vote_count": 13,
     "genres": [
       "Romance",
       "Drame",
@@ -23,11 +24,12 @@
     "original_title": "Les enfants vont bien",
     "cinema_date": "3 décembre 2025",
     "vote_average": 6.9,
+    "vote_count": 77,
     "genres": [
       "Drame"
     ],
     "is_french": true,
-    "source": "provider-fr"
+    "source": "prédite"
   },
   {
     "title": "Gérald le Conquérant",
@@ -37,11 +39,12 @@
     "original_title": "Gérald le Conquérant",
     "cinema_date": "3 décembre 2025",
     "vote_average": 5.6,
+    "vote_count": 30,
     "genres": [
       "Comédie"
     ],
     "is_french": true,
-    "source": "provider-fr"
+    "source": "prédite"
   },
   {
     "title": "Que ma volonté soit faite",
@@ -51,12 +54,13 @@
     "original_title": "Que ma volonté soit faite",
     "cinema_date": "3 décembre 2025",
     "vote_average": 4,
+    "vote_count": 2,
     "genres": [
       "Drame",
       "Horreur"
     ],
     "is_french": true,
-    "source": "provider-fr"
+    "source": "prédite"
   },
   {
     "title": "Dites-lui que je l’aime",
@@ -66,12 +70,13 @@
     "original_title": "Dites-lui que je l’aime",
     "cinema_date": "3 décembre 2025",
     "vote_average": 8.1,
+    "vote_count": 7,
     "genres": [
       "Drame",
       "Comédie"
     ],
     "is_french": true,
-    "source": "provider-fr"
+    "source": "prédite"
   },
   {
     "title": "Cabo Negro",
@@ -81,11 +86,12 @@
     "original_title": "Cabo Negro",
     "cinema_date": "3 décembre 2025",
     "vote_average": 0,
+    "vote_count": 0,
     "genres": [
       "Drame"
     ],
     "is_french": true,
-    "source": "provider-fr"
+    "source": "prédite"
   },
   {
     "title": "Psycho Killer",
@@ -95,6 +101,7 @@
     "original_title": "Psycho Killer",
     "cinema_date": "19 février 2026",
     "vote_average": 5.5,
+    "vote_count": 39,
     "genres": [
       "Crime",
       "Horreur",
@@ -111,6 +118,7 @@
     "original_title": "L'Immortel",
     "cinema_date": "9 décembre 2025",
     "vote_average": 0,
+    "vote_count": 0,
     "genres": [
       "Drame",
       "Aventure"
@@ -126,6 +134,7 @@
     "original_title": "ओ रोमियो",
     "cinema_date": "13 février 2026",
     "vote_average": 5.3,
+    "vote_count": 10,
     "genres": [
       "Romance",
       "Action",
@@ -142,11 +151,12 @@
     "original_title": "Love Me Tender",
     "cinema_date": "10 décembre 2025",
     "vote_average": 6.7,
+    "vote_count": 9,
     "genres": [
       "Drame"
     ],
     "is_french": true,
-    "source": "provider-fr"
+    "source": "prédite"
   },
   {
     "title": "Chasse gardée 2",
@@ -156,11 +166,12 @@
     "original_title": "Chasse gardée 2",
     "cinema_date": "10 décembre 2025",
     "vote_average": 5.7,
+    "vote_count": 43,
     "genres": [
       "Comédie"
     ],
     "is_french": true,
-    "source": "provider-fr"
+    "source": "prédite"
   },
   {
     "title": "Louise",
@@ -170,11 +181,12 @@
     "original_title": "Louise",
     "cinema_date": "10 décembre 2025",
     "vote_average": 6.9,
+    "vote_count": 7,
     "genres": [
       "Drame"
     ],
     "is_french": true,
-    "source": "provider-fr"
+    "source": "prédite"
   },
   {
     "title": "La Condition",
@@ -184,12 +196,13 @@
     "original_title": "La Condition",
     "cinema_date": "10 décembre 2025",
     "vote_average": 6,
+    "vote_count": 29,
     "genres": [
       "Drame",
       "Histoire"
     ],
     "is_french": true,
-    "source": "provider-fr"
+    "source": "prédite"
   },
   {
     "title": "La Petite Cuisine de Mehdi",
@@ -199,12 +212,13 @@
     "original_title": "La Petite Cuisine de Mehdi",
     "cinema_date": "10 décembre 2025",
     "vote_average": 7,
+    "vote_count": 10,
     "genres": [
       "Comédie",
       "Drame"
     ],
     "is_french": true,
-    "source": "provider-fr"
+    "source": "prédite"
   },
   {
     "title": "Animal Totem",
@@ -214,11 +228,12 @@
     "original_title": "Animal Totem",
     "cinema_date": "10 décembre 2025",
     "vote_average": 6.8,
+    "vote_count": 5,
     "genres": [
       "Comédie"
     ],
     "is_french": true,
-    "source": "provider-fr"
+    "source": "prédite"
   },
   {
     "title": "À la poursuite du Père Noël !",
@@ -228,98 +243,11 @@
     "original_title": "À la poursuite du Père Noël !",
     "cinema_date": "10 décembre 2025",
     "vote_average": 5.1,
+    "vote_count": 5,
     "genres": [
       "Comédie",
       "Familial"
     ],
-    "is_french": true,
-    "source": "provider-fr"
-  },
-  {
-    "title": "Des feux et des rois",
-    "plex_release": "9 avril 2026",
-    "tmdb_id": 1596181,
-    "poster_path": "/ebcVAq7WnCc5DuJTeUmbnlJIaeO.jpg",
-    "original_title": "Des feux et des rois",
-    "cinema_date": "10 décembre 2025",
-    "vote_average": 0,
-    "genres": [],
-    "is_french": true,
-    "source": "prédite"
-  },
-  {
-    "title": "Paris Opera: Der Nussknacker",
-    "plex_release": "13 avril 2026",
-    "tmdb_id": 1550394,
-    "poster_path": "/7riTZRkiddaUg4sd5mdNvafegbX.jpg",
-    "original_title": "Paris Opera: Der Nussknacker",
-    "cinema_date": "14 décembre 2025",
-    "vote_average": 0,
-    "genres": [],
-    "is_french": true,
-    "source": "prédite"
-  },
-  {
-    "title": "Casse-Noisette",
-    "plex_release": "13 avril 2026",
-    "tmdb_id": 1416613,
-    "poster_path": "/5TGp5OswPKYOPXW3GEk1CVRD2RM.jpg",
-    "original_title": "Casse-Noisette",
-    "cinema_date": "14 décembre 2025",
-    "vote_average": 0,
-    "genres": [
-      "Familial"
-    ],
-    "is_french": true,
-    "source": "prédite"
-  },
-  {
-    "title": "Grace",
-    "plex_release": "14 avril 2026",
-    "tmdb_id": 1649435,
-    "poster_path": "/42qz0xggymCZ1UfJs3oaRjZdUpj.jpg",
-    "original_title": "Grace",
-    "cinema_date": "15 décembre 2025",
-    "vote_average": 0,
-    "genres": [
-      "Thriller"
-    ],
-    "is_french": true,
-    "source": "prédite"
-  },
-  {
-    "title": "9 m2 pour deux",
-    "plex_release": "15 avril 2026",
-    "tmdb_id": 1068730,
-    "poster_path": "/p4dixYct74lWCWKQUvSEbPxPwsl.jpg",
-    "original_title": "9 m2 pour deux",
-    "cinema_date": "16 décembre 2025",
-    "vote_average": 8,
-    "genres": [],
-    "is_french": true,
-    "source": "prédite"
-  },
-  {
-    "title": "Vésuve - le volcan destructeur de Pompéi qui inquiète l'Europe",
-    "plex_release": "15 avril 2026",
-    "tmdb_id": 1600959,
-    "poster_path": "/vfFB99UCr1tGhDClpEU88PFAaZp.jpg",
-    "original_title": "Vésuve - le volcan destructeur de Pompéi qui inquiète l'Europe",
-    "cinema_date": "16 décembre 2025",
-    "vote_average": 0,
-    "genres": [],
-    "is_french": true,
-    "source": "prédite"
-  },
-  {
-    "title": "Retour au Pays",
-    "plex_release": "15 avril 2026",
-    "tmdb_id": 1647360,
-    "poster_path": null,
-    "original_title": "Retour au Pays",
-    "cinema_date": "16 décembre 2025",
-    "vote_average": 0,
-    "genres": [],
     "is_french": true,
     "source": "prédite"
   },
@@ -331,28 +259,14 @@
     "original_title": "L’Âme Idéale",
     "cinema_date": "17 décembre 2025",
     "vote_average": 7,
+    "vote_count": 83,
     "genres": [
       "Comédie",
       "Romance",
       "Fantastique"
     ],
     "is_french": true,
-    "source": "provider-fr"
-  },
-  {
-    "title": "Meurtres à Concarneau",
-    "plex_release": "16 avril 2026",
-    "tmdb_id": 1664400,
-    "poster_path": "/eEBSbqt2rIKuZmjTnTah6TovwlI.jpg",
-    "original_title": "Meurtres à Concarneau",
-    "cinema_date": "7 décembre 2025",
-    "vote_average": 7,
-    "genres": [
-      "Téléfilm",
-      "Crime"
-    ],
-    "is_french": true,
-    "source": "officielle-fr"
+    "source": "prédite"
   },
   {
     "title": "Du Charbon dans les Veines",
@@ -362,6 +276,7 @@
     "original_title": "Du Charbon dans les Veines",
     "cinema_date": "18 décembre 2025",
     "vote_average": 0,
+    "vote_count": 0,
     "genres": [
       "Comédie",
       "Drame",
@@ -378,6 +293,7 @@
     "original_title": "Primo et Louise",
     "cinema_date": "18 décembre 2025",
     "vote_average": 8,
+    "vote_count": 1,
     "genres": [
       "Comédie",
       "Romance",
@@ -387,56 +303,6 @@
     "source": "prédite"
   },
   {
-    "title": "Rupture à domicile",
-    "plex_release": "19 avril 2026",
-    "tmdb_id": 1599093,
-    "poster_path": "/gR2ySi5N4SjvbxtU6S9JZJySATf.jpg",
-    "original_title": "Rupture à domicile",
-    "cinema_date": "20 décembre 2025",
-    "vote_average": 0,
-    "genres": [
-      "Comédie"
-    ],
-    "is_french": true,
-    "source": "prédite"
-  },
-  {
-    "title": "Untitled",
-    "plex_release": "19 avril 2026",
-    "tmdb_id": 1601773,
-    "poster_path": "/6D5g0IWPfRyPzcmXUBNyIDNb3m3.jpg",
-    "original_title": "Untitled",
-    "cinema_date": "20 décembre 2025",
-    "vote_average": 0,
-    "genres": [],
-    "is_french": true,
-    "source": "prédite"
-  },
-  {
-    "title": "Les Marées Basses",
-    "plex_release": "19 avril 2026",
-    "tmdb_id": 1601287,
-    "poster_path": null,
-    "original_title": "Les Marées Basses",
-    "cinema_date": "20 décembre 2025",
-    "vote_average": 0,
-    "genres": [],
-    "is_french": true,
-    "source": "prédite"
-  },
-  {
-    "title": "Gaming X Symphony – Legends and Quests in Concert",
-    "plex_release": "21 avril 2026",
-    "tmdb_id": 1603067,
-    "poster_path": "/z8228HhATIP11C1mpHDWbZHdAoB.jpg",
-    "original_title": "Gaming X Symphony – Legends and Quests in Concert",
-    "cinema_date": "22 décembre 2025",
-    "vote_average": 0,
-    "genres": [],
-    "is_french": true,
-    "source": "provider-fr"
-  },
-  {
     "title": "la fin absolue du monde",
     "plex_release": "21 avril 2026",
     "tmdb_id": 1596632,
@@ -444,6 +310,7 @@
     "original_title": "la fin absolue du monde",
     "cinema_date": "22 décembre 2025",
     "vote_average": 0,
+    "vote_count": 0,
     "genres": [
       "Drame"
     ],
@@ -458,6 +325,7 @@
     "original_title": "L'Olívia i el terratrèmol invisible",
     "cinema_date": "21 janvier 2026",
     "vote_average": 7.5,
+    "vote_count": 4,
     "genres": [
       "Animation",
       "Comédie",
