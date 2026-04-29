@@ -69,12 +69,38 @@ async function fetchAllPages(baseUrl, maxPages = 6) {
   return movies;
 }
 
-/** Le film est-il une production française ? */
+/**
+ * Le film est-il une production FRANÇAISE (France métropolitaine uniquement) ?
+ * Exclusions :
+ *  - Canada/Québec (CA) → VFQ avec accent québécois, pas souhaité
+ *  - Belgique, Suisse seuls → francophones mais pas françaises
+ * Règle : langue originale fr ET pays de production inclut FR
+ */
 function isFrenchProduction(details) {
-  return (
-    details.original_language === 'fr' ||
-    details.production_countries?.some((c) => c.iso_3166_1 === 'FR')
-  );
+  const hasFRCountry = details.production_countries?.some((c) => c.iso_3166_1 === 'FR');
+  const isFrLang     = details.original_language === 'fr';
+  return isFrLang && hasFRCountry;
+}
+
+/**
+ * Genres TMDB à exclure :
+ *  99    = Documentaire
+ *  10402 = Musique (concerts / clips)
+ */
+const EXCLUDED_GENRE_IDS = new Set([99, 10402]);
+
+function hasExcludedGenre(details) {
+  return details.genres?.some((g) => EXCLUDED_GENRE_IDS.has(g.id)) ?? false;
+}
+
+/**
+ * Court-métrage = durée < 40 minutes.
+ * Si TMDB ne renseigne pas runtime (0 ou null) → on garde le film.
+ */
+function isTooShort(details) {
+  const runtime = details.runtime;
+  if (!runtime || runtime === 0) return false;
+  return runtime < 40;
 }
 
 /**
@@ -246,6 +272,10 @@ async function updateVOD() {
     }
 
     if (!details.release_date) { skipped++; continue; }
+
+    // ── Filtre documentaires et courts-métrages ──────────────────────────────
+    if (hasExcludedGenre(details)) { skipped++; continue; }
+    if (isTooShort(details))       { skipped++; continue; }
 
     const isFrench = isFrenchProduction(details);
     const minDelay = isFrench ? DELAYS.FRENCH : DELAYS.AMERICAN;
