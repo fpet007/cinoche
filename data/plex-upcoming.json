@@ -6,15 +6,14 @@
     "poster_path": "/Ag0gzbjcdUu8t0eeFks2USP9a5V.jpg",
     "original_title": "Mektoub, My Love: Canto Due",
     "cinema_date": "3 décembre 2025",
-    "overview": "Amin revient à Sète après ses études à Paris, rêvant toujours de cinéma. Un producteur Américain en vacance s’intéresse par hasard à son projet, Les Principes essentiels de l’existence universelle, et veut que sa femme, Jess, en soit l’héroïne. Mais le destin, capricieux, impose ses propres règles.",
-    "vote_average": 7.308,
+    "vote_average": 7.3,
     "genres": [
       "Romance",
       "Drame",
       "Comédie"
     ],
     "is_french": true,
-    "source": "officielle"
+    "source": "officielle-fr"
   },
   {
     "title": "Les enfants vont bien",
@@ -23,13 +22,12 @@
     "poster_path": "/lzHohlKAZ8qG0WbkctJq02ZB3lJ.jpg",
     "original_title": "Les enfants vont bien",
     "cinema_date": "3 décembre 2025",
-    "overview": "Un soir d’été, Suzanne, accompagnée de ses deux jeunes enfants Gaspard et Margaux, rend une visite impromptue à sa sœur Jeanne. Celle-ci est prise au dépourvu, car elles ne sont pas revues depuis longtemps. Au réveil, Jeanne découvre le mot laissé par sa sœur : “Elle ne reviendra pas”. Après la sidération, vient la colère lorsqu’à la gendarmerie Jeanne comprend qu’aucune procédure de recherche ne pourra être engagée : Suzanne a fait le choix insensé de disparaître…",
     "vote_average": 6.9,
     "genres": [
       "Drame"
     ],
     "is_french": true,
-    "source": "prédite"
+    "source": "provider-fr"
   },
   {
     "title": "Gérald le Conquérant",
@@ -38,13 +36,12 @@
     "poster_path": "/lyjO7qEAxtMF4hZhzp3haPdeBde.jpg",
     "original_title": "Gérald le Conquérant",
     "cinema_date": "3 décembre 2025",
-    "overview": "Il s’appelle Gérald. Son objectif : redorer le blason de sa région de cœur, la Normandie. Sa méthode : bâtir le plus grand parc d'attractions du pays, à la gloire de Guillaume le conquérant. Et pour y parvenir, il est prêt à aller loin, très loin… Retenez bien ce prénom, car il va marquer l’Histoire !",
     "vote_average": 5.6,
     "genres": [
       "Comédie"
     ],
     "is_french": true,
-    "source": "prédite"
+    "source": "provider-fr"
   },
   {
     "title": "Que ma volonté soit faite",
@@ -53,31 +50,42 @@
     "poster_path": "/oBWmqQSFewFhAhfcmFvvf9yIjo6.jpg",
     "original_title": "Que ma volonté soit faite",
     "cinema_date": "3 décembre 2025",
-    "overview": "La jeune Nawojka, qui vit avec son père et ses frères dans la ferme familiale, cache un terrible secret : un pouvoir monstrueux, qu'elle pense hérité de sa défunte mère, s'éveille chaque fois qu'elle éprouve du désir. Lorsque Sandra, une femme libre et sulfureuse originaire du coin, revient au village, Nawojka est fascinée et ses pouvoirs se manifestent sans qu’elle ne puisse plus rien contrôler.",
     "vote_average": 4,
     "genres": [
       "Drame",
       "Horreur"
     ],
     "is_french": true,
-    "source": "prédite"
+    "source": "provider-fr"
   },
   {
-    "title": "Iron Lung",
-    "plex_release": "5 avril 2026",
-    "tmdb_id": 1116201,
-    "poster_path": "/sIwakdbMGS1krtgendTWpxTY9Hw.jpg",
-    "original_title": "Iron Lung",
-    "cinema_date": "19 février 2026",
-    "overview": "Les étoiles ne sont plus. Les planètes ont disparu. Seuls quelques individus subsistent, à bord de stations spatiales ou de vaisseaux errants. Ils ont survécu pour assister à la fin — et lui donner un nom : « Le Rapt silencieux ». Après des années de déclin et d’infrastructures en perdition, l’Iron Consolidation fait une découverte sur une lune désolée, AT-5. Un océan de sang. L’Iron Consolidation lance immédiatement une expédition, avec l’espoir d’y trouver des ressources cruciales. Un sous-marin est construit, et un condamné y est enfermé. En raison de la pression et de la profondeur de l’océan, l’hublot frontal du sous-marin est masqué par un bouclier de métal. S’il s’en sort, il gagnera sa liberté. Sinon, un autre suivra.",
-    "vote_average": 7.312,
+    "title": "Dites-lui que je l’aime",
+    "plex_release": "2 avril 2026",
+    "tmdb_id": 1221719,
+    "poster_path": "/5s2TmudKv5urU5lHXtbxZoYTt4D.jpg",
+    "original_title": "Dites-lui que je l’aime",
+    "cinema_date": "3 décembre 2025",
+    "vote_average": 8.1,
     "genres": [
-      "Horreur",
-      "Mystère",
-      "Science-Fiction"
+      "Drame",
+      "Comédie"
     ],
-    "is_french": false,
-    "source": "prédite"
+    "is_french": true,
+    "source": "provider-fr"
+  },
+  {
+    "title": "Cabo Negro",
+    "plex_release": "2 avril 2026",
+    "tmdb_id": 1297024,
+    "poster_path": "/9xSITDTOLcwitBuVXt0B706qQNL.jpg",
+    "original_title": "Cabo Negro",
+    "cinema_date": "3 décembre 2025",
+    "vote_average": 0,
+    "genres": [
+      "Drame"
+    ],
+    "is_french": true,
+    "source": "provider-fr"
   },
   {
     "title": "Psycho Killer",
@@ -86,15 +94,45 @@
     "poster_path": "/5xgxxmLivJXL8aF0HdZfpx8aAIo.jpg",
     "original_title": "Psycho Killer",
     "cinema_date": "19 février 2026",
-    "overview": "A la suite du meurtre de son époux, la policière, Jane Thorne, souhaite mettre la main sur un tueur en série surnommé le \" Satanic Slasher \".",
-    "vote_average": 5.513,
+    "vote_average": 5.5,
     "genres": [
       "Crime",
       "Horreur",
       "Mystère"
     ],
     "is_french": false,
-    "source": "officielle"
+    "source": "officielle-us"
+  },
+  {
+    "title": "L'Immortel",
+    "plex_release": "8 avril 2026",
+    "tmdb_id": 1403152,
+    "poster_path": "/A5oB57qQp03jkbgXhlCCupGCR1y.jpg",
+    "original_title": "L'Immortel",
+    "cinema_date": "9 décembre 2025",
+    "vote_average": 0,
+    "genres": [
+      "Drame",
+      "Aventure"
+    ],
+    "is_french": true,
+    "source": "prédite"
+  },
+  {
+    "title": "ओ रोमियो",
+    "plex_release": "9 avril 2026",
+    "tmdb_id": 1275574,
+    "poster_path": "/1TNpucCvRHhlhTTsDU0wnKBgruP.jpg",
+    "original_title": "ओ रोमियो",
+    "cinema_date": "13 février 2026",
+    "vote_average": 5.3,
+    "genres": [
+      "Romance",
+      "Action",
+      "Drame"
+    ],
+    "is_french": false,
+    "source": "officielle-us"
   },
   {
     "title": "Love Me Tender",
@@ -103,13 +141,12 @@
     "poster_path": "/rC6DX6NYu8EaK9Y9DjkEVn2bSR0.jpg",
     "original_title": "Love Me Tender",
     "cinema_date": "10 décembre 2025",
-    "overview": "Une fin d’été, Clémence annonce à son ex-mari qu’elle a des histoires d’amour avec des femmes. Sa vie bascule lorsqu'il lui retire la garde de son fils. Clémence va devoir lutter pour rester mère, femme, libre.",
     "vote_average": 6.7,
     "genres": [
       "Drame"
     ],
     "is_french": true,
-    "source": "prédite"
+    "source": "provider-fr"
   },
   {
     "title": "Chasse gardée 2",
@@ -118,29 +155,12 @@
     "poster_path": "/9PJrHGp41hRTq2kkPWU2j6zzjat.jpg",
     "original_title": "Chasse gardée 2",
     "cinema_date": "10 décembre 2025",
-    "overview": "Deux ans se sont écoulés à Saint Hubert. La vie y est paisible, peut-être trop pour Adélaïde et Simon qui souffrent du manque d’amis de leur âge. C’est sans compter sur l’arrivée de Stanislas, le fils de Bernard (l'ancien président des chasseurs du village), qui revient vivre à la campagne avec sa femme et ses deux enfants. Ils sont beaux, jeunes, et sympas. Leur seul défaut : ils pratiquent la chasse à courre ! La paix du village va être mise à mal : nouveaux voisins, nouveaux problèmes…",
-    "vote_average": 5.709,
+    "vote_average": 5.7,
     "genres": [
       "Comédie"
     ],
     "is_french": true,
-    "source": "prédite"
-  },
-  {
-    "title": "La Condition",
-    "plex_release": "9 avril 2026",
-    "tmdb_id": 1119548,
-    "poster_path": "/5yxwpcK0OHR0fBB6CBS80YWHoAC.jpg",
-    "original_title": "La Condition",
-    "cinema_date": "10 décembre 2025",
-    "overview": "C’est l’histoire de Céleste, jeune bonne employée chez Victoire et André, en 1908. C’est l’histoire de Victoire, de l’épouse modèle qu’elle ne sait pas être. Deux femmes que tout sépare mais qui vivent sous le même toit, défiant les conventions et les non-dits.",
-    "vote_average": 6,
-    "genres": [
-      "Drame",
-      "Histoire"
-    ],
-    "is_french": true,
-    "source": "prédite"
+    "source": "provider-fr"
   },
   {
     "title": "Louise",
@@ -149,13 +169,27 @@
     "poster_path": "/62GcSVw9fE8paRDTCHDycZvQ26p.jpg",
     "original_title": "Louise",
     "cinema_date": "10 décembre 2025",
-    "overview": "Suite à un incident, la jeune Marion décide de fuguer du domicile familial. Elle démarre alors une nouvelle vie sous une autre identité : Louise. Quinze ans plus tard, « Louise » retrouve la trace de sa sœur et de sa mère. Petit à petit, elle réapprend à les connaître sans leur dévoiler son identité. Alors qu'elle renoue avec son passé, un dilemme s'impose à elle : rester Louise ou redevenir Marion…",
     "vote_average": 6.9,
     "genres": [
       "Drame"
     ],
     "is_french": true,
-    "source": "prédite"
+    "source": "provider-fr"
+  },
+  {
+    "title": "La Condition",
+    "plex_release": "9 avril 2026",
+    "tmdb_id": 1119548,
+    "poster_path": "/5yxwpcK0OHR0fBB6CBS80YWHoAC.jpg",
+    "original_title": "La Condition",
+    "cinema_date": "10 décembre 2025",
+    "vote_average": 6,
+    "genres": [
+      "Drame",
+      "Histoire"
+    ],
+    "is_french": true,
+    "source": "provider-fr"
   },
   {
     "title": "La Petite Cuisine de Mehdi",
@@ -164,14 +198,13 @@
     "poster_path": "/AeM5idmeLmPZwtkFoe58zV9FbmK.jpg",
     "original_title": "La Petite Cuisine de Mehdi",
     "cinema_date": "10 décembre 2025",
-    "overview": "Mehdi est sur un fil. Il joue le rôle du fils algérien parfait devant sa mère Fatima, tout en lui cachant sa relation avec Léa ainsi que sa passion pour la gastronomie française. Il est chef dans un bistrot qu’il s’apprête à racheter avec Léa. Mais celle-ci n’en peut plus de ses cachoteries et exige de rencontrer Fatima. Au pied du mur, Mehdi va trouver la pire des solutions.",
-    "vote_average": 6.95,
+    "vote_average": 7,
     "genres": [
       "Comédie",
       "Drame"
     ],
     "is_french": true,
-    "source": "prédite"
+    "source": "provider-fr"
   },
   {
     "title": "Animal Totem",
@@ -180,42 +213,64 @@
     "poster_path": "/5mQOefrjyMEq8qaFagEVX2i4SH8.jpg",
     "original_title": "Animal Totem",
     "cinema_date": "10 décembre 2025",
-    "overview": "De l’aéroport de Beauvais à La Défense, accompagné de sa valise à roulettes, Darius traverse à pied campagnes et banlieues pour mener à bien, et sans empreinte carbone, une mystérieuse mission.",
     "vote_average": 6.8,
     "genres": [
       "Comédie"
     ],
     "is_french": true,
-    "source": "prédite"
+    "source": "provider-fr"
   },
   {
-    "title": "Rue Málaga",
-    "plex_release": "11 avril 2026",
-    "tmdb_id": 1399462,
-    "poster_path": "/qvfwPBIL4tGoJM2tzOVvrzmRJFd.jpg",
-    "original_title": "Calle Málaga",
-    "cinema_date": "25 février 2026",
-    "overview": "Maria Angeles, une Espagnole de 79 ans, vit seule à Tanger, dans le nord du Maroc, où elle profite de sa ville et de son quotidien. Sa vie bascule lorsque sa fille Clara arrive de Madrid pour vendre l’appartement dans lequel elle a toujours vécu. Déterminée à rester dans cette ville qui l'a vue grandir, elle met tout en œuvre pour garder sa maison et récupérer les objets d'une vie. Contre toute attente, elle redécouvre en chemin l’amour et le désir.",
-    "vote_average": 7.25,
+    "title": "À la poursuite du Père Noël !",
+    "plex_release": "9 avril 2026",
+    "tmdb_id": 1432812,
+    "poster_path": "/xqDooVZxeUCoF9avNpZBrlbv9gZ.jpg",
+    "original_title": "À la poursuite du Père Noël !",
+    "cinema_date": "10 décembre 2025",
+    "vote_average": 5.1,
     "genres": [
-      "Drame"
+      "Comédie",
+      "Familial"
     ],
-    "is_french": false,
+    "is_french": true,
+    "source": "provider-fr"
+  },
+  {
+    "title": "Des feux et des rois",
+    "plex_release": "9 avril 2026",
+    "tmdb_id": 1596181,
+    "poster_path": "/ebcVAq7WnCc5DuJTeUmbnlJIaeO.jpg",
+    "original_title": "Des feux et des rois",
+    "cinema_date": "10 décembre 2025",
+    "vote_average": 0,
+    "genres": [],
+    "is_french": true,
     "source": "prédite"
   },
   {
-    "title": "Justa",
-    "plex_release": "11 avril 2026",
-    "tmdb_id": 1168710,
-    "poster_path": "/t5urffG7WtzCUIvTpUJBkwecYav.jpg",
-    "original_title": "Justa",
-    "cinema_date": "25 février 2026",
-    "overview": "En 2017, une région du Portugal est ravagée par de gigantesques incendies qui emportent des forêts entières… et des vies. Quelques mois plus tard, un groupe de survivants — Justa, une fillette, son père gravement brûlé, une femme âgée devenue aveugle, un adolescent — tente tant bien que mal de se reconstruire. Chacun affronte ses traumatismes, ses silences, ses fantômes. Mais certaines expériences demeurent impossibles à partager pour ceux qui ne les ont pas traversées.",
+    "title": "Paris Opera: Der Nussknacker",
+    "plex_release": "13 avril 2026",
+    "tmdb_id": 1550394,
+    "poster_path": "/7riTZRkiddaUg4sd5mdNvafegbX.jpg",
+    "original_title": "Paris Opera: Der Nussknacker",
+    "cinema_date": "14 décembre 2025",
+    "vote_average": 0,
+    "genres": [],
+    "is_french": true,
+    "source": "prédite"
+  },
+  {
+    "title": "Casse-Noisette",
+    "plex_release": "13 avril 2026",
+    "tmdb_id": 1416613,
+    "poster_path": "/5TGp5OswPKYOPXW3GEk1CVRD2RM.jpg",
+    "original_title": "Casse-Noisette",
+    "cinema_date": "14 décembre 2025",
     "vote_average": 0,
     "genres": [
-      "Drame"
+      "Familial"
     ],
-    "is_french": false,
+    "is_french": true,
     "source": "prédite"
   },
   {
@@ -225,11 +280,46 @@
     "poster_path": "/42qz0xggymCZ1UfJs3oaRjZdUpj.jpg",
     "original_title": "Grace",
     "cinema_date": "15 décembre 2025",
-    "overview": "Grace, dévastée par le meurtre de son compagnon Julien, s'allie à Tom, un ancien amant aujourd'hui dans un gang, pour traquer les responsables. Leur quête de vengeance les rapproche, mais Grace commence à douter de Tom.",
     "vote_average": 0,
     "genres": [
       "Thriller"
     ],
+    "is_french": true,
+    "source": "prédite"
+  },
+  {
+    "title": "9 m2 pour deux",
+    "plex_release": "15 avril 2026",
+    "tmdb_id": 1068730,
+    "poster_path": "/p4dixYct74lWCWKQUvSEbPxPwsl.jpg",
+    "original_title": "9 m2 pour deux",
+    "cinema_date": "16 décembre 2025",
+    "vote_average": 8,
+    "genres": [],
+    "is_french": true,
+    "source": "prédite"
+  },
+  {
+    "title": "Vésuve - le volcan destructeur de Pompéi qui inquiète l'Europe",
+    "plex_release": "15 avril 2026",
+    "tmdb_id": 1600959,
+    "poster_path": "/vfFB99UCr1tGhDClpEU88PFAaZp.jpg",
+    "original_title": "Vésuve - le volcan destructeur de Pompéi qui inquiète l'Europe",
+    "cinema_date": "16 décembre 2025",
+    "vote_average": 0,
+    "genres": [],
+    "is_french": true,
+    "source": "prédite"
+  },
+  {
+    "title": "Retour au Pays",
+    "plex_release": "15 avril 2026",
+    "tmdb_id": 1647360,
+    "poster_path": null,
+    "original_title": "Retour au Pays",
+    "cinema_date": "16 décembre 2025",
+    "vote_average": 0,
+    "genres": [],
     "is_french": true,
     "source": "prédite"
   },
@@ -240,7 +330,6 @@
     "poster_path": "/ws9wCKrqMsS700OOScv8L52wJMa.jpg",
     "original_title": "L’Âme Idéale",
     "cinema_date": "17 décembre 2025",
-    "overview": "Elsa, médecin, cache au reste du monde qu’elle voit les morts et les aide à \"passer de l’autre côté\". Convaincue que son don provoque le rejet, elle a renoncé aux histoires d'amour et s'est enfermée dans la solitude et le travail. Jusqu’au jour où elle fait la rencontre d’Oscar, un mort qui ne sait pas qu’il est mort...",
     "vote_average": 7,
     "genres": [
       "Comédie",
@@ -248,33 +337,113 @@
       "Fantastique"
     ],
     "is_french": true,
+    "source": "provider-fr"
+  },
+  {
+    "title": "Meurtres à Concarneau",
+    "plex_release": "16 avril 2026",
+    "tmdb_id": 1664400,
+    "poster_path": "/eEBSbqt2rIKuZmjTnTah6TovwlI.jpg",
+    "original_title": "Meurtres à Concarneau",
+    "cinema_date": "7 décembre 2025",
+    "vote_average": 7,
+    "genres": [
+      "Téléfilm",
+      "Crime"
+    ],
+    "is_french": true,
+    "source": "officielle-fr"
+  },
+  {
+    "title": "Du Charbon dans les Veines",
+    "plex_release": "17 avril 2026",
+    "tmdb_id": 1604319,
+    "poster_path": "/7wg262QAmMpXIkRD8ZNR0Wbbq73.jpg",
+    "original_title": "Du Charbon dans les Veines",
+    "cinema_date": "18 décembre 2025",
+    "vote_average": 0,
+    "genres": [
+      "Comédie",
+      "Drame",
+      "Histoire"
+    ],
+    "is_french": true,
     "source": "prédite"
   },
   {
-    "title": "Le Noël de monsieur Hubert",
-    "plex_release": "22 avril 2026",
-    "tmdb_id": 1430870,
-    "poster_path": "/7qNBbq1Y2SHwkJagT69L9mK8XiE.jpg",
-    "original_title": "Le Noël de monsieur Hubert",
-    "cinema_date": "23 décembre 2025",
-    "overview": "C’est bientôt Noël dans un petit village alsacien. Hubert, un vieux garçon acariâtre et grincheux, se retrouve immobilisé dans sa maison à la suite d'un accident. Il est contraint de faire appel à une aide à domicile pour gérer son quotidien. Il s'attendait à tout sauf à voir débarquer la tornade Nora, une mère célibataire joyeuse et grande gueule, et Leo, son fils de 9 ans... Commence alors une improbable cohabitation !",
+    "title": "Primo et Louise",
+    "plex_release": "17 avril 2026",
+    "tmdb_id": 1600943,
+    "poster_path": "/i4BHj5A5ESmg8v6TKK0Hl2aYN5U.jpg",
+    "original_title": "Primo et Louise",
+    "cinema_date": "18 décembre 2025",
+    "vote_average": 8,
+    "genres": [
+      "Comédie",
+      "Romance",
+      "Drame"
+    ],
+    "is_french": true,
+    "source": "prédite"
+  },
+  {
+    "title": "Rupture à domicile",
+    "plex_release": "19 avril 2026",
+    "tmdb_id": 1599093,
+    "poster_path": "/gR2ySi5N4SjvbxtU6S9JZJySATf.jpg",
+    "original_title": "Rupture à domicile",
+    "cinema_date": "20 décembre 2025",
     "vote_average": 0,
     "genres": [
-      "Téléfilm",
       "Comédie"
     ],
     "is_french": true,
     "source": "prédite"
   },
   {
-    "title": "L'Engloutie",
-    "plex_release": "23 avril 2026",
-    "tmdb_id": 1069650,
-    "poster_path": "/yzMVS2PPaCj58i3Og7FgtIpMLA6.jpg",
-    "original_title": "L'Engloutie",
-    "cinema_date": "24 décembre 2025",
-    "overview": "1899. Hautes Alpes. \"Soudain\" est un hameau encerclé par la neige sur les hauts plateaux d’une montagne reculée. Ses habitants voient arriver, par une nuit de tempête, Aimée, une jeune institutrice, laïque et républicaine, qui restera le temps de l’hiver pour faire l’école à une poignée d’enfants. Mais peu après son arrivée, une avalanche engloutit un premier montagnard…",
-    "vote_average": 5.8,
+    "title": "Untitled",
+    "plex_release": "19 avril 2026",
+    "tmdb_id": 1601773,
+    "poster_path": "/6D5g0IWPfRyPzcmXUBNyIDNb3m3.jpg",
+    "original_title": "Untitled",
+    "cinema_date": "20 décembre 2025",
+    "vote_average": 0,
+    "genres": [],
+    "is_french": true,
+    "source": "prédite"
+  },
+  {
+    "title": "Les Marées Basses",
+    "plex_release": "19 avril 2026",
+    "tmdb_id": 1601287,
+    "poster_path": null,
+    "original_title": "Les Marées Basses",
+    "cinema_date": "20 décembre 2025",
+    "vote_average": 0,
+    "genres": [],
+    "is_french": true,
+    "source": "prédite"
+  },
+  {
+    "title": "Gaming X Symphony – Legends and Quests in Concert",
+    "plex_release": "21 avril 2026",
+    "tmdb_id": 1603067,
+    "poster_path": "/z8228HhATIP11C1mpHDWbZHdAoB.jpg",
+    "original_title": "Gaming X Symphony – Legends and Quests in Concert",
+    "cinema_date": "22 décembre 2025",
+    "vote_average": 0,
+    "genres": [],
+    "is_french": true,
+    "source": "provider-fr"
+  },
+  {
+    "title": "la fin absolue du monde",
+    "plex_release": "21 avril 2026",
+    "tmdb_id": 1596632,
+    "poster_path": "/d0f1rrJxd79sC7rJ0JoMWDzPdFa.jpg",
+    "original_title": "la fin absolue du monde",
+    "cinema_date": "22 décembre 2025",
+    "vote_average": 0,
     "genres": [
       "Drame"
     ],
@@ -282,63 +451,18 @@
     "source": "prédite"
   },
   {
-    "title": "Orphelin",
-    "plex_release": "25 avril 2026",
-    "tmdb_id": 803208,
-    "poster_path": "/c9V1tdienNzLD98NfHOMx4Qh2dk.jpg",
-    "original_title": "Árva",
-    "cinema_date": "11 mars 2026",
-    "overview": "Budapest 1957, après l'échec de l'insurrection contre le régime communiste. Andor, un jeune garçon juif, vit seul avec sa mère Klara qui l'élève dans le souvenir de son mari disparu dans les camps. Mais quand un homme rustre tout juste arrivé de la campagne prétend être son vrai père, le monde d’Andor vole soudain en éclats…",
-    "vote_average": 5.8,
+    "title": "Olivia",
+    "plex_release": "21 mai 2026",
+    "tmdb_id": 676679,
+    "poster_path": "/3qqL5jpYIatN0Cdz21eATs32SHG.jpg",
+    "original_title": "L'Olívia i el terratrèmol invisible",
+    "cinema_date": "21 janvier 2026",
+    "vote_average": 7.5,
     "genres": [
-      "Drame"
-    ],
-    "is_french": false,
-    "source": "prédite"
-  },
-  {
-    "title": "Qui brille au combat",
-    "plex_release": "30 avril 2026",
-    "tmdb_id": 1308618,
-    "poster_path": "/kpUkx4nxuH9ssoTi4NLunlRcXgu.jpg",
-    "original_title": "Qui brille au combat",
-    "cinema_date": "31 décembre 2025",
-    "overview": "Qui brille au combat est le sens étymologique du prénom Bertille, la plus jeune des deux sœurs de la famille Roussier, atteinte d’un handicap lourd au diagnostic incertain. La famille vit dans un équilibre fragile autour de cet enfant qui accapare les efforts et pensées de chacun, et qui pourrait perdre la vie à tout moment. Chacun se construit, vit comme il peut avec les exigences de ce rythme et les incertitudes qui l’accompagnent. Les parents, Madeleine et Gilles, la sœur aînée, Marion. Quel quotidien et quels avenirs pour une mère, un père, un couple, une adolescente que la responsabilité ​ de sa cadette a rendu trop vite adulte ? Lorsqu’un nouveau diagnostic est posé, les cartes sont rebattues et un nouvel horizon se dessine...",
-    "vote_average": 6.955,
-    "genres": [
-      "Drame"
-    ],
-    "is_french": true,
-    "source": "prédite"
-  },
-  {
-    "title": "Le Pays d’Arto",
-    "plex_release": "30 avril 2026",
-    "tmdb_id": 1308910,
-    "poster_path": "/4kdxpg8WtjDQfLo45YDhkg4hPA1.jpg",
-    "original_title": "Le Pays d’Arto",
-    "cinema_date": "31 décembre 2025",
-    "overview": "Céline arrive pour la première fois en Arménie afin de régulariser la mort d’Arto, son mari. Elle découvre qu’il lui a menti, qu’il a fait la guerre, usurpé son identité, et que ses anciens amis le tiennent pour un déserteur. Commence pour elle un nouveau voyage, à la rencontre du passé d'Arto : invalides des combats de 2020, vétérans des batailles victorieuses des années 90, hantises d’une guerre qui n’en finit jamais. Une femme court après un fantôme. Comment faire pour l’enterrer ? Peut-on sauver les morts ?",
-    "vote_average": 3.5,
-    "genres": [
-      "Drame"
-    ],
-    "is_french": true,
-    "source": "prédite"
-  },
-  {
-    "title": "Vade Retro",
-    "plex_release": "30 avril 2026",
-    "tmdb_id": 1001288,
-    "poster_path": "/1D2Hn8HD9tpU9j901vNRmn4Oz3J.jpg",
-    "original_title": "Vade Retro",
-    "cinema_date": "31 décembre 2025",
-    "overview": "Pour entrer dans l’âge adulte, un vampire doit mordre. Pour conjurer cette virginité, il lui faut du sang \"pur\". Autrement, il sait qu’une malédiction s’abattrait sur sa famille : ils retourneraient en poussière, leur château avec. Norbert a déjà 350 ans, il est temps pour lui de devenir cet adulte. Il a trouvé sa proie, mais qui s’avère être une chasseuse de vampire. Il en sort traumatisé, et une dent en moins. Sa famille décide de l’envoyer à l’autre bout du monde pour vaincre sa soudaine phobie, mordre et sauver leur château. Norbert débarque par erreur sur l’île de Boulet Rouge, régie par le cartésianisme français. L’arrivée de Norbert déclenche bien sûr une chasse au vampire…",
-    "vote_average": 5.75,
-    "genres": [
-      "Fantastique",
+      "Animation",
       "Comédie",
-      "Horreur"
+      "Drame",
+      "Familial"
     ],
     "is_french": true,
     "source": "prédite"
