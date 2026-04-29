@@ -47,22 +47,6 @@
     "source": "prédite"
   },
   {
-    "title": "Que ma volonté soit faite",
-    "plex_release": "2 avril 2026",
-    "tmdb_id": 1376046,
-    "poster_path": "/oBWmqQSFewFhAhfcmFvvf9yIjo6.jpg",
-    "original_title": "Que ma volonté soit faite",
-    "cinema_date": "3 décembre 2025",
-    "vote_average": 4,
-    "vote_count": 2,
-    "genres": [
-      "Drame",
-      "Horreur"
-    ],
-    "is_french": true,
-    "source": "prédite"
-  },
-  {
     "title": "Dites-lui que je l’aime",
     "plex_release": "2 avril 2026",
     "tmdb_id": 1221719,
@@ -79,18 +63,20 @@
     "source": "prédite"
   },
   {
-    "title": "Cabo Negro",
-    "plex_release": "2 avril 2026",
-    "tmdb_id": 1297024,
-    "poster_path": "/9xSITDTOLcwitBuVXt0B706qQNL.jpg",
-    "original_title": "Cabo Negro",
-    "cinema_date": "3 décembre 2025",
-    "vote_average": 0,
-    "vote_count": 0,
+    "title": "Iron Lung",
+    "plex_release": "5 avril 2026",
+    "tmdb_id": 1116201,
+    "poster_path": "/sIwakdbMGS1krtgendTWpxTY9Hw.jpg",
+    "original_title": "Iron Lung",
+    "cinema_date": "19 février 2026",
+    "vote_average": 7.3,
+    "vote_count": 133,
     "genres": [
-      "Drame"
+      "Horreur",
+      "Mystère",
+      "Science-Fiction"
     ],
-    "is_french": true,
+    "is_french": false,
     "source": "prédite"
   },
   {
@@ -106,39 +92,6 @@
       "Crime",
       "Horreur",
       "Mystère"
-    ],
-    "is_french": false,
-    "source": "officielle-us"
-  },
-  {
-    "title": "L'Immortel",
-    "plex_release": "8 avril 2026",
-    "tmdb_id": 1403152,
-    "poster_path": "/A5oB57qQp03jkbgXhlCCupGCR1y.jpg",
-    "original_title": "L'Immortel",
-    "cinema_date": "9 décembre 2025",
-    "vote_average": 0,
-    "vote_count": 0,
-    "genres": [
-      "Drame",
-      "Aventure"
-    ],
-    "is_french": true,
-    "source": "prédite"
-  },
-  {
-    "title": "ओ रोमियो",
-    "plex_release": "9 avril 2026",
-    "tmdb_id": 1275574,
-    "poster_path": "/1TNpucCvRHhlhTTsDU0wnKBgruP.jpg",
-    "original_title": "ओ रोमियो",
-    "cinema_date": "13 février 2026",
-    "vote_average": 5.3,
-    "vote_count": 10,
-    "genres": [
-      "Romance",
-      "Action",
-      "Drame"
     ],
     "is_french": false,
     "source": "officielle-us"
@@ -264,73 +217,6 @@
       "Comédie",
       "Romance",
       "Fantastique"
-    ],
-    "is_french": true,
-    "source": "prédite"
-  },
-  {
-    "title": "Du Charbon dans les Veines",
-    "plex_release": "17 avril 2026",
-    "tmdb_id": 1604319,
-    "poster_path": "/7wg262QAmMpXIkRD8ZNR0Wbbq73.jpg",
-    "original_title": "Du Charbon dans les Veines",
-    "cinema_date": "18 décembre 2025",
-    "vote_average": 0,
-    "vote_count": 0,
-    "genres": [
-      "Comédie",
-      "Drame",
-      "Histoire"
-    ],
-    "is_french": true,
-    "source": "prédite"
-  },
-  {
-    "title": "Primo et Louise",
-    "plex_release": "17 avril 2026",
-    "tmdb_id": 1600943,
-    "poster_path": "/i4BHj5A5ESmg8v6TKK0Hl2aYN5U.jpg",
-    "original_title": "Primo et Louise",
-    "cinema_date": "18 décembre 2025",
-    "vote_average": 8,
-    "vote_count": 1,
-    "genres": [
-      "Comédie",
-      "Romance",
-      "Drame"
-    ],
-    "is_french": true,
-    "source": "prédite"
-  },
-  {
-    "title": "la fin absolue du monde",
-    "plex_release": "21 avril 2026",
-    "tmdb_id": 1596632,
-    "poster_path": "/d0f1rrJxd79sC7rJ0JoMWDzPdFa.jpg",
-    "original_title": "la fin absolue du monde",
-    "cinema_date": "22 décembre 2025",
-    "vote_average": 0,
-    "vote_count": 0,
-    "genres": [
-      "Drame"
-    ],
-    "is_french": true,
-    "source": "prédite"
-  },
-  {
-    "title": "Olivia",
-    "plex_release": "21 mai 2026",
-    "tmdb_id": 676679,
-    "poster_path": "/3qqL5jpYIatN0Cdz21eATs32SHG.jpg",
-    "original_title": "L'Olívia i el terratrèmol invisible",
-    "cinema_date": "21 janvier 2026",
-    "vote_average": 7.5,
-    "vote_count": 4,
-    "genres": [
-      "Animation",
-      "Comédie",
-      "Drame",
-      "Familial"
     ],
     "is_french": true,
     "source": "prédite"
