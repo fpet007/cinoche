@@ -7,10 +7,11 @@ const DATA_PATH = path.join(__dirname, '../data/plex-upcoming.json');
 async function updateVOD() {
   try {
     const today = new Date();
-    const currentMonth = today.getMonth(); // 0 = Janvier, 3 = Avril
+    const currentMonth = today.getMonth();
+    const nextMonth = (currentMonth + 1) % 12;
     const currentYear = today.getFullYear();
 
-    // 1. Chercher les films sortis récemment (6 derniers mois)
+    // On cherche les films sortis au ciné depuis 6 mois pour couvrir toutes les fenêtres VOD
     const sixMonthsAgo = new Date();
     sixMonthsAgo.setMonth(today.getMonth() - 6);
     const dateStr = sixMonthsAgo.toISOString().split('T')[0];
@@ -24,7 +25,6 @@ async function updateVOD() {
     const upcomingList = [];
 
     for (const movie of movies) {
-      // Chercher les détails pour le pays et les dates de sortie précises (Digital)
       const detailUrl = `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${TMDB_API_KEY}&append_to_response=release_dates`;
       const detailRes = await fetch(detailUrl);
       const details = await detailRes.json();
@@ -37,31 +37,29 @@ async function updateVOD() {
 
       let vodDate = new Date(releaseDate);
 
-      // --- LOGIQUE DE PRÉDICTION ---
+      // Calcul prédictif
       if (isFrench) {
-        // France : Sortie Ciné + 4 mois (121 jours)
-        vodDate.setDate(vodDate.getDate() + 121);
+        vodDate.setDate(vodDate.getDate() + 121); // 4 mois
       } else {
-        // USA/International : Sortie Ciné + 45 jours
-        vodDate.setDate(vodDate.getDate() + 45);
+        vodDate.setDate(vodDate.getDate() + 45);  // 45 jours
       }
 
-      // --- VÉRIFICATION SI DATE RÉELLE EXISTE ---
+      // Overwrite si une date digitale réelle existe
       const releaseResults = details.release_dates?.results || [];
       for (const country of releaseResults) {
         for (const release of country.release_dates) {
-          if (release.type === 4) { // Type 4 = Digital/VOD
+          if (release.type === 4) {
             const realVod = new Date(release.release_date);
-            // Si une date officielle existe et qu'elle est différente, on la prend
             if (!isNaN(realVod)) vodDate = realVod;
           }
         }
       }
 
-      // --- FILTRE STRICT DU MOIS EN COURS ---
-      // On n'affiche que si le mois ET l'année correspondent à aujourd'hui
-      if (vodDate.getMonth() === currentMonth && vodDate.getFullYear() === currentYear) {
-        
+      // --- FILTRE : MOIS EN COURS OU MOIS PROCHAIN ---
+      const isCurrentMonth = (vodDate.getMonth() === currentMonth && vodDate.getFullYear() === currentYear);
+      const isNextMonth = (vodDate.getMonth() === nextMonth && vodDate.getFullYear() === (nextMonth === 0 ? currentYear + 1 : currentYear));
+
+      if (isCurrentMonth || isNextMonth) {
         const options = { day: 'numeric', month: 'long', year: 'numeric' };
         upcomingList.push({
           title: movie.title,
@@ -73,18 +71,18 @@ async function updateVOD() {
       }
     }
 
-    // Trier les films par date (du plus proche au plus lointain)
+    // Tri par date
     upcomingList.sort((a, b) => new Date(a.sort_date) - new Date(b.sort_date));
 
-    // Sauvegarder le fichier
+    // Sauvegarde
     const dir = path.dirname(DATA_PATH);
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
     
     fs.writeFileSync(DATA_PATH, JSON.stringify(upcomingList, null, 2), 'utf8');
-    console.log(`✅ Succès : ${upcomingList.length} films trouvés pour ce mois.`);
+    console.log(`✅ Succès : ${upcomingList.length} films trouvés (Avril & Mai).`);
 
   } catch (error) {
-    console.error('❌ Erreur lors de la mise à jour :', error);
+    console.error('❌ Erreur :', error);
     process.exit(1);
   }
 }
