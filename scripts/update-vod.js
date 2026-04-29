@@ -1,22 +1,26 @@
 /**
- * updateVOD.js — v4
+ * updateVOD.js — v5
  * =================
- * Génère la liste des films VOD pour le MOIS EN COURS (et amorce le mois suivant
- * sur les 7 derniers jours du mois) pour un serveur Plex FR.
+ * Génère la liste des FILMS DE CINÉMA en VOD pour le mois en cours.
+ * Plex FR — uniquement de vrais longs-métrages sortis en salle.
  *
- * Améliorations v4 par rapport à v3 :
- *  ✅ Fenêtre glissante : on garde aussi les sorties imminentes du mois prochain
- *     pendant la dernière semaine du mois → plus jamais de fichier "vide" le 1er
- *  ✅ Cache disque des détails TMDB (24h) → 5x moins d'appels API
- *  ✅ Vérification watch/providers FR (TVOD réelle) en plus de release_type 4
- *  ✅ Détection "production française" robustifiée (origin_country + production_countries
- *     + langue, avec gestion des co-prods majoritairement françaises)
- *  ✅ Suppression du filtre vote_count.gte sur les films récents (< 90 jours)
- *     → on ne rate plus les nouveautés
- *  ✅ Tri stable (date VOD puis popularité)
- *  ✅ Sortie JSON allégée (champs réellement consommés par index.html)
- *  ✅ Atomic write (fichier temporaire + rename) → jamais de JSON corrompu
- *  ✅ Logs structurés + rapport de couverture
+ * Améliorations v5 par rapport à v4 (filtres anti-faux-positifs) :
+ *  ✅ Exclusion des téléfilms (genre TMDB 10770 = TV Movie)
+ *  ✅ Exclusion des captations de concerts/opéras/ballets/spectacles vivants
+ *     (mots-clés dans le titre + détection genre Musique)
+ *  ✅ Exclusion des fiches TMDB "fantômes" (sans genres, sans votes, sans poster)
+ *  ✅ Exigence minimale de qualité : au moins 1 genre valide ET (au moins quelques
+ *     votes OU une vraie sortie ciné FR documentée)
+ *  ✅ Suppression de la source "provider-fr" trop permissive : un film listé
+ *     sur Apple TV n'est pas forcément un film de cinéma
+ *  ✅ Vérification que la sortie ciné est bien de type 3 (theatrical large) ou 2
+ *     pour les FR aussi, sinon on rejette
+ *
+ * Conservé de la v4 :
+ *  ✅ Fenêtre glissante (amorce mois suivant les 7 derniers jours)
+ *  ✅ Cache disque 24h
+ *  ✅ Détection FR robuste (score 2/3)
+ *  ✅ Tri stable, écriture atomique, gestion 429
  *
  * Règles métier (chronologie des médias France, accord 2022) :
  *  - VOD à l'acte / TVOD : 4 mois (120 j) après sortie ciné — c'est notre cible
@@ -58,26 +62,41 @@ const MAX_PAGES_PER_ENDPOINT = 6;
 // Durée minimum pour ne pas être un court-métrage (minutes)
 const MIN_RUNTIME = 40;
 
-// Genres TMDB exclus : 99 = Documentaire, 10402 = Musique
-const EXCLUDED_GENRE_IDS = new Set([99, 10402]);
+// Genres TMDB exclus :
+//  - 99    = Documentaire
+//  - 10402 = Musique (concerts, captations, clips)
+//  - 10770 = Téléfilm (TV Movie) — Meurtres à Concarneau, etc.
+const EXCLUDED_GENRE_IDS = new Set([99, 10402, 10770]);
 
-// Providers VOD/TVOD français reconnus (IDs TMDB) — utilisés pour confirmer
-// qu'un film est réellement disponible à l'achat/location numérique en France.
-// Source : https://api.themoviedb.org/3/watch/providers/movie?watch_region=FR
-const FR_TVOD_PROVIDER_IDS = new Set([
-  2,    // Apple TV
-  3,    // Google Play Movies
-  7,    // Fandango (FR : Orange VOD)
-  10,   // Amazon Video (achat/location)
-  35,   // Rakuten TV
-  68,   // Microsoft Store
-  130,  // Sky Store
-  192,  // YouTube
-  381,  // Canal VOD
-  582,  // Universcine
-  3186, // FILMO TV (achat à l'acte)
-  1796, // Pathé Thuis (rare en FR mais présent)
-]);
+/**
+ * Mots-clés titres qui trahissent une captation de spectacle vivant
+ * (concerts, opéras, ballets) qui n'est PAS un film de cinéma.
+ * On compare en minuscules sur le titre ET le titre original.
+ */
+const SPECTACLE_KEYWORDS = [
+  'symphony', 'symphonie', 'philharmonic', 'philharmonique',
+  ' opera', 'opera:', "l'opéra", 'opéra de paris', 'paris opera',
+  'in concert', 'live at', 'live in', 'live from', 'en concert',
+  ' tour ', 'world tour', 'la tournée',
+  ' ballet', 'casse-noisette', 'nutcracker', 'der nussknacker',
+  'récital', 'recital',
+  'metropolitan opera', 'royal opera',
+  'gaming x symphony',
+];
+
+/**
+ * Mots-clés titres qui trahissent un téléfilm policier régional FR
+ * (Meurtres à X, Crimes à X, Disparition à X — formats France 3).
+ * Utilisés EN COMPLÉMENT du genre 10770 pour rattraper les téléfilms
+ * mal taggués sur TMDB.
+ */
+const TELEFILM_TITLE_PATTERNS = [
+  /^meurtres? à /i,
+  /^crimes? à /i,
+  /^disparition à /i,
+  /^enquêtes? à /i,
+  /^un (mystère|crime) à /i,
+];
 
 // ─── HELPERS DE BASE ───────────────────────────────────────────────────────────
 
@@ -165,6 +184,53 @@ function hasExcludedGenre(details) {
   return details.genres?.some((g) => EXCLUDED_GENRE_IDS.has(g.id)) ?? false;
 }
 
+/**
+ * Détecte une captation de spectacle vivant (concert, opéra, ballet) à partir
+ * du titre. Ces "films" ne sont pas des films de cinéma.
+ */
+function isSpectacle(details) {
+  const titles = [details.title, details.original_title]
+    .filter(Boolean)
+    .map((t) => t.toLowerCase());
+  return titles.some((t) => SPECTACLE_KEYWORDS.some((kw) => t.includes(kw)));
+}
+
+/**
+ * Détecte un téléfilm par pattern de titre (en complément du genre 10770).
+ * Ex : "Meurtres à Concarneau", "Crimes à Saint-Malo"...
+ */
+function isTelefilmByTitle(details) {
+  const title = details.title || '';
+  return TELEFILM_TITLE_PATTERNS.some((rx) => rx.test(title));
+}
+
+/**
+ * Une fiche TMDB "fantôme" est une entrée stub pour un film jamais vraiment
+ * sorti / référencé. Symptômes :
+ *  - aucun genre renseigné
+ *  - aucun vote (vote_count = 0 ET vote_average = 0)
+ *  - pas de poster
+ *  - titre suspect ("Untitled", "Sans titre"...)
+ * On en rejette quand AU MOINS 2 critères sont réunis.
+ */
+function isGhostEntry(details) {
+  const noGenres   = !details.genres || details.genres.length === 0;
+  const noVotes    = (details.vote_count ?? 0) === 0 && (details.vote_average ?? 0) === 0;
+  const noPoster   = !details.poster_path;
+  const badTitle   = /^untitled$|^sans titre$|^\s*$/i.test(details.title || '');
+  const score = (noGenres ? 1 : 0) + (noVotes ? 1 : 0) + (noPoster ? 1 : 0) + (badTitle ? 2 : 0);
+  return score >= 2;
+}
+
+/**
+ * Le film a un genre "Musique" (10402) ? On l'utilise comme signal
+ * supplémentaire pour les concerts non détectés par les mots-clés.
+ * Note : déjà couvert par EXCLUDED_GENRE_IDS, mais doublon de sécurité.
+ */
+function hasMusicGenre(details) {
+  return details.genres?.some((g) => g.id === 10402) ?? false;
+}
+
 function isTooShort(details) {
   const runtime = details.runtime;
   if (!runtime || runtime === 0) return false; // donnée manquante → on garde
@@ -208,18 +274,6 @@ function getOfficialDigitalDate(releaseDates) {
     if (digital) return { date: digital, region };
   }
   return null;
-}
-
-/**
- * Le film est-il déjà listé sur un provider TVOD français ?
- * Si oui → date officielle "maintenant" (sortie effective).
- */
-function isAvailableOnFRTVOD(watchProviders) {
-  const fr = watchProviders?.results?.FR;
-  if (!fr) return false;
-  // 'buy' = achat, 'rent' = location → c'est de la VOD à l'acte
-  const tvodEntries = [...(fr.buy ?? []), ...(fr.rent ?? [])];
-  return tvodEntries.some((p) => FR_TVOD_PROVIDER_IDS.has(p.provider_id));
 }
 
 function predictVODDate(cinemaDate, isFrench) {
@@ -325,7 +379,7 @@ async function fetchMovieDetails(movieId, cache) {
   }
   const url = `https://api.themoviedb.org/3/movie/${movieId}` +
               `?api_key=${TMDB_API_KEY}&language=fr-FR` +
-              `&append_to_response=release_dates,watch/providers`;
+              `&append_to_response=release_dates`;
   const data = await fetchWithRetry(url);
   cache[key] = { _cachedAt: Date.now(), data };
   return data;
@@ -378,7 +432,13 @@ async function updateVOD() {
 
   // ── 2. Analyse film par film ────────────────────────────────────────────────
   const finalResults = [];
-  const dropReasons = { noDetails: 0, noReleaseDate: 0, excludedGenre: 0, tooShort: 0, noFRTheatrical: 0, beforeWindow: 0, afterWindow: 0, delayTooShort: 0 };
+  const dropReasons = {
+    noDetails: 0, noReleaseDate: 0,
+    excludedGenre: 0, telefilmByTitle: 0, spectacle: 0,
+    tooShort: 0, ghostEntry: 0, noGenresAtAll: 0,
+    noFRTheatrical: 0, lowQuality: 0,
+    beforeWindow: 0, afterWindow: 0, delayTooShort: 0,
+  };
   let cacheHits = 0;
 
   console.log('  🔬  Analyse détaillée :');
@@ -396,38 +456,64 @@ async function updateVOD() {
       continue;
     }
 
-    if (!details.release_date)        { dropReasons.noReleaseDate++; continue; }
-    if (hasExcludedGenre(details))    { dropReasons.excludedGenre++; continue; }
-    if (isTooShort(details))          { dropReasons.tooShort++;     continue; }
+    // ── Filtres "type de contenu" : on veut UNIQUEMENT des films de cinéma ──
+    if (!details.release_date)        { dropReasons.noReleaseDate++;   continue; }
+    if (hasExcludedGenre(details))    { dropReasons.excludedGenre++;   continue; } // doc/musique/téléfilm
+    if (isTelefilmByTitle(details))   { dropReasons.telefilmByTitle++; continue; } // "Meurtres à X"
+    if (isSpectacle(details))         { dropReasons.spectacle++;       continue; } // concerts/opéras/ballets
+    if (isTooShort(details))          { dropReasons.tooShort++;        continue; }
+    if (isGhostEntry(details))        { dropReasons.ghostEntry++;      continue; } // fiche TMDB stub
+
+    // Au moins 1 genre valide requis (sinon = fiche incomplète, suspect)
+    if (!details.genres || details.genres.length === 0) {
+      dropReasons.noGenresAtAll++;
+      continue;
+    }
 
     const isFrench   = isFrenchProduction(details);
     const minDelay   = isFrench ? DELAYS.FRENCH : DELAYS.AMERICAN;
     const hasFRCine  = hasTheatricalReleaseFR(details.release_dates);
 
-    // Filtre principal : films INTL doivent avoir une sortie ciné FR
-    // Films français : on est plus tolérant (TMDB est parfois incomplet sur les
-    // petites sorties nationales)
-    if (!isFrench && !hasFRCine) { dropReasons.noFRTheatrical++; continue; }
+    // ── Filtre principal : sortie ciné FR documentée ─────────────────────────
+    // Pour les films INTL : obligatoire (sinon on récupère des trucs distribués
+    // uniquement à l'étranger).
+    // Pour les films FR : obligatoire AUSSI maintenant — TMDB est généralement
+    // bien renseigné sur les sorties françaises. Si pas de release_type 2 ou 3
+    // en FR, c'est probablement un téléfilm, une sortie directe streaming, ou
+    // une fiche fantôme.
+    if (!hasFRCine) { dropReasons.noFRTheatrical++; continue; }
+
+    // ── Filtre qualité : éviter les films "fantômes" qui passent les autres ──
+    // On exige soit un minimum de votes (preuve d'existence), soit une date
+    // de sortie ciné FR officielle (preuve de distribution réelle).
+    const voteCount = details.vote_count ?? 0;
+    const cinemaDateFR_check = getTheatricalDateFR(details.release_dates);
+    const hasRealFRRelease = cinemaDateFR_check !== null;
+    if (voteCount < 3 && !hasRealFRRelease) {
+      dropReasons.lowQuality++;
+      continue;
+    }
 
     // ── Calcul de la date VOD ─────────────────────────────────────────────────
     const cinemaDateGlobal = new Date(details.release_date);
-    const cinemaDateFR     = getTheatricalDateFR(details.release_dates);
+    const cinemaDateFR     = cinemaDateFR_check;
     const cinemaDate       = cinemaDateFR ?? cinemaDateGlobal;
     if (isNaN(cinemaDate)) { dropReasons.noReleaseDate++; continue; }
 
     const officialDigital  = getOfficialDigitalDate(details.release_dates);
-    const onFRTVOD         = isAvailableOnFRTVOD(details['watch/providers']);
     const predictedDate    = predictVODDate(cinemaDate, isFrench);
 
+    // ── Sources de date VOD acceptées (par ordre de fiabilité) ───────────────
+    //   1. Date officielle TMDB type 4 (FR ou US)
+    //   2. Prédiction calculée à partir de la sortie ciné FR + délai légal
+    //
+    // On NE FAIT PLUS confiance à la simple présence sur un provider TVOD FR
+    // (Apple TV, etc.) car ça crée trop de faux positifs : des films d'auteur
+    // listés sans avoir eu de vraie sortie ciné, des spectacles, etc.
     let vodDate, source;
     if (officialDigital) {
       vodDate = officialDigital.date;
       source  = `officielle-${officialDigital.region.toLowerCase()}`;
-    } else if (onFRTVOD) {
-      // Disponible MAINTENANT sur un provider FR mais pas de date type 4 :
-      // on prend la prédiction si elle est dans le passé proche, sinon "aujourd'hui"
-      vodDate = predictedDate < now ? predictedDate : now;
-      source  = 'provider-fr';
     } else {
       vodDate = predictedDate;
       source  = 'prédite';
@@ -451,7 +537,8 @@ async function updateVOD() {
       original_title : details.original_title,
       cinema_date    : formatDateFR(cinemaDate),
       vote_average   : Math.round((details.vote_average ?? 0) * 10) / 10,
-      genres         : details.genres?.map((g) => g.name) ?? [],
+      vote_count     : voteCount,
+      genres         : details.genres.map((g) => g.name),
       is_french      : isFrench,
       source,
       // Champs internes (supprimés avant écriture)
@@ -460,7 +547,7 @@ async function updateVOD() {
     });
 
     const flag = isFrench ? '🇫🇷' : '🌍';
-    const srcShort = source.startsWith('officielle') ? '✓' : source === 'provider-fr' ? '⊛' : '~';
+    const srcShort = source.startsWith('officielle') ? '✓' : '~';
     console.log(`     ${flag} ${srcShort} ${(details.title || '').padEnd(45).slice(0, 45)} → ${formatDateFR(vodDate)}`);
   }
 
@@ -494,32 +581,35 @@ async function updateVOD() {
   const frCount   = output.filter((m) => m.is_french).length;
   const intCount  = output.length - frCount;
   const officCount = output.filter((m) => m.source.startsWith('officielle')).length;
-  const tvodCount  = output.filter((m) => m.source === 'provider-fr').length;
   const predCount  = output.filter((m) => m.source === 'prédite').length;
   const elapsed   = ((Date.now() - t0) / 1000).toFixed(1);
 
   console.log(`
 ╔══════════════════════════════════════════════════╗
-║  ✅  ${output.length} films VOD — ${now.toLocaleString('fr-FR', { month: 'long', year: 'numeric' })}${isExtended ? ' (+ amorce)' : ''}
+║  ✅  ${output.length} films de cinéma VOD — ${now.toLocaleString('fr-FR', { month: 'long', year: 'numeric' })}${isExtended ? ' (+ amorce)' : ''}
 ║  🇫🇷  Productions françaises : ${frCount}
 ║  🌍  Films internationaux   : ${intCount}
 ║  ✓   Dates officielles      : ${officCount}
-║  ⊛   Confirmées TVOD FR     : ${tvodCount}
 ║  ~   Dates prédites         : ${predCount}
-║  💾  Cache : ${cacheHits} hits / ${uniqueMovies.length} (${Math.round(cacheHits/uniqueMovies.length*100)}%)
+║  💾  Cache : ${cacheHits} hits / ${uniqueMovies.length} (${uniqueMovies.length ? Math.round(cacheHits/uniqueMovies.length*100) : 0}%)
 ║  ⏱   Durée totale : ${elapsed}s
 ║  📁  ${DATA_PATH}
 ╚══════════════════════════════════════════════════╝
 
-📊  Films écartés :
-     • Pas de détails TMDB     : ${dropReasons.noDetails}
-     • Pas de date de sortie   : ${dropReasons.noReleaseDate}
-     • Genre exclu (doc/musique): ${dropReasons.excludedGenre}
-     • Court-métrage           : ${dropReasons.tooShort}
-     • Pas de sortie ciné FR   : ${dropReasons.noFRTheatrical}
-     • Délai légal non respecté: ${dropReasons.delayTooShort}
-     • Avant la fenêtre        : ${dropReasons.beforeWindow}
-     • Après la fenêtre        : ${dropReasons.afterWindow}
+📊  Films écartés (par raison) :
+     • Pas de détails TMDB        : ${dropReasons.noDetails}
+     • Pas de date de sortie      : ${dropReasons.noReleaseDate}
+     • Genre exclu (doc/musique/TV): ${dropReasons.excludedGenre}
+     • Téléfilm détecté par titre : ${dropReasons.telefilmByTitle}
+     • Concert / opéra / spectacle: ${dropReasons.spectacle}
+     • Court-métrage              : ${dropReasons.tooShort}
+     • Fiche fantôme TMDB         : ${dropReasons.ghostEntry}
+     • Aucun genre renseigné      : ${dropReasons.noGenresAtAll}
+     • Pas de sortie ciné FR      : ${dropReasons.noFRTheatrical}
+     • Qualité insuffisante       : ${dropReasons.lowQuality}
+     • Délai légal non respecté   : ${dropReasons.delayTooShort}
+     • Avant la fenêtre           : ${dropReasons.beforeWindow}
+     • Après la fenêtre           : ${dropReasons.afterWindow}
 `);
 }
 
