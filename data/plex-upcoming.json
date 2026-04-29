@@ -1,11 +1,5 @@
 [
   {
-    "title": "Crime 101",
-    "plex_release": "1 avril 2026",
-    "tmdb_id": 1171145,
-    "poster_path": "/cz6VIBoOKopo3pymqRkNiVc2M7.jpg"
-  },
-  {
     "title": "Mektoub, My Love: Canto Due",
     "plex_release": "2 avril 2026",
     "tmdb_id": 661568,
@@ -16,24 +10,6 @@
     "plex_release": "3 avril 2026",
     "tmdb_id": 1277882,
     "poster_path": "/lzHohlKAZ8qG0WbkctJq02ZB3lJ.jpg"
-  },
-  {
-    "title": "Gérald le Conquérant",
-    "plex_release": "3 avril 2026",
-    "tmdb_id": 1174382,
-    "poster_path": "/lyjO7qEAxtMF4hZhzp3haPdeBde.jpg"
-  },
-  {
-    "title": "Que ma volonté soit faite",
-    "plex_release": "3 avril 2026",
-    "tmdb_id": 1376046,
-    "poster_path": "/oBWmqQSFewFhAhfcmFvvf9yIjo6.jpg"
-  },
-  {
-    "title": "Bardot",
-    "plex_release": "3 avril 2026",
-    "tmdb_id": 977168,
-    "poster_path": "/tFxgFiJsclpN55ZCRx3vfwmBvxO.jpg"
   },
   {
     "title": "Justa",
@@ -60,30 +36,6 @@
     "poster_path": "/9PJrHGp41hRTq2kkPWU2j6zzjat.jpg"
   },
   {
-    "title": "La Condition",
-    "plex_release": "10 avril 2026",
-    "tmdb_id": 1119548,
-    "poster_path": "/5yxwpcK0OHR0fBB6CBS80YWHoAC.jpg"
-  },
-  {
-    "title": "Louise",
-    "plex_release": "10 avril 2026",
-    "tmdb_id": 1197125,
-    "poster_path": "/62GcSVw9fE8paRDTCHDycZvQ26p.jpg"
-  },
-  {
-    "title": "La Petite Cuisine de Mehdi",
-    "plex_release": "10 avril 2026",
-    "tmdb_id": 1266826,
-    "poster_path": "/AeM5idmeLmPZwtkFoe58zV9FbmK.jpg"
-  },
-  {
-    "title": "Animal Totem",
-    "plex_release": "10 avril 2026",
-    "tmdb_id": 1439177,
-    "poster_path": "/5mQOefrjyMEq8qaFagEVX2i4SH8.jpg"
-  },
-  {
     "title": "L’Âme Idéale",
     "plex_release": "17 avril 2026",
     "tmdb_id": 1166170,
@@ -102,10 +54,10 @@
     "poster_path": "/cSNgGUf6k2k7WJJVlda6ZUPYgGo.jpg"
   },
   {
-    "title": "L'Engloutie",
-    "plex_release": "24 avril 2026",
-    "tmdb_id": 1069650,
-    "poster_path": "/yzMVS2PPaCj58i3Og7FgtIpMLA6.jpg"
+    "title": "Jumpers",
+    "plex_release": "18 avril 2026",
+    "tmdb_id": 1327819,
+    "poster_path": "/hwFQ33TvDGugRb0JFkCeKyrpIhT.jpg"
   },
   {
     "title": "Super Mario Galaxy, le film",
