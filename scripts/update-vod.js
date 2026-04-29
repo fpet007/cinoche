@@ -16,46 +16,48 @@ async function updateVOD() {
         const currentMonth = today.getMonth();
         const currentYear = today.getFullYear();
 
-        // Fenêtres de recherche intelligentes
-        // 1. Pour la France : films sortis au ciné il y a 3.5 à 5 mois
-        const startFR = new Date(); startFR.setMonth(today.getMonth() - 5);
-        const endFR = new Date(); endFR.setMonth(today.getMonth() - 3);
-        
-        // 2. Pour l'International : films sortis au ciné il y a 20 à 70 jours
-        const startINT = new Date(); startINT.setDate(today.getDate() - 70);
-        const endINT = new Date(); endINT.setDate(today.getDate() - 20);
+        console.log(`🔎 Début du scan ultra-profond pour le mois de ${today.toLocaleDateString('fr-FR', {month: 'long'})}...`);
 
-        const queries = [
-            // Scan France (Chronologie 4 mois)
-            `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=fr-FR&region=FR&with_origin_country=FR&primary_release_date.gte=${startFR.toISOString().split('T')[0]}&primary_release_date.lte=${endFR.toISOString().split('T')[0]}&sort_by=primary_release_date.asc`,
-            // Scan International (Fenêtre 45 jours)
-            `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=fr-FR&region=US&primary_release_date.gte=${startINT.toISOString().split('T')[0]}&primary_release_date.lte=${endINT.toISOString().split('T')[0]}&sort_by=popularity.desc`
-        ];
+        // On définit les fenêtres de sortie cinéma pour trouver la VOD de MAINTENANT
+        const fourMonthsAgo = new Date(); fourMonthsAgo.setMonth(today.getMonth() - 5);
+        const twoMonthsAgo = new Date(); twoMonthsAgo.setMonth(today.getMonth() - 1);
 
         let allMovies = [];
-        for (const url of queries) {
+
+        // --- SCAN 1 : LES PRODUCTIONS FRANÇAISES (5 pages pour ne rien rater) ---
+        for (let page = 1; page <= 5; page++) {
+            const url = `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=fr-FR&region=FR&with_original_language=fr&primary_release_date.gte=${fourMonthsAgo.toISOString().split('T')[0]}&primary_release_date.lte=${twoMonthsAgo.toISOString().split('T')[0]}&sort_by=primary_release_date.desc&page=${page}`;
             const res = await fetch(url);
             const data = await res.json();
             if (data.results) allMovies = allMovies.concat(data.results);
         }
 
-        const uniqueMovies = Array.from(new Map(allMovies.map(m => [m.id, m])).values());
+        // --- SCAN 2 : LES BLOCKBUSTERS INTERNATIONAUX (2 pages) ---
+        for (let page = 1; page <= 2; page++) {
+            const url = `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=fr-FR&region=FR&primary_release_date.gte=${twoMonthsAgo.toISOString().split('T')[0]}&sort_by=popularity.desc&page=${page}`;
+            const res = await fetch(url);
+            const data = await res.json();
+            if (data.results) allMovies = allMovies.concat(data.results);
+        }
+
+        // Suppression des doublons
+        const movies = Array.from(new Map(allMovies.map(m => [m.id, m])).values());
         let finalResults = [];
 
-        for (const movie of uniqueMovies) {
+        for (const movie of movies) {
             const detailRes = await fetch(`https://api.themoviedb.org/3/movie/${movie.id}?api_key=${TMDB_API_KEY}&append_to_response=release_dates`);
             const details = await detailRes.json();
 
             if (!details.release_date) continue;
 
             const releaseCinema = new Date(details.release_date);
-            const isFrench = details.production_countries?.some(c => c.iso_3166_1 === 'FR');
+            const isFrench = details.production_countries?.some(c => c.iso_3166_1 === 'FR') || details.original_language === 'fr';
             const companyIds = details.production_companies?.map(c => c.id) || [];
 
-            // --- CALCUL PRÉDICTIF ---
+            // --- CALCUL PRÉDICTIF SELON TES RÈGLES ---
             let delay = 45; 
             if (isFrench) {
-                delay = 121; // Loi française : 4 mois
+                delay = 121; // Chronologie FR (4 mois)
             } else if (companyIds.some(id => STUDIOS.UNIVERSAL.includes(id))) {
                 delay = 25;
             } else if (companyIds.some(id => STUDIOS.WARNER.includes(id))) {
@@ -67,7 +69,7 @@ async function updateVOD() {
             let vodDate = new Date(releaseCinema);
             vodDate.setDate(vodDate.getDate() + delay);
 
-            // --- VÉRIFICATION DATE DIGITALE RÉELLE ---
+            // Vérification si date Digital officielle
             const releases = details.release_dates?.results || [];
             const digitalRelease = releases
                 .find(r => r.iso_3166_1 === 'FR' || r.iso_3166_1 === 'US')
@@ -78,16 +80,13 @@ async function updateVOD() {
                 if (!isNaN(officialDate)) vodDate = officialDate;
             }
 
-            // --- FILTRES DE SÉCURITÉ CRITIQUES ---
-            // 1. Uniquement le mois en cours
+            // --- FILTRES DE PRÉCISION ---
             const isSameMonth = vodDate.getMonth() === currentMonth && vodDate.getFullYear() === currentYear;
             
-            // 2. SÉCURITÉ : La date VOD doit être AU MOINS 20 jours après la sortie Cinéma 
-            // (C'est ce qui va bloquer "Vivaldi et moi" qui sort au ciné aujourd'hui)
+            // Sécurité : On exclut les films qui sortent au ciné en même temps (diff < 20 jours)
             const diffDays = (vodDate - releaseCinema) / (1000 * 3600 * 24);
-            const isNotCinemaRelease = diffDays > 20;
 
-            if (isSameMonth && isNotCinemaRelease) {
+            if (isSameMonth && diffDays > 20) {
                 finalResults.push({
                     title: movie.title,
                     plex_release: vodDate.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }),
@@ -98,11 +97,13 @@ async function updateVOD() {
             }
         }
 
+        // Tri et sauvegarde
         finalResults.sort((a, b) => a._sort - b._sort);
-        const cleanResults = finalResults.map(({_sort, ...rest}) => rest);
+        const cleanResults = Array.from(new Map(finalResults.map(m => [m.tmdb_id, m])).values()) // Anti-doublon final
+                                  .map(({_sort, ...rest}) => rest);
 
         fs.writeFileSync(DATA_PATH, JSON.stringify(cleanResults, null, 2), 'utf8');
-        console.log(`✅ Succès : ${cleanResults.length} films VOD pour ce mois.`);
+        console.log(`✅ Scan terminé : ${cleanResults.length} films trouvés pour ce mois.`);
 
     } catch (e) {
         console.error("Erreur :", e);
