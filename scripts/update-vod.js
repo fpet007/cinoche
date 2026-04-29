@@ -18,13 +18,13 @@ async function updateVOD() {
         const currentMonth = today.getMonth();
         const currentYear = today.getFullYear();
 
-        // Fenêtre de scan large (5 mois en arrière) pour ne rien rater
+        // Scan large sur 5 mois pour attraper VFQ et VFF
         const dateDebutScan = new Date(); 
         dateDebutScan.setMonth(today.getMonth() - 5);
         const dateStr = dateDebutScan.toISOString().split('T')[0];
 
         const endpoints = [
-            // 1. SCAN FRANCE (2 pages pour les films français et pépites)
+            // 1. SCAN FRANCE (2 pages pour ne rien rater des films français)
             `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=fr-FR&region=FR&with_origin_country=FR&primary_release_date.gte=${dateStr}&sort_by=popularity.desc&page=1`,
             `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=fr-FR&region=FR&with_origin_country=FR&primary_release_date.gte=${dateStr}&sort_by=popularity.desc&page=2`,
             // 2. SCAN INTERNATIONAL (Pour les blockbusters US/VFQ)
@@ -53,55 +53,54 @@ async function updateVOD() {
             const isFrench = details.production_countries?.some(c => c.iso_3166_1 === 'FR') || details.original_language === 'fr';
             const companyIds = details.production_companies?.map(c => c.id) || [];
 
-            // --- CALCUL DÉLAI OPTIMISÉ VFQ / VFF ---
-            let delay = 45; // Standard VFQ/International
+            // --- CALCUL DÉLAI OPTIMISÉ ---
+            let delay = 45; // Standard VFQ
             
             if (isFrench) {
-                delay = 121; // 4 mois pour les films FR
+                delay = 121; // 4 mois VFF [cite: 14, 15]
             } else if (companyIds.some(id => STUDIOS.UNIVERSAL.includes(id))) {
-                delay = 25;
+                delay = 25; [cite: 15]
             } else if (companyIds.some(id => STUDIOS.WARNER.includes(id))) {
-                delay = 35;
+                delay = 35; [cite: 16]
             }
 
             let vodDate = new Date(releaseCinema);
             vodDate.setDate(vodDate.getDate() + delay);
 
-            // Priorité à la date digitale réelle (Type 4)
+            // Priorité date digitale réelle (Type 4) [cite: 19]
             const digitalData = details.release_dates?.results
                 .find(r => r.iso_3166_1 === 'US' || r.iso_3166_1 === 'FR' || r.iso_3166_1 === 'CA')
                 ?.release_dates.find(rd => rd.type === 4);
 
             if (digitalData) {
                 const officialDate = new Date(digitalData.release_date);
-                if (!isNaN(officialDate)) vodDate = officialDate;
+                if (!isNaN(officialDate)) vodDate = officialDate; [cite: 21]
             }
 
-            // Uniquement les sorties du mois cible
-            const isTargetMonth = (vodDate.getMonth() === currentMonth && vodDate.getFullYear() === currentYear);
-            const diffDays = (vodDate - releaseCinema) / (1000 * 3600 * 24);
+            const isTargetMonth = (vodDate.getMonth() === currentMonth && vodDate.getFullYear() === currentYear); [cite: 21]
+            const diffDays = (vodDate - releaseCinema) / (1000 * 3600 * 24); [cite: 22]
 
-            // Sécurité : On accepte si VOD est > 20 jours après ciné (évite les erreurs de synchro)
+            // Sécurité minimale : 20 jours [cite: 25]
             if (isTargetMonth && diffDays >= 20) {
                 finalResults.push({
                     title: movie.title,
-                    plex_release: vodDate.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }),
-                    tmdb_id: movie.id,
-                    poster_path: movie.poster_path,
-                    _sort: vodDate.getTime()
+                    plex_release: vodDate.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }), [cite: 25]
+                    tmdb_id: movie.id, [cite: 26]
+                    poster_path: movie.poster_path, [cite: 26]
+                    _sort: vodDate.getTime() [cite: 26]
                 });
             }
         }
 
-        finalResults.sort((a, b) => a._sort - b._sort);
-        const cleanResults = Array.from(new Map(finalResults.map(m => [m.title, m])).values())
-                                  .map(({_sort, ...rest}) => rest);
+        finalResults.sort((a, b) => a._sort - b._sort); [cite: 27]
+        const cleanResults = Array.from(new Map(finalResults.map(m => [m.title, m])).values()) [cite: 28]
+                                  .map(({_sort, ...rest}) => rest); [cite: 28]
 
-        fs.writeFileSync(DATA_PATH, JSON.stringify(cleanResults, null, 2), 'utf8');
-        console.log(`✅ Mise à jour réussie : ${cleanResults.length} films.`);
+        fs.writeFileSync(DATA_PATH, JSON.stringify(cleanResults, null, 2), 'utf8'); [cite: 29]
+        console.log(`✅ Mise à jour réussie : ${cleanResults.length} films.`); [cite: 29]
 
     } catch (e) {
-        console.error("Erreur :", e);
+        console.error("Erreur :", e); [cite: 30]
     }
 }
 
