@@ -18,22 +18,32 @@ async function updateVOD() {
         const currentMonth = today.getMonth();
         const currentYear = today.getFullYear();
 
-        console.log(`🚀 Scan exhaustif : Nouveautés VOD d'Avril 2026...`);
+        console.log(`🔍 Scan ciblé : Sorties VOD de ${today.toLocaleDateString('fr-FR', {month: 'long', year: 'numeric'})}`);
 
-        // Fenêtre large pour capturer les sorties ciné qui deviennent VOD ce mois-ci
-        const searchStart = new Date(); searchStart.setMonth(today.getMonth() - 6);
-        const dateLimit = searchStart.toISOString().split('T')[0];
+        // Fenêtre pour la France (Cinéma + 4 mois) : on cherche les films sortis il y a ~120 jours
+        const dateDebutFR = new Date(); dateDebutFR.setMonth(today.getMonth() - 5);
+        const dateFinFR = new Date(); dateFinFR.setMonth(today.getMonth() - 3);
+        
+        // Fenêtre pour l'International (Cinéma + 45 jours) : on cherche les films sortis il y a ~2 mois
+        const dateDebutINT = new Date(); dateDebutINT.setMonth(today.getMonth() - 3);
+
+        const endpoints = [
+            // 1. SCAN SPÉCIFIQUE FRANCE (On force la recherche sur les films français uniquement)
+            `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=fr-FR&region=FR&with_origin_country=FR&primary_release_date.gte=${dateDebutFR.toISOString().split('T')[0]}&primary_release_date.lte=${dateFinFR.toISOString().split('T')[0]}&sort_by=primary_release_date.desc&page=1`,
+            // 2. SCAN POPULARITÉ FRANCE (Pour les gros succès FR et sorties récentes)
+            `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=fr-FR&region=FR&primary_release_date.gte=${dateDebutFR.toISOString().split('T')[0]}&sort_by=popularity.desc&page=1`,
+            // 3. SCAN INTERNATIONAL (Blockbusters US)
+            `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=fr-FR&region=US&primary_release_date.gte=${dateDebutINT.toISOString().split('T')[0]}&sort_by=popularity.desc&page=1`
+        ];
 
         let allMovies = [];
-        
-        // SCAN MASSIF : On demande 10 pages de résultats pour être sûr de trouver les films FR
-        for (let i = 1; i <= 10; i++) {
-            const url = `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=fr-FR&region=FR&primary_release_date.gte=${dateLimit}&sort_by=popularity.desc&page=${i}`;
+        for (const url of endpoints) {
             const res = await fetch(url);
             const data = await res.json();
             if (data.results) allMovies = allMovies.concat(data.results);
         }
 
+        // Déduplication par ID
         const uniqueMovies = Array.from(new Map(allMovies.map(m => [m.id, m])).values());
         let finalResults = [];
 
@@ -47,10 +57,10 @@ async function updateVOD() {
             const isFrench = details.production_countries?.some(c => c.iso_3166_1 === 'FR') || details.original_language === 'fr';
             const companyIds = details.production_companies?.map(c => c.id) || [];
 
-            // --- CALCUL PRÉDICTIF ---
-            let delay = 45; // Standard international
+            // --- CALCUL DE LA DATE VOD ---
+            let delay = 45; 
             if (isFrench) {
-                delay = 121; // Loi française stricte (4 mois)
+                delay = 121; // Chronologie des médias FR : 4 mois
             } else if (companyIds.some(id => STUDIOS.UNIVERSAL.includes(id))) {
                 delay = 28;
             } else if (companyIds.some(id => STUDIOS.WARNER.includes(id)) || companyIds.some(id => STUDIOS.SONY.includes(id))) {
@@ -62,9 +72,8 @@ async function updateVOD() {
             let vodDate = new Date(releaseCinema);
             vodDate.setDate(vodDate.getDate() + delay);
 
-            // --- VÉRIFICATION DATE OFFICIELLE (TYPE 4 = DIGITAL) ---
+            // Vérification date officielle Digital (Type 4)
             const releaseResults = details.release_dates?.results || [];
-            // On cherche une date digitale officielle en priorité
             const digitalData = releaseResults.find(r => r.iso_3166_1 === 'FR' || r.iso_3166_1 === 'US')
                 ?.release_dates.find(rd => rd.type === 4);
 
@@ -73,14 +82,12 @@ async function updateVOD() {
                 if (!isNaN(officialDate)) vodDate = officialDate;
             }
 
-            // --- FILTRES DE PRÉCISION ---
-            // 1. Uniquement le mois et l'année en cours (Avril 2026)
+            // --- FILTRE STRICT : MOIS EN COURS ---
             const isTargetMonth = (vodDate.getMonth() === currentMonth && vodDate.getFullYear() === currentYear);
             
-            // 2. Sécurité : La VOD ne peut pas sortir avant le cinéma (bug Mission Rosetta/Vivaldi)
-            // On impose un minimum de 15 jours après le ciné pour les US et 120 pour les FR
+            // Sécurité pour éviter les erreurs de date de sortie cinéma
             const diffDays = (vodDate - releaseCinema) / (1000 * 3600 * 24);
-            const securityCheck = isFrench ? diffDays > 110 : diffDays > 15;
+            const securityCheck = isFrench ? diffDays > 115 : diffDays > 15;
 
             if (isTargetMonth && securityCheck) {
                 finalResults.push({
@@ -93,15 +100,18 @@ async function updateVOD() {
             }
         }
 
-        // Tri chronologique (du 1er au 30 avril)
+        // Tri par date
         finalResults.sort((a, b) => a._sort - b._sort);
         
-        // Suppression des doublons de titre (fréquent sur TMDB)
+        // Nettoyage des doublons de titres
         const cleanResults = Array.from(new Map(finalResults.map(m => [m.title, m])).values())
                                   .map(({_sort, ...rest}) => rest);
 
+        const dir = path.dirname(DATA_PATH);
+        if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
         fs.writeFileSync(DATA_PATH, JSON.stringify(cleanResults, null, 2), 'utf8');
-        console.log(`✅ Succès ! ${cleanResults.length} nouveautés VOD trouvées pour ce mois.`);
+
+        console.log(`✅ Terminé : ${cleanResults.length} films pour ce mois.`);
 
     } catch (e) {
         console.error("Erreur critique :", e);
