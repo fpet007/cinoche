@@ -18,14 +18,19 @@ async function updateVOD() {
         const currentMonth = today.getMonth();
         const currentYear = today.getFullYear();
 
-        // Fenêtres de scan
-        const dateDebutFR = new Date(); dateDebutFR.setMonth(today.getMonth() - 5);
-        const dateFinFR = new Date(); dateFinFR.setMonth(today.getMonth() - 3);
+        // Fenêtre de scan large (5 mois en arrière) pour ne rien rater
+        const dateDebutScan = new Date(); 
+        dateDebutScan.setMonth(today.getMonth() - 5);
+        const dateStr = dateDebutScan.toISOString().split('T')[0];
 
         const endpoints = [
-            `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=fr-FR&region=FR&with_origin_country=FR&primary_release_date.gte=${dateDebutFR.toISOString().split('T')[0]}&primary_release_date.lte=${dateFinFR.toISOString().split('T')[0]}&sort_by=popularity.desc&page=1`,
-            `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=fr-FR&region=FR&with_origin_country=FR&primary_release_date.gte=${dateDebutFR.toISOString().split('T')[0]}&primary_release_date.lte=${dateFinFR.toISOString().split('T')[0]}&sort_by=popularity.desc&page=2`,
-            `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=fr-FR&region=FR&primary_release_date.gte=${dateDebutFR.toISOString().split('T')[0]}&sort_by=popularity.desc&page=1`
+            // 1. SCAN FRANCE (2 pages pour les films français et pépites)
+            `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=fr-FR&region=FR&with_origin_country=FR&primary_release_date.gte=${dateStr}&sort_by=popularity.desc&page=1`,
+            `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=fr-FR&region=FR&with_origin_country=FR&primary_release_date.gte=${dateStr}&sort_by=popularity.desc&page=2`,
+            // 2. SCAN INTERNATIONAL (Pour les blockbusters US/VFQ)
+            `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=fr-FR&region=US&primary_release_date.gte=${dateStr}&sort_by=popularity.desc&page=1`,
+            // 3. SCAN GÉNÉRAL (Pour les films comme Mario ou Crime 101)
+            `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=fr-FR&primary_release_date.gte=${dateStr}&sort_by=popularity.desc&page=1`
         ];
 
         let allMovies = [];
@@ -48,23 +53,23 @@ async function updateVOD() {
             const isFrench = details.production_countries?.some(c => c.iso_3166_1 === 'FR') || details.original_language === 'fr';
             const companyIds = details.production_companies?.map(c => c.id) || [];
 
-            // --- CALCUL PRÉDICTIF OPTIMISÉ ---
-            let delay = 45; 
+            // --- CALCUL DÉLAI OPTIMISÉ VFQ / VFF ---
+            let delay = 45; // Standard VFQ/International
+            
             if (isFrench) {
-                delay = 121; // 4 mois
+                delay = 121; // 4 mois pour les films FR
             } else if (companyIds.some(id => STUDIOS.UNIVERSAL.includes(id))) {
                 delay = 25;
             } else if (companyIds.some(id => STUDIOS.WARNER.includes(id))) {
                 delay = 35;
-            } else if (companyIds.some(id => STUDIOS.DISNEY.includes(id))) {
-                delay = 65; // Disney est plus lent
             }
 
             let vodDate = new Date(releaseCinema);
             vodDate.setDate(vodDate.getDate() + delay);
 
+            // Priorité à la date digitale réelle (Type 4)
             const digitalData = details.release_dates?.results
-                .find(r => r.iso_3166_1 === 'FR' || r.iso_3166_1 === 'US')
+                .find(r => r.iso_3166_1 === 'US' || r.iso_3166_1 === 'FR' || r.iso_3166_1 === 'CA')
                 ?.release_dates.find(rd => rd.type === 4);
 
             if (digitalData) {
@@ -72,15 +77,12 @@ async function updateVOD() {
                 if (!isNaN(officialDate)) vodDate = officialDate;
             }
 
+            // Uniquement les sorties du mois cible
             const isTargetMonth = (vodDate.getMonth() === currentMonth && vodDate.getFullYear() === currentYear);
             const diffDays = (vodDate - releaseCinema) / (1000 * 3600 * 24);
-            
-            // --- CONDITION DE SÉCURITÉ RENFORCÉE ---
-            // Un film FR ne peut PAS sortir en VOD moins de 115 jours après le ciné.
-            // Un film US ne peut PAS sortir en VOD moins de 20 jours après le ciné.
-            const minAllowedDelay = isFrench ? 115 : 20;
 
-            if (isTargetMonth && diffDays >= minAllowedDelay) {
+            // Sécurité : On accepte si VOD est > 20 jours après ciné (évite les erreurs de synchro)
+            if (isTargetMonth && diffDays >= 20) {
                 finalResults.push({
                     title: movie.title,
                     plex_release: vodDate.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }),
