@@ -16,47 +16,46 @@ async function updateVOD() {
         const currentMonth = today.getMonth();
         const currentYear = today.getFullYear();
 
-        // On remonte 6 mois pour couvrir la chronologie des médias FR
-        const sixMonthsAgo = new Date();
-        sixMonthsAgo.setMonth(today.getMonth() - 6);
-        const minDate = sixMonthsAgo.toISOString().split('T')[0];
+        // Fenêtres de recherche intelligentes
+        // 1. Pour la France : films sortis au ciné il y a 3.5 à 5 mois
+        const startFR = new Date(); startFR.setMonth(today.getMonth() - 5);
+        const endFR = new Date(); endFR.setMonth(today.getMonth() - 3);
+        
+        // 2. Pour l'International : films sortis au ciné il y a 20 à 70 jours
+        const startINT = new Date(); startINT.setDate(today.getDate() - 70);
+        const endINT = new Date(); endINT.setDate(today.getDate() - 20);
 
-        // --- MULTI-SCAN POUR NE RIEN RATER ---
-        const fetchUrls = [
-            // 1. Films populaires (Mondial)
-            `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=fr-FR&region=FR&sort_by=popularity.desc&primary_release_date.gte=${minDate}&page=1`,
-            `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=fr-FR&region=FR&sort_by=popularity.desc&primary_release_date.gte=${minDate}&page=2`,
-            // 2. Focus spécial PRODUCTIONS FRANÇAISES (Pour trouver Grand Ciel, Louise, etc.)
-            `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=fr-FR&region=FR&with_origin_country=FR&primary_release_date.gte=${minDate}&sort_by=primary_release_date.desc&page=1`,
-            // 3. Films actuellement ou récemment en salle
-            `https://api.themoviedb.org/3/movie/now_playing?api_key=${TMDB_API_KEY}&language=fr-FR&region=FR`
+        const queries = [
+            // Scan France (Chronologie 4 mois)
+            `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=fr-FR&region=FR&with_origin_country=FR&primary_release_date.gte=${startFR.toISOString().split('T')[0]}&primary_release_date.lte=${endFR.toISOString().split('T')[0]}&sort_by=primary_release_date.asc`,
+            // Scan International (Fenêtre 45 jours)
+            `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=fr-FR&region=US&primary_release_date.gte=${startINT.toISOString().split('T')[0]}&primary_release_date.lte=${endINT.toISOString().split('T')[0]}&sort_by=popularity.desc`
         ];
 
-        let rawMovies = [];
-        for (const url of fetchUrls) {
+        let allMovies = [];
+        for (const url of queries) {
             const res = await fetch(url);
             const data = await res.json();
-            if (data.results) rawMovies = rawMovies.concat(data.results);
+            if (data.results) allMovies = allMovies.concat(data.results);
         }
 
-        // Suppression des doublons par ID
-        const movies = Array.from(new Map(rawMovies.map(m => [m.id, m])).values());
+        const uniqueMovies = Array.from(new Map(allMovies.map(m => [m.id, m])).values());
         let finalResults = [];
 
-        for (const movie of movies) {
+        for (const movie of uniqueMovies) {
             const detailRes = await fetch(`https://api.themoviedb.org/3/movie/${movie.id}?api_key=${TMDB_API_KEY}&append_to_response=release_dates`);
             const details = await detailRes.json();
 
             if (!details.release_date) continue;
 
-            const releaseDate = new Date(details.release_date);
+            const releaseCinema = new Date(details.release_date);
             const isFrench = details.production_countries?.some(c => c.iso_3166_1 === 'FR');
             const companyIds = details.production_companies?.map(c => c.id) || [];
 
-            // --- CALCUL DE LA PRÉDICTION ---
-            let delay = 45; // Standard International
+            // --- CALCUL PRÉDICTIF ---
+            let delay = 45; 
             if (isFrench) {
-                delay = 121; // Chronologie des médias FR (4 mois pile)
+                delay = 121; // Loi française : 4 mois
             } else if (companyIds.some(id => STUDIOS.UNIVERSAL.includes(id))) {
                 delay = 25;
             } else if (companyIds.some(id => STUDIOS.WARNER.includes(id))) {
@@ -65,51 +64,48 @@ async function updateVOD() {
                 delay = 60;
             }
 
-            let predictedDate = new Date(releaseDate);
-            predictedDate.setDate(predictedDate.getDate() + delay);
+            let vodDate = new Date(releaseCinema);
+            vodDate.setDate(vodDate.getDate() + delay);
 
-            // --- RECHERCHE DE LA DATE RÉELLE (DIGITAL) ---
-            const allReleases = details.release_dates?.results || [];
-            
-            // On cherche la date VOD en priorité en France (FR), puis aux USA (US)
-            const targetedRegions = allReleases.filter(r => r.iso_3166_1 === 'FR' || r.iso_3166_1 === 'US');
-            
-            for (const region of targetedRegions) {
-                const digital = region.release_dates.find(r => r.type === 4); // Type 4 = Digital
-                if (digital) {
-                    const realDate = new Date(digital.release_date);
-                    // Si le film est français et qu'on trouve une date FR, ou si c'est US
-                    if (!isNaN(realDate)) {
-                        predictedDate = realDate;
-                        break; 
-                    }
-                }
+            // --- VÉRIFICATION DATE DIGITALE RÉELLE ---
+            const releases = details.release_dates?.results || [];
+            const digitalRelease = releases
+                .find(r => r.iso_3166_1 === 'FR' || r.iso_3166_1 === 'US')
+                ?.release_dates.find(rd => rd.type === 4);
+
+            if (digitalRelease) {
+                const officialDate = new Date(digitalRelease.release_date);
+                if (!isNaN(officialDate)) vodDate = officialDate;
             }
 
-            // --- FILTRE : MOIS EN COURS UNIQUEMENT ---
-            if (predictedDate.getMonth() === currentMonth && predictedDate.getFullYear() === currentYear) {
+            // --- FILTRES DE SÉCURITÉ CRITIQUES ---
+            // 1. Uniquement le mois en cours
+            const isSameMonth = vodDate.getMonth() === currentMonth && vodDate.getFullYear() === currentYear;
+            
+            // 2. SÉCURITÉ : La date VOD doit être AU MOINS 20 jours après la sortie Cinéma 
+            // (C'est ce qui va bloquer "Vivaldi et moi" qui sort au ciné aujourd'hui)
+            const diffDays = (vodDate - releaseCinema) / (1000 * 3600 * 24);
+            const isNotCinemaRelease = diffDays > 20;
+
+            if (isSameMonth && isNotCinemaRelease) {
                 finalResults.push({
                     title: movie.title,
-                    plex_release: predictedDate.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }),
+                    plex_release: vodDate.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }),
                     tmdb_id: movie.id,
                     poster_path: movie.poster_path,
-                    _sort: predictedDate.getTime()
+                    _sort: vodDate.getTime()
                 });
             }
         }
 
-        // Tri par date
         finalResults.sort((a, b) => a._sort - b._sort);
         const cleanResults = finalResults.map(({_sort, ...rest}) => rest);
 
-        const dir = path.dirname(DATA_PATH);
-        if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
         fs.writeFileSync(DATA_PATH, JSON.stringify(cleanResults, null, 2), 'utf8');
-
-        console.log(`✅ Analyse terminée. ${cleanResults.length} films trouvés pour ce mois.`);
+        console.log(`✅ Succès : ${cleanResults.length} films VOD pour ce mois.`);
 
     } catch (e) {
-        console.error("Erreur critique lors de l'update :", e);
+        console.error("Erreur :", e);
     }
 }
 
