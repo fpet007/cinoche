@@ -1,14 +1,134 @@
 [
   {
-    "title": "Mission Rosetta - La quête des origines",
-    "plex_release": "19 avril 2026",
-    "tmdb_id": 1677498,
-    "poster_path": "/oVPuYh9gb2ttXLCd4LlKo5sRV1G.jpg"
+    "title": "Crime 101",
+    "plex_release": "1 avril 2026",
+    "tmdb_id": 1171145,
+    "poster_path": "/cz6VIBoOKopo3pymqRkNiVc2M7.jpg"
+  },
+  {
+    "title": "Father Mother Sister Brother",
+    "plex_release": "1 avril 2026",
+    "tmdb_id": 1159206,
+    "poster_path": "/fwjXTNPPsp5pcrFrYyR5karoXcV.jpg"
+  },
+  {
+    "title": "熊猫计划之部落奇遇记",
+    "plex_release": "3 avril 2026",
+    "tmdb_id": 1421552,
+    "poster_path": "/bt3JcjSC54qq83yfpLZmnD9y4qT.jpg"
+  },
+  {
+    "title": "Mission Pizza",
+    "plex_release": "3 avril 2026",
+    "tmdb_id": 1493859,
+    "poster_path": "/1xNCKksGotlqxGoBWaB22mi7LVK.jpg"
+  },
+  {
+    "title": "镖人：风起大漠",
+    "plex_release": "3 avril 2026",
+    "tmdb_id": 1305781,
+    "poster_path": "/AsWzPlQK2xJTIrzw6McT8Yvy6H2.jpg"
+  },
+  {
+    "title": "Psycho Killer",
+    "plex_release": "5 avril 2026",
+    "tmdb_id": 1107166,
+    "poster_path": "/5xgxxmLivJXL8aF0HdZfpx8aAIo.jpg"
+  },
+  {
+    "title": "Evangelion 30+: 30th Anniversary Special",
+    "plex_release": "7 avril 2026",
+    "tmdb_id": 1600672,
+    "poster_path": "/25csgA1l0jpvvSRwdFgjrI7PDnk.jpg"
+  },
+  {
+    "title": "Reminders of Him",
+    "plex_release": "8 avril 2026",
+    "tmdb_id": 1367642,
+    "poster_path": "/od9yzZ6cc3ZGSvJI2mTxcsyI48M.jpg"
+  },
+  {
+    "title": "Scream 7",
+    "plex_release": "11 avril 2026",
+    "tmdb_id": 1159559,
+    "poster_path": "/j6Y7vqULt8tRlXVFXHK5aj3nCo4.jpg"
+  },
+  {
+    "title": "Starbright",
+    "plex_release": "13 avril 2026",
+    "tmdb_id": 662707,
+    "poster_path": "/m1Zl07DNYeSyNcz9hf8hDsS2oB5.jpg"
+  },
+  {
+    "title": "The Bride!",
+    "plex_release": "13 avril 2026",
+    "tmdb_id": 1159831,
+    "poster_path": "/6TQDTJtHxkz1Ln7oJsw60hPWEw4.jpg"
+  },
+  {
+    "title": "undertone",
+    "plex_release": "14 avril 2026",
+    "tmdb_id": 1480387,
+    "poster_path": "/2PFgFMnrdCPXWiZl1PUvky7Mo9D.jpg"
+  },
+  {
+    "title": "Vengeance",
+    "plex_release": "17 avril 2026",
+    "tmdb_id": 1613798,
+    "poster_path": "/cSNgGUf6k2k7WJJVlda6ZUPYgGo.jpg"
+  },
+  {
+    "title": "Sundutan",
+    "plex_release": "20 avril 2026",
+    "tmdb_id": 1646787,
+    "poster_path": "/2neZgVuY7prWIak5hhNKT53Hk0N.jpg"
+  },
+  {
+    "title": "The Deadly Little Mermaid",
+    "plex_release": "20 avril 2026",
+    "tmdb_id": 1572073,
+    "poster_path": "/uye25uG7k8r3NNPLyPiKOiRnFRF.jpg"
+  },
+  {
+    "title": "സംഭവം അദ്ധ്യായം ഒന്ന്",
+    "plex_release": "20 avril 2026",
+    "tmdb_id": 1469458,
+    "poster_path": "/tBNSo4T0R8UztkkpjYkzXI4bFAT.jpg"
+  },
+  {
+    "title": "Protector",
+    "plex_release": "21 avril 2026",
+    "tmdb_id": 1383731,
+    "poster_path": "/icOZpnGuH9YrEaW3wrw5GJaXGih.jpg"
+  },
+  {
+    "title": "Tow",
+    "plex_release": "21 avril 2026",
+    "tmdb_id": 1244517,
+    "poster_path": "/wMd9UIyRYjnZLP0VcadMCeFHwKp.jpg"
+  },
+  {
+    "title": "Abot Langit",
+    "plex_release": "27 avril 2026",
+    "tmdb_id": 1650558,
+    "poster_path": "/5lVYe4aSimWdxJINKwq9s68TZ2G.jpg"
+  },
+  {
+    "title": "Forbidden Fruits",
+    "plex_release": "28 avril 2026",
+    "tmdb_id": 1450527,
+    "poster_path": "/t3hvrrrqvRoURz4y1A1aCys6WD9.jpg"
   },
   {
     "title": "Super Mario Galaxy, le film",
-    "plex_release": "26 avril 2026",
+    "plex_release": "29 avril 2026",
     "tmdb_id": 1226863,
     "poster_path": "/aSQktALDmbunDbwkuZbZFMEWVFr.jpg"
+  },
+  {
+    "title": "Projet dernière chance",
+    "plex_release": "29 avril 2026",
+    "tmdb_id": 687163,
+    "poster_path": "/wzyy8ZrsuHfAt4iz4iH3rT0tdoT.jpg"
   }
 ]
