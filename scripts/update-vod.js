@@ -243,13 +243,14 @@ async function updateVOD() {
     const genres = details.genres?.map((g) => g.name) ?? [];
 
     finalResults.push({
+      // ⚠️  Ces noms de champs sont imposés par index.html — ne pas renommer
       title          : details.title || movie.title,
+      plex_release   : formatDateFR(vodDate),       // lu par daysUntil() et renderCards()
+      tmdb_id        : movie.id,                    // lu par plexMovies.find()
+      poster_path    : movie.poster_path,           // lu par renderCards()
+      // Champs bonus (non utilisés par le front actuel, mais utiles pour l'avenir)
       original_title : details.original_title,
-      vod_date       : formatDateFR(vodDate),
-      vod_date_iso   : vodDate.toISOString().split('T')[0],
       cinema_date    : formatDateFR(cinemDate),
-      tmdb_id        : movie.id,
-      poster_path    : movie.poster_path,
       overview       : details.overview,
       vote_average   : details.vote_average,
       genres,
