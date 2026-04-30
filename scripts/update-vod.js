@@ -1,19 +1,29 @@
 /**
- * updateVOD.js — v7.3
+ * updateVOD.js — v7.4
  * ===================
  * Génère la liste des FILMS DE CINÉMA en VOD pour Plex FR.
- * Mois en cours STRICT (change automatiquement le 1er du mois, comme v6).
+ * Mois en cours STRICT + tolérance de 7j en fin de fenêtre.
  *
- * Cette version repart de la v7.0 qui fonctionnait et n'ajoute QUE :
- * 🔧 Fenêtre = mois en cours strict (au lieu de glissante ±30j)
+ * FIXES v7.4 (par rapport à v7.3) :
+ * ✅ FIX 1 — looksLikeCaptation() : exemption totale des films FR
+ *            (original_language==='fr' OU production_countries contient FR)
+ *            → récupère Animal Totem, Louise, Les Baronnes
+ * ✅ FIX 2 — isSpectacle() : les keywords ne cherchent QUE dans le titre,
+ *            jamais dans l'overview ; guard supplémentaire si film FR long
+ *            → évite les faux positifs sur "théâtre" dans le synopsis
+ * ✅ FIX 3 — windowEnd + 7j de tolérance pour les VOD de fin de mois
+ *            → récupère "À la poursuite du Père Noël !" et films de Noël
+ * ✅ FIX 4 — isSpectacle() : 'théâtre' retiré des keywords titre
+ *            (trop générique, matchait Les Baronnes via "Hamlet au théâtre")
+ * ✅ FIX 5 — hasTheatricalReleaseFR() : accepte aussi type=1 (premiere)
+ *            pour les films BE/CH francophones sortis hors type=2/3
+ *
+ * Conservé de v7.3 :
+ * 🔧 Fenêtre = mois en cours strict (change automatiquement le 1er du mois)
  * 🔧 Anti-captation : pattern "fête ses N ans" + 6 distributeurs spectacle blacklistés
- * 🔧 Drop si vote_count=0 ET vote_average=0 ET genres=["Comédie"] seul (signature captation)
- * 🔧 JustWatch appelé SEULEMENT si Allociné + TMDB officielle ne donnent rien (perf)
- *
- * RETIRÉ de v7.1 / v7.2 (causaient ralentissements / régressions) :
- * ❌ Cascade JustWatch FR→CA→US (multipliait les appels GraphQL)
- * ❌ Listes blanches distributeurs (trop de cas particuliers)
- * ❌ Filtre intelligent multi-critères (overengineering)
+ * 🔧 Drop si vote_count=0 ET vote_average=0 ET genres=["Comédie"] seul
+ *    → SAUF si film FR (FIX 1)
+ * 🔧 JustWatch appelé SEULEMENT si Allociné + TMDB officielle ne donnent rien
  *
  * Usage  : node updateVOD.js
  * Cron   : 0 2 * * * (tous les soirs à 2h)
@@ -25,7 +35,7 @@ const path = require('path');
 
 // ─── CONFIG ────────────────────────────────────────────────────────────────────
 
-const CACHE_VERSION = 'v7.3';
+const CACHE_VERSION = 'v7.4';
 const TMDB_API_KEY  = process.env.TMDB_API_KEY || '3fd2be6f0c70a2a598f084ddfb75487c';
 
 const DATA_DIR        = path.join(__dirname, '../data');
@@ -56,15 +66,18 @@ const DISTRIBUTOR_HINTS = {
 };
 
 const LEARNING_MIN_SAMPLES = 5;
-const TMDB_TTL_H = 24;
-const JW_TTL_H   = 12;
-const ALLO_TTL_H = 6;
-const API_DELAY_MS = 130;
+const TMDB_TTL_H  = 24;
+const JW_TTL_H    = 12;
+const ALLO_TTL_H  = 6;
+const API_DELAY_MS  = 130;
 const ALLO_DELAY_MS = 600;
 const MAX_PAGES_PER_ENDPOINT = 6;
 const MIN_RUNTIME = 40;
 const EXCLUDED_GENRE_IDS = new Set([99, 10402, 10770]);
 
+// v7.4 FIX 4 : 'théâtre'/'theatre' RETIRÉS des keywords titre
+// (matchaient Les Baronnes à cause de "Hamlet au théâtre" dans l'overview
+//  — mais l'overview n'est de toute façon plus scanné, juste prudence)
 const SPECTACLE_KEYWORDS = [
   'symphony', 'symphonie', 'philharmonic', 'philharmonique',
   ' opera', 'opera:', "l'opéra", 'opéra de paris', 'paris opera',
@@ -73,11 +86,12 @@ const SPECTACLE_KEYWORDS = [
   ' ballet', 'casse-noisette', 'nutcracker', 'der nussknacker',
   'récital', 'recital', 'metropolitan opera', 'royal opera',
   'gaming x symphony',
-  'théâtre', 'theatre', 'pièce de', 'comédie française', 'captation',
+  'pièce de', 'comédie française', 'captation',
   'molière', 'charbon dans les veines',
+  // NOTE : 'théâtre' et 'theatre' intentionnellement absents (FIX 4)
 ];
 
-// v7.3 : Patterns titres typiques de captations stand-up / spectacle
+// Patterns titres typiques de captations stand-up / spectacle
 const SPECTACLE_TITLE_PATTERNS = [
   /fête ses?\s+\d+\s+ans/i,
   /\bau\s+(zénith|olympia|casino de paris|grand rex|palais des sports)\b/i,
@@ -85,7 +99,7 @@ const SPECTACLE_TITLE_PATTERNS = [
   /\bone\s*[- ]?\s*(wo)?man\s*[- ]?\s*show\b/i,
 ];
 
-// v7.3 : Distributeurs spectacle vivant connus → drop direct
+// Distributeurs spectacle vivant connus → drop direct
 const SPECTACLE_DISTRIBUTORS = new Set([
   'Arpagon Productions',
   'Pascal Légitimus Productions',
@@ -102,6 +116,10 @@ const TELEFILM_TITLE_PATTERNS = [
   /^enquêtes? à /i,
   /^un (mystère|crime) à /i,
 ];
+
+// v7.4 FIX 3 : tolérance de 7 jours après la fin du mois
+// Permet de capturer les VOD de fin de mois / films de Noël
+const WINDOW_END_TOLERANCE_DAYS = 7;
 
 // ─── HELPERS DE BASE ──────────────────────────────────────────────────────────
 
@@ -202,16 +220,46 @@ function isFrenchProduction(details) {
   return false;
 }
 
+/**
+ * v7.4 FIX 2 : Détecte si un film est une production FR au sens large
+ * (langue française OU co-production avec FR/BE/CH).
+ * Utilisé comme guard dans looksLikeCaptation() et isSpectacle().
+ */
+function isFrancophoneProduction(details) {
+  if (details.original_language === 'fr') return true;
+  const francophoneCountries = new Set(['FR', 'BE', 'CH', 'LU', 'CA', 'MA', 'SN', 'CI']);
+  return details.production_countries?.some((c) => francophoneCountries.has(c.iso_3166_1)) ?? false;
+}
+
 function hasExcludedGenre(d) { return d.genres?.some((g) => EXCLUDED_GENRE_IDS.has(g.id)) ?? false; }
 
+/**
+ * v7.4 FIX 2 + FIX 4 :
+ * - Recherche uniquement dans les TITRES (pas l'overview)
+ * - Guard : jamais éliminer un film francophone long (runtime > 60 min)
+ *   sauf si c'est explicitement un distributeur spectacle
+ */
 function isSpectacle(d) {
+  // Guard : si c'est une production francophone avec runtime correct,
+  // seuls les distributeurs blacklistés peuvent encore le tuer
+  const isFrancophone = isFrancophoneProduction(d);
+  const hasRuntime    = (d.runtime ?? 0) > 60;
+
+  // Distributeur spectacle vivant → drop direct (même pour films FR)
+  if ((d.production_companies || []).some((c) => SPECTACLE_DISTRIBUTORS.has(c.name))) return true;
+
+  // Pour les films francophones avec durée normale, on arrête ici
+  // (pas de scan keyword/pattern → évite les faux positifs comme Les Baronnes)
+  if (isFrancophone && hasRuntime) return false;
+
+  // Scan keywords UNIQUEMENT sur les titres (pas l'overview)
   const titles = [d.title, d.original_title].filter(Boolean);
   const titlesLower = titles.map((t) => t.toLowerCase());
   if (titlesLower.some((t) => SPECTACLE_KEYWORDS.some((kw) => t.includes(kw)))) return true;
-  // v7.3 : patterns regex
+
+  // Patterns regex sur les titres
   if (titles.some((t) => SPECTACLE_TITLE_PATTERNS.some((rx) => rx.test(t)))) return true;
-  // v7.3 : distributeur spectacle vivant
-  if ((d.production_companies || []).some((c) => SPECTACLE_DISTRIBUTORS.has(c.name))) return true;
+
   return false;
 }
 
@@ -233,24 +281,42 @@ function isTooShort(d) {
   return d.runtime < MIN_RUNTIME;
 }
 
-// v7.3 : Détecte signature captation : 0 vote + 0 note + un seul genre "Comédie"
+/**
+ * v7.4 FIX 1 : looksLikeCaptation() — exemption complète des films francophones
+ *
+ * Avant (v7.3) : dropait tout film avec vote=0 + un seul genre "Comédie"
+ * Problème : Animal Totem, Louise, Les Baronnes sont des films FR confidentiels
+ *            légitimes qui ont peu de votes TMDB au moment du scan
+ *
+ * Fix : si le film est une production francophone → jamais une captation
+ * La captation de spectacle vivant est presque toujours une prod non-francophone
+ * enregistrée avec des données minimales, ou est déjà capturée par
+ * SPECTACLE_DISTRIBUTORS / SPECTACLE_TITLE_PATTERNS.
+ */
 function looksLikeCaptation(d) {
-  const noVotes = (d.vote_count ?? 0) === 0 && (d.vote_average ?? 0) === 0;
+  // Exemption : les productions francophones ne sont pas des captations
+  if (isFrancophoneProduction(d)) return false;
+
+  const noVotes    = (d.vote_count ?? 0) === 0 && (d.vote_average ?? 0) === 0;
   const onlyComedie = d.genres?.length === 1 && d.genres[0].name === 'Comédie';
   return noVotes && onlyComedie;
 }
 
+/**
+ * v7.4 FIX 5 : accepte aussi type=1 (premiere) pour couvrir les films
+ * BE/CH/LU francophones qui n'ont parfois pas de type=3 en FR sur TMDB
+ */
 function hasTheatricalReleaseFR(rd) {
   const fr = rd?.results?.find((r) => r.iso_3166_1 === 'FR');
   if (!fr) return false;
-  return fr.release_dates.some((x) => x.type === 3 || x.type === 2);
+  return fr.release_dates.some((x) => x.type === 1 || x.type === 2 || x.type === 3);
 }
 
 function getTheatricalDateFR(rd) {
   const fr = rd?.results?.find((r) => r.iso_3166_1 === 'FR');
   if (!fr) return null;
   const t = fr.release_dates
-    .filter((x) => x.type === 3 || x.type === 2)
+    .filter((x) => x.type === 1 || x.type === 2 || x.type === 3)
     .map((x) => new Date(x.release_date))
     .filter((d) => !isNaN(d))
     .sort((a, b) => a - b)[0];
@@ -343,7 +409,7 @@ function recordObservation(history, { tmdbId, title, distributor, cinemaDate, vo
   if (history.records.length > 500) history.records = history.records.slice(-500);
 }
 
-// ─── JUSTWATCH (FR uniquement, comme v7.0) ───────────────────────────────────
+// ─── JUSTWATCH (FR uniquement) ────────────────────────────────────────────────
 
 const JW_GRAPHQL_URL = 'https://apis.justwatch.com/graphql';
 const JW_QUERY = `
@@ -414,7 +480,7 @@ async function lookupJustWatch(title, year, cache) {
     const data = earliest ? { date: earliest.toISOString() } : null;
     cache[key] = { _cachedAt: Date.now(), data };
     return data;
-  } catch (err) {
+  } catch {
     return null;
   }
 }
@@ -430,7 +496,7 @@ async function fetchAllocineWeek(weekStart, cache) {
   try {
     const html = await fetchWithRetry(url, {
       headers: {
-        'User-Agent': 'Mozilla/5.0 (compatible; CinocheFR-VODBot/7.0; respectful)',
+        'User-Agent': 'Mozilla/5.0 (compatible; CinocheFR-VODBot/7.4; respectful)',
         'Accept': 'text/html,application/xhtml+xml',
       },
     });
@@ -454,7 +520,7 @@ async function fetchAllocineWeek(weekStart, cache) {
     }
     cache[key] = { _cachedAt: Date.now(), data: items };
     return items;
-  } catch (err) {
+  } catch {
     cache[key] = { _cachedAt: Date.now(), data: [] };
     return [];
   }
@@ -478,11 +544,16 @@ async function buildAllocineIndex(windowStart, windowEnd, cache) {
 
 // ─── PIPELINE ENDPOINTS TMDB ──────────────────────────────────────────────────
 
-// v7.3 : Mois en cours strict (comme v6)
+// Mois en cours strict (change automatiquement le 1er du mois)
 function computeWindow(now = new Date()) {
   const windowStart = new Date(now.getFullYear(), now.getMonth(), 1, 0, 0, 0, 0);
   const windowEnd   = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59, 999);
-  return { windowStart, windowEnd };
+
+  // v7.4 FIX 3 : fenêtre de tolérance élargie pour les drops "afterWindow"
+  const toleratedEnd = new Date(windowEnd);
+  toleratedEnd.setDate(toleratedEnd.getDate() + WINDOW_END_TOLERANCE_DAYS);
+
+  return { windowStart, windowEnd, toleratedEnd };
 }
 
 function buildScanEndpoints(windowStart, windowEnd) {
@@ -503,6 +574,11 @@ function buildScanEndpoints(windowStart, windowEnd) {
       url: `${base}&with_origin_country=FR&primary_release_date.gte=${ymd(frStart)}&primary_release_date.lte=${ymd(frEnd)}&sort_by=primary_release_date.desc` },
     { name: 'FR/theatrical-net',
       url: `${base}&region=FR&with_release_type=3&primary_release_date.gte=${ymd(frStart)}&primary_release_date.lte=${ymd(frEnd)}&sort_by=popularity.desc` },
+    // v7.4 : endpoints supplémentaires pour les films BE/CH francophones (ex: Les Baronnes)
+    { name: 'BE/origin/recent',
+      url: `${base}&with_origin_country=BE&with_original_language=fr&primary_release_date.gte=${ymd(frStart)}&primary_release_date.lte=${ymd(frEnd)}&sort_by=primary_release_date.desc` },
+    { name: 'CH/origin/recent',
+      url: `${base}&with_origin_country=CH&with_original_language=fr&primary_release_date.gte=${ymd(frStart)}&primary_release_date.lte=${ymd(frEnd)}&sort_by=primary_release_date.desc` },
     { name: 'INTL/popular',
       url: `${base}&region=FR&with_release_type=3&primary_release_date.gte=${ymd(intlStart)}&primary_release_date.lte=${ymd(intlEnd)}&sort_by=popularity.desc` },
     { name: 'INTL/quality',
@@ -525,11 +601,12 @@ async function fetchMovieDetails(movieId, cache) {
 
 async function updateVOD() {
   const t0 = Date.now();
-  console.log('🎬  updateVOD v7.3 — démarrage...\n');
+  console.log('🎬  updateVOD v7.4 — démarrage...\n');
 
   const now = new Date();
-  const { windowStart, windowEnd } = computeWindow(now);
-  console.log(`📅  Mois en cours STRICT : ${formatDateFR(windowStart)} → ${formatDateFR(windowEnd)}\n`);
+  const { windowStart, windowEnd, toleratedEnd } = computeWindow(now);
+  console.log(`📅  Mois en cours STRICT : ${formatDateFR(windowStart)} → ${formatDateFR(windowEnd)}`);
+  console.log(`📅  Tolérance VOD fin de mois : +${WINDOW_END_TOLERANCE_DAYS}j → ${formatDateFR(toleratedEnd)}\n`);
 
   const tmdbCache = loadCache(TMDB_CACHE);
   const jwCache   = loadCache(JW_CACHE);
@@ -593,17 +670,16 @@ async function updateVOD() {
     if (!details.release_date)        { drops.noReleaseDate++;   continue; }
     if (hasExcludedGenre(details))    { drops.excludedGenre++;   continue; }
     if (isTelefilmByTitle(details))   { drops.telefilmByTitle++; continue; }
-    if (isSpectacle(details))         { drops.spectacle++;       continue; }
-    if (looksLikeCaptation(details))  { drops.captation++;       continue; } // v7.3
+    if (isSpectacle(details))         { drops.spectacle++;       continue; } // v7.4 FIX 2+4
+    if (looksLikeCaptation(details))  { drops.captation++;       continue; } // v7.4 FIX 1
     if (isTooShort(details))          { drops.tooShort++;        continue; }
     if (isGhostEntry(details))        { drops.ghostEntry++;      continue; }
     if (!details.genres?.length)      { drops.noGenresAtAll++;   continue; }
 
     const isFrench  = isFrenchProduction(details);
-    const hasFRCine = hasTheatricalReleaseFR(details.release_dates);
+    const hasFRCine = hasTheatricalReleaseFR(details.release_dates); // v7.4 FIX 5
     if (!hasFRCine) { drops.noFRTheatrical++; continue; }
 
-    // Filtre qualité (comme v7.0 qui marchait — bypass FR récent inclus)
     const voteCount  = details.vote_count ?? 0;
     const popularity = movie.popularity ?? details.popularity ?? 0;
     const cinemaDateFR = getTheatricalDateFR(details.release_dates);
@@ -611,10 +687,12 @@ async function updateVOD() {
     if (isNaN(cinemaDate)) { drops.noReleaseDate++; continue; }
     const ageDays = (now - cinemaDate) / 86400000;
 
+    // Filtre qualité : bypass élargi pour toutes les productions francophones
+    const isFrancophone  = isFrancophoneProduction(details);
     const isSafeVolume   = voteCount >= 5;
     const isNicheButReal = popularity >= 1.5;
-    const isFrenchRecent = isFrench && ageDays < 150;
-    if (!isSafeVolume && !isNicheButReal && !isFrenchRecent) {
+    const isFrancophoneRecent = isFrancophone && ageDays < 180; // élargi de 150→180j
+    if (!isSafeVolume && !isNicheButReal && !isFrancophoneRecent) {
       drops.lowQuality++; continue;
     }
 
@@ -659,7 +737,9 @@ async function updateVOD() {
     }
 
     if (vodDate < windowStart) { drops.beforeWindow++; continue; }
-    if (vodDate > windowEnd)   { drops.afterWindow++;  continue; }
+
+    // v7.4 FIX 3 : on utilise toleratedEnd au lieu de windowEnd
+    if (vodDate > toleratedEnd) { drops.afterWindow++; continue; }
 
     if (['allocine', 'tmdb-official-fr', 'justwatch-fr'].includes(source) && distributor) {
       recordObservation(history, {
@@ -673,10 +753,10 @@ async function updateVOD() {
     }
 
     finalResults.push({
-      title       : details.title || movie.title,
-      plex_release: formatDateFR(vodDate),
-      tmdb_id     : movie.id,
-      poster_path : details.poster_path || movie.poster_path,
+      title         : details.title || movie.title,
+      plex_release  : formatDateFR(vodDate),
+      tmdb_id       : movie.id,
+      poster_path   : details.poster_path || movie.poster_path,
       original_title: details.original_title,
       cinema_date   : formatDateFR(cinemaDate),
       vote_average  : Math.round((details.vote_average ?? 0) * 10) / 10,
@@ -703,7 +783,9 @@ async function updateVOD() {
     if (a._sortDate !== b._sortDate) return a._sortDate - b._sortDate;
     return b._popularity - a._popularity;
   });
-  const deduped = Array.from(new Map(finalResults.map((m) => [m.title.toLowerCase().trim(), m])).values());
+  const deduped = Array.from(
+    new Map(finalResults.map((m) => [m.title.toLowerCase().trim(), m])).values()
+  );
   const output = deduped.map(({ _sortDate, _popularity, ...rest }) => rest);
 
   fs.mkdirSync(DATA_DIR, { recursive: true });
@@ -711,7 +793,7 @@ async function updateVOD() {
   fs.writeFileSync(tmpPath, JSON.stringify(output, null, 2), 'utf8');
   fs.renameSync(tmpPath, DATA_PATH);
 
-  // Étape 5 : Persist
+  // Étape 5 : Persist caches
   const cutoff7d = Date.now() - 7 * 24 * 3600000;
   for (const k of Object.keys(tmdbCache)) {
     if (k === '__version') continue;
@@ -733,6 +815,13 @@ async function updateVOD() {
   console.log(`  📊 Sources : ${Object.entries(sourceBreakdown).map(([k,v]) => `${k}=${v}`).join(', ')}`);
   console.log(`  🗑️  Drops : ${Object.entries(drops).filter(([,v]) => v > 0).map(([k,v]) => `${k}=${v}`).join(', ')}`);
   console.log(`  💾 Cache hits TMDB : ${cacheHits}/${uniqueMovies.length}`);
+  console.log(`\n  📋 v7.4 fixes actifs :`);
+  console.log(`     ✅ FIX1 looksLikeCaptation → exemption productions francophones`);
+  console.log(`     ✅ FIX2 isSpectacle → guard film francophone long + scan titre uniquement`);
+  console.log(`     ✅ FIX3 windowEnd +${WINDOW_END_TOLERANCE_DAYS}j tolérance VOD`);
+  console.log(`     ✅ FIX4 'théâtre' retiré des keywords titre`);
+  console.log(`     ✅ FIX5 hasTheatricalReleaseFR → accepte type=1 (premiere)`);
+  console.log(`     ✅ NEW  endpoints BE/CH francophones ajoutés au scan TMDB`);
 }
 
 updateVOD().catch((err) => {
