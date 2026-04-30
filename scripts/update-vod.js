@@ -1,29 +1,42 @@
 /**
- * updateVOD.js — v7.4
+ * updateVOD.js — v6.1
  * ===================
- * Génère la liste des FILMS DE CINÉMA en VOD pour Plex FR.
- * Mois en cours STRICT + tolérance de 7j en fin de fenêtre.
+ * Génère la liste des FILMS DE CINÉMA en VOD pour le mois en cours STRICT.
+ * Plex FR — uniquement de vrais longs-métrages sortis en salle.
  *
- * FIXES v7.4 (par rapport à v7.3) :
- * ✅ FIX 1 — looksLikeCaptation() : exemption totale des films FR
- *            (original_language==='fr' OU production_countries contient FR)
+ * BASE : v6 (structure conservée à l'identique)
+ *
+ * FIXES v6.1 (chirurgicaux, sans surengineering) :
+ *
+ * 🔧 FIX 1 — Bug Marsupilami : suppression du fallback date digitale US.
+ *            getOfficialDigitalDateFR() ne cherche plus qu'en FR (type=4).
+ *            Le fallback US renvoyait des dates placeholder/pre-order qui
+ *            faisaient apparaître des films encore en salle.
+ *
+ * 🔧 FIX 2 — Garde-fou délai minimum sur dates officielles aussi :
+ *            le check actualDelayDays < minDelay s'applique maintenant
+ *            à TOUTES les sources (officielle et prédite).
+ *
+ * 🔧 FIX 3 — looksLikeCaptation() : filtre les stand-up/spectacles mal
+ *            catalogués (0 vote, 0 note, genre unique "Comédie").
+ *            Exemption totale pour les productions francophones (FR/BE/CH).
  *            → récupère Animal Totem, Louise, Les Baronnes
- * ✅ FIX 2 — isSpectacle() : les keywords ne cherchent QUE dans le titre,
- *            jamais dans l'overview ; guard supplémentaire si film FR long
- *            → évite les faux positifs sur "théâtre" dans le synopsis
- * ✅ FIX 3 — windowEnd + 7j de tolérance pour les VOD de fin de mois
- *            → récupère "À la poursuite du Père Noël !" et films de Noël
- * ✅ FIX 4 — isSpectacle() : 'théâtre' retiré des keywords titre
- *            (trop générique, matchait Les Baronnes via "Hamlet au théâtre")
- * ✅ FIX 5 — hasTheatricalReleaseFR() : accepte aussi type=1 (premiere)
- *            pour les films BE/CH francophones sortis hors type=2/3
  *
- * Conservé de v7.3 :
- * 🔧 Fenêtre = mois en cours strict (change automatiquement le 1er du mois)
- * 🔧 Anti-captation : pattern "fête ses N ans" + 6 distributeurs spectacle blacklistés
- * 🔧 Drop si vote_count=0 ET vote_average=0 ET genres=["Comédie"] seul
- *    → SAUF si film FR (FIX 1)
- * 🔧 JustWatch appelé SEULEMENT si Allociné + TMDB officielle ne donnent rien
+ * 🔧 FIX 4 — isSpectacle() : retrait de 'théâtre'/'theatre' des keywords
+ *            (trop générique, faux positifs sur films légitimes).
+ *            Ajout de SPECTACLE_TITLE_PATTERNS (regex) et
+ *            SPECTACLE_DISTRIBUTORS (blacklist distributeurs captation).
+ *            Guard : jamais killer un film francophone avec runtime > 60 min
+ *            sauf via distributeur blacklisté.
+ *
+ * 🔧 FIX 5 — Endpoints BE/CH francophones ajoutés au scan TMDB.
+ *            → Les Baronnes et films belges/suisses en français sont couverts.
+ *
+ * 🔧 FIX 6 — hasTheatricalReleaseFR() accepte type=1 (premiere) en plus
+ *            de type=2/3 pour les films francophones hors France.
+ *
+ * 🔧 FIX 7 — Tolérance de 7 jours après windowEnd (toleratedEnd).
+ *            → À la poursuite du Père Noël ! et films de fin de mois.
  *
  * Usage  : node updateVOD.js
  * Cron   : 0 2 * * * (tous les soirs à 2h)
@@ -35,49 +48,34 @@ const path = require('path');
 
 // ─── CONFIG ────────────────────────────────────────────────────────────────────
 
-const CACHE_VERSION = 'v7.4';
-const TMDB_API_KEY  = process.env.TMDB_API_KEY || '3fd2be6f0c70a2a598f084ddfb75487c';
+const TMDB_API_KEY = process.env.TMDB_API_KEY || '3fd2be6f0c70a2a598f084ddfb75487c';
+const DATA_PATH    = path.join(__dirname, '../data/plex-upcoming.json');
+const CACHE_PATH   = path.join(__dirname, '../data/.tmdb-cache.json');
 
-const DATA_DIR        = path.join(__dirname, '../data');
-const DATA_PATH       = path.join(DATA_DIR, 'plex-upcoming.json');
-const TMDB_CACHE      = path.join(DATA_DIR, '.tmdb-cache.json');
-const JW_CACHE        = path.join(DATA_DIR, '.justwatch-cache.json');
-const ALLO_CACHE      = path.join(DATA_DIR, '.allocine-cache.json');
-const DELAY_HISTORY   = path.join(DATA_DIR, '.delay-history.json');
-
-const DEFAULT_DELAYS = {
-  FRENCH:   120,
-  AMERICAN:  45,
+const DELAYS = {
+  FRENCH  : 120,   // Chronologie des médias FR — VOD à l'acte
+  AMERICAN:  45,   // PVOD/TVOD international standard
 };
 
-const DISTRIBUTOR_HINTS = {
-  'Universal Pictures':         { days: 31 },
-  'Focus Features':             { days: 31 },
-  'Walt Disney Pictures':       { days: 70 },
-  'Pixar':                      { days: 70 },
-  'Marvel Studios':             { days: 75 },
-  'Warner Bros. Pictures':      { days: 50 },
-  'Sony Pictures':              { days: 45 },
-  'Columbia Pictures':          { days: 45 },
-  'Paramount Pictures':         { days: 45 },
-  'A24':                        { days: 60 },
-  'Lionsgate':                  { days: 60 },
-  'Apple Original Films':       { days: 90 },
-};
-
-const LEARNING_MIN_SAMPLES = 5;
-const TMDB_TTL_H  = 24;
-const JW_TTL_H    = 12;
-const ALLO_TTL_H  = 6;
-const API_DELAY_MS  = 130;
-const ALLO_DELAY_MS = 600;
+// Cache TMDB : durée de validité d'une entrée détails (en heures)
+const CACHE_TTL_HOURS = 24;
+// Délai entre appels TMDB (limite officielle : ~50 req/s, on reste très conservateur)
+const API_DELAY_MS = 130;
+// Pages max par endpoint discover
 const MAX_PAGES_PER_ENDPOINT = 6;
+// Durée minimum pour ne pas être un court-métrage (minutes)
 const MIN_RUNTIME = 40;
+
+// FIX 7 : tolérance après la fin du mois pour capturer les VOD de fin de période
+const WINDOW_END_TOLERANCE_DAYS = 7;
+
+// Genres TMDB exclus : Documentaire (99), Musique (10402), Téléfilm (10770)
 const EXCLUDED_GENRE_IDS = new Set([99, 10402, 10770]);
 
-// v7.4 FIX 4 : 'théâtre'/'theatre' RETIRÉS des keywords titre
-// (matchaient Les Baronnes à cause de "Hamlet au théâtre" dans l'overview
-//  — mais l'overview n'est de toute façon plus scanné, juste prudence)
+/**
+ * Mots-clés titres qui trahissent une captation de spectacle vivant.
+ * FIX 4 : 'théâtre' et 'theatre' RETIRÉS (trop génériques, faux positifs).
+ */
 const SPECTACLE_KEYWORDS = [
   'symphony', 'symphonie', 'philharmonic', 'philharmonique',
   ' opera', 'opera:', "l'opéra", 'opéra de paris', 'paris opera',
@@ -88,10 +86,12 @@ const SPECTACLE_KEYWORDS = [
   'gaming x symphony',
   'pièce de', 'comédie française', 'captation',
   'molière', 'charbon dans les veines',
-  // NOTE : 'théâtre' et 'theatre' intentionnellement absents (FIX 4)
+  // NOTE : 'théâtre'/'theatre' intentionnellement absents (FIX 4)
 ];
 
-// Patterns titres typiques de captations stand-up / spectacle
+/**
+ * FIX 4 : Patterns regex sur les titres — captations stand-up / spectacle.
+ */
 const SPECTACLE_TITLE_PATTERNS = [
   /fête ses?\s+\d+\s+ans/i,
   /\bau\s+(zénith|olympia|casino de paris|grand rex|palais des sports)\b/i,
@@ -99,16 +99,21 @@ const SPECTACLE_TITLE_PATTERNS = [
   /\bone\s*[- ]?\s*(wo)?man\s*[- ]?\s*show\b/i,
 ];
 
-// Distributeurs spectacle vivant connus → drop direct
+/**
+ * FIX 4 : Distributeurs spectacle vivant connus → drop direct.
+ */
 const SPECTACLE_DISTRIBUTORS = new Set([
   'Arpagon Productions',
   'Pascal Légitimus Productions',
   'JMD Production',
-  'Ki M\'aime Me Suive',
+  "Ki M'aime Me Suive",
   'Productions du Théâtre',
   'Comédie Française',
 ]);
 
+/**
+ * Patterns qui trahissent un téléfilm policier régional FR.
+ */
 const TELEFILM_TITLE_PATTERNS = [
   /^meurtres? à /i,
   /^crimes? à /i,
@@ -117,22 +122,17 @@ const TELEFILM_TITLE_PATTERNS = [
   /^un (mystère|crime) à /i,
 ];
 
-// v7.4 FIX 3 : tolérance de 7 jours après la fin du mois
-// Permet de capturer les VOD de fin de mois / films de Noël
-const WINDOW_END_TOLERANCE_DAYS = 7;
-
-// ─── HELPERS DE BASE ──────────────────────────────────────────────────────────
+// ─── HELPERS DE BASE ───────────────────────────────────────────────────────────
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-async function fetchWithRetry(url, opts = {}, retries = 3) {
+async function fetchWithRetry(url, retries = 3) {
   for (let attempt = 1; attempt <= retries; attempt++) {
     try {
-      const res = await fetch(url, opts);
+      const res = await fetch(url);
       if (res.status === 429) { await sleep(2000 * attempt); continue; }
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const ct = res.headers.get('content-type') || '';
-      return ct.includes('json') ? await res.json() : await res.text();
+      return await res.json();
     } catch (err) {
       if (attempt === retries) throw err;
       await sleep(attempt * 600);
@@ -154,9 +154,7 @@ async function fetchAllPages(baseUrl, maxPages = MAX_PAGES_PER_ENDPOINT) {
 
 function formatDateFR(date) {
   try {
-    return date.toLocaleDateString('fr-FR', {
-      day: 'numeric', month: 'long', year: 'numeric',
-    });
+    return date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
   } catch {
     const months = ['Janvier','Février','Mars','Avril','Mai','Juin',
                     'Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
@@ -166,404 +164,197 @@ function formatDateFR(date) {
 
 function ymd(date) { return date.toISOString().split('T')[0]; }
 
-function normalizeTitle(s) {
-  return (s || '')
-    .toLowerCase()
-    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-    .replace(/[''`]/g, "'")
-    .replace(/[^a-z0-9 ]/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim();
+// ─── CACHE TMDB ────────────────────────────────────────────────────────────────
+
+function loadCache() {
+  try { return JSON.parse(fs.readFileSync(CACHE_PATH, 'utf8')); }
+  catch { return {}; }
 }
 
-// ─── CACHE GÉNÉRIQUE ──────────────────────────────────────────────────────────
-
-function loadCache(filePath) {
+function saveCache(cache) {
   try {
-    const raw = fs.readFileSync(filePath, 'utf8');
-    const parsed = JSON.parse(raw);
-    if (parsed.__version !== CACHE_VERSION) return { __version: CACHE_VERSION };
-    return parsed;
-  } catch {
-    return { __version: CACHE_VERSION };
-  }
-}
-
-function saveCache(filePath, cache) {
-  try {
-    fs.mkdirSync(path.dirname(filePath), { recursive: true });
-    cache.__version = CACHE_VERSION;
-    const tmp = filePath + '.tmp';
+    fs.mkdirSync(path.dirname(CACHE_PATH), { recursive: true });
+    const tmp = CACHE_PATH + '.tmp';
     fs.writeFileSync(tmp, JSON.stringify(cache), 'utf8');
-    fs.renameSync(tmp, filePath);
+    fs.renameSync(tmp, CACHE_PATH);
   } catch (err) {
-    console.warn(`  ⚠️  Cache ${path.basename(filePath)} non sauvegardé : ${err.message}`);
+    console.warn(`  ⚠️  Cache non sauvegardé : ${err.message}`);
   }
 }
 
-function isFresh(entry, ttlHours) {
+function isCacheEntryFresh(entry) {
   if (!entry?._cachedAt) return false;
-  return (Date.now() - entry._cachedAt) / 3600000 < ttlHours;
+  return (Date.now() - entry._cachedAt) / 3600000 < CACHE_TTL_HOURS;
 }
 
-// ─── HELPERS MÉTIER ───────────────────────────────────────────────────────────
+// ─── HELPERS MÉTIER ────────────────────────────────────────────────────────────
 
 function isFrenchProduction(details) {
   const hasFRCountry = details.production_countries?.some((c) => c.iso_3166_1 === 'FR') ?? false;
   const hasFROrigin  = details.origin_country?.includes('FR') ?? false;
   const isFrLang     = details.original_language === 'fr';
-  const hasUSCountry = details.production_countries?.some((c) => c.iso_3166_1 === 'US') ?? false;
-  const hasUKCountry = details.production_countries?.some((c) => c.iso_3166_1 === 'GB') ?? false;
   const score = (hasFRCountry ? 1 : 0) + (hasFROrigin ? 1 : 0) + (isFrLang ? 1 : 0);
-  if (score >= 2) return true;
-  if (isFrLang && !hasUSCountry && !hasUKCountry) return true;
-  return false;
+  return score >= 2;
 }
 
 /**
- * v7.4 FIX 2 : Détecte si un film est une production FR au sens large
- * (langue française OU co-production avec FR/BE/CH).
- * Utilisé comme guard dans looksLikeCaptation() et isSpectacle().
+ * FIX 3 & 4 : Productions francophones au sens large (FR, BE, CH, LU…).
+ * Utilisé comme garde-fou dans looksLikeCaptation() et isSpectacle().
  */
 function isFrancophoneProduction(details) {
   if (details.original_language === 'fr') return true;
-  const francophoneCountries = new Set(['FR', 'BE', 'CH', 'LU', 'CA', 'MA', 'SN', 'CI']);
-  return details.production_countries?.some((c) => francophoneCountries.has(c.iso_3166_1)) ?? false;
+  const francoCountries = new Set(['FR', 'BE', 'CH', 'LU', 'CA', 'MA', 'SN', 'CI']);
+  return details.production_countries?.some((c) => francoCountries.has(c.iso_3166_1)) ?? false;
 }
 
-function hasExcludedGenre(d) { return d.genres?.some((g) => EXCLUDED_GENRE_IDS.has(g.id)) ?? false; }
+function hasExcludedGenre(details) {
+  return details.genres?.some((g) => EXCLUDED_GENRE_IDS.has(g.id)) ?? false;
+}
 
 /**
- * v7.4 FIX 2 + FIX 4 :
- * - Recherche uniquement dans les TITRES (pas l'overview)
- * - Guard : jamais éliminer un film francophone long (runtime > 60 min)
- *   sauf si c'est explicitement un distributeur spectacle
+ * FIX 4 : Détecte les captations de spectacle vivant.
+ * - Keywords et patterns : cherchent uniquement dans les TITRES.
+ * - Guard : un film francophone avec runtime > 60 min ne peut être éliminé
+ *   que par un distributeur blacklisté (jamais par keyword/pattern).
  */
-function isSpectacle(d) {
-  // Guard : si c'est une production francophone avec runtime correct,
-  // seuls les distributeurs blacklistés peuvent encore le tuer
-  const isFrancophone = isFrancophoneProduction(d);
-  const hasRuntime    = (d.runtime ?? 0) > 60;
+function isSpectacle(details) {
+  const isFrancophone = isFrancophoneProduction(details);
+  const hasRuntime    = (details.runtime ?? 0) > 60;
 
-  // Distributeur spectacle vivant → drop direct (même pour films FR)
-  if ((d.production_companies || []).some((c) => SPECTACLE_DISTRIBUTORS.has(c.name))) return true;
+  // Distributeur blacklisté → drop direct, même pour les films FR
+  if ((details.production_companies || []).some((c) => SPECTACLE_DISTRIBUTORS.has(c.name))) {
+    return true;
+  }
 
-  // Pour les films francophones avec durée normale, on arrête ici
-  // (pas de scan keyword/pattern → évite les faux positifs comme Les Baronnes)
+  // Guard : film francophone long → pas une captation via keyword/pattern
   if (isFrancophone && hasRuntime) return false;
 
-  // Scan keywords UNIQUEMENT sur les titres (pas l'overview)
-  const titles = [d.title, d.original_title].filter(Boolean);
-  const titlesLower = titles.map((t) => t.toLowerCase());
+  // Scan keywords sur les titres uniquement (pas l'overview)
+  const titlesLower = [details.title, details.original_title]
+    .filter(Boolean)
+    .map((t) => t.toLowerCase());
   if (titlesLower.some((t) => SPECTACLE_KEYWORDS.some((kw) => t.includes(kw)))) return true;
 
   // Patterns regex sur les titres
+  const titles = [details.title, details.original_title].filter(Boolean);
   if (titles.some((t) => SPECTACLE_TITLE_PATTERNS.some((rx) => rx.test(t)))) return true;
 
   return false;
 }
 
-function isTelefilmByTitle(d) {
-  return TELEFILM_TITLE_PATTERNS.some((rx) => rx.test(d.title || ''));
+function isTelefilmByTitle(details) {
+  return TELEFILM_TITLE_PATTERNS.some((rx) => rx.test(details.title || ''));
 }
 
-function isGhostEntry(d) {
-  const noGenres = !d.genres || d.genres.length === 0;
-  const noVotes  = (d.vote_count ?? 0) === 0 && (d.vote_average ?? 0) === 0;
-  const noPoster = !d.poster_path;
-  const badTitle = /^untitled$|^sans titre$|^\s*$/i.test(d.title || '');
+function isGhostEntry(details) {
+  const noGenres = !details.genres || details.genres.length === 0;
+  const noVotes  = (details.vote_count ?? 0) === 0 && (details.vote_average ?? 0) === 0;
+  const noPoster = !details.poster_path;
+  const badTitle = /^untitled$|^sans titre$|^\s*$/i.test(details.title || '');
   const score = (noGenres ? 1 : 0) + (noVotes ? 1 : 0) + (noPoster ? 1 : 0) + (badTitle ? 2 : 0);
   return score >= 2;
 }
 
-function isTooShort(d) {
-  if (!d.runtime || d.runtime === 0) return false;
-  return d.runtime < MIN_RUNTIME;
+function isTooShort(details) {
+  if (!details.runtime || details.runtime === 0) return false;
+  return details.runtime < MIN_RUNTIME;
 }
 
 /**
- * v7.4 FIX 1 : looksLikeCaptation() — exemption complète des films francophones
- *
- * Avant (v7.3) : dropait tout film avec vote=0 + un seul genre "Comédie"
- * Problème : Animal Totem, Louise, Les Baronnes sont des films FR confidentiels
- *            légitimes qui ont peu de votes TMDB au moment du scan
- *
- * Fix : si le film est une production francophone → jamais une captation
- * La captation de spectacle vivant est presque toujours une prod non-francophone
- * enregistrée avec des données minimales, ou est déjà capturée par
- * SPECTACLE_DISTRIBUTORS / SPECTACLE_TITLE_PATTERNS.
+ * FIX 3 : Détecte une signature de captation de spectacle mal catalogué :
+ * 0 vote + 0 note + genre unique "Comédie".
+ * Exemption complète pour les productions francophones
+ * (Animal Totem, Louise, Les Baronnes sont des films FR/BE légitimes).
  */
-function looksLikeCaptation(d) {
-  // Exemption : les productions francophones ne sont pas des captations
-  if (isFrancophoneProduction(d)) return false;
-
-  const noVotes    = (d.vote_count ?? 0) === 0 && (d.vote_average ?? 0) === 0;
-  const onlyComedie = d.genres?.length === 1 && d.genres[0].name === 'Comédie';
+function looksLikeCaptation(details) {
+  if (isFrancophoneProduction(details)) return false; // exemption FR/BE/CH
+  const noVotes     = (details.vote_count ?? 0) === 0 && (details.vote_average ?? 0) === 0;
+  const onlyComedie = details.genres?.length === 1 && details.genres[0].name === 'Comédie';
   return noVotes && onlyComedie;
 }
 
 /**
- * v7.4 FIX 5 : accepte aussi type=1 (premiere) pour couvrir les films
- * BE/CH/LU francophones qui n'ont parfois pas de type=3 en FR sur TMDB
+ * FIX 6 : Accepte type=1 (premiere) en plus de type=2/3 (theatrical)
+ * pour couvrir les films BE/CH qui n'ont parfois pas type=3 en FR sur TMDB.
  */
-function hasTheatricalReleaseFR(rd) {
-  const fr = rd?.results?.find((r) => r.iso_3166_1 === 'FR');
+function hasTheatricalReleaseFR(releaseDates) {
+  const fr = releaseDates?.results?.find((r) => r.iso_3166_1 === 'FR');
   if (!fr) return false;
-  return fr.release_dates.some((x) => x.type === 1 || x.type === 2 || x.type === 3);
+  return fr.release_dates.some((rd) => rd.type === 1 || rd.type === 2 || rd.type === 3);
 }
 
-function getTheatricalDateFR(rd) {
-  const fr = rd?.results?.find((r) => r.iso_3166_1 === 'FR');
+function getTheatricalDateFR(releaseDates) {
+  const fr = releaseDates?.results?.find((r) => r.iso_3166_1 === 'FR');
   if (!fr) return null;
-  const t = fr.release_dates
-    .filter((x) => x.type === 1 || x.type === 2 || x.type === 3)
-    .map((x) => new Date(x.release_date))
+  const theatrical = fr.release_dates
+    .filter((rd) => rd.type === 1 || rd.type === 2 || rd.type === 3)
+    .map((rd) => new Date(rd.release_date))
     .filter((d) => !isNaN(d))
     .sort((a, b) => a - b)[0];
-  return t ?? null;
+  return theatrical ?? null;
 }
 
-function getOfficialDigitalDateFR(rd) {
-  const fr = rd?.results?.find((r) => r.iso_3166_1 === 'FR');
+/**
+ * FIX 1 : Ne cherche la date digitale officielle QU'EN FR (type=4).
+ * Suppression du fallback US qui renvoyait des dates placeholder
+ * (pre-order Amazon, Prime Video) faisant apparaître des films encore en salle.
+ *
+ * AVANT (v6) : cherchait FR puis US en fallback → Marsupilami (sorti le 4/02)
+ *              apparaissait car Prime Video US avait une date type=4 fictive
+ *              dans la fenêtre du mois en cours.
+ * APRÈS : uniquement type=4 FR → si pas de date officielle FR, on prédit.
+ */
+function getOfficialDigitalDateFR(releaseDates) {
+  const fr = releaseDates?.results?.find((r) => r.iso_3166_1 === 'FR');
   if (!fr) return null;
-  const d = fr.release_dates
-    .filter((x) => x.type === 4)
-    .map((x) => new Date(x.release_date))
+  const digital = fr.release_dates
+    .filter((rd) => rd.type === 4)
+    .map((rd) => new Date(rd.release_date))
     .filter((d) => !isNaN(d))
     .sort((a, b) => a - b)[0];
-  return d ? { date: d, region: 'FR' } : null;
+  return digital ? { date: digital, region: 'FR' } : null;
 }
 
-function getMainDistributor(details) {
-  const companies = details.production_companies || [];
-  const withLogo = companies.find((c) => c.logo_path);
-  return (withLogo || companies[0])?.name || null;
+function predictVODDate(cinemaDate, isFrench) {
+  const vod = new Date(cinemaDate);
+  vod.setDate(vod.getDate() + (isFrench ? DELAYS.FRENCH : DELAYS.AMERICAN));
+  return vod;
 }
 
-// ─── APPRENTISSAGE DES DÉLAIS ─────────────────────────────────────────────────
+// ─── FENÊTRE CIBLE ─────────────────────────────────────────────────────────────
 
-function loadDelayHistory() {
-  try { return JSON.parse(fs.readFileSync(DELAY_HISTORY, 'utf8')); }
-  catch { return { records: [], learned: {} }; }
-}
-
-function saveDelayHistory(history) {
-  try {
-    fs.mkdirSync(DATA_DIR, { recursive: true });
-    const tmp = DELAY_HISTORY + '.tmp';
-    fs.writeFileSync(tmp, JSON.stringify(history, null, 2), 'utf8');
-    fs.renameSync(tmp, DELAY_HISTORY);
-  } catch (err) {
-    console.warn(`  ⚠️  Historique délais non sauvegardé : ${err.message}`);
-  }
-}
-
-function median(values) {
-  if (!values.length) return null;
-  const sorted = [...values].sort((a, b) => a - b);
-  const mid = Math.floor(sorted.length / 2);
-  return sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
-}
-
-function computeLearnedDelays(history) {
-  const byDistributor = {};
-  for (const r of history.records || []) {
-    if (!r.distributor || !r.observedDelayDays) continue;
-    if (!byDistributor[r.distributor]) byDistributor[r.distributor] = [];
-    byDistributor[r.distributor].push(r.observedDelayDays);
-  }
-  const learned = {};
-  for (const [dist, delays] of Object.entries(byDistributor)) {
-    if (delays.length >= LEARNING_MIN_SAMPLES) {
-      learned[dist] = { days: Math.round(median(delays)), samples: delays.length };
-    }
-  }
-  history.learned = learned;
-  return learned;
-}
-
-function getBestDelay(distributor, isFrench, learned) {
-  if (distributor && learned[distributor]) {
-    return { days: learned[distributor].days, source: `learned-${learned[distributor].samples}` };
-  }
-  if (distributor && DISTRIBUTOR_HINTS[distributor]) {
-    return { days: DISTRIBUTOR_HINTS[distributor].days, source: 'hint' };
-  }
-  return {
-    days: isFrench ? DEFAULT_DELAYS.FRENCH : DEFAULT_DELAYS.AMERICAN,
-    source: 'default',
-  };
-}
-
-function recordObservation(history, { tmdbId, title, distributor, cinemaDate, vodDate, isFrench }) {
-  const observedDelayDays = Math.round((vodDate - cinemaDate) / 86400000);
-  if (observedDelayDays < 5 || observedDelayDays > 365) return;
-  history.records = (history.records || []).filter((r) => r.tmdbId !== tmdbId);
-  history.records.push({
-    tmdbId, title, distributor, isFrench,
-    cinemaDate: ymd(cinemaDate),
-    vodDate: ymd(vodDate),
-    observedDelayDays,
-    recordedAt: ymd(new Date()),
-  });
-  if (history.records.length > 500) history.records = history.records.slice(-500);
-}
-
-// ─── JUSTWATCH (FR uniquement) ────────────────────────────────────────────────
-
-const JW_GRAPHQL_URL = 'https://apis.justwatch.com/graphql';
-const JW_QUERY = `
-  query GetSearchTitles($searchTitlesFilter: TitleFilter!, $country: Country!, $language: Language!) {
-    popularTitles(country: $country, filter: $searchTitlesFilter, first: 5) {
-      edges {
-        node {
-          objectId objectType
-          content(country: $country, language: $language) {
-            title originalReleaseYear
-          }
-          offers(country: $country, platform: WEB) {
-            monetizationType
-            availableTo
-            availableFromTime
-            package { clearName }
-          }
-        }
-      }
-    }
-  }
-`;
-
-async function lookupJustWatch(title, year, cache) {
-  const key = `${normalizeTitle(title)}::${year || ''}`;
-  if (cache[key] && isFresh(cache[key], JW_TTL_H)) return cache[key].data;
-
-  try {
-    const body = {
-      operationName: 'GetSearchTitles',
-      query: JW_QUERY,
-      variables: {
-        searchTitlesFilter: { searchQuery: title },
-        country: 'FR',
-        language: 'fr',
-      },
-    };
-    const res = await fetchWithRetry(JW_GRAPHQL_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
-    });
-    const edges = res?.data?.popularTitles?.edges || [];
-    const targetTitle = normalizeTitle(title);
-    let best = edges.find((e) => {
-      const t = normalizeTitle(e.node.content?.title);
-      const y = e.node.content?.originalReleaseYear;
-      return t === targetTitle && (!year || Math.abs(y - year) <= 1);
-    });
-    if (!best && edges.length) {
-      best = edges.find((e) => normalizeTitle(e.node.content?.title) === targetTitle);
-    }
-    if (!best) {
-      cache[key] = { _cachedAt: Date.now(), data: null };
-      return null;
-    }
-    const monetized = (best.node.offers || []).filter(
-      (o) => ['BUY', 'RENT'].includes(o.monetizationType) && o.availableFromTime
-    );
-    if (!monetized.length) {
-      cache[key] = { _cachedAt: Date.now(), data: null };
-      return null;
-    }
-    const earliest = monetized
-      .map((o) => new Date(o.availableFromTime))
-      .filter((d) => !isNaN(d))
-      .sort((a, b) => a - b)[0];
-    const data = earliest ? { date: earliest.toISOString() } : null;
-    cache[key] = { _cachedAt: Date.now(), data };
-    return data;
-  } catch {
-    return null;
-  }
-}
-
-// ─── ALLOCINÉ ────────────────────────────────────────────────────────────────
-
-async function fetchAllocineWeek(weekStart, cache) {
-  const dateStr = ymd(weekStart);
-  const key = `week-${dateStr}`;
-  if (cache[key] && isFresh(cache[key], ALLO_TTL_H)) return cache[key].data;
-
-  const url = `https://www.allocine.fr/film/agenda/sem-${dateStr}/`;
-  try {
-    const html = await fetchWithRetry(url, {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (compatible; CinocheFR-VODBot/7.4; respectful)',
-        'Accept': 'text/html,application/xhtml+xml',
-      },
-    });
-    if (typeof html !== 'string') {
-      cache[key] = { _cachedAt: Date.now(), data: [] };
-      return [];
-    }
-    const items = [];
-    const cardRegex = /<div[^>]*class="[^"]*card entity-card[^"]*"[^>]*>([\s\S]*?)<\/div>\s*<\/div>\s*<\/div>/g;
-    const titleRegex = /<a[^>]*class="[^"]*meta-title-link[^"]*"[^>]*>([^<]+)<\/a>/;
-    let m;
-    while ((m = cardRegex.exec(html)) !== null) {
-      const block = m[1];
-      const tm = titleRegex.exec(block);
-      if (tm) {
-        items.push({
-          title: tm[1].trim().replace(/&#039;/g, "'").replace(/&amp;/g, '&'),
-          weekOf: dateStr,
-        });
-      }
-    }
-    cache[key] = { _cachedAt: Date.now(), data: items };
-    return items;
-  } catch {
-    cache[key] = { _cachedAt: Date.now(), data: [] };
-    return [];
-  }
-}
-
-async function buildAllocineIndex(windowStart, windowEnd, cache) {
-  const index = new Map();
-  const cursor = new Date(windowStart);
-  cursor.setDate(cursor.getDate() - cursor.getDay() + 1);
-  while (cursor <= windowEnd) {
-    const items = await fetchAllocineWeek(new Date(cursor), cache);
-    for (const it of items) {
-      const norm = normalizeTitle(it.title);
-      if (!index.has(norm)) index.set(norm, new Date(it.weekOf));
-    }
-    cursor.setDate(cursor.getDate() + 7);
-    await sleep(ALLO_DELAY_MS);
-  }
-  return index;
-}
-
-// ─── PIPELINE ENDPOINTS TMDB ──────────────────────────────────────────────────
-
-// Mois en cours strict (change automatiquement le 1er du mois)
-function computeWindow(now = new Date()) {
-  const windowStart = new Date(now.getFullYear(), now.getMonth(), 1, 0, 0, 0, 0);
-  const windowEnd   = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59, 999);
-
-  // v7.4 FIX 3 : fenêtre de tolérance élargie pour les drops "afterWindow"
-  const toleratedEnd = new Date(windowEnd);
+/**
+ * Mois strictement en cours, aucune anticipation sur le mois suivant.
+ * FIX 7 : toleratedEnd = windowEnd + 7j pour les VOD de fin de mois.
+ */
+function computeTargetWindow(now = new Date()) {
+  const monthStart   = new Date(now.getFullYear(), now.getMonth(), 1);
+  const monthEnd     = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59);
+  const toleratedEnd = new Date(monthEnd);
   toleratedEnd.setDate(toleratedEnd.getDate() + WINDOW_END_TOLERANCE_DAYS);
-
-  return { windowStart, windowEnd, toleratedEnd };
+  return { monthStart, monthEnd, toleratedEnd };
 }
 
-function buildScanEndpoints(windowStart, windowEnd) {
-  const frStart = new Date(windowEnd); frStart.setMonth(frStart.getMonth() - 7);
-  const frEnd   = new Date(windowStart); frEnd.setDate(frEnd.getDate() - 90);
-  const intlStart = new Date(windowEnd); intlStart.setMonth(intlStart.getMonth() - 5);
-  const intlEnd   = new Date(windowStart); intlEnd.setDate(intlEnd.getDate() - 14);
+// ─── ENDPOINTS TMDB ───────────────────────────────────────────────────────────
+
+function buildScanEndpoints(monthStart, monthEnd) {
+  // Fenêtre scan FR : films sortis entre 6,5 mois et 100 jours avant monthEnd
+  const frStart = new Date(monthEnd);
+  frStart.setMonth(frStart.getMonth() - 6);
+  frStart.setDate(frStart.getDate() - 15);
+  const frEnd = new Date(monthStart);
+  frEnd.setDate(frEnd.getDate() - 100);
+
+  // Fenêtre scan INTL : films sortis entre 4 mois et 30 jours avant monthEnd
+  const intlStart = new Date(monthEnd);
+  intlStart.setMonth(intlStart.getMonth() - 4);
+  const intlEnd = new Date(monthStart);
+  intlEnd.setDate(intlEnd.getDate() - 30);
 
   const base = `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=fr-FR&include_adult=false`;
+
   return [
+    // ── Films français ──────────────────────────────────────────────────────
     { name: 'FR/origin/popular',
       url: `${base}&with_origin_country=FR&primary_release_date.gte=${ymd(frStart)}&primary_release_date.lte=${ymd(frEnd)}&sort_by=popularity.desc` },
     { name: 'FR/origin/quality',
@@ -574,11 +365,12 @@ function buildScanEndpoints(windowStart, windowEnd) {
       url: `${base}&with_origin_country=FR&primary_release_date.gte=${ymd(frStart)}&primary_release_date.lte=${ymd(frEnd)}&sort_by=primary_release_date.desc` },
     { name: 'FR/theatrical-net',
       url: `${base}&region=FR&with_release_type=3&primary_release_date.gte=${ymd(frStart)}&primary_release_date.lte=${ymd(frEnd)}&sort_by=popularity.desc` },
-    // v7.4 : endpoints supplémentaires pour les films BE/CH francophones (ex: Les Baronnes)
-    { name: 'BE/origin/recent',
+    // ── FIX 5 : Films BE et CH francophones (ex: Les Baronnes) ──────────────
+    { name: 'BE/franco/recent',
       url: `${base}&with_origin_country=BE&with_original_language=fr&primary_release_date.gte=${ymd(frStart)}&primary_release_date.lte=${ymd(frEnd)}&sort_by=primary_release_date.desc` },
-    { name: 'CH/origin/recent',
+    { name: 'CH/franco/recent',
       url: `${base}&with_origin_country=CH&with_original_language=fr&primary_release_date.gte=${ymd(frStart)}&primary_release_date.lte=${ymd(frEnd)}&sort_by=primary_release_date.desc` },
+    // ── Films internationaux ─────────────────────────────────────────────────
     { name: 'INTL/popular',
       url: `${base}&region=FR&with_release_type=3&primary_release_date.gte=${ymd(intlStart)}&primary_release_date.lte=${ymd(intlEnd)}&sort_by=popularity.desc` },
     { name: 'INTL/quality',
@@ -588,9 +380,11 @@ function buildScanEndpoints(windowStart, windowEnd) {
   ];
 }
 
+// ─── DÉTAILS FILM (avec cache) ────────────────────────────────────────────────
+
 async function fetchMovieDetails(movieId, cache) {
   const key = String(movieId);
-  if (cache[key] && isFresh(cache[key], TMDB_TTL_H)) return cache[key].data;
+  if (cache[key] && isCacheEntryFresh(cache[key])) return cache[key].data;
   const url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${TMDB_API_KEY}&language=fr-FR&append_to_response=release_dates`;
   const data = await fetchWithRetry(url);
   cache[key] = { _cachedAt: Date.now(), data };
@@ -601,41 +395,24 @@ async function fetchMovieDetails(movieId, cache) {
 
 async function updateVOD() {
   const t0 = Date.now();
-  console.log('🎬  updateVOD v7.4 — démarrage...\n');
+  console.log('🎬  updateVOD v6.1 — démarrage...\n');
 
   const now = new Date();
-  const { windowStart, windowEnd, toleratedEnd } = computeWindow(now);
-  console.log(`📅  Mois en cours STRICT : ${formatDateFR(windowStart)} → ${formatDateFR(windowEnd)}`);
-  console.log(`📅  Tolérance VOD fin de mois : +${WINDOW_END_TOLERANCE_DAYS}j → ${formatDateFR(toleratedEnd)}\n`);
+  const { monthStart, monthEnd, toleratedEnd } = computeTargetWindow(now);
 
-  const tmdbCache = loadCache(TMDB_CACHE);
-  const jwCache   = loadCache(JW_CACHE);
-  const alloCache = loadCache(ALLO_CACHE);
-  const history   = loadDelayHistory();
-  const learned   = computeLearnedDelays(history);
+  console.log(`📅  Mois cible strict : ${formatDateFR(monthStart)} → ${formatDateFR(monthEnd)}`);
+  console.log(`📅  Tolérance fin de mois : +${WINDOW_END_TOLERANCE_DAYS}j → ${formatDateFR(toleratedEnd)}\n`);
 
-  console.log(`💾  Caches : TMDB ${Object.keys(tmdbCache).length-1} | JW ${Object.keys(jwCache).length-1} | Allo ${Object.keys(alloCache).length-1}`);
-  console.log(`🧠  Apprentissage : ${Object.keys(learned).length} distributeurs\n`);
+  const cache = loadCache();
+  console.log(`💾  Cache : ${Object.keys(cache).length} entrées chargées\n`);
 
-  // Étape 1 : Allociné
-  console.log('  🔎  Index Allociné...');
-  let alloIndex;
-  try {
-    alloIndex = await buildAllocineIndex(windowStart, windowEnd, alloCache);
-    console.log(`  ✓ ${alloIndex.size} entrées Allociné indexées\n`);
-  } catch (err) {
-    console.warn(`  ⚠️  Allociné indisponible : ${err.message}\n`);
-    alloIndex = new Map();
-  }
-  saveCache(ALLO_CACHE, alloCache);
-
-  // Étape 2 : Scan TMDB
-  const endpoints = buildScanEndpoints(windowStart, windowEnd);
+  // Étape 1 : Scan TMDB
+  const endpoints = buildScanEndpoints(monthStart, monthEnd);
   const rawMovies = [];
   console.log('  🔎  Scan TMDB :');
   for (let i = 0; i < endpoints.length; i++) {
     const { name, url } = endpoints[i];
-    process.stdout.write(`     [${String(i+1).padStart(2,'0')}/${endpoints.length}] ${name.padEnd(22)} `);
+    process.stdout.write(`     [${String(i + 1).padStart(2, '0')}/${endpoints.length}] ${name.padEnd(22)} `);
     try {
       const results = await fetchAllPages(url);
       rawMovies.push(...results);
@@ -645,112 +422,73 @@ async function updateVOD() {
     }
     await sleep(API_DELAY_MS);
   }
+
   const uniqueMovies = Array.from(new Map(rawMovies.map((m) => [m.id, m])).values());
   console.log(`\n  📦  ${uniqueMovies.length} films uniques\n`);
 
-  // Étape 3 : Analyse
-  console.log('  🔬  Analyse :');
+  // Étape 2 : Analyse
   const finalResults = [];
   const drops = {
     noDetails: 0, noReleaseDate: 0, excludedGenre: 0, telefilmByTitle: 0,
     spectacle: 0, captation: 0, tooShort: 0, ghostEntry: 0, noGenresAtAll: 0,
-    noFRTheatrical: 0, lowQuality: 0, beforeWindow: 0, afterWindow: 0,
+    noFRTheatrical: 0, lowQuality: 0, delayTooShort: 0, beforeWindow: 0, afterWindow: 0,
   };
   let cacheHits = 0;
 
+  console.log('  🔬  Analyse détaillée :');
   for (const movie of uniqueMovies) {
-    const cachedBefore = tmdbCache[String(movie.id)] && isFresh(tmdbCache[String(movie.id)], TMDB_TTL_H);
+    const cachedBefore = cache[String(movie.id)] && isCacheEntryFresh(cache[String(movie.id)]);
     if (cachedBefore) cacheHits++;
     if (!cachedBefore) await sleep(API_DELAY_MS);
 
     let details;
-    try { details = await fetchMovieDetails(movie.id, tmdbCache); }
+    try { details = await fetchMovieDetails(movie.id, cache); }
     catch { drops.noDetails++; continue; }
 
     if (!details.release_date)        { drops.noReleaseDate++;   continue; }
     if (hasExcludedGenre(details))    { drops.excludedGenre++;   continue; }
     if (isTelefilmByTitle(details))   { drops.telefilmByTitle++; continue; }
-    if (isSpectacle(details))         { drops.spectacle++;       continue; } // v7.4 FIX 2+4
-    if (looksLikeCaptation(details))  { drops.captation++;       continue; } // v7.4 FIX 1
+    if (isSpectacle(details))         { drops.spectacle++;       continue; } // FIX 4
+    if (looksLikeCaptation(details))  { drops.captation++;       continue; } // FIX 3
     if (isTooShort(details))          { drops.tooShort++;        continue; }
     if (isGhostEntry(details))        { drops.ghostEntry++;      continue; }
     if (!details.genres?.length)      { drops.noGenresAtAll++;   continue; }
 
     const isFrench  = isFrenchProduction(details);
-    const hasFRCine = hasTheatricalReleaseFR(details.release_dates); // v7.4 FIX 5
+    const minDelay  = isFrench ? DELAYS.FRENCH : DELAYS.AMERICAN;
+    const hasFRCine = hasTheatricalReleaseFR(details.release_dates); // FIX 6
+
     if (!hasFRCine) { drops.noFRTheatrical++; continue; }
 
+    // Filtre qualité composite (conservé de v6)
     const voteCount  = details.vote_count ?? 0;
     const popularity = movie.popularity ?? details.popularity ?? 0;
+    if (voteCount < 5 && popularity < 1.5) { drops.lowQuality++; continue; }
+
     const cinemaDateFR = getTheatricalDateFR(details.release_dates);
     const cinemaDate   = cinemaDateFR ?? new Date(details.release_date);
     if (isNaN(cinemaDate)) { drops.noReleaseDate++; continue; }
-    const ageDays = (now - cinemaDate) / 86400000;
 
-    // Filtre qualité : bypass élargi pour toutes les productions francophones
-    const isFrancophone  = isFrancophoneProduction(details);
-    const isSafeVolume   = voteCount >= 5;
-    const isNicheButReal = popularity >= 1.5;
-    const isFrancophoneRecent = isFrancophone && ageDays < 180; // élargi de 150→180j
-    if (!isSafeVolume && !isNicheButReal && !isFrancophoneRecent) {
-      drops.lowQuality++; continue;
-    }
-
-    const distributor = getMainDistributor(details);
+    // FIX 1 : date officielle FR uniquement (plus de fallback US)
     const officialDigital = getOfficialDigitalDateFR(details.release_dates);
-    const year = cinemaDate.getFullYear();
+    const predictedDate   = predictVODDate(cinemaDate, isFrench);
 
-    // Allociné en premier (lookup gratuit dans Map)
-    const alloDate = alloIndex.get(normalizeTitle(details.title))
-                   || alloIndex.get(normalizeTitle(details.original_title));
-
-    // JustWatch SEULEMENT si Allociné et TMDB officielle ne donnent rien
-    let jwData = null;
-    if (!alloDate && !officialDigital) {
-      try { jwData = await lookupJustWatch(details.title, year, jwCache); }
-      catch {}
-    }
-
-    let vodDate, source, confidence;
-    const delayInfo = getBestDelay(distributor, isFrench, learned);
-
-    if (alloDate) {
-      vodDate = alloDate;
-      source = 'allocine';
-      confidence = 0.95;
-    } else if (officialDigital) {
+    let vodDate, source;
+    if (officialDigital) {
       vodDate = officialDigital.date;
-      source = 'tmdb-official-fr';
-      confidence = 0.90;
-    } else if (jwData?.date) {
-      vodDate = new Date(jwData.date);
-      source = 'justwatch-fr';
-      confidence = 0.85;
+      source  = 'officielle-fr';
     } else {
-      const vod = new Date(cinemaDate);
-      vod.setDate(vod.getDate() + delayInfo.days);
-      vodDate = vod;
-      source = `predicted-${delayInfo.source}`;
-      confidence = delayInfo.source.startsWith('learned') ? 0.70
-                 : delayInfo.source === 'hint' ? 0.55
-                 : 0.40;
+      vodDate = predictedDate;
+      source  = 'prédite';
     }
 
-    if (vodDate < windowStart) { drops.beforeWindow++; continue; }
+    // FIX 2 : délai minimum appliqué sur toutes les sources (pas seulement prédite)
+    const actualDelayDays = (vodDate - cinemaDate) / 86400000;
+    if (actualDelayDays < minDelay) { drops.delayTooShort++; continue; }
 
-    // v7.4 FIX 3 : on utilise toleratedEnd au lieu de windowEnd
+    if (vodDate < monthStart) { drops.beforeWindow++; continue; }
+    // FIX 7 : tolérance +7j sur la fin de fenêtre
     if (vodDate > toleratedEnd) { drops.afterWindow++; continue; }
-
-    if (['allocine', 'tmdb-official-fr', 'justwatch-fr'].includes(source) && distributor) {
-      recordObservation(history, {
-        tmdbId: movie.id,
-        title: details.title,
-        distributor,
-        cinemaDate,
-        vodDate,
-        isFrench,
-      });
-    }
 
     finalResults.push({
       title         : details.title || movie.title,
@@ -763,22 +501,17 @@ async function updateVOD() {
       vote_count    : voteCount,
       genres        : details.genres.map((g) => g.name),
       is_french     : isFrench,
-      distributor,
       source,
-      confidence,
       _sortDate     : vodDate.getTime(),
       _popularity   : popularity,
     });
 
-    const flag = isFrench ? '🇫🇷' : '🌍';
-    const srcEmoji = source === 'allocine' ? '🅰️ '
-                   : source === 'tmdb-official-fr' ? '✓ '
-                   : source === 'justwatch-fr' ? '📺'
-                   : '~ ';
-    console.log(`     ${flag} ${srcEmoji} ${(details.title || '').padEnd(40).slice(0,40)} → ${formatDateFR(vodDate)}`);
+    const flag     = isFrench ? '🇫🇷' : '🌍';
+    const srcShort = source === 'officielle-fr' ? '✓' : '~';
+    console.log(`     ${flag} ${srcShort} ${(details.title || '').padEnd(45).slice(0, 45)} → ${formatDateFR(vodDate)}`);
   }
 
-  // Étape 4 : Tri, dédup, écriture
+  // Étape 3 : Tri, dédup, écriture
   finalResults.sort((a, b) => {
     if (a._sortDate !== b._sortDate) return a._sortDate - b._sortDate;
     return b._popularity - a._popularity;
@@ -788,40 +521,35 @@ async function updateVOD() {
   );
   const output = deduped.map(({ _sortDate, _popularity, ...rest }) => rest);
 
-  fs.mkdirSync(DATA_DIR, { recursive: true });
+  fs.mkdirSync(path.dirname(DATA_PATH), { recursive: true });
   const tmpPath = DATA_PATH + '.tmp';
   fs.writeFileSync(tmpPath, JSON.stringify(output, null, 2), 'utf8');
   fs.renameSync(tmpPath, DATA_PATH);
 
-  // Étape 5 : Persist caches
-  const cutoff7d = Date.now() - 7 * 24 * 3600000;
-  for (const k of Object.keys(tmdbCache)) {
-    if (k === '__version') continue;
-    if (!tmdbCache[k]?._cachedAt || tmdbCache[k]._cachedAt < cutoff7d) delete tmdbCache[k];
+  // Étape 4 : Nettoyage cache (entrées > 7 jours)
+  const cutoff = Date.now() - 7 * 24 * 3600000;
+  for (const k of Object.keys(cache)) {
+    if (!cache[k]?._cachedAt || cache[k]._cachedAt < cutoff) delete cache[k];
   }
-  saveCache(TMDB_CACHE, tmdbCache);
-  saveCache(JW_CACHE, jwCache);
-  saveDelayHistory(history);
+  saveCache(cache);
 
   // Récap
-  const frCount = output.filter((m) => m.is_french).length;
-  const sourceBreakdown = output.reduce((acc, m) => {
-    acc[m.source] = (acc[m.source] || 0) + 1;
-    return acc;
-  }, {});
-  const elapsed = ((Date.now() - t0) / 1000).toFixed(1);
+  const frCount       = output.filter((m) => m.is_french).length;
+  const officielCount = output.filter((m) => m.source === 'officielle-fr').length;
+  const elapsed       = ((Date.now() - t0) / 1000).toFixed(1);
 
   console.log(`\n  ✅ Terminé en ${elapsed}s : ${output.length} films générés (${frCount} 🇫🇷)`);
-  console.log(`  📊 Sources : ${Object.entries(sourceBreakdown).map(([k,v]) => `${k}=${v}`).join(', ')}`);
+  console.log(`  📊 Sources : officielle-fr=${officielCount}, prédite=${output.length - officielCount}`);
   console.log(`  🗑️  Drops : ${Object.entries(drops).filter(([,v]) => v > 0).map(([k,v]) => `${k}=${v}`).join(', ')}`);
-  console.log(`  💾 Cache hits TMDB : ${cacheHits}/${uniqueMovies.length}`);
-  console.log(`\n  📋 v7.4 fixes actifs :`);
-  console.log(`     ✅ FIX1 looksLikeCaptation → exemption productions francophones`);
-  console.log(`     ✅ FIX2 isSpectacle → guard film francophone long + scan titre uniquement`);
-  console.log(`     ✅ FIX3 windowEnd +${WINDOW_END_TOLERANCE_DAYS}j tolérance VOD`);
-  console.log(`     ✅ FIX4 'théâtre' retiré des keywords titre`);
-  console.log(`     ✅ FIX5 hasTheatricalReleaseFR → accepte type=1 (premiere)`);
-  console.log(`     ✅ NEW  endpoints BE/CH francophones ajoutés au scan TMDB`);
+  console.log(`  💾 Cache hits : ${cacheHits}/${uniqueMovies.length}`);
+  console.log(`\n  📋 Fixes actifs v6.1 :`);
+  console.log(`     ✅ FIX1  date officielle FR uniquement (Marsupilami corrigé)`);
+  console.log(`     ✅ FIX2  délai minimum garanti sur dates officielles aussi`);
+  console.log(`     ✅ FIX3  looksLikeCaptation() + exemption francophones`);
+  console.log(`     ✅ FIX4  isSpectacle() affiné (sans 'théâtre', guard FR long)`);
+  console.log(`     ✅ FIX5  endpoints BE/CH francophones`);
+  console.log(`     ✅ FIX6  hasTheatricalReleaseFR() accepte type=1`);
+  console.log(`     ✅ FIX7  toleratedEnd = windowEnd +${WINDOW_END_TOLERANCE_DAYS}j`);
 }
 
 updateVOD().catch((err) => {
