@@ -1,44 +1,11 @@
 [
   {
-    "title": "Marsupilami",
-    "plex_release": "1 avril 2026",
-    "tmdb_id": 1145899,
-    "poster_path": "/rJNHFa07Id2ylQgw0ttzGwpeczE.jpg",
-    "original_title": "Marsupilami",
-    "cinema_date": "2 décembre 2025",
-    "vote_average": 6.6,
-    "vote_count": 70,
-    "genres": [
-      "Aventure",
-      "Comédie"
-    ],
-    "is_french": true,
-    "source": "prédite"
-  },
-  {
-    "title": "L’Âme Idéale",
-    "plex_release": "1 avril 2026",
-    "tmdb_id": 1166170,
-    "poster_path": "/ws9wCKrqMsS700OOScv8L52wJMa.jpg",
-    "original_title": "L’Âme Idéale",
-    "cinema_date": "2 décembre 2025",
-    "vote_average": 7,
-    "vote_count": 83,
-    "genres": [
-      "Comédie",
-      "Romance",
-      "Fantastique"
-    ],
-    "is_french": true,
-    "source": "prédite"
-  },
-  {
     "title": "Mektoub, My Love: Canto Due",
     "plex_release": "2 avril 2026",
     "tmdb_id": 661568,
     "poster_path": "/Ag0gzbjcdUu8t0eeFks2USP9a5V.jpg",
     "original_title": "Mektoub, My Love: Canto Due",
-    "cinema_date": "7 octobre 2025",
+    "cinema_date": "3 décembre 2025",
     "vote_average": 7.3,
     "vote_count": 13,
     "genres": [
@@ -50,37 +17,49 @@
     "source": "officielle-fr"
   },
   {
-    "title": "Cold Storage",
-    "plex_release": "4 avril 2026",
-    "tmdb_id": 696393,
-    "poster_path": "/6VEXLZt3gEiCuPnl666nak3OXKW.jpg",
-    "original_title": "Cold Storage",
-    "cinema_date": "18 février 2026",
-    "vote_average": 6.8,
-    "vote_count": 364,
+    "title": "Les enfants vont bien",
+    "plex_release": "2 avril 2026",
+    "tmdb_id": 1277882,
+    "poster_path": "/lzHohlKAZ8qG0WbkctJq02ZB3lJ.jpg",
+    "original_title": "Les enfants vont bien",
+    "cinema_date": "3 décembre 2025",
+    "vote_average": 6.9,
+    "vote_count": 77,
     "genres": [
-      "Horreur",
-      "Science-Fiction",
-      "Comédie"
+      "Drame"
     ],
-    "is_french": false,
+    "is_french": true,
     "source": "prédite"
   },
   {
-    "title": "Psycho Killer",
-    "plex_release": "5 avril 2026",
-    "tmdb_id": 1107166,
-    "poster_path": "/5xgxxmLivJXL8aF0HdZfpx8aAIo.jpg",
-    "original_title": "Psycho Killer",
-    "cinema_date": "19 février 2026",
-    "vote_average": 5.5,
-    "vote_count": 39,
+    "title": "Gérald le Conquérant",
+    "plex_release": "2 avril 2026",
+    "tmdb_id": 1174382,
+    "poster_path": "/lyjO7qEAxtMF4hZhzp3haPdeBde.jpg",
+    "original_title": "Gérald le Conquérant",
+    "cinema_date": "3 décembre 2025",
+    "vote_average": 5.6,
+    "vote_count": 30,
     "genres": [
-      "Crime",
-      "Horreur",
-      "Mystère"
+      "Comédie"
     ],
-    "is_french": false,
+    "is_french": true,
+    "source": "prédite"
+  },
+  {
+    "title": "Dites-lui que je l’aime",
+    "plex_release": "2 avril 2026",
+    "tmdb_id": 1221719,
+    "poster_path": "/5s2TmudKv5urU5lHXtbxZoYTt4D.jpg",
+    "original_title": "Dites-lui que je l’aime",
+    "cinema_date": "3 décembre 2025",
+    "vote_average": 8.1,
+    "vote_count": 7,
+    "genres": [
+      "Drame",
+      "Comédie"
+    ],
+    "is_french": true,
     "source": "prédite"
   },
   {
@@ -98,6 +77,38 @@
       "Science-Fiction"
     ],
     "is_french": false,
+    "source": "prédite"
+  },
+  {
+    "title": "Psycho Killer",
+    "plex_release": "7 avril 2026",
+    "tmdb_id": 1107166,
+    "poster_path": "/5xgxxmLivJXL8aF0HdZfpx8aAIo.jpg",
+    "original_title": "Psycho Killer",
+    "cinema_date": "19 février 2026",
+    "vote_average": 5.5,
+    "vote_count": 39,
+    "genres": [
+      "Crime",
+      "Horreur",
+      "Mystère"
+    ],
+    "is_french": false,
+    "source": "officielle-us"
+  },
+  {
+    "title": "Love Me Tender",
+    "plex_release": "9 avril 2026",
+    "tmdb_id": 1290450,
+    "poster_path": "/rC6DX6NYu8EaK9Y9DjkEVn2bSR0.jpg",
+    "original_title": "Love Me Tender",
+    "cinema_date": "10 décembre 2025",
+    "vote_average": 6.9,
+    "vote_count": 10,
+    "genres": [
+      "Drame"
+    ],
+    "is_french": true,
     "source": "prédite"
   },
   {
@@ -131,6 +142,22 @@
     "source": "prédite"
   },
   {
+    "title": "La Condition",
+    "plex_release": "9 avril 2026",
+    "tmdb_id": 1119548,
+    "poster_path": "/5yxwpcK0OHR0fBB6CBS80YWHoAC.jpg",
+    "original_title": "La Condition",
+    "cinema_date": "10 décembre 2025",
+    "vote_average": 6,
+    "vote_count": 29,
+    "genres": [
+      "Drame",
+      "Histoire"
+    ],
+    "is_french": true,
+    "source": "prédite"
+  },
+  {
     "title": "La Petite Cuisine de Mehdi",
     "plex_release": "9 avril 2026",
     "tmdb_id": 1266826,
@@ -142,6 +169,21 @@
     "genres": [
       "Comédie",
       "Drame"
+    ],
+    "is_french": true,
+    "source": "prédite"
+  },
+  {
+    "title": "Animal Totem",
+    "plex_release": "9 avril 2026",
+    "tmdb_id": 1439177,
+    "poster_path": "/5mQOefrjyMEq8qaFagEVX2i4SH8.jpg",
+    "original_title": "Animal Totem",
+    "cinema_date": "10 décembre 2025",
+    "vote_average": 6.8,
+    "vote_count": 5,
+    "genres": [
+      "Comédie"
     ],
     "is_french": true,
     "source": "prédite"
@@ -163,68 +205,20 @@
     "source": "prédite"
   },
   {
-    "title": "Scream 7",
-    "plex_release": "11 avril 2026",
-    "tmdb_id": 1159559,
-    "poster_path": "/j6Y7vqULt8tRlXVFXHK5aj3nCo4.jpg",
-    "original_title": "Scream 7",
-    "cinema_date": "25 février 2026",
-    "vote_average": 6.1,
-    "vote_count": 806,
-    "genres": [
-      "Horreur",
-      "Mystère",
-      "Crime"
-    ],
-    "is_french": false,
-    "source": "prédite"
-  },
-  {
-    "title": "Is This Thing On?",
-    "plex_release": "11 avril 2026",
-    "tmdb_id": 1140498,
-    "poster_path": "/yl4Px3QgHIC9IXhvpNUlXBIn5yn.jpg",
-    "original_title": "Is This Thing On?",
-    "cinema_date": "25 février 2026",
-    "vote_average": 6.6,
-    "vote_count": 132,
+    "title": "L’Âme Idéale",
+    "plex_release": "16 avril 2026",
+    "tmdb_id": 1166170,
+    "poster_path": "/ws9wCKrqMsS700OOScv8L52wJMa.jpg",
+    "original_title": "L’Âme Idéale",
+    "cinema_date": "17 décembre 2025",
+    "vote_average": 7,
+    "vote_count": 83,
     "genres": [
       "Comédie",
-      "Drame"
+      "Romance",
+      "Fantastique"
     ],
-    "is_french": false,
-    "source": "prédite"
-  },
-  {
-    "title": "Christy",
-    "plex_release": "18 avril 2026",
-    "tmdb_id": 1287322,
-    "poster_path": "/e3x0tJ1EfSBsBFGEv2WCKfII4cv.jpg",
-    "original_title": "Christy",
-    "cinema_date": "4 mars 2026",
-    "vote_average": 7.2,
-    "vote_count": 153,
-    "genres": [
-      "Histoire",
-      "Drame"
-    ],
-    "is_french": false,
-    "source": "prédite"
-  },
-  {
-    "title": "Le Sifflet",
-    "plex_release": "2 mai 2026",
-    "tmdb_id": 1193501,
-    "poster_path": "/d3U7rzj3ReOjpxNBd2n09WAxSLH.jpg",
-    "original_title": "Whistle",
-    "cinema_date": "18 mars 2026",
-    "vote_average": 6.1,
-    "vote_count": 289,
-    "genres": [
-      "Horreur",
-      "Mystère"
-    ],
-    "is_french": false,
+    "is_french": true,
     "source": "prédite"
   }
 ]
