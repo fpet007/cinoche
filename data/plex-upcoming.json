@@ -13,46 +13,24 @@
       "Comédie"
     ],
     "is_french": true,
-    "distributor": "Pathé",
-    "source": "predicted-default",
-    "confidence": 0.4
+    "source": "prédite"
   },
   {
-    "title": "Laurent dans le vent",
+    "title": "L’Âme Idéale",
     "plex_release": "1 avril 2026",
-    "tmdb_id": 1383289,
-    "poster_path": "/gkg8DnHsMhRhO2IkQAmWnU2RHtD.jpg",
-    "original_title": "Laurent dans le vent",
-    "cinema_date": "16 mai 2025",
-    "vote_average": 7.1,
-    "vote_count": 6,
+    "tmdb_id": 1166170,
+    "poster_path": "/ws9wCKrqMsS700OOScv8L52wJMa.jpg",
+    "original_title": "L’Âme Idéale",
+    "cinema_date": "2 décembre 2025",
+    "vote_average": 7,
+    "vote_count": 83,
     "genres": [
       "Comédie",
-      "Drame",
-      "Romance"
+      "Romance",
+      "Fantastique"
     ],
     "is_french": true,
-    "distributor": "Mabel Films",
-    "source": "justwatch-fr",
-    "confidence": 0.85
-  },
-  {
-    "title": "L'Arbre de la connaissance",
-    "plex_release": "1 avril 2026",
-    "tmdb_id": 1523438,
-    "poster_path": "/yjNjdYCSogOhQAMKShhk0nuGYNn.jpg",
-    "original_title": "A Árvore do Conhecimento",
-    "cinema_date": "19 novembre 2025",
-    "vote_average": 4.5,
-    "vote_count": 1,
-    "genres": [
-      "Comédie",
-      "Drame"
-    ],
-    "is_french": true,
-    "distributor": "O Som e a Fúria",
-    "source": "justwatch-fr",
-    "confidence": 0.85
+    "source": "prédite"
   },
   {
     "title": "Mektoub, My Love: Canto Due",
@@ -69,27 +47,7 @@
       "Comédie"
     ],
     "is_french": true,
-    "distributor": "Pathé",
-    "source": "tmdb-official-fr",
-    "confidence": 0.9
-  },
-  {
-    "title": "Marty Supreme",
-    "plex_release": "4 avril 2026",
-    "tmdb_id": 1317288,
-    "poster_path": "/hjrvtc7UCrnsypfnLJuxx9ODKCi.jpg",
-    "original_title": "Marty Supreme",
-    "cinema_date": "3 février 2026",
-    "vote_average": 7.4,
-    "vote_count": 1630,
-    "genres": [
-      "Drame",
-      "Thriller"
-    ],
-    "is_french": false,
-    "distributor": "A24",
-    "source": "predicted-hint",
-    "confidence": 0.55
+    "source": "officielle-fr"
   },
   {
     "title": "Cold Storage",
@@ -106,9 +64,7 @@
       "Comédie"
     ],
     "is_french": false,
-    "distributor": "StudioCanal UK",
-    "source": "predicted-default",
-    "confidence": 0.4
+    "source": "prédite"
   },
   {
     "title": "Psycho Killer",
@@ -125,9 +81,7 @@
       "Mystère"
     ],
     "is_french": false,
-    "distributor": "New Regency Pictures",
-    "source": "predicted-default",
-    "confidence": 0.4
+    "source": "prédite"
   },
   {
     "title": "Iron Lung",
@@ -144,27 +98,69 @@
       "Science-Fiction"
     ],
     "is_french": false,
-    "distributor": "Markiplier Studios",
-    "source": "predicted-default",
-    "confidence": 0.4
+    "source": "prédite"
   },
   {
-    "title": "Dites-lui que je l’aime",
-    "plex_release": "7 avril 2026",
-    "tmdb_id": 1221719,
-    "poster_path": "/5s2TmudKv5urU5lHXtbxZoYTt4D.jpg",
-    "original_title": "Dites-lui que je l’aime",
-    "cinema_date": "19 mai 2025",
-    "vote_average": 8.1,
-    "vote_count": 7,
+    "title": "Louise",
+    "plex_release": "9 avril 2026",
+    "tmdb_id": 1197125,
+    "poster_path": "/62GcSVw9fE8paRDTCHDycZvQ26p.jpg",
+    "original_title": "Louise",
+    "cinema_date": "10 décembre 2025",
+    "vote_average": 7.1,
+    "vote_count": 8,
     "genres": [
-      "Drame",
+      "Drame"
+    ],
+    "is_french": true,
+    "source": "prédite"
+  },
+  {
+    "title": "Chasse gardée 2",
+    "plex_release": "9 avril 2026",
+    "tmdb_id": 1437985,
+    "poster_path": "/9PJrHGp41hRTq2kkPWU2j6zzjat.jpg",
+    "original_title": "Chasse gardée 2",
+    "cinema_date": "10 décembre 2025",
+    "vote_average": 5.7,
+    "vote_count": 43,
+    "genres": [
       "Comédie"
     ],
     "is_french": true,
-    "distributor": "Escazal Films",
-    "source": "justwatch-fr",
-    "confidence": 0.85
+    "source": "prédite"
+  },
+  {
+    "title": "La Petite Cuisine de Mehdi",
+    "plex_release": "9 avril 2026",
+    "tmdb_id": 1266826,
+    "poster_path": "/AeM5idmeLmPZwtkFoe58zV9FbmK.jpg",
+    "original_title": "La Petite Cuisine de Mehdi",
+    "cinema_date": "10 décembre 2025",
+    "vote_average": 7,
+    "vote_count": 10,
+    "genres": [
+      "Comédie",
+      "Drame"
+    ],
+    "is_french": true,
+    "source": "prédite"
+  },
+  {
+    "title": "À la poursuite du Père Noël !",
+    "plex_release": "9 avril 2026",
+    "tmdb_id": 1432812,
+    "poster_path": "/xqDooVZxeUCoF9avNpZBrlbv9gZ.jpg",
+    "original_title": "À la poursuite du Père Noël !",
+    "cinema_date": "10 décembre 2025",
+    "vote_average": 5.1,
+    "vote_count": 5,
+    "genres": [
+      "Comédie",
+      "Familial"
+    ],
+    "is_french": true,
+    "source": "prédite"
   },
   {
     "title": "Scream 7",
@@ -181,27 +177,7 @@
       "Crime"
     ],
     "is_french": false,
-    "distributor": "Paramount Pictures",
-    "source": "predicted-hint",
-    "confidence": 0.55
-  },
-  {
-    "title": "5 centimètres par seconde",
-    "plex_release": "11 avril 2026",
-    "tmdb_id": 1359916,
-    "poster_path": "/nhvPn4TsUQk5ZBk9T9RBW7v7z1J.jpg",
-    "original_title": "秒速5センチメートル",
-    "cinema_date": "25 février 2026",
-    "vote_average": 8.1,
-    "vote_count": 12,
-    "genres": [
-      "Romance",
-      "Drame"
-    ],
-    "is_french": false,
-    "distributor": "Spoon.",
-    "source": "predicted-default",
-    "confidence": 0.4
+    "source": "prédite"
   },
   {
     "title": "Is This Thing On?",
@@ -217,65 +193,7 @@
       "Drame"
     ],
     "is_french": false,
-    "distributor": "Searchlight Pictures",
-    "source": "predicted-default",
-    "confidence": 0.4
-  },
-  {
-    "title": "Du Charbon dans les Veines",
-    "plex_release": "17 avril 2026",
-    "tmdb_id": 1604319,
-    "poster_path": "/7wg262QAmMpXIkRD8ZNR0Wbbq73.jpg",
-    "original_title": "Du Charbon dans les Veines",
-    "cinema_date": "18 décembre 2025",
-    "vote_average": 0,
-    "vote_count": 0,
-    "genres": [
-      "Comédie",
-      "Drame",
-      "Histoire"
-    ],
-    "is_french": true,
-    "distributor": "Supermouche Productions",
-    "source": "predicted-default",
-    "confidence": 0.4
-  },
-  {
-    "title": "Primo et Louise",
-    "plex_release": "17 avril 2026",
-    "tmdb_id": 1600943,
-    "poster_path": "/i4BHj5A5ESmg8v6TKK0Hl2aYN5U.jpg",
-    "original_title": "Primo et Louise",
-    "cinema_date": "18 décembre 2025",
-    "vote_average": 8,
-    "vote_count": 1,
-    "genres": [
-      "Comédie",
-      "Romance",
-      "Drame"
-    ],
-    "is_french": true,
-    "distributor": null,
-    "source": "predicted-default",
-    "confidence": 0.4
-  },
-  {
-    "title": "Reminders of Him",
-    "plex_release": "18 avril 2026",
-    "tmdb_id": 1367642,
-    "poster_path": "/od9yzZ6cc3ZGSvJI2mTxcsyI48M.jpg",
-    "original_title": "Reminders of Him",
-    "cinema_date": "18 mars 2026",
-    "vote_average": 7.2,
-    "vote_count": 168,
-    "genres": [
-      "Romance",
-      "Drame"
-    ],
-    "is_french": false,
-    "distributor": "Universal Pictures",
-    "source": "predicted-hint",
-    "confidence": 0.55
+    "source": "prédite"
   },
   {
     "title": "Christy",
@@ -291,210 +209,7 @@
       "Drame"
     ],
     "is_french": false,
-    "distributor": "Anonymous Content",
-    "source": "predicted-default",
-    "confidence": 0.4
-  },
-  {
-    "title": "Good Luck, Have Fun, Don't Die",
-    "plex_release": "20 avril 2026",
-    "tmdb_id": 1119449,
-    "poster_path": "/peLj36BkjP7zdm5voS5QOoye2kC.jpg",
-    "original_title": "Good Luck, Have Fun, Don't Die",
-    "cinema_date": "15 avril 2026",
-    "vote_average": 6.9,
-    "vote_count": 386,
-    "genres": [
-      "Science-Fiction",
-      "Action",
-      "Comédie"
-    ],
-    "is_french": false,
-    "distributor": "Constantin Film",
-    "source": "allocine",
-    "confidence": 0.95
-  },
-  {
-    "title": "La Corde au cou",
-    "plex_release": "20 avril 2026",
-    "tmdb_id": 1263012,
-    "poster_path": "/g7Y94KrUd0pDGRVVZQMh4n9FnYp.jpg",
-    "original_title": "Dead Man's Wire",
-    "cinema_date": "15 avril 2026",
-    "vote_average": 6.4,
-    "vote_count": 114,
-    "genres": [
-      "Crime",
-      "Drame",
-      "Thriller"
-    ],
-    "is_french": false,
-    "distributor": "Elevated Films",
-    "source": "allocine",
-    "confidence": 0.95
-  },
-  {
-    "title": "la fin absolue du monde",
-    "plex_release": "21 avril 2026",
-    "tmdb_id": 1596632,
-    "poster_path": "/d0f1rrJxd79sC7rJ0JoMWDzPdFa.jpg",
-    "original_title": "la fin absolue du monde",
-    "cinema_date": "22 décembre 2025",
-    "vote_average": 0,
-    "vote_count": 0,
-    "genres": [
-      "Drame"
-    ],
-    "is_french": true,
-    "distributor": null,
-    "source": "predicted-default",
-    "confidence": 0.4
-  },
-  {
-    "title": "The Bride!",
-    "plex_release": "23 avril 2026",
-    "tmdb_id": 1159831,
-    "poster_path": "/6TQDTJtHxkz1Ln7oJsw60hPWEw4.jpg",
-    "original_title": "The Bride!",
-    "cinema_date": "4 mars 2026",
-    "vote_average": 6.3,
-    "vote_count": 379,
-    "genres": [
-      "Science-Fiction",
-      "Horreur",
-      "Fantastique"
-    ],
-    "is_french": false,
-    "distributor": "Warner Bros. Pictures",
-    "source": "predicted-hint",
-    "confidence": 0.55
-  },
-  {
-    "title": "Selon Joy",
-    "plex_release": "23 avril 2026",
-    "tmdb_id": 1318710,
-    "poster_path": "/nKceKLtAwStX4lkeh1smyrNKZ8p.jpg",
-    "original_title": "Selon Joy",
-    "cinema_date": "24 décembre 2025",
-    "vote_average": 0,
-    "vote_count": 0,
-    "genres": [
-      "Drame"
-    ],
-    "is_french": true,
-    "distributor": "Barney Production",
-    "source": "predicted-default",
-    "confidence": 0.4
-  },
-  {
-    "title": "C'était mieux demain",
-    "plex_release": "24 avril 2026",
-    "tmdb_id": 1284496,
-    "poster_path": "/f8AbVOhL39Y85J1091sK7auUd77.jpg",
-    "original_title": "C'était mieux demain",
-    "cinema_date": "30 août 2025",
-    "vote_average": 6.1,
-    "vote_count": 87,
-    "genres": [
-      "Comédie",
-      "Science-Fiction"
-    ],
-    "is_french": true,
-    "distributor": "UGC",
-    "source": "tmdb-official-fr",
-    "confidence": 0.9
-  },
-  {
-    "title": "Projet dernière chance",
-    "plex_release": "25 avril 2026",
-    "tmdb_id": 687163,
-    "poster_path": "/wzyy8ZrsuHfAt4iz4iH3rT0tdoT.jpg",
-    "original_title": "Project Hail Mary",
-    "cinema_date": "11 mars 2026",
-    "vote_average": 8.2,
-    "vote_count": 1819,
-    "genres": [
-      "Science-Fiction",
-      "Aventure"
-    ],
-    "is_french": false,
-    "distributor": "Lord Miller",
-    "source": "predicted-default",
-    "confidence": 0.4
-  },
-  {
-    "title": "Anemone",
-    "plex_release": "25 avril 2026",
-    "tmdb_id": 1364608,
-    "poster_path": "/oB69yZFTSzu7Wf16v9WADdDH7Oi.jpg",
-    "original_title": "Anemone",
-    "cinema_date": "25 mars 2026",
-    "vote_average": 6.1,
-    "vote_count": 115,
-    "genres": [
-      "Drame"
-    ],
-    "is_french": false,
-    "distributor": "Focus Features",
-    "source": "predicted-hint",
-    "confidence": 0.55
-  },
-  {
-    "title": "Anaconda",
-    "plex_release": "29 avril 2026",
-    "tmdb_id": 1234731,
-    "poster_path": "/5EbKjIowNw5yExzrhvu231GFVCf.jpg",
-    "original_title": "Anaconda",
-    "cinema_date": "31 décembre 2025",
-    "vote_average": 5.9,
-    "vote_count": 1072,
-    "genres": [
-      "Aventure",
-      "Comédie",
-      "Horreur"
-    ],
-    "is_french": false,
-    "distributor": "Fully Formed Entertainment",
-    "source": "justwatch-fr",
-    "confidence": 0.85
-  },
-  {
-    "title": "Le Pays d’Arto",
-    "plex_release": "29 avril 2026",
-    "tmdb_id": 1308910,
-    "poster_path": "/4kdxpg8WtjDQfLo45YDhkg4hPA1.jpg",
-    "original_title": "Le Pays d’Arto",
-    "cinema_date": "31 décembre 2025",
-    "vote_average": 3.5,
-    "vote_count": 2,
-    "genres": [
-      "Drame"
-    ],
-    "is_french": true,
-    "distributor": "La Huit",
-    "source": "justwatch-fr",
-    "confidence": 0.85
-  },
-  {
-    "title": "De quel côté est la Seine ?",
-    "plex_release": "1 mai 2026",
-    "tmdb_id": 1548029,
-    "poster_path": "/3AQ5uz2CwI7NDgZaGBxLJuuRLwp.jpg",
-    "original_title": "De quel côté est la Seine ?",
-    "cinema_date": "1 janvier 2026",
-    "vote_average": 0,
-    "vote_count": 0,
-    "genres": [
-      "Drame",
-      "Mystère",
-      "Histoire",
-      "Romance",
-      "Thriller"
-    ],
-    "is_french": true,
-    "distributor": null,
-    "source": "predicted-default",
-    "confidence": 0.4
+    "source": "prédite"
   },
   {
     "title": "Le Sifflet",
@@ -510,46 +225,6 @@
       "Mystère"
     ],
     "is_french": false,
-    "distributor": "No Trace Camping",
-    "source": "predicted-default",
-    "confidence": 0.4
-  },
-  {
-    "title": "Dhurandhar : The Revenge",
-    "plex_release": "2 mai 2026",
-    "tmdb_id": 1582770,
-    "poster_path": "/ov8vrRLZGoXHpYjSY9Vpv1tHJX7.jpg",
-    "original_title": "धुरंधर: द रिवेंज",
-    "cinema_date": "18 mars 2026",
-    "vote_average": 7.6,
-    "vote_count": 63,
-    "genres": [
-      "Action",
-      "Crime",
-      "Thriller"
-    ],
-    "is_french": false,
-    "distributor": "Jio Studios",
-    "source": "predicted-default",
-    "confidence": 0.4
-  },
-  {
-    "title": "Nouvelle Vague",
-    "plex_release": "5 mai 2026",
-    "tmdb_id": 1254808,
-    "poster_path": "/pEcAfVyp2XRRoMvlkUdHvgbFqNW.jpg",
-    "original_title": "Nouvelle Vague",
-    "cinema_date": "17 mai 2025",
-    "vote_average": 7.3,
-    "vote_count": 188,
-    "genres": [
-      "Comédie",
-      "Drame",
-      "Histoire"
-    ],
-    "is_french": true,
-    "distributor": "ARP Sélection",
-    "source": "tmdb-official-fr",
-    "confidence": 0.9
+    "source": "prédite"
   }
 ]
