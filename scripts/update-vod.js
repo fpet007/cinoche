@@ -1,8 +1,15 @@
 /**
- * updateVOD.js — v7
- * =================
+ * updateVOD.js — v7.1
+ * ===================
  * Génère la liste des FILMS DE CINÉMA en VOD pour Plex FR.
  * Fenêtre glissante de ±30 jours autour d'aujourd'hui.
+ *
+ * Patches v7.1 (vs v7.0) :
+ * 🔧 Filtre STRICT : vote_count=0 + vote_average=0 → drop (élimine captations fantômes)
+ * 🔧 Détecteur spectacle enrichi : pattern "fête ses N ans", distributeurs spectacle vivant
+ * 🔧 JustWatch élargi à US/CA pour dates VFQ (utile si TVOD FR pas encore dispo)
+ * 🔧 Source "justwatch-na" avec confidence 0.75
+ * 🔧 Logs : ⚠️ visible pour les films à confidence < 0.5
  *
  * Améliorations v7 (vs v6) :
  * ✅ Sources multiples : TMDB + Allociné + JustWatch (avec fallbacks gracieux)
@@ -32,7 +39,7 @@ const path = require('path');
 
 // ─── CONFIG ────────────────────────────────────────────────────────────────────
 
-const CACHE_VERSION = 'v7.0'; // bump pour invalider tous les caches
+const CACHE_VERSION = 'v7.1'; // bump pour invalider tous les caches
 const TMDB_API_KEY  = process.env.TMDB_API_KEY || '3fd2be6f0c70a2a598f084ddfb75487c';
 
 const DATA_DIR        = path.join(__dirname, '../data');
@@ -93,6 +100,27 @@ const SPECTACLE_KEYWORDS = [
   'théâtre', 'theatre', 'pièce de', 'comédie française', 'captation',
   'molière', 'charbon dans les veines',
 ];
+
+// v7.1 : Patterns titres typiques des captations stand-up / spectacle vivant
+const SPECTACLE_TITLE_PATTERNS = [
+  /fête ses?\s+\d+\s+ans/i,        // "Booder fête ses 20 ans"
+  /\bau\s+(zénith|olympia|casino de paris|grand rex|palais des sports)\b/i,
+  /\bsur scène\b/i,
+  /\bone\s*[- ]?\s*(wo)?man\s*[- ]?\s*show\b/i,
+  /\bspectacle\b/i,
+  /\bstand[- ]?up\b/i,
+];
+
+// v7.1 : Distributeurs spectacle vivant connus → drop direct
+const SPECTACLE_DISTRIBUTORS = new Set([
+  'Arpagon Productions',
+  'Pascal Légitimus Productions',
+  'JMD Production',
+  'Ki M\'aime Me Suive',
+  'Productions du Théâtre',
+  'Théâtre des Nouveautés',
+  'Comédie Française',
+]);
 
 const TELEFILM_TITLE_PATTERNS = [
   /^meurtres? à /i,
@@ -207,8 +235,16 @@ function isFrenchProduction(details) {
 
 function hasExcludedGenre(d)   { return d.genres?.some((g) => EXCLUDED_GENRE_IDS.has(g.id)) ?? false; }
 function isSpectacle(d) {
-  const titles = [d.title, d.original_title].filter(Boolean).map((t) => t.toLowerCase());
-  return titles.some((t) => SPECTACLE_KEYWORDS.some((kw) => t.includes(kw)));
+  const titles = [d.title, d.original_title].filter(Boolean);
+  const titlesLower = titles.map((t) => t.toLowerCase());
+  // 1. Mots-clés substring
+  if (titlesLower.some((t) => SPECTACLE_KEYWORDS.some((kw) => t.includes(kw)))) return true;
+  // 2. v7.1 : Patterns regex sur le titre original
+  if (titles.some((t) => SPECTACLE_TITLE_PATTERNS.some((rx) => rx.test(t)))) return true;
+  // 3. v7.1 : Distributeur de spectacle vivant connu
+  const distributor = (d.production_companies || []).find((c) => SPECTACLE_DISTRIBUTORS.has(c.name));
+  if (distributor) return true;
+  return false;
 }
 function isTelefilmByTitle(d) {
   return TELEFILM_TITLE_PATTERNS.some((rx) => rx.test(d.title || ''));
@@ -371,8 +407,8 @@ const JW_QUERY = `
   }
 `;
 
-async function lookupJustWatch(title, year, cache) {
-  const key = `${normalizeTitle(title)}::${year || ''}`;
+async function lookupJustWatchCountry(title, year, country, language, cache) {
+  const key = `${country}::${normalizeTitle(title)}::${year || ''}`;
   if (cache[key] && isFresh(cache[key], JW_TTL_H)) return cache[key].data;
 
   try {
@@ -381,8 +417,8 @@ async function lookupJustWatch(title, year, cache) {
       query: JW_QUERY,
       variables: {
         searchTitlesFilter: { searchQuery: title },
-        country: 'FR',
-        language: 'fr',
+        country,
+        language,
       },
     };
     const res = await fetchWithRetry(JW_GRAPHQL_URL, {
@@ -391,7 +427,6 @@ async function lookupJustWatch(title, year, cache) {
       body: JSON.stringify(body),
     });
     const edges = res?.data?.popularTitles?.edges || [];
-    // Match par titre+année (tolérant ±1 an)
     const targetTitle = normalizeTitle(title);
     let best = edges.find((e) => {
       const t = normalizeTitle(e.node.content?.title);
@@ -399,14 +434,12 @@ async function lookupJustWatch(title, year, cache) {
       return t === targetTitle && (!year || Math.abs(y - year) <= 1);
     });
     if (!best && edges.length) {
-      // Fallback : titre identique sans contrainte d'année
       best = edges.find((e) => normalizeTitle(e.node.content?.title) === targetTitle);
     }
     if (!best) {
       cache[key] = { _cachedAt: Date.now(), data: null };
       return null;
     }
-    // Cherche la première offre TVOD/EST (achat ou location)
     const monetized = (best.node.offers || []).filter(
       (o) => ['BUY', 'RENT'].includes(o.monetizationType) && o.availableFromTime
     );
@@ -418,12 +451,23 @@ async function lookupJustWatch(title, year, cache) {
       .map((o) => new Date(o.availableFromTime))
       .filter((d) => !isNaN(d))
       .sort((a, b) => a - b)[0];
-    const data = earliest ? { date: earliest.toISOString(), source: 'justwatch-fr' } : null;
+    const data = earliest ? { date: earliest.toISOString(), country } : null;
     cache[key] = { _cachedAt: Date.now(), data };
     return data;
   } catch (err) {
-    return null; // Échec silencieux, on tombe sur d'autres sources
+    return null;
   }
+}
+
+// v7.1 : Cascade FR → CA → US (CA/US capture les VFQ et sorties US TVOD précoces)
+async function lookupJustWatch(title, year, cache) {
+  const fr = await lookupJustWatchCountry(title, year, 'FR', 'fr', cache);
+  if (fr) return { ...fr, region: 'fr' };
+  const ca = await lookupJustWatchCountry(title, year, 'CA', 'fr', cache);
+  if (ca) return { ...ca, region: 'na' };
+  const us = await lookupJustWatchCountry(title, year, 'US', 'en', cache);
+  if (us) return { ...us, region: 'na' };
+  return null;
 }
 
 // ─── ALLOCINÉ (scraping HTML léger) ──────────────────────────────────────────
@@ -619,18 +663,25 @@ async function updateVOD() {
     const hasFRCine = hasTheatricalReleaseFR(details.release_dates);
     if (!hasFRCine) { drops.noFRTheatrical++; continue; }
 
-    // ── Filtre qualité v7 (assoupli pour FR récent) ──
+    // ── Filtre qualité v7.1 (STRICT : virer fantômes, garder cinéma d'auteur réel) ──
     const voteCount  = details.vote_count ?? 0;
+    const voteAvg    = details.vote_average ?? 0;
     const popularity = movie.popularity ?? details.popularity ?? 0;
     const cinemaDateFR = getTheatricalDateFR(details.release_dates);
     const cinemaDate   = cinemaDateFR ?? new Date(details.release_date);
     if (isNaN(cinemaDate)) { drops.noReleaseDate++; continue; }
     const ageDays = (now - cinemaDate) / 86400000;
 
+    // Règle absolue : aucun vote ET aucune note = fantôme/captation → drop
+    // (un vrai film de cinéma sorti en salle a TOUJOURS au moins 1-2 votes TMDB)
+    if (voteCount === 0 && voteAvg === 0) {
+      drops.lowQuality++; continue;
+    }
+
     const isSafeVolume   = voteCount >= 5;
     const isNicheButReal = popularity >= 1.5;
-    const isFrenchRecent = isFrench && ageDays < 150; // FR récent → bypass qualité
-    if (!isSafeVolume && !isNicheButReal && !isFrenchRecent) {
+    // Bypass FR récent retiré en v7.1 : sauvait trop de captations (cf. Booder)
+    if (!isSafeVolume && !isNicheButReal) {
       drops.lowQuality++; continue;
     }
 
@@ -663,8 +714,14 @@ async function updateVOD() {
       confidence = 0.90;
     } else if (jwData?.date) {
       vodDate = new Date(jwData.date);
-      source = 'justwatch-fr';
-      confidence = 0.85;
+      // v7.1 : distingue FR (haute confiance) vs NA = US/CA pour VFQ (confiance moyenne)
+      if (jwData.region === 'fr') {
+        source = 'justwatch-fr';
+        confidence = 0.85;
+      } else {
+        source = 'justwatch-na';
+        confidence = 0.75;
+      }
     } else {
       // Prédiction avec délai appris/hint/défaut
       const vod = new Date(cinemaDate);
@@ -680,7 +737,7 @@ async function updateVOD() {
     if (vodDate > windowEnd)   { drops.afterWindow++;  continue; }
 
     // Enregistre l'observation pour apprentissage si source fiable
-    if (['allocine', 'tmdb-official-fr', 'justwatch-fr'].includes(source) && distributor) {
+    if (['allocine', 'tmdb-official-fr', 'justwatch-fr', 'justwatch-na'].includes(source) && distributor) {
       recordObservation(history, {
         tmdbId: movie.id,
         title: details.title,
@@ -715,8 +772,11 @@ async function updateVOD() {
     const srcEmoji = source === 'allocine' ? '🅰️ '
                    : source === 'tmdb-official-fr' ? '✓ '
                    : source === 'justwatch-fr' ? '📺'
+                   : source === 'justwatch-na' ? '🇨🇦'
                    : '~ ';
-    console.log(`     ${flag} ${srcEmoji} ${(details.title || '').padEnd(40).slice(0,40)} → ${formatDateFR(vodDate)} (conf: ${confidence.toFixed(2)})`);
+    // v7.1 : warning visible si confidence basse (films à risque)
+    const warn = confidence < 0.5 ? ' ⚠️ ' : '   ';
+    console.log(`     ${flag} ${srcEmoji}${warn}${(details.title || '').padEnd(38).slice(0,38)} → ${formatDateFR(vodDate)} (conf: ${confidence.toFixed(2)})`);
   }
 
   // ── Étape 4 : Tri, dédup, écriture ──
