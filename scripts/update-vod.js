@@ -581,12 +581,16 @@ async function lookupJustWatchCountry(title, year, country, language, cache) {
   }
 }
 
-// v7.1 : Cascade FR → CA → US (CA/US capture les VFQ et sorties US TVOD précoces)
-async function lookupJustWatch(title, year, cache) {
+// v7.2 : Cascade FR → (CA → US si film INTL uniquement)
+// Pour les films FR, la cascade NA est inutile (un film FR n'a pas de VFQ avant la VOD FR).
+async function lookupJustWatch(title, year, cache, isFrench = false) {
   const fr = await lookupJustWatchCountry(title, year, 'FR', 'fr', cache);
   if (fr) return { ...fr, region: 'fr' };
+  if (isFrench) return null; // pas de cascade NA pour les films FR
+  await sleep(API_DELAY_MS); // anti-rate-limit entre appels JustWatch
   const ca = await lookupJustWatchCountry(title, year, 'CA', 'fr', cache);
   if (ca) return { ...ca, region: 'na' };
+  await sleep(API_DELAY_MS);
   const us = await lookupJustWatchCountry(title, year, 'US', 'en', cache);
   if (us) return { ...us, region: 'na' };
   return null;
@@ -821,14 +825,19 @@ async function updateVOD() {
     const officialDigital = getOfficialDigitalDateFR(details.release_dates); // FR-only
     const year = cinemaDate.getFullYear();
 
-    // Tentative JustWatch (sans bloquer si échec)
-    let jwData = null;
-    try { jwData = await lookupJustWatch(details.title, year, jwCache); }
-    catch {}
-
-    // Tentative Allociné (lookup dans l'index pré-calculé)
+    // v7.2 : Tentative Allociné EN PREMIER (déjà en cache, lookup gratuit dans Map)
     const alloDate = alloIndex.get(normalizeTitle(details.title))
                    || alloIndex.get(normalizeTitle(details.original_title));
+
+    // v7.2 : JustWatch UNIQUEMENT si on n'a ni Allociné ni TMDB officielle FR
+    //        Sinon on gaspille ~3 appels GraphQL pour rien.
+    //        Cascade NA limitée aux films INTL (un film FR n'a pas de raison d'avoir une VFQ avant la VOD FR).
+    let jwData = null;
+    if (!alloDate && !officialDigital) {
+      try {
+        jwData = await lookupJustWatch(details.title, year, jwCache, isFrench);
+      } catch {}
+    }
 
     // ── Décision finale : choisir la meilleure source ──
     // Ordre de priorité : Allociné > TMDB officielle FR > JustWatch > Prédiction
