@@ -1,5 +1,21 @@
 [
   {
+    "title": "Projet dernière chance",
+    "plex_release": "5 mai 2026",
+    "tmdb_id": 687163,
+    "poster_path": "/wzyy8ZrsuHfAt4iz4iH3rT0tdoT.jpg",
+    "original_title": "Project Hail Mary",
+    "cinema_date": "15 mars 2026",
+    "vote_average": 8.2,
+    "vote_count": 1846,
+    "genres": [
+      "Science-Fiction",
+      "Aventure"
+    ],
+    "is_french": false,
+    "source": "prédite-mardi"
+  },
+  {
     "title": "Dhurandhar : The Revenge",
     "plex_release": "5 mai 2026",
     "tmdb_id": 1582770,
@@ -15,6 +31,25 @@
     ],
     "is_french": false,
     "source": "prédite-mardi"
+  },
+  {
+    "title": "Super Mario Galaxy, le film",
+    "plex_release": "5 mai 2026",
+    "tmdb_id": 1226863,
+    "poster_path": "/aSQktALDmbunDbwkuZbZFMEWVFr.jpg",
+    "original_title": "The Super Mario Galaxy Movie",
+    "cinema_date": "1 avril 2026",
+    "vote_average": 6.7,
+    "vote_count": 690,
+    "genres": [
+      "Familial",
+      "Comédie",
+      "Aventure",
+      "Fantastique",
+      "Animation"
+    ],
+    "is_french": false,
+    "source": "maxblizz"
   },
   {
     "title": "Ma frère",
@@ -65,6 +100,22 @@
     "source": "prédite"
   },
   {
+    "title": "Le Réveil de la Momie",
+    "plex_release": "19 mai 2026",
+    "tmdb_id": 1304313,
+    "poster_path": "/f77yGBGOjainowvlGHU70CCQrjV.jpg",
+    "original_title": "Lee Cronin's The Mummy",
+    "cinema_date": "15 avril 2026",
+    "vote_average": 6.8,
+    "vote_count": 166,
+    "genres": [
+      "Horreur",
+      "Mystère"
+    ],
+    "is_french": false,
+    "source": "officielle-us"
+  },
+  {
     "title": "The Drama",
     "plex_release": "19 mai 2026",
     "tmdb_id": 1325734,
@@ -82,36 +133,20 @@
     "source": "prédite-mardi"
   },
   {
-    "title": "Dolly",
+    "title": "Stille Freundin",
     "plex_release": "19 mai 2026",
-    "tmdb_id": 1309083,
-    "poster_path": "/9gIbvpGc3Dhm23XfjKZILbmppMA.jpg",
-    "original_title": "Dolly",
+    "tmdb_id": 1168719,
+    "poster_path": "/yTPbeO1Peb9fgmJLecTk7KyzctQ.jpg",
+    "original_title": "Stille Freundin",
     "cinema_date": "1 avril 2026",
-    "vote_average": 6.4,
-    "vote_count": 33,
+    "vote_average": 7.9,
+    "vote_count": 15,
     "genres": [
-      "Horreur"
+      "Drame",
+      "Histoire"
     ],
     "is_french": false,
     "source": "prédite-mardi"
-  },
-  {
-    "title": "Le Mage du Kremlin",
-    "plex_release": "21 mai 2026",
-    "tmdb_id": 1291659,
-    "poster_path": "/efxlwMqMiZzDF2DABswC5VWptRC.jpg",
-    "original_title": "Le mage du Kremlin",
-    "cinema_date": "21 janvier 2026",
-    "vote_average": 6.5,
-    "vote_count": 120,
-    "genres": [
-      "Drame",
-      "Comédie",
-      "Thriller"
-    ],
-    "is_french": true,
-    "source": "prédite"
   },
   {
     "title": "Grand Ciel",
@@ -125,24 +160,6 @@
     "genres": [
       "Thriller",
       "Fantastique"
-    ],
-    "is_french": true,
-    "source": "prédite"
-  },
-  {
-    "title": "Olivia",
-    "plex_release": "21 mai 2026",
-    "tmdb_id": 676679,
-    "poster_path": "/3qqL5jpYIatN0Cdz21eATs32SHG.jpg",
-    "original_title": "L'Olívia i el terratrèmol invisible",
-    "cinema_date": "21 janvier 2026",
-    "vote_average": 7.5,
-    "vote_count": 4,
-    "genres": [
-      "Animation",
-      "Comédie",
-      "Drame",
-      "Familial"
     ],
     "is_french": true,
     "source": "prédite"
