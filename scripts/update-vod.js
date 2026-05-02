@@ -188,88 +188,133 @@ async function fetchMaxblizzReleases() {
   const releases = new Map();
 
   try {
-    // 1. Page liste : on récupère les liens vers les articles individuels
+    // Stratégie : on parse directement la page liste. Chaque entrée VOD contient
+    // un alt d'image avec la phrase "<Titre> will be available on VOD starting
+    // <Month> <Day>, <Year>" (ou des variantes "available... on", "arrives on",
+    // "arriving on", "starting"...). C'est plus robuste que de fetch chaque article.
     const listHtml = await fetchWithRetry(
       'https://maxblizz.com/dvd-and-vod-release-dates/',
       3,
       { text: true, headers: { 'User-Agent': 'Mozilla/5.0 updateVOD-bot' } }
     );
 
-    // Extrait les liens d'articles : pattern <a href="https://maxblizz.com/[slug]-vod-release-date-revealed/">
-    const articleRegex = /href="(https:\/\/maxblizz\.com\/[a-z0-9-]+-vod-release-date-revealed\/?)"/gi;
-    const articleUrls = new Set();
-    let match;
-    while ((match = articleRegex.exec(listHtml)) !== null) {
-      articleUrls.add(match[1]);
+    // Extrait toutes les balises img avec leur alt, et tous les liens d'articles VOD
+    // pour faire la correspondance image -> article -> titre.
+    //
+    // Pattern visé dans la page liste :
+    //   <a href="https://maxblizz.com/the-super-mario-galaxy-movie-vod-release-date-revealed/">
+    //     <img alt="The Super Mario Galaxy Movie will be available on VOD starting May 19, 2026..." />
+    //   </a>
+    // On capture conjointement href + alt grâce à un look-around tolérant.
+
+    // Extraction par paires (lien, alt d'image associée)
+    const pairRegex = /<a[^>]+href="(https:\/\/maxblizz\.com\/([a-z0-9-]+)-vod-release-date-revealed\/?)"[^>]*>\s*<img[^>]+alt="([^"]+)"/gi;
+    const pairs = [];
+    let m;
+    while ((m = pairRegex.exec(listHtml)) !== null) {
+      pairs.push({ url: m[1], slug: m[2], alt: m[3] });
     }
 
-    console.log(`     ${articleUrls.size} articles VOD trouvés`);
-
-    // 2. Pour chaque article, on extrait le titre du film + la date VOD US annoncée
-    let parsed = 0;
-    for (const url of articleUrls) {
-      try {
-        await sleep(250); // soft rate limit pour ne pas matraquer le site
-        const html = await fetchWithRetry(url, 2, {
-          text: true, headers: { 'User-Agent': 'Mozilla/5.0 updateVOD-bot' },
-        });
-
-        // Cherche une date au format "Month DD, YYYY" dans le contenu
-        // Plusieurs patterns possibles : "starting May 5, 2026", "on March 31, 2026", etc.
-        const dateRegex = /\b(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2}),\s+(\d{4})\b/gi;
-        const dates = [];
-        let dm;
-        while ((dm = dateRegex.exec(html)) !== null) {
-          const d = new Date(`${dm[1]} ${dm[2]}, ${dm[3]} 12:00:00 UTC`);
-          if (!isNaN(d)) dates.push(d);
-        }
-
-        // On prend la date la plus probable : la plus future (date de SORTIE, pas date de l'article)
-        // Heuristique : on filtre les dates < aujourd'hui - 7j (ce sont des dates d'articles)
-        const cutoff = Date.now() - 7 * 86400000;
-        const futureDates = dates.filter((d) => d.getTime() > cutoff);
-        const vodDate = futureDates.length
-          ? futureDates.sort((a, b) => a - b)[0]   // la plus proche dans le futur
-          : null;
-
-        if (!vodDate) continue;
-
-        // Extrait le titre du film depuis le slug : 
-        //   .../the-super-mario-galaxy-movie-vod-release-date-revealed/
-        //     → "the super mario galaxy movie"
-        const slugMatch = url.match(/maxblizz\.com\/([a-z0-9-]+)-vod-release-date-revealed/i);
-        if (!slugMatch) continue;
-        const rawSlug = slugMatch[1].replace(/-/g, ' ');
-
-        // Nettoie : retire des préfixes redondants type "lee cronins", "sam raimis", "maggie gyllenhaals"
-        // (le scraping liste l'a montré : ces noms de réalisateur polluent le slug)
-        const cleanedTitle = rawSlug
-          .replace(/^[a-z]+ ?[a-z]+s? /, (m) => {
-            // Si le préfixe ressemble à un nom propre possessif, on l'enlève seulement s'il y a >=3 mots après
-            const rest = rawSlug.slice(m.length).trim();
-            return rest.split(' ').length >= 2 ? '' : m;
-          })
-          .trim();
-
-        const norm = normalizeTitle(cleanedTitle);
-        if (!norm) continue;
-
-        // En cas de collision, on garde la date la plus précoce (= annonce la plus ferme)
-        const existing = releases.get(norm);
-        if (!existing || vodDate < existing.date) {
-          releases.set(norm, {
-            date: vodDate,
-            originalTitle: cleanedTitle,
-            url,
-          });
-        }
-        parsed++;
-      } catch (err) {
-        // article inaccessible → on passe
+    // Fallback : si la regex couplée n'a rien donné (markup différent),
+    // on fait deux passes séparées et on apparie par proximité.
+    if (pairs.length === 0) {
+      console.log(`     ⚠️  Markup couplé introuvable, fallback...`);
+      const linkRe = /href="(https:\/\/maxblizz\.com\/([a-z0-9-]+)-vod-release-date-revealed\/?)"/gi;
+      const altRe  = /<img[^>]+alt="([^"]+)"/gi;
+      const links = [];
+      const alts  = [];
+      while ((m = linkRe.exec(listHtml)) !== null) links.push({ url: m[1], slug: m[2], pos: m.index });
+      while ((m = altRe.exec(listHtml))  !== null) alts.push({ alt: m[1], pos: m.index });
+      // Pour chaque lien, on prend le alt le plus proche dont la position est >= celle du lien
+      for (const l of links) {
+        const closest = alts
+          .filter((a) => Math.abs(a.pos - l.pos) < 600)
+          .sort((a, b) => Math.abs(a.pos - l.pos) - Math.abs(b.pos - l.pos))[0];
+        if (closest) pairs.push({ url: l.url, slug: l.slug, alt: closest.alt });
       }
     }
 
-    console.log(`     ✓ ${parsed} dates VOD US extraites de MaxBlizz`);
+    // Dédoublonnage par URL
+    const seen = new Set();
+    const uniquePairs = pairs.filter((p) => {
+      if (seen.has(p.url)) return false;
+      seen.add(p.url);
+      return true;
+    });
+
+    console.log(`     ${uniquePairs.length} entrées VOD trouvées sur la liste`);
+
+    // Patterns de date dans le alt :
+    //   "...starting May 19, 2026"
+    //   "...on March 31, 2026"
+    //   "...arrives on April 14, 2026"
+    //   "...arriving on January 27, 2026"
+    //   "...VOD May 5, 2026"
+    const dateRegex = /\b(?:starting|on|VOD|date)\s+(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2}),?\s+(\d{4})\b/i;
+    // Pattern de fallback (date "nue") au cas où la préposition manque
+    const bareDateRegex = /\b(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2}),\s+(\d{4})\b/;
+
+    let parsed = 0;
+    for (const { url, slug, alt } of uniquePairs) {
+      // 1. Extrait la date depuis le alt
+      let dm = alt.match(dateRegex) || alt.match(bareDateRegex);
+      if (!dm) continue;
+      const date = new Date(`${dm[1]} ${dm[2]}, ${dm[3]} 12:00:00 UTC`);
+      if (isNaN(date)) continue;
+
+      // 2. Extrait le titre depuis le alt (avant " will be available", " VOD", " gets a", " arrives", etc.)
+      // ou à défaut depuis le slug.
+      let title = null;
+      const altLower = alt.toLowerCase();
+      const splitMarkers = [
+        ' will be available',
+        ' will arrive',
+        ' arrives ',
+        ' arriving ',
+        ' gets a vod',
+        ' gets a digital',
+        ' is coming',
+        ' coming to vod',
+        ' vod release',
+        ' digital hd',
+        ' is now available',
+      ];
+      for (const marker of splitMarkers) {
+        const idx = altLower.indexOf(marker);
+        if (idx > 5) {
+          title = alt.slice(0, idx).trim();
+          break;
+        }
+      }
+      if (!title) {
+        // Fallback : reconstitue depuis le slug (mots séparés par tirets)
+        title = slug.replace(/-/g, ' ');
+      }
+
+      // Normalisation : la clé de matching enlève les noms de réalisateur en préfixe
+      // (le slug donne souvent "lee-cronins-the-mummy", on veut matcher "the mummy")
+      const baseNorm = normalizeTitle(title);
+
+      // Génère 2-3 clés possibles pour maximiser le matching :
+      //  - clé brute (titre complet)
+      //  - clé sans premier mot (si > 2 mots, retire les noms propres en préfixe type "lee cronins")
+      //  - clé sans deux premiers mots (si > 3 mots)
+      const tokens = baseNorm.split(' ').filter(Boolean);
+      const keysToStore = new Set([baseNorm]);
+      if (tokens.length >= 3) keysToStore.add(tokens.slice(1).join(' '));
+      if (tokens.length >= 4) keysToStore.add(tokens.slice(2).join(' '));
+
+      for (const key of keysToStore) {
+        if (!key || key.length < 3) continue;
+        const existing = releases.get(key);
+        if (!existing || date < existing.date) {
+          releases.set(key, { date, originalTitle: title, url });
+        }
+      }
+      parsed++;
+    }
+
+    console.log(`     ✓ ${parsed} dates VOD US extraites (${releases.size} clés de matching)`);
 
     // Cache
     const toCache = {
@@ -288,37 +333,89 @@ async function fetchMaxblizzReleases() {
 
 /**
  * Cherche un film dans la map MaxBlizz par titre (FR ou original).
- * Matching tolérant : exact, préfixe, ou contenu mutuel.
+ * Stratégie en 3 niveaux :
+ *  1. Match exact sur la clé normalisée (titre FR ou titre original)
+ *  2. Match par inclusion stricte (titre court inclus dans titre long)
+ *  3. Match par tokens : tous les mots significatifs (>2 lettres) du titre TMDB
+ *     présents dans la clé MaxBlizz, OU inversement.
+ *
+ * Note : on teste prioritairement le titre original (anglais) car MaxBlizz est
+ * un site US, ses titres sont en anglais. Les titres FR des films US sont
+ * souvent traduits ("The Mummy" → "Le Réveil de la Momie") et ne matcheront pas.
  */
 function findMaxblizzMatch(maxblizzMap, title, originalTitle) {
-  const candidates = [title, originalTitle].filter(Boolean).map(normalizeTitle);
+  // On privilégie le titre original (anglais) en premier — MaxBlizz est en anglais.
+  const candidates = [originalTitle, title].filter(Boolean).map(normalizeTitle).filter(Boolean);
+
+  // Niveau 1 : match exact
   for (const c of candidates) {
-    if (!c) continue;
     if (maxblizzMap.has(c)) return maxblizzMap.get(c);
-    // Match tolérant : titre TMDB inclus dans une clé MaxBlizz, ou inversement.
-    // Garde-fou : on exige >= 8 caractères pour éviter les faux positifs ("the", "ana"…).
-    if (c.length < 8) continue;
+  }
+
+  // Niveau 2 : inclusion stricte (titre court contenu dans titre long)
+  for (const c of candidates) {
+    if (c.length < 4) continue; // évite les faux positifs sur des mots trop courts
     for (const [k, v] of maxblizzMap.entries()) {
-      if (k.length < 8) continue;
-      if (k === c) return v;
-      if (k.includes(c) || c.includes(k)) {
-        // Vérifie que ce n'est pas un match trop large
-        const ratio = Math.min(k.length, c.length) / Math.max(k.length, c.length);
-        if (ratio >= 0.6) return v;
+      if (k.length < 4) continue;
+      // Inclusion mot-à-mot pour éviter "mummy" → "the mummy returns"
+      const cTokens = c.split(' ');
+      const kTokens = k.split(' ');
+      const cInK = cTokens.every((t) => kTokens.includes(t));
+      const kInC = kTokens.every((t) => cTokens.includes(t));
+      if (cInK || kInC) {
+        // Garde-fou : il faut au moins 1 token significatif (>3 lettres)
+        const sigC = cTokens.filter((t) => t.length > 3);
+        const sigK = kTokens.filter((t) => t.length > 3);
+        if (sigC.length > 0 && sigK.length > 0) return v;
       }
     }
   }
+
+  // Niveau 3 : tokens communs significatifs (>3 lettres) — règle plus permissive
+  // On exige qu'au moins 2 tokens significatifs soient communs (sécurité contre faux positifs)
+  for (const c of candidates) {
+    const cTokens = c.split(' ').filter((t) => t.length > 3);
+    if (cTokens.length === 0) continue;
+    for (const [k, v] of maxblizzMap.entries()) {
+      const kTokens = k.split(' ').filter((t) => t.length > 3);
+      if (kTokens.length === 0) continue;
+      const common = cTokens.filter((t) => kTokens.includes(t));
+      // Si l'un des deux titres est court (1-2 tokens significatifs), on exige
+      // que TOUS ses tokens significatifs soient présents dans l'autre.
+      const minTokens = Math.min(cTokens.length, kTokens.length);
+      if (minTokens === 1 && common.length >= 1) return v;
+      if (minTokens >= 2 && common.length >= 2) return v;
+    }
+  }
+
   return null;
 }
 
 // ─── HELPERS MÉTIER ────────────────────────────────────────────────────────────
 
+/**
+ * Détermine si un film doit suivre la chronologie des médias FR (délai 120j).
+ *
+ * RÈGLE STRICTE : un film n'est "français" au sens chronologique QUE s'il est
+ * en langue française. Un blockbuster US co-produit avec un studio FR
+ * (ex: Illumination Paris pour Mario Galaxy, Despicable Me…) reste un film
+ * américain au sens distribution / chronologie : il sort en PVOD US à 45j,
+ * pas après 4 mois comme un film FR à l'acte.
+ *
+ * Sans cette règle, des blockbusters comme Mario Galaxy étaient classés FR
+ * (production_countries=['FR','US','JP'], origin=['FR']) et ratés du mois.
+ */
 function isFrenchProduction(details) {
-  const hasFRCountry  = details.production_countries?.some((c) => c.iso_3166_1 === 'FR') ?? false;
-  const hasFROrigin   = details.origin_country?.includes('FR') ?? false;
-  const isFrLang      = details.original_language === 'fr';
-  const score = (hasFRCountry ? 1 : 0) + (hasFROrigin ? 1 : 0) + (isFrLang ? 1 : 0);
-  return score >= 2;
+  // Critère bloquant : la langue originale doit être française.
+  // Sans elle, peu importe les pays de production.
+  if (details.original_language !== 'fr') return false;
+
+  // Avec la langue française, il faut au moins UN ancrage de production FR
+  // pour confirmer (sinon on capte aussi les films québécois, belges, etc.,
+  // qui ne suivent PAS la chronologie FR à l'acte).
+  const hasFRCountry = details.production_countries?.some((c) => c.iso_3166_1 === 'FR') ?? false;
+  const hasFROrigin  = details.origin_country?.includes('FR') ?? false;
+  return hasFRCountry || hasFROrigin;
 }
 
 function hasExcludedGenre(details) {
@@ -435,9 +532,15 @@ function buildScanEndpoints(monthStart, windowEnd) {
   frStart.setMonth(frStart.getMonth() - 6); frStart.setDate(frStart.getDate() - 15);
   const frEnd   = new Date(monthStart); frEnd.setDate(frEnd.getDate() - 100);
 
+  // Fenêtre INTL : on doit capter les films dont la date ciné FR est suffisamment
+  // récente pour que la VOD tombe dans le mois cible (délai PVOD US ~30-45j).
+  // Borne haute : monthStart + 15 jours (un film sorti à J+15 du mois cible peut
+  // sortir en VOD à J+45 = J+30 du mois cible, encore dedans).
+  // Borne basse : 4 mois en arrière (couvre les films à fenêtre PVOD plus longue).
   const intlStart = new Date(windowEnd);
   intlStart.setMonth(intlStart.getMonth() - 4);
-  const intlEnd   = new Date(monthStart); intlEnd.setDate(intlEnd.getDate() - 30);
+  const intlEnd = new Date(monthStart);
+  intlEnd.setDate(intlEnd.getDate() + 15);
 
   const base = `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=fr-FR&include_adult=false`;
   return [
