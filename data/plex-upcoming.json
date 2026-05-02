@@ -1,22 +1,5 @@
 [
   {
-    "title": "Dhurandhar : The Revenge",
-    "plex_release": "2 mai 2026",
-    "tmdb_id": 1582770,
-    "poster_path": "/ov8vrRLZGoXHpYjSY9Vpv1tHJX7.jpg",
-    "original_title": "धुरंधर: द रिवेंज",
-    "cinema_date": "18 mars 2026",
-    "vote_average": 7.6,
-    "vote_count": 63,
-    "genres": [
-      "Action",
-      "Crime",
-      "Thriller"
-    ],
-    "is_french": false,
-    "source": "prédite"
-  },
-  {
     "title": "Ma frère",
     "plex_release": "7 mai 2026",
     "tmdb_id": 1290436,
@@ -65,57 +48,6 @@
     "source": "prédite"
   },
   {
-    "title": "Super Mario Galaxy, le film",
-    "plex_release": "16 mai 2026",
-    "tmdb_id": 1226863,
-    "poster_path": "/aSQktALDmbunDbwkuZbZFMEWVFr.jpg",
-    "original_title": "The Super Mario Galaxy Movie",
-    "cinema_date": "1 avril 2026",
-    "vote_average": 6.7,
-    "vote_count": 685,
-    "genres": [
-      "Familial",
-      "Comédie",
-      "Aventure",
-      "Fantastique",
-      "Animation"
-    ],
-    "is_french": false,
-    "source": "prédite"
-  },
-  {
-    "title": "The Drama",
-    "plex_release": "16 mai 2026",
-    "tmdb_id": 1325734,
-    "poster_path": "/37r0FZuv9OAQgMApDoJ8gvd5LWs.jpg",
-    "original_title": "The Drama",
-    "cinema_date": "1 avril 2026",
-    "vote_average": 7,
-    "vote_count": 566,
-    "genres": [
-      "Romance",
-      "Comédie",
-      "Drame"
-    ],
-    "is_french": false,
-    "source": "prédite"
-  },
-  {
-    "title": "Dolly",
-    "plex_release": "16 mai 2026",
-    "tmdb_id": 1309083,
-    "poster_path": "/9gIbvpGc3Dhm23XfjKZILbmppMA.jpg",
-    "original_title": "Dolly",
-    "cinema_date": "1 avril 2026",
-    "vote_average": 6.4,
-    "vote_count": 33,
-    "genres": [
-      "Horreur"
-    ],
-    "is_french": false,
-    "source": "prédite"
-  },
-  {
     "title": "Le Mage du Kremlin",
     "plex_release": "21 mai 2026",
     "tmdb_id": 1291659,
@@ -123,7 +55,7 @@
     "original_title": "Le mage du Kremlin",
     "cinema_date": "21 janvier 2026",
     "vote_average": 6.5,
-    "vote_count": 119,
+    "vote_count": 120,
     "genres": [
       "Drame",
       "Comédie",
@@ -164,22 +96,6 @@
       "Familial"
     ],
     "is_french": true,
-    "source": "prédite"
-  },
-  {
-    "title": "Wedding Nightmare : Deuxième Partie",
-    "plex_release": "23 mai 2026",
-    "tmdb_id": 1266127,
-    "poster_path": "/ICQGjgWmTD3idlMUgRhhKIIxul.jpg",
-    "original_title": "Ready or Not 2: Here I Come",
-    "cinema_date": "8 avril 2026",
-    "vote_average": 7,
-    "vote_count": 294,
-    "genres": [
-      "Horreur",
-      "Comédie"
-    ],
-    "is_french": false,
     "source": "prédite"
   }
 ]
