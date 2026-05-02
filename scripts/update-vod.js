@@ -391,24 +391,21 @@ function predictVODDate(cinemaDate, isFrench) {
 
 /**
  * Snap to Tuesday (règle empirique de l'utilisateur) : pour les films US uniquement,
- * on aligne la date prédite sur le mardi le plus proche.
+ * on aligne la date prédite sur le PROCHAIN mardi (jamais en arrière).
  * Les blockbusters américains sortent en VOD le mardi (PVOD/TVOD US).
  * On NE TOUCHE PAS aux dates officielles ni MaxBlizz : ces sources sont déjà précises.
+ *
+ * Important : on n'arrondit JAMAIS en arrière, sinon on passerait sous le délai
+ * minimum chronologie médias (45j US) et le film serait éjecté du résultat.
+ * Au pire on ajoute 0..6 jours, jamais on n'en retire.
  */
 function snapToTuesday(date) {
   const d = new Date(date);
-  const day = d.getDay(); // 0=dim, 1=lun, 2=mar, 3=mer...
-  // Distance signée vers le mardi le plus proche
-  // mardi = 2. Diff possibles : -2..+4
-  const candidates = [
-    { delta: 2 - day, sign: 1 },              // mardi prochain (ou aujourd'hui)
-    { delta: 2 - day - 7, sign: -1 },         // mardi précédent
-  ];
-  // On prend la distance absolue minimale
-  const best = candidates.reduce((a, b) =>
-    Math.abs(a.delta) <= Math.abs(b.delta) ? a : b
-  );
-  d.setDate(d.getDate() + best.delta);
+  const day = d.getDay(); // 0=dim, 1=lun, 2=mar, 3=mer, 4=jeu, 5=ven, 6=sam
+  // Décalage vers le prochain mardi (mardi=2). Si on est déjà mardi, on reste.
+  // dim=0 → +2, lun=1 → +1, mar=2 → 0, mer=3 → +6, jeu=4 → +5, ven=5 → +4, sam=6 → +3
+  const delta = (2 - day + 7) % 7;
+  d.setDate(d.getDate() + delta);
   return d;
 }
 
@@ -485,7 +482,7 @@ async function fetchMovieDetails(movieId, cache) {
  *   3. Date numérique officielle TMDB (FR puis US)
  *   4. Prédiction (cinemaDate + délai), avec snap to Tuesday pour les films US
  */
-function resolveVODDate({ details, movie, cinemaDate, isFrench, maxblizzMap }) {
+function resolveVODDate({ details, movie, cinemaDate, isFrench, maxblizzMap, windowEnd }) {
   // 1. Override manuel
   const titleNorm = normalizeTitle(details.title || movie.title);
   const origNorm  = normalizeTitle(details.original_title || '');
@@ -513,9 +510,15 @@ function resolveVODDate({ details, movie, cinemaDate, isFrench, maxblizzMap }) {
 
   // 4. Prédiction
   const predicted = predictVODDate(cinemaDate, isFrench);
-  // Snap to Tuesday : règle empirique pour les films US uniquement
+  // Snap to Tuesday : règle empirique pour les films US uniquement.
+  // Garde-fou : si le snap pousse la date au-delà de la fin du mois cible,
+  // on conserve la date prédite originale plutôt que d'éjecter le film.
   if (!isFrench) {
-    return { date: snapToTuesday(predicted), source: 'prédite-mardi' };
+    const snapped = snapToTuesday(predicted);
+    if (windowEnd && snapped > windowEnd && predicted <= windowEnd) {
+      return { date: predicted, source: 'prédite' };
+    }
+    return { date: snapped, source: 'prédite-mardi' };
   }
   return { date: predicted, source: 'prédite' };
 }
@@ -615,12 +618,15 @@ async function updateVOD() {
 
     // ── Hiérarchie des sources : override > maxblizz > officielle TMDB > prédite ──
     const { date: vodDate, source } = resolveVODDate({
-      details, movie, cinemaDate, isFrench, maxblizzMap,
+      details, movie, cinemaDate, isFrench, maxblizzMap, windowEnd,
     });
 
-    // Sécurité : on n'accepte pas une date VOD avant la sortie ciné + délai minimum
-    // (sauf pour les overrides manuels, qui sont une source de vérité absolue)
-    if (source !== 'override-manuel') {
+    // Sécurité délai : on rejette une date VOD trop proche de la sortie ciné
+    // UNIQUEMENT pour les dates prédites (où l'on calcule soi-même).
+    // Les sources fiables (override, maxblizz, officielles TMDB) sont acceptées telles quelles :
+    // si un studio annonce une fenêtre PVOD plus courte, c'est la réalité, pas un bug.
+    const isPredicted = source === 'prédite' || source === 'prédite-mardi';
+    if (isPredicted) {
       const actualDelayDays = (vodDate - cinemaDate) / 86400000;
       if (actualDelayDays < minDelay) { dropReasons.delayTooShort++; continue; }
     }
