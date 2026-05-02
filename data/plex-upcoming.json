@@ -1,7 +1,7 @@
 [
   {
     "title": "Dhurandhar : The Revenge",
-    "plex_release": "5 mai 2026",
+    "plex_release": "2 mai 2026",
     "tmdb_id": 1582770,
     "poster_path": "/ov8vrRLZGoXHpYjSY9Vpv1tHJX7.jpg",
     "original_title": "धुरंधर: द रिवेंज",
@@ -14,7 +14,7 @@
       "Thriller"
     ],
     "is_french": false,
-    "source": "prédite-mardi"
+    "source": "prédite"
   },
   {
     "title": "Ma frère",
@@ -30,6 +30,22 @@
     ],
     "is_french": true,
     "source": "prédite"
+  },
+  {
+    "title": "Projet dernière chance",
+    "plex_release": "12 mai 2026",
+    "tmdb_id": 687163,
+    "poster_path": "/wzyy8ZrsuHfAt4iz4iH3rT0tdoT.jpg",
+    "original_title": "Project Hail Mary",
+    "cinema_date": "15 mars 2026",
+    "vote_average": 8.2,
+    "vote_count": 1846,
+    "genres": [
+      "Science-Fiction",
+      "Aventure"
+    ],
+    "is_french": false,
+    "source": "override-manuel"
   },
   {
     "title": "L’affaire Bojarski",
@@ -66,7 +82,7 @@
   },
   {
     "title": "The Drama",
-    "plex_release": "19 mai 2026",
+    "plex_release": "16 mai 2026",
     "tmdb_id": 1325734,
     "poster_path": "/37r0FZuv9OAQgMApDoJ8gvd5LWs.jpg",
     "original_title": "The Drama",
@@ -79,23 +95,22 @@
       "Drame"
     ],
     "is_french": false,
-    "source": "prédite-mardi"
+    "source": "prédite"
   },
   {
-    "title": "Stille Freundin",
-    "plex_release": "19 mai 2026",
-    "tmdb_id": 1168719,
-    "poster_path": "/yTPbeO1Peb9fgmJLecTk7KyzctQ.jpg",
-    "original_title": "Stille Freundin",
+    "title": "Dolly",
+    "plex_release": "16 mai 2026",
+    "tmdb_id": 1309083,
+    "poster_path": "/9gIbvpGc3Dhm23XfjKZILbmppMA.jpg",
+    "original_title": "Dolly",
     "cinema_date": "1 avril 2026",
-    "vote_average": 7.9,
-    "vote_count": 15,
+    "vote_average": 6.4,
+    "vote_count": 33,
     "genres": [
-      "Drame",
-      "Histoire"
+      "Horreur"
     ],
     "is_french": false,
-    "source": "prédite-mardi"
+    "source": "prédite"
   },
   {
     "title": "Super Mario Galaxy, le film",
@@ -133,6 +148,23 @@
     "source": "maxblizz"
   },
   {
+    "title": "Le Mage du Kremlin",
+    "plex_release": "21 mai 2026",
+    "tmdb_id": 1291659,
+    "poster_path": "/efxlwMqMiZzDF2DABswC5VWptRC.jpg",
+    "original_title": "Le mage du Kremlin",
+    "cinema_date": "21 janvier 2026",
+    "vote_average": 6.5,
+    "vote_count": 120,
+    "genres": [
+      "Drame",
+      "Comédie",
+      "Thriller"
+    ],
+    "is_french": true,
+    "source": "prédite"
+  },
+  {
     "title": "Grand Ciel",
     "plex_release": "21 mai 2026",
     "tmdb_id": 1000879,
@@ -149,8 +181,26 @@
     "source": "prédite"
   },
   {
+    "title": "Olivia",
+    "plex_release": "21 mai 2026",
+    "tmdb_id": 676679,
+    "poster_path": "/3qqL5jpYIatN0Cdz21eATs32SHG.jpg",
+    "original_title": "L'Olívia i el terratrèmol invisible",
+    "cinema_date": "21 janvier 2026",
+    "vote_average": 7.5,
+    "vote_count": 4,
+    "genres": [
+      "Animation",
+      "Comédie",
+      "Drame",
+      "Familial"
+    ],
+    "is_french": true,
+    "source": "prédite"
+  },
+  {
     "title": "Wedding Nightmare : Deuxième Partie",
-    "plex_release": "26 mai 2026",
+    "plex_release": "23 mai 2026",
     "tmdb_id": 1266127,
     "poster_path": "/ICQGjgWmTD3idlMUgRhhKIIxul.jpg",
     "original_title": "Ready or Not 2: Here I Come",
@@ -162,6 +212,6 @@
       "Comédie"
     ],
     "is_french": false,
-    "source": "prédite-mardi"
+    "source": "prédite"
   }
 ]
