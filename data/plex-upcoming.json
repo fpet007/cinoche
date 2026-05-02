@@ -1,21 +1,5 @@
 [
   {
-    "title": "Projet dernière chance",
-    "plex_release": "5 mai 2026",
-    "tmdb_id": 687163,
-    "poster_path": "/wzyy8ZrsuHfAt4iz4iH3rT0tdoT.jpg",
-    "original_title": "Project Hail Mary",
-    "cinema_date": "15 mars 2026",
-    "vote_average": 8.2,
-    "vote_count": 1846,
-    "genres": [
-      "Science-Fiction",
-      "Aventure"
-    ],
-    "is_french": false,
-    "source": "prédite-mardi"
-  },
-  {
     "title": "Dhurandhar : The Revenge",
     "plex_release": "5 mai 2026",
     "tmdb_id": 1582770,
@@ -31,25 +15,6 @@
     ],
     "is_french": false,
     "source": "prédite-mardi"
-  },
-  {
-    "title": "Super Mario Galaxy, le film",
-    "plex_release": "5 mai 2026",
-    "tmdb_id": 1226863,
-    "poster_path": "/aSQktALDmbunDbwkuZbZFMEWVFr.jpg",
-    "original_title": "The Super Mario Galaxy Movie",
-    "cinema_date": "1 avril 2026",
-    "vote_average": 6.7,
-    "vote_count": 690,
-    "genres": [
-      "Familial",
-      "Comédie",
-      "Aventure",
-      "Fantastique",
-      "Animation"
-    ],
-    "is_french": false,
-    "source": "maxblizz"
   },
   {
     "title": "Ma frère",
@@ -100,22 +65,6 @@
     "source": "prédite"
   },
   {
-    "title": "Le Réveil de la Momie",
-    "plex_release": "19 mai 2026",
-    "tmdb_id": 1304313,
-    "poster_path": "/f77yGBGOjainowvlGHU70CCQrjV.jpg",
-    "original_title": "Lee Cronin's The Mummy",
-    "cinema_date": "15 avril 2026",
-    "vote_average": 6.8,
-    "vote_count": 166,
-    "genres": [
-      "Horreur",
-      "Mystère"
-    ],
-    "is_french": false,
-    "source": "officielle-us"
-  },
-  {
     "title": "The Drama",
     "plex_release": "19 mai 2026",
     "tmdb_id": 1325734,
@@ -147,6 +96,41 @@
     ],
     "is_french": false,
     "source": "prédite-mardi"
+  },
+  {
+    "title": "Super Mario Galaxy, le film",
+    "plex_release": "19 mai 2026",
+    "tmdb_id": 1226863,
+    "poster_path": "/aSQktALDmbunDbwkuZbZFMEWVFr.jpg",
+    "original_title": "The Super Mario Galaxy Movie",
+    "cinema_date": "1 avril 2026",
+    "vote_average": 6.7,
+    "vote_count": 690,
+    "genres": [
+      "Familial",
+      "Comédie",
+      "Aventure",
+      "Fantastique",
+      "Animation"
+    ],
+    "is_french": false,
+    "source": "maxblizz"
+  },
+  {
+    "title": "Le Réveil de la Momie",
+    "plex_release": "19 mai 2026",
+    "tmdb_id": 1304313,
+    "poster_path": "/f77yGBGOjainowvlGHU70CCQrjV.jpg",
+    "original_title": "Lee Cronin's The Mummy",
+    "cinema_date": "15 avril 2026",
+    "vote_average": 6.8,
+    "vote_count": 166,
+    "genres": [
+      "Horreur",
+      "Mystère"
+    ],
+    "is_french": false,
+    "source": "maxblizz"
   },
   {
     "title": "Grand Ciel",
