@@ -168,137 +168,168 @@ function isCacheEntryFresh(entry, ttlHours = CACHE_TTL_HOURS) {
 // ─── SCRAPING MAXBLIZZ ────────────────────────────────────────────────────────
 
 /**
- * Récupère les annonces VOD de maxblizz.com et extrait :
- *  - le titre du film
- *  - la date VOD US officielle annoncée
- * Stratégie : on lit la page liste, on suit chaque article récent, on parse la date.
+ * Récupère les annonces VOD de maxblizz.com.
+ *
+ * Stratégie :
+ *  1. Page liste → liens d'articles + titres extraits des slugs
+ *  2. Pour chaque article (avec cache par URL pour ne pas tout refaire à chaque run),
+ *     on fetche le corps de l'article et on extrait la VRAIE date VOD.
+ *
+ * Pourquoi pas juste le alt de la liste ? Parce que MaxBlizz a des alts
+ * incohérents (ex : Mario Galaxy alt="May 5, 2026" mais l'article dit "May 19, 2026").
+ * La date dans le corps de l'article est canonique, en gras (markdown **...**),
+ * formulée comme "...starting Month Day, Year" ou "...on Month Day, Year".
  *
  * Retourne un Map<titleNormalized, { date: Date, originalTitle: string, url: string }>
  */
 async function fetchMaxblizzReleases() {
+  // Version du parseur : si elle change, on invalide tout le cache.
+  // À incrémenter à chaque modification de la logique d'extraction de date.
+  const PARSER_VERSION = 2;
+
   const cache = loadCache(MAXBLIZZ_CACHE);
-  if (cache._cachedAt && isCacheEntryFresh(cache, MAXBLIZZ_TTL_HOURS)) {
-    console.log(`  💾 MaxBlizz : cache valide (${Object.keys(cache.releases || {}).length} entrées)`);
-    return new Map(Object.entries(cache.releases || {}).map(([k, v]) => [k, {
+  const cacheValid = cache._parserVersion === PARSER_VERSION;
+  const articleCache = cacheValid ? (cache.articles || {}) : {};
+  const listFresh = cacheValid && cache._listCachedAt
+    && (Date.now() - cache._listCachedAt) / 3600000 < MAXBLIZZ_TTL_HOURS;
+
+  // Si la liste ET tous les articles sont frais, on ressort le map cache directement.
+  if (listFresh && cache.releases) {
+    console.log(`  💾 MaxBlizz : cache valide (${Object.keys(cache.releases).length} entrées)`);
+    return new Map(Object.entries(cache.releases).map(([k, v]) => [k, {
       ...v, date: new Date(v.date),
     }]));
+  }
+
+  if (!cacheValid && cache._parserVersion !== undefined) {
+    console.log(`  🔄 MaxBlizz : invalidation cache (parser v${cache._parserVersion} → v${PARSER_VERSION})`);
   }
 
   console.log(`  🌐 MaxBlizz : scraping en cours...`);
   const releases = new Map();
 
   try {
-    // Stratégie : on parse directement la page liste. Chaque entrée VOD contient
-    // un alt d'image avec la phrase "<Titre> will be available on VOD starting
-    // <Month> <Day>, <Year>" (ou des variantes "available... on", "arrives on",
-    // "arriving on", "starting"...). C'est plus robuste que de fetch chaque article.
+    // 1. Page liste : on récupère les URLs d'articles
     const listHtml = await fetchWithRetry(
       'https://maxblizz.com/dvd-and-vod-release-dates/',
       3,
       { text: true, headers: { 'User-Agent': 'Mozilla/5.0 updateVOD-bot' } }
     );
 
-    // Extrait toutes les balises img avec leur alt, et tous les liens d'articles VOD
-    // pour faire la correspondance image -> article -> titre.
-    //
-    // Pattern visé dans la page liste :
-    //   <a href="https://maxblizz.com/the-super-mario-galaxy-movie-vod-release-date-revealed/">
-    //     <img alt="The Super Mario Galaxy Movie will be available on VOD starting May 19, 2026..." />
-    //   </a>
-    // On capture conjointement href + alt grâce à un look-around tolérant.
-
-    // Extraction par paires (lien, alt d'image associée)
-    const pairRegex = /<a[^>]+href="(https:\/\/maxblizz\.com\/([a-z0-9-]+)-vod-release-date-revealed\/?)"[^>]*>\s*<img[^>]+alt="([^"]+)"/gi;
-    const pairs = [];
+    // Extrait les URLs d'articles VOD (pattern stable : /[slug]-vod-release-date-revealed/)
+    const linkRegex = /href="(https:\/\/maxblizz\.com\/([a-z0-9-]+)-vod-release-date-revealed\/?)"/gi;
+    const articles = new Map(); // url -> slug
     let m;
-    while ((m = pairRegex.exec(listHtml)) !== null) {
-      pairs.push({ url: m[1], slug: m[2], alt: m[3] });
+    while ((m = linkRegex.exec(listHtml)) !== null) {
+      if (!articles.has(m[1])) articles.set(m[1], m[2]);
     }
 
-    // Fallback : si la regex couplée n'a rien donné (markup différent),
-    // on fait deux passes séparées et on apparie par proximité.
-    if (pairs.length === 0) {
-      console.log(`     ⚠️  Markup couplé introuvable, fallback...`);
-      const linkRe = /href="(https:\/\/maxblizz\.com\/([a-z0-9-]+)-vod-release-date-revealed\/?)"/gi;
-      const altRe  = /<img[^>]+alt="([^"]+)"/gi;
-      const links = [];
-      const alts  = [];
-      while ((m = linkRe.exec(listHtml)) !== null) links.push({ url: m[1], slug: m[2], pos: m.index });
-      while ((m = altRe.exec(listHtml))  !== null) alts.push({ alt: m[1], pos: m.index });
-      // Pour chaque lien, on prend le alt le plus proche dont la position est >= celle du lien
-      for (const l of links) {
-        const closest = alts
-          .filter((a) => Math.abs(a.pos - l.pos) < 600)
-          .sort((a, b) => Math.abs(a.pos - l.pos) - Math.abs(b.pos - l.pos))[0];
-        if (closest) pairs.push({ url: l.url, slug: l.slug, alt: closest.alt });
-      }
-    }
+    console.log(`     ${articles.size} articles VOD trouvés sur la liste`);
 
-    // Dédoublonnage par URL
-    const seen = new Set();
-    const uniquePairs = pairs.filter((p) => {
-      if (seen.has(p.url)) return false;
-      seen.add(p.url);
-      return true;
-    });
+    // 2. Pour chaque article : cache hit ou fetch + extraction de la vraie date
+    let parsed = 0, fromCache = 0, fetched = 0, skipped = 0;
+    const newArticleCache = {};
 
-    console.log(`     ${uniquePairs.length} entrées VOD trouvées sur la liste`);
+    for (const [url, slug] of articles) {
+      let articleData;
 
-    // Patterns de date dans le alt :
-    //   "...starting May 19, 2026"
-    //   "...on March 31, 2026"
-    //   "...arrives on April 14, 2026"
-    //   "...arriving on January 27, 2026"
-    //   "...VOD May 5, 2026"
-    const dateRegex = /\b(?:starting|on|VOD|date)\s+(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2}),?\s+(\d{4})\b/i;
-    // Pattern de fallback (date "nue") au cas où la préposition manque
-    const bareDateRegex = /\b(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2}),\s+(\d{4})\b/;
+      // Cache article (TTL = 7 jours, les dates VOD changent rarement une fois annoncées)
+      const cached = articleCache[url];
+      const cachedFresh = cached && (Date.now() - cached._cachedAt) / 3600000 < 24 * 7;
 
-    let parsed = 0;
-    for (const { url, slug, alt } of uniquePairs) {
-      // 1. Extrait la date depuis le alt
-      let dm = alt.match(dateRegex) || alt.match(bareDateRegex);
-      if (!dm) continue;
-      const date = new Date(`${dm[1]} ${dm[2]}, ${dm[3]} 12:00:00 UTC`);
-      if (isNaN(date)) continue;
+      if (cachedFresh) {
+        articleData = cached;
+        fromCache++;
+      } else {
+        try {
+          await sleep(250); // soft rate limit
+          const html = await fetchWithRetry(url, 2, {
+            text: true, headers: { 'User-Agent': 'Mozilla/5.0 updateVOD-bot' },
+          });
 
-      // 2. Extrait le titre depuis le alt (avant " will be available", " VOD", " gets a", " arrives", etc.)
-      // ou à défaut depuis le slug.
-      let title = null;
-      const altLower = alt.toLowerCase();
-      const splitMarkers = [
-        ' will be available',
-        ' will arrive',
-        ' arrives ',
-        ' arriving ',
-        ' gets a vod',
-        ' gets a digital',
-        ' is coming',
-        ' coming to vod',
-        ' vod release',
-        ' digital hd',
-        ' is now available',
-      ];
-      for (const marker of splitMarkers) {
-        const idx = altLower.indexOf(marker);
-        if (idx > 5) {
-          title = alt.slice(0, idx).trim();
-          break;
+          // ── Extraction de la VRAIE date depuis le corps ──
+          // Pattern canonique : "starting **Month Day, Year**" ou "on **Month Day, Year**"
+          // Le ** vient du markdown rendu en HTML <strong> ou conservé brut selon la source.
+          // On cherche d'abord le pattern fort (avec contexte "starting"/"on"/etc.),
+          // puis on filtre pour exclure la date de publication de l'article (en haut).
+          //
+          // Les dates dans MaxBlizz se présentent généralement comme :
+          //   <strong>May 19, 2026</strong>
+          //   ou
+          //   **May 19, 2026**
+          //   ou en texte brut : "starting May 19, 2026"
+          const monthPattern = '(January|February|March|April|May|June|July|August|September|October|November|December)';
+          const datePart = `${monthPattern}\\s+(\\d{1,2}),?\\s+(\\d{4})`;
+
+          // Stratégie : trouver les dates "fortes" (en <strong> ou ** **) dans le corps
+          const strongDateRegex = new RegExp(
+            `(?:<strong>|\\*\\*)\\s*${datePart}\\s*(?:</strong>|\\*\\*)`,
+            'gi'
+          );
+          // Stratégie de secours : dates précédées de "starting" / "on" / "rent" / "buy"
+          const contextDateRegex = new RegExp(
+            `(?:starting|available\\s+(?:on|to)|rent\\s+(?:on|it)|buy\\s+(?:on|it)|arrives?\\s+on|arriving\\s+on|release\\s+date\\s+(?:is|will\\s+be))\\s+${datePart}`,
+            'gi'
+          );
+
+          // Skip l'en-tête (~2000 chars) où apparaît la date de publication.
+          // Si l'article est trop court (< 3000 chars), on prend tout : la date
+          // de publication sera filtrée plus loin par la règle "préférer 'starting/in body'".
+          const body = html.length > 3000 ? html.slice(2000) : html;
+
+          const candidates = [];
+          let dm;
+          while ((dm = strongDateRegex.exec(body)) !== null) {
+            candidates.push({ src: 'strong', date: new Date(`${dm[1]} ${dm[2]}, ${dm[3]} 12:00:00 UTC`) });
+          }
+          while ((dm = contextDateRegex.exec(body)) !== null) {
+            candidates.push({ src: 'context', date: new Date(`${dm[1]} ${dm[2]}, ${dm[3]} 12:00:00 UTC`) });
+          }
+
+          // Filtre : on garde les dates valides et plausibles (entre il y a 2 mois et dans 2 ans)
+          const now = Date.now();
+          const minDate = now - 60 * 86400000;
+          const maxDate = now + 730 * 86400000;
+          const valid = candidates
+            .filter((c) => !isNaN(c.date) && c.date.getTime() >= minDate && c.date.getTime() <= maxDate);
+
+          // On privilégie les dates "strong" (en gras) — c'est l'indication la plus forte.
+          // À défaut, les dates "context" (avec préposition explicite).
+          let chosenDate = null;
+          const strongs = valid.filter((c) => c.src === 'strong');
+          const contexts = valid.filter((c) => c.src === 'context');
+          if (strongs.length > 0) {
+            // Plusieurs strong ? On prend la plus précoce (= date VOD, pas date d'un autre événement)
+            chosenDate = strongs.sort((a, b) => a.date - b.date)[0].date;
+          } else if (contexts.length > 0) {
+            chosenDate = contexts.sort((a, b) => a.date - b.date)[0].date;
+          }
+
+          articleData = {
+            _cachedAt: Date.now(),
+            date: chosenDate ? chosenDate.toISOString() : null,
+            slug,
+          };
+          fetched++;
+        } catch (err) {
+          articleData = { _cachedAt: Date.now(), date: null, slug, error: err.message };
         }
       }
-      if (!title) {
-        // Fallback : reconstitue depuis le slug (mots séparés par tirets)
-        title = slug.replace(/-/g, ' ');
-      }
 
-      // Normalisation : la clé de matching enlève les noms de réalisateur en préfixe
-      // (le slug donne souvent "lee-cronins-the-mummy", on veut matcher "the mummy")
+      newArticleCache[url] = articleData;
+
+      if (!articleData.date) { skipped++; continue; }
+      const date = new Date(articleData.date);
+      if (isNaN(date)) { skipped++; continue; }
+
+      // Titre déduit du slug (les slugs sont stables et fiables, même si parfois préfixés
+      // d'un nom de réalisateur — le matching gère ça via génération multi-clés)
+      const title = slug.replace(/-/g, ' ');
       const baseNorm = normalizeTitle(title);
+      if (!baseNorm) { skipped++; continue; }
 
-      // Génère 2-3 clés possibles pour maximiser le matching :
-      //  - clé brute (titre complet)
-      //  - clé sans premier mot (si > 2 mots, retire les noms propres en préfixe type "lee cronins")
-      //  - clé sans deux premiers mots (si > 3 mots)
+      // Génère plusieurs clés pour maximiser le matching :
+      //   "lee cronins the mummy" → ["lee cronins the mummy", "cronins the mummy", "the mummy"]
       const tokens = baseNorm.split(' ').filter(Boolean);
       const keysToStore = new Set([baseNorm]);
       if (tokens.length >= 3) keysToStore.add(tokens.slice(1).join(' '));
@@ -314,11 +345,13 @@ async function fetchMaxblizzReleases() {
       parsed++;
     }
 
-    console.log(`     ✓ ${parsed} dates VOD US extraites (${releases.size} clés de matching)`);
+    console.log(`     ✓ ${parsed} films extraits (${fromCache} depuis cache, ${fetched} fetchés, ${skipped} ignorés)`);
 
-    // Cache
+    // Cache : on stocke la liste + les articles + la map releases finale
     const toCache = {
-      _cachedAt: Date.now(),
+      _parserVersion: PARSER_VERSION,
+      _listCachedAt: Date.now(),
+      articles: newArticleCache,
       releases: Object.fromEntries(
         Array.from(releases.entries()).map(([k, v]) => [k, { ...v, date: v.date.toISOString() }])
       ),
