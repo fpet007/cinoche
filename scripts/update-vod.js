@@ -361,7 +361,7 @@ function saveMaxblizzCache(data) {
  * Retourne un tableau : [{ slug, title, date: Date, url }]
  */
 async function fetchMaxblizzReleases() {
-  const PARSER_VERSION = 2; // À incrémenter si on change l'extraction → invalide le cache
+  const PARSER_VERSION = 3; // À incrémenter si on change l'extraction → invalide le cache
   const cache = loadMaxblizzCache();
   const cacheValid = cache._parserVersion === PARSER_VERSION;
   const articleCache = cacheValid ? (cache.articles || {}) : {};
@@ -383,7 +383,13 @@ async function fetchMaxblizzReleases() {
   try {
     // 1. Liste : extraire les URLs d'articles
     const listHtml = await fetchTextWithRetry('https://maxblizz.com/dvd-and-vod-release-dates/');
-    const linkRegex = /href="(https:\/\/maxblizz\.com\/([a-z0-9-]+)-vod-release-date-revealed\/?)"/gi;
+    // Regex tolérante : MaxBlizz utilise plusieurs formats de slug pour ses articles VOD :
+    //   - "<titre>-vod-release-date-revealed"           (cas standard)
+    //   - "<titre>-vod-and-dvd-release-date-revealed"   (sortie combinée VOD + DVD)
+    //   - "<titre>-dvd-and-vod-release-date-revealed"   (ordre inversé, déjà vu)
+    // On capture tous ces formats. Le "(?:...)" reste non-capturant pour ne pas
+    // décaler les groupes de capture.
+    const linkRegex = /href="(https:\/\/maxblizz\.com\/([a-z0-9-]+?)-(?:vod|dvd)(?:-and-(?:vod|dvd))?-release-date-revealed\/?)"/gi;
     const articles = new Map(); // url → slug
     let m;
     while ((m = linkRegex.exec(listHtml)) !== null) {
