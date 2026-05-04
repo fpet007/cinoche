@@ -17,6 +17,22 @@
     "source": "prédite"
   },
   {
+    "title": "Wedding Nightmare : Deuxième Partie",
+    "plex_release": "5 mai 2026",
+    "tmdb_id": 1266127,
+    "poster_path": "/ICQGjgWmTD3idlMUgRhhKIIxul.jpg",
+    "original_title": "Ready or Not 2: Here I Come",
+    "cinema_date": "19 mars 2026",
+    "vote_average": 7,
+    "vote_count": 305,
+    "genres": [
+      "Horreur",
+      "Comédie"
+    ],
+    "is_french": false,
+    "source": "maxblizz"
+  },
+  {
     "title": "Ma frère",
     "plex_release": "7 mai 2026",
     "tmdb_id": 1290436,
@@ -39,7 +55,7 @@
     "original_title": "Project Hail Mary",
     "cinema_date": "15 mars 2026",
     "vote_average": 8.2,
-    "vote_count": 1871,
+    "vote_count": 1888,
     "genres": [
       "Science-Fiction",
       "Aventure"
@@ -87,8 +103,8 @@
     "poster_path": "/9gIbvpGc3Dhm23XfjKZILbmppMA.jpg",
     "original_title": "Dolly",
     "cinema_date": "1 avril 2026",
-    "vote_average": 6.4,
-    "vote_count": 34,
+    "vote_average": 6.3,
+    "vote_count": 35,
     "genres": [
       "Horreur"
     ],
@@ -102,8 +118,8 @@
     "poster_path": "/aSQktALDmbunDbwkuZbZFMEWVFr.jpg",
     "original_title": "The Super Mario Galaxy Movie",
     "cinema_date": "1 avril 2026",
-    "vote_average": 6.8,
-    "vote_count": 704,
+    "vote_average": 6.7,
+    "vote_count": 711,
     "genres": [
       "Familial",
       "Comédie",
@@ -122,7 +138,7 @@
     "original_title": "Lee Cronin's The Mummy",
     "cinema_date": "15 avril 2026",
     "vote_average": 6.8,
-    "vote_count": 171,
+    "vote_count": 173,
     "genres": [
       "Horreur",
       "Mystère"
@@ -138,7 +154,7 @@
     "original_title": "Le mage du Kremlin",
     "cinema_date": "21 janvier 2026",
     "vote_average": 6.5,
-    "vote_count": 123,
+    "vote_count": 124,
     "genres": [
       "Drame"
     ],
@@ -152,8 +168,8 @@
     "poster_path": "/bgLFIN6dx1MkGLrGXcCxJfXS9gK.jpg",
     "original_title": "Grand Ciel",
     "cinema_date": "21 janvier 2026",
-    "vote_average": 6.6,
-    "vote_count": 13,
+    "vote_average": 6.5,
+    "vote_count": 14,
     "genres": [
       "Thriller",
       "Fantastique"
