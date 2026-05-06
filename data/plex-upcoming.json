@@ -23,8 +23,8 @@
     "poster_path": "/ICQGjgWmTD3idlMUgRhhKIIxul.jpg",
     "original_title": "Ready or Not 2: Here I Come",
     "cinema_date": "19 mars 2026",
-    "vote_average": 7,
-    "vote_count": 315,
+    "vote_average": 7.1,
+    "vote_count": 336,
     "genres": [
       "Horreur",
       "Comédie"
@@ -55,7 +55,7 @@
     "original_title": "Project Hail Mary",
     "cinema_date": "15 mars 2026",
     "vote_average": 8.2,
-    "vote_count": 1914,
+    "vote_count": 1925,
     "genres": [
       "Science-Fiction",
       "Aventure"
@@ -119,7 +119,7 @@
     "original_title": "The Super Mario Galaxy Movie",
     "cinema_date": "1 avril 2026",
     "vote_average": 6.7,
-    "vote_count": 723,
+    "vote_count": 726,
     "genres": [
       "Familial",
       "Comédie",
@@ -128,7 +128,7 @@
       "Animation"
     ],
     "is_french": false,
-    "source": "maxblizz"
+    "source": "officielle-us"
   },
   {
     "title": "Le Réveil de la Momie",
@@ -137,8 +137,8 @@
     "poster_path": "/f77yGBGOjainowvlGHU70CCQrjV.jpg",
     "original_title": "Lee Cronin's The Mummy",
     "cinema_date": "15 avril 2026",
-    "vote_average": 6.7,
-    "vote_count": 177,
+    "vote_average": 6.8,
+    "vote_count": 178,
     "genres": [
       "Horreur",
       "Mystère"
@@ -154,7 +154,7 @@
     "original_title": "Le mage du Kremlin",
     "cinema_date": "21 janvier 2026",
     "vote_average": 6.5,
-    "vote_count": 124,
+    "vote_count": 126,
     "genres": [
       "Drame"
     ],
