@@ -24,7 +24,7 @@
     "original_title": "Ready or Not 2: Here I Come",
     "cinema_date": "19 mars 2026",
     "vote_average": 7.1,
-    "vote_count": 355,
+    "vote_count": 377,
     "genres": [
       "Horreur",
       "Comédie"
@@ -36,11 +36,11 @@
     "title": "Ma frère",
     "plex_release": "7 mai 2026",
     "tmdb_id": 1290436,
-    "poster_path": "/j4p4TaoK4LrlLgCK0m0pBUT5CcB.jpg",
+    "poster_path": "/xOgEHI9GTLhKQCQ2BL8c2biUIzp.jpg",
     "original_title": "Ma frère",
     "cinema_date": "7 janvier 2026",
     "vote_average": 7.1,
-    "vote_count": 33,
+    "vote_count": 34,
     "genres": [
       "Comédie"
     ],
@@ -55,13 +55,13 @@
     "original_title": "Project Hail Mary",
     "cinema_date": "15 mars 2026",
     "vote_average": 8.2,
-    "vote_count": 1945,
+    "vote_count": 1950,
     "genres": [
       "Science-Fiction",
       "Aventure"
     ],
     "is_french": false,
-    "source": "override-manuel"
+    "source": "officielle-us"
   },
   {
     "title": "L’affaire Bojarski",
@@ -119,7 +119,7 @@
     "original_title": "The Super Mario Galaxy Movie",
     "cinema_date": "1 avril 2026",
     "vote_average": 6.7,
-    "vote_count": 742,
+    "vote_count": 751,
     "genres": [
       "Familial",
       "Comédie",
@@ -137,8 +137,8 @@
     "poster_path": "/f77yGBGOjainowvlGHU70CCQrjV.jpg",
     "original_title": "Lee Cronin's The Mummy",
     "cinema_date": "15 avril 2026",
-    "vote_average": 6.8,
-    "vote_count": 180,
+    "vote_average": 6.7,
+    "vote_count": 184,
     "genres": [
       "Horreur",
       "Mystère"
@@ -154,25 +154,9 @@
     "original_title": "Le mage du Kremlin",
     "cinema_date": "21 janvier 2026",
     "vote_average": 6.5,
-    "vote_count": 126,
+    "vote_count": 127,
     "genres": [
       "Drame"
-    ],
-    "is_french": true,
-    "source": "prédite"
-  },
-  {
-    "title": "Grand Ciel",
-    "plex_release": "21 mai 2026",
-    "tmdb_id": 1000879,
-    "poster_path": "/bgLFIN6dx1MkGLrGXcCxJfXS9gK.jpg",
-    "original_title": "Grand Ciel",
-    "cinema_date": "21 janvier 2026",
-    "vote_average": 5.6,
-    "vote_count": 16,
-    "genres": [
-      "Thriller",
-      "Fantastique"
     ],
     "is_french": true,
     "source": "prédite"
@@ -191,6 +175,22 @@
       "Comédie",
       "Drame",
       "Familial"
+    ],
+    "is_french": true,
+    "source": "prédite"
+  },
+  {
+    "title": "Grand Ciel",
+    "plex_release": "21 mai 2026",
+    "tmdb_id": 1000879,
+    "poster_path": "/bgLFIN6dx1MkGLrGXcCxJfXS9gK.jpg",
+    "original_title": "Grand Ciel",
+    "cinema_date": "21 janvier 2026",
+    "vote_average": 5.6,
+    "vote_count": 17,
+    "genres": [
+      "Thriller",
+      "Fantastique"
     ],
     "is_french": true,
     "source": "prédite"
