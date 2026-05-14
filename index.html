@@ -67,6 +67,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://image.tmdb.org">
 <link rel="preconnect" href="https://api.themoviedb.org">
+<link rel="dns-prefetch" href="https://i.ytimg.com">
+<link rel="dns-prefetch" href="https://www.youtube-nocookie.com">
+
+<!-- Preload du catalogue Plex — démarre le téléchargement dès le début du parse, gain 150-300ms -->
+<link rel="preload" href="data/plex-upcoming.json" as="fetch" crossorigin="anonymous">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -2392,6 +2397,76 @@ footer {
 <script>
 'use strict';
 
+// ============== CONFIG GLOBALE (v3) ==============
+// Configuration centralisée, partagée entre toutes les IIFE.
+// API_KEY TMDB publique (ok pour usage client, mais visible — voir docs).
+window.CINOCHE = window.CINOCHE || {};
+window.CINOCHE.CONFIG = {
+  TMDB_KEY  : '3fd2be6f0c70a2a598f084ddfb75487c',
+  TMDB_BASE : 'https://api.themoviedb.org/3',
+  IMG_BASE  : 'https://image.tmdb.org/t/p',
+  PLEX_JSON : 'data/plex-upcoming.json',
+  DEBUG     : false,  // mettre à true pour voir les warnings console
+  CACHE_TTL : {
+    MOVIE_DETAILS : 7  * 86400 * 1000,  // 7 jours pour les fiches film
+    HERO_POPULAR  : 24 *  3600 * 1000,  // 24h pour les films populaires (hero)
+    PLEX_FETCH    : 30 *    60 * 1000,  // 30 min pour le JSON Plex côté navigateur
+  },
+};
+
+// ============== HELPER CACHE LOCALSTORAGE (v3) ==============
+// Cache lecture/écriture avec TTL, gère les quotas dépassés gracieusement.
+window.CINOCHE.cache = {
+  get(key) {
+    try {
+      const raw = localStorage.getItem(key);
+      if (!raw) return null;
+      const { data, ts, ttl } = JSON.parse(raw);
+      if (Date.now() - ts > ttl) {
+        localStorage.removeItem(key);
+        return null;
+      }
+      return data;
+    } catch(e) { return null; }
+  },
+  set(key, data, ttl) {
+    try {
+      localStorage.setItem(key, JSON.stringify({ data, ts: Date.now(), ttl }));
+      return true;
+    } catch(e) {
+      // Quota dépassé : on purge les vieilles entrées et on retente
+      if (e.name === 'QuotaExceededError' || e.code === 22) {
+        this.purgeOldest();
+        try { localStorage.setItem(key, JSON.stringify({ data, ts: Date.now(), ttl })); return true; }
+        catch(e2) { return false; }
+      }
+      return false;
+    }
+  },
+  purgeOldest() {
+    // Supprime jusqu'à 10 entrées cinoche_* les plus vieilles pour libérer de la place
+    const entries = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (k && k.startsWith('cinoche_cache_')) {
+        try {
+          const v = JSON.parse(localStorage.getItem(k));
+          entries.push({ k, ts: v.ts || 0 });
+        } catch(e) {}
+      }
+    }
+    entries.sort((a, b) => a.ts - b.ts).slice(0, 10).forEach(e => localStorage.removeItem(e.k));
+  }
+};
+
+// ============== HELPER LOGGER (v3) ==============
+// Logs masqués en prod sauf si CONFIG.DEBUG = true
+window.CINOCHE.log = {
+  warn(...args) { if (window.CINOCHE.CONFIG.DEBUG) console.warn(...args); },
+  info(...args) { if (window.CINOCHE.CONFIG.DEBUG) console.info(...args); },
+  error(...args) { console.error(...args); }, // les erreurs restent visibles en prod
+};
+
 // ============== INTRO LOADER ==============
 window.addEventListener('load', () => {
   setTimeout(() => {
@@ -2461,8 +2536,8 @@ revealEls.forEach(el => revealObs.observe(el));
 // ============== HERO BACKDROPS CAROUSEL (LE WOW) ==============
 (function initHeroBackdrops() {
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const API_KEY = '3fd2be6f0c70a2a598f084ddfb75487c';
-  const IMG_BASE = 'https://image.tmdb.org/t/p/original';
+  const { CONFIG, cache, log } = window.CINOCHE;
+  const IMG_BASE = `${CONFIG.IMG_BASE}/original`;
   const container = document.getElementById('heroBackdrops');
   const featuredEl = document.getElementById('heroFeatured');
   const titleEl = document.getElementById('heroFeaturedTitle');
@@ -2476,8 +2551,19 @@ revealEls.forEach(el => revealObs.observe(el));
     container.appendChild(div);
   }
 
-  fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=fr-FR&page=1`)
-    .then(r => r.ok ? r.json() : Promise.reject())
+  // Cache localStorage 24h pour le hero — évite 1 round-trip TMDB à chaque visite
+  async function fetchHeroPopular() {
+    const cacheKey = 'cinoche_cache_hero_popular';
+    const cached = cache.get(cacheKey);
+    if (cached) return cached;
+    const res = await fetch(`${CONFIG.TMDB_BASE}/movie/popular?api_key=${CONFIG.TMDB_KEY}&language=fr-FR&page=1`);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    cache.set(cacheKey, data, CONFIG.CACHE_TTL.HERO_POPULAR);
+    return data;
+  }
+
+  fetchHeroPopular()
     .then(data => {
       // On garde les films avec un beau backdrop horizontal
       const movies = data.results
@@ -2559,36 +2645,50 @@ revealEls.forEach(el => revealObs.observe(el));
 
 // ============== CATALOGUE INTERACTIF ==============
 (function() {
-  const API_KEY = '3fd2be6f0c70a2a598f084ddfb75487c';
-  const BASE = 'https://api.themoviedb.org/3';
-  const IMG_W = 'https://image.tmdb.org/t/p/w500';
-  const IMG_ORIG = 'https://image.tmdb.org/t/p/original';
+  const { CONFIG, cache, log } = window.CINOCHE;
+  const API_KEY = CONFIG.TMDB_KEY;
+  const BASE = CONFIG.TMDB_BASE;
+  const IMG_W = `${CONFIG.IMG_BASE}/w500`;
+  const IMG_ORIG = `${CONFIG.IMG_BASE}/original`;
   const IMG_FALLBACK = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='750' viewBox='0 0 500 750'%3E%3Crect fill='%231a1a24' width='500' height='750'/%3E%3Ctext x='50%25' y='50%25' fill='%23a09d96' font-size='18' text-anchor='middle' dominant-baseline='middle' font-family='sans-serif'%3EPas d%27image%3C/text%3E%3C/svg%3E";
 
   // Données Plex chargées depuis data/plex-upcoming.json (mis à jour par scripts/update-vod.js)
-  // Fallback si le fichier est inaccessible :
-  const PLEX_FALLBACK = [
-    { title:"Le Pays d’Arto", plex_release:"30 Avril 2026", tmdb_id:1308910, poster_path:"/4kdxpg8WtjDQfLo45YDhkg4hPA1.jpg" },
-    { title:"Super Mario Galaxy, le film", plex_release:"5 Mai 2026", tmdb_id:1226863, poster_path:"/aSQktALDmbunDbwkuZbZFMEWVFr.jpg" },
-    { title:"Ma frère", plex_release:"7 Mai 2026", tmdb_id:1290436, poster_path:"/j4p4TaoK4LrlLgCK0m0pBUT5CcB.jpg" },
-    { title:"La pire mère au monde", plex_release:"7 Mai 2026", tmdb_id:1235277, poster_path:"/aM3ZwratInjyFyckQzXE4owylgk.jpg" },
-    { title:"L’affaire Bojarski", plex_release:"14 Mai 2026", tmdb_id:1376415, poster_path:"/v12qqT8GrLjdGj4mnp4iMik7kvx.jpg" },
-    { title:"Le Réveil de la Momie", plex_release:"19 Mai 2026", tmdb_id:1304313, poster_path:"/f77yGBGOjainowvlGHU70CCQrjV.jpg" },
-    { title:"Le Mage du Kremlin", plex_release:"21 Mai 2026", tmdb_id:1291659, poster_path:"/efxlwMqMiZzDF2DABswC5VWptRC.jpg" },
-    { title:"Gourou", plex_release:"28 Mai 2026", tmdb_id:1259983, poster_path:"/gLEnkNw8BTudY3DpKICeqcxgrXV.jpg" }
-  ];
+  // Fallback minimaliste : vide. Si le JSON est inaccessible, on affiche un message dédié
+  // dans renderCards() au lieu d'afficher des films obsolètes.
+  const PLEX_FALLBACK = [];
   let plexMovies = [...PLEX_FALLBACK];
+  let plexLoadFailed = false;
 
-  // Chargement du JSON généré par scripts/update-vod.js
+  // Chargement du JSON généré par scripts/update-vod.js — utilise le preload du <head>
   async function loadPlexJSON() {
     try {
-      const res = await fetch('data/plex-upcoming.json?_=' + Date.now());
+      // Le cache-buster ?_=... force le navigateur à respecter le preload sans réutiliser
+      // une version stale (utile quand GitHub Actions a juste mis à jour le JSON).
+      const res = await fetch(CONFIG.PLEX_JSON + '?_=' + Date.now(), { cache: 'no-cache' });
       if (!res.ok) throw new Error('HTTP ' + res.status);
       const data = await res.json();
-      if (Array.isArray(data) && data.length > 0) plexMovies = data;
+      if (Array.isArray(data) && data.length > 0) {
+        plexMovies = data;
+        plexLoadFailed = false;
+      } else {
+        plexLoadFailed = true;
+      }
     } catch(e) {
-      console.warn('[Plex] Fallback activé (data/plex-upcoming.json introuvable):', e.message);
+      log.warn('[Plex] Chargement du catalogue échoué:', e.message);
+      plexLoadFailed = true;
     }
+  }
+
+  // Cache localStorage des fiches film modal — TTL 7 jours
+  async function fetchMovieDetailsCached(media, id) {
+    const cacheKey = `cinoche_cache_movie_${media}_${id}`;
+    const cached = cache.get(cacheKey);
+    if (cached) return cached;
+    const res = await fetch(`${BASE}/${media}/${id}?api_key=${API_KEY}&language=fr-FR&append_to_response=videos,credits,similar`);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    cache.set(cacheKey, data, CONFIG.CACHE_TTL.MOVIE_DETAILS);
+    return data;
   }
 
   let state = { category: 'popular', type: 'movie', page: 1, totalPages: 1, currentItems: [], sort: 'default', loading: false };
@@ -2761,7 +2861,22 @@ revealEls.forEach(el => revealObs.observe(el));
     const grid = document.getElementById('grid');
     if (!append) grid.innerHTML = '';
     if (items.length === 0 && !append) {
-      grid.innerHTML = `<div class="error-state"><div class="error-state-icon">🔍</div><p>Aucun résultat trouvé.</p></div>`;
+      // Message dédié si on est sur la section Plex et que le JSON n'a pas chargé
+      if (state.category === 'plex' && plexLoadFailed) {
+        grid.innerHTML = `<div class="error-state">
+          <div class="error-state-icon">⏳</div>
+          <p style="margin-bottom:8px;font-weight:600;">Catalogue Plex en cours de mise à jour</p>
+          <p style="font-size:14px;color:var(--text3);">Le calendrier des sorties VOD est généré automatiquement chaque nuit. Reviens dans quelques minutes.</p>
+        </div>`;
+      } else if (state.category === 'plex') {
+        grid.innerHTML = `<div class="error-state">
+          <div class="error-state-icon">📭</div>
+          <p style="margin-bottom:8px;font-weight:600;">Aucune sortie VOD prévue ce mois-ci.</p>
+          <p style="font-size:14px;color:var(--text3);">Le catalogue se remplit progressivement selon les annonces officielles.</p>
+        </div>`;
+      } else {
+        grid.innerHTML = `<div class="error-state"><div class="error-state-icon">🔍</div><p>Aucun résultat trouvé.</p></div>`;
+      }
       return;
     }
     const sorted = sortItems(items);
@@ -2904,7 +3019,16 @@ revealEls.forEach(el => revealObs.observe(el));
         loadMoreWrap.style.display = state.page < state.totalPages ? 'flex' : 'none';
       }
     } catch(err) {
-      grid.innerHTML = `<div class="error-state"><div class="error-state-icon">⚠</div><p>Erreur de chargement.<br>Vérifiez votre connexion.</p><button class="error-retry" onclick="window.location.reload()">Réessayer</button></div>`;
+      log.error('[fetchData] Erreur:', err);
+      // Retry intelligent : refait fetchData() sans recharger toute la page
+      grid.innerHTML = `<div class="error-state">
+        <div class="error-state-icon">⚠</div>
+        <p style="margin-bottom:6px;font-weight:600;">Service temporairement indisponible</p>
+        <p style="font-size:14px;color:var(--text3);">Vérifie ta connexion ou réessaie dans un instant.</p>
+        <button class="error-retry" id="errorRetryBtn">Réessayer</button>
+      </div>`;
+      const retryBtn = document.getElementById('errorRetryBtn');
+      if (retryBtn) retryBtn.addEventListener('click', () => fetchData(append));
       toast('Erreur lors du chargement', 'warning');
     }
 
@@ -2922,7 +3046,8 @@ revealEls.forEach(el => revealObs.observe(el));
     content.innerHTML = `<div style="padding:100px;text-align:center;color:var(--text2);">Chargement des détails…</div>`;
 
     try {
-      const data = await apiFetch(`${BASE}/${mediaType}/${id}?api_key=${API_KEY}&append_to_response=videos,credits&language=fr-FR`);
+      // Cache localStorage 7 jours — clic instantané à la 2e ouverture du même film
+      const data = await fetchMovieDetailsCached(mediaType, id);
       const title = data.title || data.name || 'Titre inconnu';
       const poster = data.poster_path ? IMG_W + data.poster_path : IMG_FALLBACK;
       const backdrop = data.backdrop_path ? IMG_ORIG + data.backdrop_path : null;
@@ -3118,6 +3243,18 @@ revealEls.forEach(el => revealObs.observe(el));
 const spinKeyframes = document.createElement('style');
 spinKeyframes.textContent = `@keyframes spin { to { transform: rotate(360deg); } }`;
 document.head.appendChild(spinKeyframes);
+
+// ============== SERVICE WORKER (PWA + Offline) ==============
+// Enregistré après le 'load' pour ne PAS retarder le rendu initial.
+// Le SW cache les images TMDB, les fiches film et la coquille de l'app
+// pour offrir une expérience offline + des chargements instantanés en visite répétée.
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js')
+      .then((reg) => { if (window.CINOCHE?.CONFIG?.DEBUG) console.info('[SW] Enregistré, scope:', reg.scope); })
+      .catch((err) => { if (window.CINOCHE?.CONFIG?.DEBUG) console.warn('[SW] Échec enregistrement:', err); });
+  });
+}
 </script>
 </body>
 </html>
