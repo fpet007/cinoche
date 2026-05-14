@@ -1,44 +1,33 @@
 /**
- * updateVOD.js — v8 (ultimate)
- * ==============================
+ * updateVOD.js — v8.2 (ultimate + fenêtre FR corrigée)
+ * =====================================================
  * Génère la liste des FILMS DE CINÉMA en VOD pour le mois en cours STRICT.
  * Plex FR — uniquement de vrais longs-métrages sortis en salle, avec un focus
  * blockbusters internationaux + films français + blockbusters VFQ.
  *
- * 🆕 NOUVEAUTÉS v8 (vs v7) :
+ * 🆕 NOUVEAUTÉS v8.2 (vs v8) :
+ * ─────────────────────────────────────────────────────────────────────────────
+ * ✅ Fenêtre FR de scan élargie : frEnd = monthStart - 85j (au lieu de -100j).
+ *    Cause : un film sorti fin janvier (ex: Gourou le 28/01) a sa VOD à 120j,
+ *    soit le 28 mai, qui tombe dans le mois cible. Avec frEnd à -100j,
+ *    le scan s'arrêtait au 21 janvier et ratait toutes les sorties de fin
+ *    janvier dont la VOD tombe dans le mois en cours.
+ *
+ * 🔒 Toute la logique v8 est préservée (studios, tiers, AlloCiné, MaxBlizz,
+ *    anti-QC, confiance, etc.). Aucun changement de format JSON de sortie.
+ *
+ * NOUVEAUTÉS v8 (rappel) :
  * ─────────────────────────────────────────────────────────────────────────────
  * ✅ Délais VOD par studio (mapping TMDB) :
  *      Disney/Marvel/Pixar  ~85j  |  Universal  ~35j  |  Warner ~55j
  *      Sony ~45j  |  Paramount ~50j  |  Lionsgate ~45j  |  A24 ~75j
  *      Le délai US générique 45j reste en fallback pour studios inconnus.
  *
- * ✅ Système de tiers (blockbuster / mid / niche) basé sur un scoring composite
- *    budget × popularité × vote_count × revenue. Permet de filtrer les "petites"
- *    productions internationales qu'on ne veut pas.
- *
- * ✅ Filtre anti-production québécoise locale (CA + fr + faible portée + pas
- *    de coproduction FR/US/UK). Les blockbusters US dubbés VFQ passent toujours.
- *
- * ✅ Couche AlloCiné — TRIANGULATION FR :
- *      - Scrape https://www.allocine.fr/video/aladelocation/ + aladevente
- *      - Cross-confirme les dates VOD officielles annoncées en FR
- *      - Boost de confiance énorme quand MaxBlizz (US) ET AlloCiné (FR)
- *        s'accordent sur un film
- *      - Permet aussi d'ajouter des films FR officiels qu'on aurait ratés
- *
- * ✅ Scoring de confiance par film (level: override|high|medium|low + score 0-1
- *    + liste des sources). Le frontend peut afficher des badges "Sûr" / "Estimé".
- *
- * ✅ Overrides externes (data/overrides.json) — modifiable sans redéploiement.
- *    Fallback sur les overrides codés en dur (rétrocompat v7).
- *
- * ✅ Logs structurés + récap final détaillé par tier et par source.
- *
- * ✅ Mode --dry-run (n'écrit pas le JSON final, utile pour tester).
- *
- * 🔒 Logique v7 préservée à 100% pour la rétrocompat :
- *    - Mois cible strict, filtres anti-fantôme/anti-théâtre, captations spectacle,
- *    - MaxBlizz, cache TMDB, etc. Tous les champs JSON existants sont conservés.
+ * ✅ Système de tiers (blockbuster / mid / niche)
+ * ✅ Filtre anti-production québécoise locale
+ * ✅ Couche AlloCiné — Triangulation FR
+ * ✅ Scoring de confiance par film
+ * ✅ Overrides externes (data/overrides.json)
  *
  * Usage  : node updateVOD.js [--dry-run] [--verbose]
  * Cron   : 0 2 * * *
@@ -516,9 +505,13 @@ function computeTargetWindow(now = new Date()) {
 }
 
 function buildScanEndpoints(monthStart, windowEnd) {
+  // 🆕 v8.2 : fenêtre FR ajustée pour capter les sorties tardives du mois
+  // qui auraient leur VOD à 120j tomber dans le mois cible.
+  // Ex : un film sorti le 28 janvier 2026 → VOD le 28 mai 2026.
+  // frEnd doit donc être ≥ monthStart - (120 - durée_mois). Marge: monthStart - 85j.
   const frStart = new Date(windowEnd);
   frStart.setMonth(frStart.getMonth() - 6); frStart.setDate(frStart.getDate() - 15);
-  const frEnd   = new Date(monthStart); frEnd.setDate(frEnd.getDate() - 100);
+  const frEnd   = new Date(monthStart); frEnd.setDate(frEnd.getDate() - 85);
 
   const intlStart = new Date(windowEnd);
   intlStart.setMonth(intlStart.getMonth() - 4);
