@@ -7,7 +7,7 @@
     "original_title": "Ready or Not 2: Here I Come",
     "cinema_date": "8 avril 2026",
     "vote_average": 7.5,
-    "vote_count": 642,
+    "vote_count": 644,
     "genres": [
       "Horreur",
       "Comédie"
@@ -32,7 +32,7 @@
     "original_title": "The Drama",
     "cinema_date": "1 avril 2026",
     "vote_average": 7,
-    "vote_count": 730,
+    "vote_count": 734,
     "genres": [
       "Romance",
       "Comédie",
@@ -185,7 +185,7 @@
     "original_title": "The Super Mario Galaxy Movie",
     "cinema_date": "1 avril 2026",
     "vote_average": 6.7,
-    "vote_count": 827,
+    "vote_count": 831,
     "genres": [
       "Familial",
       "Comédie",
@@ -293,6 +293,108 @@
     "vote_count": 17,
     "genres": [
       "Thriller",
+      "Fantastique"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Gourou",
+    "plex_release": "28 mai 2026",
+    "tmdb_id": 1259983,
+    "poster_path": "/gLEnkNw8BTudY3DpKICeqcxgrXV.jpg",
+    "original_title": "Gourou",
+    "cinema_date": "28 janvier 2026",
+    "vote_average": 6.2,
+    "vote_count": 175,
+    "genres": [
+      "Drame",
+      "Thriller"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Promis le ciel",
+    "plex_release": "28 mai 2026",
+    "tmdb_id": 1218412,
+    "poster_path": "/i2HNCMGzIuY4oQyDrI6zuTDrOfk.jpg",
+    "original_title": "Promis le ciel",
+    "cinema_date": "28 janvier 2026",
+    "vote_average": 5.9,
+    "vote_count": 20,
+    "genres": [
+      "Drame"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Baise-en-ville",
+    "plex_release": "28 mai 2026",
+    "tmdb_id": 1235303,
+    "poster_path": "/37bcY42oSbPpVq683KQ3nOtV867.jpg",
+    "original_title": "Baise-en-ville",
+    "cinema_date": "28 janvier 2026",
+    "vote_average": 6.4,
+    "vote_count": 17,
+    "genres": [
+      "Comédie"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Les Légendaires",
+    "plex_release": "28 mai 2026",
+    "tmdb_id": 677561,
+    "poster_path": "/plDx1dcPE8U2Ukj8zOOYKLTdp7T.jpg",
+    "original_title": "Les Légendaires",
+    "cinema_date": "28 janvier 2026",
+    "vote_average": 6.2,
+    "vote_count": 14,
+    "genres": [
+      "Action",
+      "Aventure",
+      "Animation",
+      "Comédie",
+      "Familial",
       "Fantastique"
     ],
     "is_french": true,
