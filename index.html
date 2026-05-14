@@ -2565,8 +2565,10 @@ revealEls.forEach(el => revealObs.observe(el));
   const IMG_ORIG = 'https://image.tmdb.org/t/p/original';
   const IMG_FALLBACK = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='750' viewBox='0 0 500 750'%3E%3Crect fill='%231a1a24' width='500' height='750'/%3E%3Ctext x='50%25' y='50%25' fill='%23a09d96' font-size='18' text-anchor='middle' dominant-baseline='middle' font-family='sans-serif'%3EPas d%27image%3C/text%3E%3C/svg%3E";
 
-  const plexMovies = [
-  { title:"Le Pays d’Arto", plex_release:"30 Avril 2026", tmdb_id:1308910, poster_path:"/4kdxpg8WtjDQfLo45YDhkg4hPA1.jpg" },
+  // Données Plex chargées depuis data/plex-upcoming.json (mis à jour par scripts/update-vod.js)
+  // Fallback si le fichier est inaccessible :
+  const PLEX_FALLBACK = [
+    { title:"Le Pays d’Arto", plex_release:"30 Avril 2026", tmdb_id:1308910, poster_path:"/4kdxpg8WtjDQfLo45YDhkg4hPA1.jpg" },
     { title:"Super Mario Galaxy, le film", plex_release:"5 Mai 2026", tmdb_id:1226863, poster_path:"/aSQktALDmbunDbwkuZbZFMEWVFr.jpg" },
     { title:"Ma frère", plex_release:"7 Mai 2026", tmdb_id:1290436, poster_path:"/j4p4TaoK4LrlLgCK0m0pBUT5CcB.jpg" },
     { title:"La pire mère au monde", plex_release:"7 Mai 2026", tmdb_id:1235277, poster_path:"/aM3ZwratInjyFyckQzXE4owylgk.jpg" },
@@ -2575,6 +2577,19 @@ revealEls.forEach(el => revealObs.observe(el));
     { title:"Le Mage du Kremlin", plex_release:"21 Mai 2026", tmdb_id:1291659, poster_path:"/efxlwMqMiZzDF2DABswC5VWptRC.jpg" },
     { title:"Gourou", plex_release:"28 Mai 2026", tmdb_id:1259983, poster_path:"/gLEnkNw8BTudY3DpKICeqcxgrXV.jpg" }
   ];
+  let plexMovies = [...PLEX_FALLBACK];
+
+  // Chargement du JSON généré par scripts/update-vod.js
+  async function loadPlexJSON() {
+    try {
+      const res = await fetch('data/plex-upcoming.json?_=' + Date.now());
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+      if (Array.isArray(data) && data.length > 0) plexMovies = data;
+    } catch(e) {
+      console.warn('[Plex] Fallback activé (data/plex-upcoming.json introuvable):', e.message);
+    }
+  }
 
   let state = { category: 'popular', type: 'movie', page: 1, totalPages: 1, currentItems: [], sort: 'default', loading: false };
 
@@ -3069,7 +3084,7 @@ revealEls.forEach(el => revealObs.observe(el));
 
   // Init
   updateListBadge();
-  fetchData();
+  loadPlexJSON().then(() => fetchData());
 })();
 
 // ============== DISCORD CHANNEL SWITCHER ==============
