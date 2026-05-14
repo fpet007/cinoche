@@ -5,15 +5,50 @@
     "tmdb_id": 1266127,
     "poster_path": "/ygbalhUdg7RnQKwnnyyqqSXoSvY.jpg",
     "original_title": "Ready or Not 2: Here I Come",
-    "cinema_date": "19 mars 2026",
+    "cinema_date": "8 avril 2026",
     "vote_average": 7.5,
-    "vote_count": 633,
+    "vote_count": 642,
     "genres": [
       "Horreur",
       "Comédie"
     ],
     "is_french": false,
-    "source": "maxblizz"
+    "source": "officielle-us",
+    "confidence": {
+      "level": "high",
+      "score": 0.82,
+      "sources": [
+        "officielle-us"
+      ]
+    },
+    "tier": "mid",
+    "lead_studio": null
+  },
+  {
+    "title": "The Drama",
+    "plex_release": "5 mai 2026",
+    "tmdb_id": 1325734,
+    "poster_path": "/37r0FZuv9OAQgMApDoJ8gvd5LWs.jpg",
+    "original_title": "The Drama",
+    "cinema_date": "1 avril 2026",
+    "vote_average": 7,
+    "vote_count": 727,
+    "genres": [
+      "Romance",
+      "Comédie",
+      "Drame"
+    ],
+    "is_french": false,
+    "source": "officielle-us",
+    "confidence": {
+      "level": "high",
+      "score": 0.82,
+      "sources": [
+        "officielle-us"
+      ]
+    },
+    "tier": "mid",
+    "lead_studio": "A24"
   },
   {
     "title": "Ma frère",
@@ -28,7 +63,16 @@
       "Comédie"
     ],
     "is_french": true,
-    "source": "prédite"
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
   },
   {
     "title": "Projet Dernière Chance",
@@ -44,7 +88,17 @@
       "Aventure"
     ],
     "is_french": false,
-    "source": "officielle-us"
+    "source": "officielle-us",
+    "confidence": {
+      "level": "high",
+      "score": 0.88,
+      "sources": [
+        "officielle-us",
+        "maxblizz"
+      ]
+    },
+    "tier": "blockbuster",
+    "lead_studio": "Lord Miller"
   },
   {
     "title": "Furcy, né libre",
@@ -60,7 +114,16 @@
       "Drame"
     ],
     "is_french": true,
-    "source": "prédite"
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
   },
   {
     "title": "L’affaire Bojarski",
@@ -77,7 +140,16 @@
       "Crime"
     ],
     "is_french": true,
-    "source": "prédite"
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
   },
   {
     "title": "Dhurandhar : The Revenge",
@@ -94,22 +166,16 @@
       "Thriller"
     ],
     "is_french": false,
-    "source": "officielle-us"
-  },
-  {
-    "title": "Dolly",
-    "plex_release": "16 mai 2026",
-    "tmdb_id": 1309083,
-    "poster_path": "/9gIbvpGc3Dhm23XfjKZILbmppMA.jpg",
-    "original_title": "Dolly",
-    "cinema_date": "1 avril 2026",
-    "vote_average": 6.2,
-    "vote_count": 41,
-    "genres": [
-      "Horreur"
-    ],
-    "is_french": false,
-    "source": "prédite"
+    "source": "officielle-us",
+    "confidence": {
+      "level": "high",
+      "score": 0.82,
+      "sources": [
+        "officielle-us"
+      ]
+    },
+    "tier": "mid",
+    "lead_studio": null
   },
   {
     "title": "Super Mario Galaxy, le film",
@@ -119,7 +185,7 @@
     "original_title": "The Super Mario Galaxy Movie",
     "cinema_date": "1 avril 2026",
     "vote_average": 6.7,
-    "vote_count": 824,
+    "vote_count": 827,
     "genres": [
       "Familial",
       "Comédie",
@@ -128,7 +194,17 @@
       "Animation"
     ],
     "is_french": false,
-    "source": "officielle-us"
+    "source": "officielle-us",
+    "confidence": {
+      "level": "high",
+      "score": 0.88,
+      "sources": [
+        "officielle-us",
+        "maxblizz"
+      ]
+    },
+    "tier": "blockbuster",
+    "lead_studio": "Illumination"
   },
   {
     "title": "Le Réveil de la Momie",
@@ -144,7 +220,16 @@
       "Mystère"
     ],
     "is_french": false,
-    "source": "maxblizz"
+    "source": "maxblizz",
+    "confidence": {
+      "level": "medium",
+      "score": 0.7,
+      "sources": [
+        "maxblizz"
+      ]
+    },
+    "tier": "mid",
+    "lead_studio": null
   },
   {
     "title": "Le Mage du Kremlin",
@@ -159,7 +244,16 @@
       "Drame"
     ],
     "is_french": true,
-    "source": "prédite"
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
   },
   {
     "title": "Olivia",
@@ -177,7 +271,16 @@
       "Familial"
     ],
     "is_french": true,
-    "source": "prédite"
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
   },
   {
     "title": "Grand Ciel",
@@ -193,6 +296,15 @@
       "Fantastique"
     ],
     "is_french": true,
-    "source": "prédite"
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
   }
 ]
