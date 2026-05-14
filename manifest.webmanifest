@@ -1,0 +1,41 @@
+{
+  "name": "Cinoche FR — Streaming Privé",
+  "short_name": "Cinoche FR",
+  "description": "60 To de films et séries en Full HD et 4K. Sans pub, sans restriction.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#060608",
+  "theme_color": "#060608",
+  "lang": "fr-FR",
+  "categories": ["entertainment", "movies", "video"],
+  "icons": [
+    {
+      "src": "Titre.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "Titre.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Rejoindre le Discord",
+      "short_name": "Discord",
+      "description": "Accéder au serveur Discord Cinoche FR",
+      "url": "https://discord.gg/mej5QrpnNb"
+    },
+    {
+      "name": "Bientôt sur Plex",
+      "short_name": "Bientôt",
+      "description": "Voir les prochaines sorties VOD",
+      "url": "/#catalog"
+    }
+  ]
+}
