@@ -1422,6 +1422,9 @@ section { padding: 120px 40px; position: relative; }
   background: transparent;
   border: none;
   padding: 0;
+  width: 80px !important;
+  height: 80px !important;
+  flex: 0 0 80px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1462,12 +1465,14 @@ section { padding: 120px 40px; position: relative; }
 }
 .watch-tick {
   position: absolute;
-  top: 4px;
+  top: 3px;
   left: 50%;
   width: 2px;
   height: 6px;
   background: #f4c66e;
-  transform-origin: 50% 30px;
+  /* IMPORTANT : les ticks sont dans .watch-face (68×68px), pas dans le wrapper.
+     Centre du watch-face = (34, 34). Tick à top:3, donc distance au centre = 34-3 = 31px. */
+  transform-origin: 50% 31px;
   border-radius: 1px;
   margin-left: -1px;
 }
@@ -1569,8 +1574,9 @@ section { padding: 120px 40px; position: relative; }
   box-shadow: none !important;
   cursor: pointer;
   position: relative;
-  width: 80px;
-  height: 80px;
+  width: 80px !important;
+  height: 80px !important;
+  flex: 0 0 80px;
   display: flex;
   align-items: center;
   justify-content: center;
