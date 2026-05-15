@@ -1362,6 +1362,150 @@ section { padding: 120px 40px; position: relative; }
 .step-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
 .step-desc { font-size: 13px; color: var(--text2); line-height: 1.55; }
 
+/* ==================== MONTRE 24H (étape "Test 24h gratuit") ==================== */
+/* Animation one-shot : au hover/clic, les aiguilles font défiler 24h en 2.4s
+   puis reprennent l'heure réelle. Pas de loop CPU, pas de son. */
+.step-num.watch-wrapper {
+  background: transparent;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none !important;
+  cursor: pointer;
+  position: relative;
+}
+.step-num.watch-wrapper:hover { transform: scale(1.1); }
+
+.watch-24 {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #f4c66e, var(--gold) 60%, #8c6620);
+  box-shadow:
+    0 0 0 2px rgba(0,0,0,0.4),
+    0 4px 14px rgba(212,168,67,0.35),
+    inset 0 -2px 6px rgba(0,0,0,0.3),
+    inset 0 2px 4px rgba(255,255,255,0.25);
+  transition: box-shadow 0.25s ease;
+}
+.step-num.watch-wrapper:hover .watch-24 {
+  box-shadow:
+    0 0 0 2px rgba(0,0,0,0.4),
+    0 6px 22px rgba(212,168,67,0.6),
+    inset 0 -2px 6px rgba(0,0,0,0.3),
+    inset 0 2px 4px rgba(255,255,255,0.25);
+}
+.watch-face {
+  position: absolute;
+  top: 6px; left: 6px;
+  width: calc(100% - 12px);
+  height: calc(100% - 12px);
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 30%, #2a2117, #1a1612 70%);
+  box-shadow: inset 0 0 8px rgba(0,0,0,0.6);
+}
+.watch-tick {
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  width: 2px;
+  height: 6px;
+  background: #f4c66e;
+  transform-origin: 50% 30px;
+  border-radius: 1px;
+  margin-left: -1px;
+}
+.watch-tick.major { height: 9px; width: 2.5px; background: var(--gold); }
+.watch-hand {
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+  transform-origin: 50% 100%;
+  border-radius: 2px;
+  will-change: transform;
+}
+.watch-hand.hour {
+  width: 3px;
+  height: 17px;
+  background: linear-gradient(to top, #fff, #e8e8e8);
+  margin-left: -1.5px;
+}
+.watch-hand.minute {
+  width: 2.5px;
+  height: 23px;
+  background: linear-gradient(to top, #fff, #e8e8e8);
+  margin-left: -1.25px;
+}
+.watch-hand.second {
+  width: 1px;
+  height: 27px;
+  background: #f4c66e;
+  margin-left: -0.5px;
+  box-shadow: 0 0 3px rgba(212,168,67,0.6);
+}
+.watch-center {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  border: 1.5px solid #1a1612;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+}
+.watch-flash {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--gold);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  opacity: 0;
+  pointer-events: none;
+  text-shadow: 0 0 8px rgba(212,168,67,0.9), 0 0 16px rgba(212,168,67,0.5);
+  z-index: 6;
+  font-family: 'Outfit', sans-serif;
+}
+.watch-24.spinning .watch-flash {
+  animation: watch-flash-pop 2.4s ease-out forwards;
+}
+@keyframes watch-flash-pop {
+  0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+  15%  { opacity: 0; }
+  30%  { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  70%  { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(1.2); }
+}
+
+/* Animation one-shot 24h en accéléré */
+@keyframes watch-spin-hour {
+  from { transform: rotate(var(--hour-start, 0deg)); }
+  to   { transform: rotate(calc(var(--hour-start, 0deg) + 720deg)); }   /* 2 tours = 24h */
+}
+@keyframes watch-spin-minute {
+  from { transform: rotate(var(--minute-start, 0deg)); }
+  to   { transform: rotate(calc(var(--minute-start, 0deg) + 8640deg)); } /* 24 tours */
+}
+@keyframes watch-spin-second {
+  from { transform: rotate(var(--second-start, 0deg)); }
+  to   { transform: rotate(calc(var(--second-start, 0deg) + 518400deg)); } /* 1440 tours */
+}
+.watch-24.spinning .watch-hand.hour   { animation: watch-spin-hour   2.4s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+.watch-24.spinning .watch-hand.minute { animation: watch-spin-minute 2.4s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+.watch-24.spinning .watch-hand.second { animation: watch-spin-second 2.4s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+
+/* Accessibilité */
+@media (prefers-reduced-motion: reduce) {
+  .watch-24.spinning .watch-hand { animation: none !important; }
+  .watch-24.spinning .watch-flash { animation: none !important; opacity: 0 !important; }
+}
+
 /* ==================== REVIEWS ==================== */
 .reviews-section { background: var(--bg2); padding: 120px 40px; }
 .reviews-inner { max-width: 1200px; margin: 0 auto; text-align: center; }
@@ -2301,7 +2445,16 @@ footer {
         <div class="step-desc">Envoyez votre e-mail Plex via le bouton ticket. On active rapidement.</div>
       </div>
       <div class="step-item">
-        <div class="step-num">🎬</div>
+        <div class="step-num watch-wrapper" id="watch24" role="button" tabindex="0" aria-label="Animation 24 heures">
+          <div class="watch-24">
+            <div class="watch-face" id="watch24Face"></div>
+            <div class="watch-hand hour" id="watch24Hour"></div>
+            <div class="watch-hand minute" id="watch24Min"></div>
+            <div class="watch-hand second" id="watch24Sec"></div>
+            <div class="watch-center"></div>
+            <div class="watch-flash">+24H</div>
+          </div>
+        </div>
         <div class="step-title">Test 24h gratuit</div>
         <div class="step-desc">Accès immédiat pour tester. Aucune CB demandée.</div>
       </div>
@@ -3243,6 +3396,88 @@ revealEls.forEach(el => revealObs.observe(el));
 const spinKeyframes = document.createElement('style');
 spinKeyframes.textContent = `@keyframes spin { to { transform: rotate(360deg); } }`;
 document.head.appendChild(spinKeyframes);
+
+// ============== MONTRE 24H (étape Test gratuit) ==============
+// Animation one-shot : au hover/clic/tap, les aiguilles font défiler 24h en 2.4s.
+// Synchronisation à l'heure réelle uniquement quand la section est visible (IntersectionObserver)
+// pour économiser CPU/batterie quand l'utilisateur scrolle ailleurs.
+(function initWatch24() {
+  const watchWrap = document.getElementById('watch24');
+  if (!watchWrap) return;
+  const watch  = watchWrap.querySelector('.watch-24');
+  const face   = document.getElementById('watch24Face');
+  const hour   = document.getElementById('watch24Hour');
+  const minute = document.getElementById('watch24Min');
+  const second = document.getElementById('watch24Sec');
+
+  // Génère les 12 ticks horaires (4 majeurs aux positions 12/3/6/9)
+  for (let i = 0; i < 12; i++) {
+    const tick = document.createElement('div');
+    tick.className = 'watch-tick' + (i % 3 === 0 ? ' major' : '');
+    tick.style.transform = `rotate(${i * 30}deg)`;
+    face.appendChild(tick);
+  }
+
+  let syncInterval = null;
+  let spinning = false;
+
+  function setRealTime() {
+    if (spinning) return; // ne pas casser l'animation en cours
+    const now = new Date();
+    const sec = now.getSeconds() + now.getMilliseconds() / 1000;
+    const min = now.getMinutes() + sec / 60;
+    const hrs = now.getHours() % 12 + min / 60;
+    const secDeg = sec * 6;
+    const minDeg = min * 6;
+    const hrsDeg = hrs * 30;
+    watch.style.setProperty('--second-start', secDeg + 'deg');
+    watch.style.setProperty('--minute-start', minDeg + 'deg');
+    watch.style.setProperty('--hour-start',   hrsDeg + 'deg');
+    second.style.transform = `rotate(${secDeg}deg)`;
+    minute.style.transform = `rotate(${minDeg}deg)`;
+    hour.style.transform   = `rotate(${hrsDeg}deg)`;
+  }
+
+  function startSync() {
+    setRealTime();
+    if (!syncInterval) syncInterval = setInterval(setRealTime, 1000);
+  }
+  function stopSync() {
+    if (syncInterval) { clearInterval(syncInterval); syncInterval = null; }
+  }
+
+  // IntersectionObserver : ne tourne que quand la montre est visible
+  const visObs = new IntersectionObserver((entries) => {
+    entries.forEach((e) => e.isIntersecting ? startSync() : stopSync());
+  }, { threshold: 0.1 });
+  visObs.observe(watchWrap);
+
+  // One-shot au hover / clic / tap / touche clavier
+  let cooldown = false;
+  function triggerSpin() {
+    if (spinning || cooldown) return;
+    spinning = true;
+    cooldown = true;
+    setRealTime();
+    // Force reflow pour que les variables CSS soient bien appliquées avant l'animation
+    void watch.offsetWidth;
+    watch.classList.add('spinning');
+    setTimeout(() => {
+      watch.classList.remove('spinning');
+      spinning = false;
+      setRealTime();
+    }, 2400);
+    // Empêche le retrigger avant la fin de l'anim + petit cooldown de respiration
+    setTimeout(() => { cooldown = false; }, 2800);
+  }
+
+  watchWrap.addEventListener('mouseenter', triggerSpin);
+  watchWrap.addEventListener('click', triggerSpin);
+  watchWrap.addEventListener('touchstart', triggerSpin, { passive: true });
+  watchWrap.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); triggerSpin(); }
+  });
+})();
 
 // ============== SERVICE WORKER (PWA + Offline) ==============
 // Enregistré après le 'load' pour ne PAS retarder le rendu initial.
