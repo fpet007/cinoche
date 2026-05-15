@@ -87,11 +87,13 @@
   --text3: #6b6862;
   --gold: #d4a843;
   --gold2: #f0c96a;
+  --gold-dark: #8c6620;
   --gold-dim: rgba(212,168,67,0.15);
   --plex: #e5a00d;
   --plex-bg: rgba(229,160,13,0.12);
   --discord: #5865F2;
   --discord-bg: rgba(88,101,242,0.12);
+  --discord-online: #23a55a;
   --green: #3ecf8e;
   --green-bg: rgba(62,207,142,0.1);
   --red: #e05555;
@@ -1322,6 +1324,57 @@ section { padding: 120px 40px; position: relative; }
   margin-top: 24px;
 }
 .reward-icon { font-size: 32px; flex-shrink: 0; }
+
+/* Variante mini de l'animation cadeau pour la box parrainage (56px au lieu de 80px) */
+.reward-icon.anim-icon-mini {
+  font-size: 0;
+  width: 56px;
+  height: 56px;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.25s ease;
+}
+.reward-icon.anim-icon-mini:hover { transform: scale(1.1); }
+.reward-icon.anim-icon-mini .anim-base { width: 100%; height: 100%; }
+.reward-icon.anim-icon-mini .anim-face { top: 4px; left: 4px; width: calc(100% - 8px); height: calc(100% - 8px); }
+.reward-icon.anim-icon-mini .gift {
+  width: 32px;
+  height: 32px;
+}
+.reward-icon.anim-icon-mini .gift-base { width: 28px; height: 18px; }
+.reward-icon.anim-icon-mini .gift-lid { width: 32px; height: 8px; }
+.reward-icon.anim-icon-mini .gift-bow { top: -5px; width: 12px; height: 9px; }
+.reward-icon.anim-icon-mini .gift-bow::before,
+.reward-icon.anim-icon-mini .gift-bow::after { width: 5px; height: 7px; }
+.reward-icon.anim-icon-mini .gift-reward { font-size: 9px; }
+.reward-icon.anim-icon-mini.gift-active .gift-lid {
+  transform: translateX(-50%) translateY(-10px) rotateX(-50deg);
+}
+.reward-icon.anim-icon-mini.gift-active .gift-bow {
+  transform: translateX(-50%) translateY(-14px) rotate(-15deg);
+}
+.reward-icon.anim-icon-mini.gift-active .gift-confetti.c1 { animation: confetti-1 1.4s ease-out 0.25s forwards; }
+.reward-icon.anim-icon-mini.gift-active .gift-confetti.c2 { animation: confetti-2 1.4s ease-out 0.30s forwards; }
+.reward-icon.anim-icon-mini.gift-active .gift-confetti.c3 { animation: confetti-3 1.4s ease-out 0.35s forwards; }
+.reward-icon.anim-icon-mini.gift-active .gift-confetti.c4 { animation: confetti-4 1.4s ease-out 0.40s forwards; }
+.reward-icon.anim-icon-mini.gift-active .gift-confetti.c5 { animation: confetti-5 1.4s ease-out 0.45s forwards; }
+.reward-icon.anim-icon-mini.gift-active .gift-confetti.c6 { animation: confetti-6 1.4s ease-out 0.50s forwards; }
+.reward-icon.anim-icon-mini.gift-active .gift-reward {
+  animation: gift-reveal-mini 1.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s forwards;
+}
+@keyframes gift-reveal-mini {
+  0%   { opacity: 0; transform: translate(-50%, 0)     scale(0.3); }
+  25%  { opacity: 1; transform: translate(-50%, -8px)  scale(1.2); }
+  50%  { opacity: 1; transform: translate(-50%, -15px) scale(1); }
+  85%  { opacity: 1; transform: translate(-50%, -22px) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -30px) scale(0.95); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reward-icon.anim-icon-mini.gift-active * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
 .reward-title { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
 .reward-desc { font-size: 13px; color: var(--text2); line-height: 1.5; }
 
@@ -1504,6 +1557,383 @@ section { padding: 120px 40px; position: relative; }
 @media (prefers-reduced-motion: reduce) {
   .watch-24.spinning .watch-hand { animation: none !important; }
   .watch-24.spinning .watch-flash { animation: none !important; opacity: 0 !important; }
+}
+
+/* ==================== ICÔNES ANIMÉES (Discord / Ticket / Diamant / Cadeau) ==================== */
+/* Système commun : .anim-icon est le wrapper, .anim-base le disque doré, .anim-face l'intérieur sombre.
+   Mêmes dimensions et style que .watch-24 pour cohérence visuelle. */
+.step-num.anim-icon {
+  background: transparent;
+  border: none;
+  padding: 0;
+  box-shadow: none !important;
+  cursor: pointer;
+  position: relative;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.step-num.anim-icon:hover { transform: scale(1.1); }
+.anim-base {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, var(--gold2), var(--gold) 60%, var(--gold-dark));
+  box-shadow:
+    0 0 0 2px rgba(0,0,0,0.4),
+    0 4px 14px rgba(212,168,67,0.35),
+    inset 0 -2px 6px rgba(0,0,0,0.3),
+    inset 0 2px 4px rgba(255,255,255,0.25);
+  transition: box-shadow 0.25s ease;
+}
+.step-num.anim-icon:hover .anim-base {
+  box-shadow:
+    0 0 0 2px rgba(0,0,0,0.4),
+    0 6px 22px rgba(212,168,67,0.6),
+    inset 0 -2px 6px rgba(0,0,0,0.3),
+    inset 0 2px 4px rgba(255,255,255,0.25);
+}
+.anim-face {
+  position: absolute;
+  top: 6px; left: 6px;
+  width: calc(100% - 12px);
+  height: calc(100% - 12px);
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 30%, #2a2117, #1a1612 70%);
+  box-shadow: inset 0 0 8px rgba(0,0,0,0.6);
+  overflow: hidden;
+}
+
+/* ─────── 1. DISCORD : Casque + onde vocale ─────── */
+.discord-headset {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 32px;
+  transition: opacity 0.3s;
+}
+.discord-headset svg { width: 100%; height: 100%; fill: #fff; filter: drop-shadow(0 0 3px rgba(88,101,242,0.4)); }
+.discord-status {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--discord-online);
+  border: 2px solid #1a1612;
+  box-shadow: 0 0 8px rgba(35,165,90,0.7);
+  z-index: 3;
+  animation: discord-pulse 2.5s ease-in-out infinite;
+}
+@keyframes discord-pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 8px rgba(35,165,90,0.7); }
+  50%      { transform: scale(1.15); box-shadow: 0 0 14px rgba(35,165,90,1); }
+}
+.discord-bars {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 28px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.discord-bar {
+  width: 4px;
+  background: var(--gold2);
+  border-radius: 2px;
+  box-shadow: 0 0 6px rgba(244,198,110,0.7);
+}
+.step-num.anim-icon.discord-active .discord-headset { opacity: 0.15; }
+.step-num.anim-icon.discord-active .discord-bars { opacity: 1; }
+.step-num.anim-icon.discord-active .discord-bar:nth-child(1) { animation: bar-dance-1 0.55s ease-in-out infinite; }
+.step-num.anim-icon.discord-active .discord-bar:nth-child(2) { animation: bar-dance-2 0.43s ease-in-out infinite; }
+.step-num.anim-icon.discord-active .discord-bar:nth-child(3) { animation: bar-dance-3 0.51s ease-in-out infinite; }
+.step-num.anim-icon.discord-active .discord-bar:nth-child(4) { animation: bar-dance-4 0.47s ease-in-out infinite; }
+.step-num.anim-icon.discord-active .discord-bar:nth-child(5) { animation: bar-dance-5 0.59s ease-in-out infinite; }
+@keyframes bar-dance-1 { 0%, 100% { height: 8px; }  50% { height: 26px; } }
+@keyframes bar-dance-2 { 0%, 100% { height: 22px; } 50% { height: 10px; } }
+@keyframes bar-dance-3 { 0%, 100% { height: 14px; } 50% { height: 28px; } }
+@keyframes bar-dance-4 { 0%, 100% { height: 24px; } 50% { height: 12px; } }
+@keyframes bar-dance-5 { 0%, 100% { height: 10px; } 50% { height: 20px; } }
+
+/* ─────── 2. TICKET : Enveloppe qui s'ouvre + cachet VIP ─────── */
+.envelope {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 32px;
+  perspective: 200px;
+}
+.envelope-body {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--gold2), var(--gold));
+  border-radius: 3px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+}
+.envelope-flap {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 50%;
+  background: linear-gradient(160deg, var(--gold2), var(--gold-dark));
+  transform-origin: top center;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  z-index: 4;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+.envelope-paper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 0) scale(0.5);
+  width: 36px;
+  height: 28px;
+  background: linear-gradient(180deg, #f8f4ec, #e8e0d0);
+  border-radius: 2px;
+  opacity: 0;
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s, opacity 0.4s ease 0.3s;
+  z-index: 2;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+.envelope-stamp {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) scale(0) rotate(-20deg);
+  color: var(--gold-dark);
+  font-size: 9px;
+  font-weight: 900;
+  border: 1.5px solid var(--gold-dark);
+  padding: 2px 4px;
+  border-radius: 2px;
+  z-index: 3;
+  letter-spacing: 0.5px;
+  opacity: 0;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) 1.2s, opacity 0.2s ease 1.2s;
+  font-family: 'Outfit', sans-serif;
+}
+.step-num.anim-icon.envelope-active .envelope-flap { transform: rotateX(180deg); }
+.step-num.anim-icon.envelope-active .envelope-paper { transform: translate(-50%, -30px) scale(1); opacity: 1; }
+.step-num.anim-icon.envelope-active .envelope-stamp { transform: translate(-50%, -50%) scale(1) rotate(-20deg); opacity: 1; }
+
+/* ─────── 3. DIAMANT : Facettes brillantes + sparkles ─────── */
+.diamond {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+}
+.diamond svg { width: 100%; height: 100%; overflow: visible; }
+.diamond-facet { transition: fill 0.3s ease; }
+.diamond-shine {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.6) 50%, transparent 70%);
+  opacity: 0;
+  pointer-events: none;
+  animation: diamond-idle-shine 5s ease-in-out infinite;
+  mix-blend-mode: overlay;
+}
+@keyframes diamond-idle-shine {
+  0%, 85%, 100% { opacity: 0; transform: translateX(-50%); }
+  90%           { opacity: 0.7; }
+  95%           { opacity: 0; transform: translateX(50%); }
+}
+.sparkle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  pointer-events: none;
+  opacity: 0;
+}
+.sparkle::before, .sparkle::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  background: var(--gold2);
+  border-radius: 1px;
+  box-shadow: 0 0 6px rgba(244,198,110,0.9);
+}
+.sparkle::before { width: 100%; height: 1.5px; transform: translate(-50%, -50%); }
+.sparkle::after  { width: 1.5px; height: 100%; transform: translate(-50%, -50%); }
+.sparkle.s1 { top: 8px;  left: 12px; }
+.sparkle.s2 { top: 14px; right: 10px; }
+.sparkle.s3 { bottom: 18px; left: 16px; }
+.sparkle.s4 { bottom: 12px; right: 14px; }
+.step-num.anim-icon.diamond-active .sparkle.s1 { animation: sparkle-pop 1.4s ease-out 0.0s forwards; }
+.step-num.anim-icon.diamond-active .sparkle.s2 { animation: sparkle-pop 1.4s ease-out 0.2s forwards; }
+.step-num.anim-icon.diamond-active .sparkle.s3 { animation: sparkle-pop 1.4s ease-out 0.4s forwards; }
+.step-num.anim-icon.diamond-active .sparkle.s4 { animation: sparkle-pop 1.4s ease-out 0.6s forwards; }
+@keyframes sparkle-pop {
+  0%   { opacity: 0; transform: scale(0)   rotate(0deg); }
+  30%  { opacity: 1; transform: scale(1.4) rotate(45deg); }
+  60%  { opacity: 1; transform: scale(1)   rotate(90deg); }
+  100% { opacity: 0; transform: scale(0.5) rotate(180deg); }
+}
+.step-num.anim-icon.diamond-active .diamond-facet.f1 { animation: facet-flash 0.4s ease-out 0.0s; }
+.step-num.anim-icon.diamond-active .diamond-facet.f2 { animation: facet-flash 0.4s ease-out 0.15s; }
+.step-num.anim-icon.diamond-active .diamond-facet.f3 { animation: facet-flash 0.4s ease-out 0.3s; }
+.step-num.anim-icon.diamond-active .diamond-facet.f4 { animation: facet-flash 0.4s ease-out 0.45s; }
+.step-num.anim-icon.diamond-active .diamond-facet.f5 { animation: facet-flash 0.4s ease-out 0.6s; }
+@keyframes facet-flash {
+  0%   { fill: var(--current-facet); filter: brightness(1); }
+  50%  { fill: #fff; filter: brightness(1.8) drop-shadow(0 0 8px #fff); }
+  100% { fill: var(--current-facet); filter: brightness(1); }
+}
+
+/* ─────── 4. CADEAU (bonus parrainage) : Boîte qui s'ouvre + "+1 MOIS" + confettis ─────── */
+.gift {
+  position: absolute;
+  top: 52%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  perspective: 300px;
+}
+.gift-base {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 26px;
+  background: linear-gradient(180deg, var(--gold2), var(--gold-dark));
+  border-radius: 2px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+}
+.gift-base::before {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 50%;
+  width: 4px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, #c8423a, #8a2820);
+  box-shadow: 0 0 4px rgba(0,0,0,0.5);
+}
+.gift-lid {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 44px;
+  height: 12px;
+  background: linear-gradient(180deg, var(--gold2), var(--gold));
+  border-radius: 2px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+  transform-origin: bottom center;
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 4;
+}
+.gift-lid::before {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 50%;
+  width: 4px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, #c8423a, #8a2820);
+}
+.gift-bow {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 12px;
+  z-index: 5;
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.gift-bow::before, .gift-bow::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 7px;
+  height: 10px;
+  background: radial-gradient(ellipse at center, #e8554a, #8a2820);
+  border-radius: 50% 50% 0 50%;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+.gift-bow::before { left: 0; transform: rotate(-20deg); }
+.gift-bow::after  { right: 0; transform: rotate(20deg) scaleX(-1); }
+.gift-reward {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  color: var(--gold2);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 10px rgba(244,198,110,0.95), 0 0 20px rgba(244,198,110,0.5);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 6;
+  font-family: 'Outfit', sans-serif;
+  white-space: nowrap;
+}
+.step-num.anim-icon.gift-active .gift-lid { transform: translateX(-50%) translateY(-14px) rotateX(-50deg); }
+.step-num.anim-icon.gift-active .gift-bow { transform: translateX(-50%) translateY(-20px) rotate(-15deg); }
+.step-num.anim-icon.gift-active .gift-reward {
+  animation: gift-reveal 1.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s forwards;
+}
+@keyframes gift-reveal {
+  0%   { opacity: 0; transform: translate(-50%, 0)     scale(0.3); }
+  25%  { opacity: 1; transform: translate(-50%, -10px) scale(1.2); }
+  50%  { opacity: 1; transform: translate(-50%, -20px) scale(1); }
+  85%  { opacity: 1; transform: translate(-50%, -28px) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -38px) scale(0.95); }
+}
+.gift-confetti {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--gold2);
+  border-radius: 1px;
+  pointer-events: none;
+  opacity: 0;
+  top: 50%; left: 50%;
+  box-shadow: 0 0 4px rgba(244,198,110,0.8);
+}
+.step-num.anim-icon.gift-active .gift-confetti.c1 { animation: confetti-1 1.4s ease-out 0.25s forwards; }
+.step-num.anim-icon.gift-active .gift-confetti.c2 { animation: confetti-2 1.4s ease-out 0.30s forwards; }
+.step-num.anim-icon.gift-active .gift-confetti.c3 { animation: confetti-3 1.4s ease-out 0.35s forwards; }
+.step-num.anim-icon.gift-active .gift-confetti.c4 { animation: confetti-4 1.4s ease-out 0.40s forwards; }
+.step-num.anim-icon.gift-active .gift-confetti.c5 { animation: confetti-5 1.4s ease-out 0.45s forwards; }
+.step-num.anim-icon.gift-active .gift-confetti.c6 { animation: confetti-6 1.4s ease-out 0.50s forwards; }
+@keyframes confetti-1 { 0%{opacity:0;transform:translate(-50%,-50%);} 20%{opacity:1;} 100%{opacity:0;transform:translate(-180%,-180%) rotate(360deg);} }
+@keyframes confetti-2 { 0%{opacity:0;transform:translate(-50%,-50%);} 20%{opacity:1;} 100%{opacity:0;transform:translate(80%,-180%) rotate(360deg);} }
+@keyframes confetti-3 { 0%{opacity:0;transform:translate(-50%,-50%);} 20%{opacity:1;} 100%{opacity:0;transform:translate(-150%,-50%) rotate(-360deg);} }
+@keyframes confetti-4 { 0%{opacity:0;transform:translate(-50%,-50%);} 20%{opacity:1;} 100%{opacity:0;transform:translate(50%,-50%) rotate(360deg);} }
+@keyframes confetti-5 { 0%{opacity:0;transform:translate(-50%,-50%);} 20%{opacity:1;} 100%{opacity:0;transform:translate(-200%,-120%) rotate(360deg);} }
+@keyframes confetti-6 { 0%{opacity:0;transform:translate(-50%,-50%);} 20%{opacity:1;} 100%{opacity:0;transform:translate(100%,-130%) rotate(-360deg);} }
+
+/* ─── Maintenant le wrapper reward-icon devient une anim-icon-mini pour le parrainage ─── */
+/* (la box reward est dans un encadré horizontal, pas une étape, donc on garde la même taille 80px) */
+
+/* Accessibilité commune */
+@media (prefers-reduced-motion: reduce) {
+  .discord-status,
+  .diamond-shine,
+  .step-num.anim-icon.discord-active .discord-bar,
+  .step-num.anim-icon.envelope-active *,
+  .step-num.anim-icon.diamond-active *,
+  .step-num.anim-icon.gift-active * {
+    animation: none !important;
+    transition: none !important;
+  }
 }
 
 /* ==================== REVIEWS ==================== */
@@ -2418,7 +2848,24 @@ footer {
     </div>
 
     <div class="reward-box reveal">
-      <div class="reward-icon">🎁</div>
+      <div class="reward-icon anim-icon-mini" id="iconGift" role="button" tabindex="0" aria-label="Animation récompense fidélité">
+        <div class="anim-base">
+          <div class="anim-face">
+            <div class="gift">
+              <div class="gift-confetti c1" aria-hidden="true"></div>
+              <div class="gift-confetti c2" aria-hidden="true"></div>
+              <div class="gift-confetti c3" aria-hidden="true"></div>
+              <div class="gift-confetti c4" aria-hidden="true"></div>
+              <div class="gift-confetti c5" aria-hidden="true"></div>
+              <div class="gift-confetti c6" aria-hidden="true"></div>
+              <div class="gift-reward" aria-hidden="true">+1 MOIS</div>
+              <div class="gift-base" aria-hidden="true"></div>
+              <div class="gift-lid" aria-hidden="true"></div>
+              <div class="gift-bow" aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="reward-info">
         <div class="reward-title">Récompense fidélité — 1 mois offert</div>
         <div class="reward-desc">Vous recommandez Cinoche FR à un proche qui s'abonne pour 6 mois ? Vous recevez <strong style="color:var(--gold)">1 mois gratuit</strong> en remerciement. Simple, automatique, fidèle à notre communauté.</div>
@@ -2435,12 +2882,39 @@ footer {
 
     <div class="steps">
       <div class="step-item">
-        <div class="step-num">💬</div>
+        <div class="step-num anim-icon" id="iconDiscord" role="button" tabindex="0" aria-label="Animation Discord">
+          <div class="anim-base">
+            <div class="anim-face">
+              <div class="discord-headset">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1a9 9 0 0 0-9 9v7a3 3 0 0 0 3 3h3v-8H5v-2a7 7 0 0 1 14 0v2h-4v8h3a3 3 0 0 0 3-3v-7a9 9 0 0 0-9-9z"/></svg>
+              </div>
+              <div class="discord-bars" aria-hidden="true">
+                <div class="discord-bar"></div>
+                <div class="discord-bar"></div>
+                <div class="discord-bar"></div>
+                <div class="discord-bar"></div>
+                <div class="discord-bar"></div>
+              </div>
+            </div>
+            <div class="discord-status" aria-hidden="true"></div>
+          </div>
+        </div>
         <div class="step-title">Rejoignez le Discord</div>
         <div class="step-desc">Cliquez sur le lien et rejoignez le serveur Cinoche FR.</div>
       </div>
       <div class="step-item">
-        <div class="step-num">📩</div>
+        <div class="step-num anim-icon" id="iconEnvelope" role="button" tabindex="0" aria-label="Animation enveloppe ticket">
+          <div class="anim-base">
+            <div class="anim-face">
+              <div class="envelope">
+                <div class="envelope-paper" aria-hidden="true"></div>
+                <div class="envelope-stamp" aria-hidden="true">VIP</div>
+                <div class="envelope-body" aria-hidden="true"></div>
+                <div class="envelope-flap" aria-hidden="true"></div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="step-title">Ouvrez un ticket</div>
         <div class="step-desc">Envoyez votre e-mail Plex via le bouton ticket. On active rapidement.</div>
       </div>
@@ -2459,7 +2933,27 @@ footer {
         <div class="step-desc">Accès immédiat pour tester. Aucune CB demandée.</div>
       </div>
       <div class="step-item">
-        <div class="step-num">💎</div>
+        <div class="step-num anim-icon" id="iconDiamond" role="button" tabindex="0" aria-label="Animation diamant">
+          <div class="anim-base">
+            <div class="anim-face">
+              <div class="diamond">
+                <svg viewBox="0 0 40 40" aria-hidden="true">
+                  <polygon class="diamond-facet f1" points="20,4 8,14 14,14"      fill="#f0c96a" style="--current-facet:#f0c96a"/>
+                  <polygon class="diamond-facet f2" points="20,4 32,14 26,14"     fill="#d4a843" style="--current-facet:#d4a843"/>
+                  <polygon class="diamond-facet f3" points="8,14 32,14 26,14 14,14" fill="#a87f30" style="--current-facet:#a87f30"/>
+                  <polygon class="diamond-facet f4" points="14,14 20,36 26,14 20,22" fill="#f0c96a" style="--current-facet:#f0c96a"/>
+                  <polygon class="diamond-facet f5" points="8,14 14,14 20,22 20,36"  fill="#d4a843" style="--current-facet:#d4a843"/>
+                  <polygon class="diamond-facet"    points="26,14 32,14 20,36 20,22" fill="#a87f30"/>
+                </svg>
+              </div>
+              <div class="diamond-shine" aria-hidden="true"></div>
+              <div class="sparkle s1" aria-hidden="true"></div>
+              <div class="sparkle s2" aria-hidden="true"></div>
+              <div class="sparkle s3" aria-hidden="true"></div>
+              <div class="sparkle s4" aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
         <div class="step-title">Abonnez-vous si convaincu</div>
         <div class="step-desc">Choisissez votre formule et profitez du catalogue complet.</div>
       </div>
@@ -3477,6 +3971,37 @@ document.head.appendChild(spinKeyframes);
   watchWrap.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); triggerSpin(); }
   });
+})();
+
+// ============== ICÔNES ANIMÉES (Discord / Ticket / Diamant / Cadeau) ==============
+// Pattern commun : ajoute une classe "active" au hover/clic/tap/clavier,
+// la retire après l'animation, avec un cooldown pour éviter le re-trigger en boucle.
+// Toutes les animations sont CSS pure - aucune boucle JS, perf optimale.
+(function initAnimIcons() {
+  function setupIcon(elId, activeClass, animDuration, cooldown) {
+    const el = document.getElementById(elId);
+    if (!el) return;
+    let busy = false;
+    function trigger() {
+      if (busy) return;
+      busy = true;
+      el.classList.add(activeClass);
+      setTimeout(() => el.classList.remove(activeClass), animDuration);
+      setTimeout(() => { busy = false; }, cooldown);
+    }
+    el.addEventListener('mouseenter', trigger);
+    el.addEventListener('click', trigger);
+    el.addEventListener('touchstart', trigger, { passive: true });
+    el.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); trigger(); }
+    });
+  }
+
+  // Durées calibrées pour chaque animation (en ms)
+  setupIcon('iconDiscord',  'discord-active',  2400, 2800);
+  setupIcon('iconEnvelope', 'envelope-active', 1800, 2400);
+  setupIcon('iconDiamond',  'diamond-active',  1800, 2400);
+  setupIcon('iconGift',     'gift-active',     2100, 2700);
 })();
 
 // ============== SERVICE WORKER (PWA + Offline) ==============
