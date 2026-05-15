@@ -1942,6 +1942,231 @@ section { padding: 120px 40px; position: relative; }
   }
 }
 
+/* ==================== STATS HERO ANIMÉES (60To / 4K / 2flux / 24h) ==================== */
+/* Mini-animations SVG sur les 4 cartes du hero. Aucune boucle JS, tout en CSS pur,
+   déclenchées au :hover du .stat-item. Préserve le compteur de chiffres existant. */
+
+/* Wrapper standard pour toutes les nouvelles icônes */
+.stat-icon-wrap {
+  width: 28px;
+  height: 28px;
+  margin: 0 auto 10px;
+  position: relative;
+  color: var(--gold);
+}
+.stat-icon-wrap svg { width: 100%; height: 100%; overflow: visible; transition: filter 0.3s; }
+@media (max-width: 600px) {
+  .stat-icon-wrap { width: 22px; height: 22px; margin-bottom: 8px; }
+}
+
+/* ─── 1. STORAGE (60 To) : 3 disques + remplissage en cascade + LED ─── */
+.stat-storage .storage-disc {
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 1.8;
+}
+.stat-storage .storage-led {
+  fill: var(--gold2);
+  opacity: 0.4;
+  animation: storage-led-idle 2.4s ease-in-out infinite;
+}
+@keyframes storage-led-idle {
+  0%, 100% { opacity: 0.25; }
+  50%      { opacity: 0.7; }
+}
+.stat-storage .storage-fill {
+  fill: var(--gold);
+  opacity: 0;
+  clip-path: inset(100% 0 0 0);
+}
+.stat-item:hover .stat-storage .storage-fill.f1 { animation: storage-fill 0.5s ease-out 0.0s forwards; }
+.stat-item:hover .stat-storage .storage-fill.f2 { animation: storage-fill 0.5s ease-out 0.25s forwards; }
+.stat-item:hover .stat-storage .storage-fill.f3 { animation: storage-fill 0.5s ease-out 0.5s forwards; }
+@keyframes storage-fill {
+  0%   { opacity: 0; clip-path: inset(100% 0 0 0); }
+  20%  { opacity: 0.6; }
+  100% { opacity: 0.6; clip-path: inset(0 0 0 0); }
+}
+.stat-item:hover .stat-storage .storage-led {
+  animation: storage-led-blink 0.15s ease-in-out 6 forwards;
+}
+@keyframes storage-led-blink {
+  0%, 100% { opacity: 0.4; fill: var(--gold2); }
+  50%      { opacity: 1; fill: #fff; }
+}
+.stat-item:hover .stat-storage svg { filter: drop-shadow(0 0 4px rgba(212,168,67,0.6)); }
+
+/* ─── 2. TV (4K) : Écran qui s'allume + scanline + texte révélé ─── */
+.stat-tv .tv-frame {
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 1.8;
+}
+.stat-tv .tv-screen {
+  fill: #0a0a0a;
+  transition: fill 0.3s;
+}
+.stat-item:hover .stat-tv .tv-screen { fill: var(--gold-dark); }
+.stat-tv .tv-flash { fill: #fff; opacity: 0; }
+.stat-item:hover .stat-tv .tv-flash { animation: tv-flash 0.18s ease-out forwards; }
+@keyframes tv-flash {
+  0%   { opacity: 0; }
+  50%  { opacity: 0.9; }
+  100% { opacity: 0; }
+}
+.stat-tv .tv-scanline { fill: var(--gold2); opacity: 0; }
+.stat-item:hover .stat-tv .tv-scanline { animation: tv-scanline 1.0s ease-in-out 0.15s forwards; }
+@keyframes tv-scanline {
+  0%   { opacity: 0; transform: translateY(0); }
+  20%  { opacity: 0.9; }
+  80%  { opacity: 0.9; }
+  100% { opacity: 0; transform: translateY(12px); }
+}
+.stat-tv .tv-text {
+  fill: var(--gold2);
+  font-size: 6px;
+  font-weight: 900;
+  font-family: 'Outfit', sans-serif;
+  opacity: 0;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  transform-origin: center;
+}
+.stat-item:hover .stat-tv .tv-text { animation: tv-text-pop 0.6s ease-out 0.6s forwards; }
+@keyframes tv-text-pop {
+  0%   { opacity: 0; transform: scale(0.5); }
+  100% { opacity: 1; transform: scale(1); }
+}
+.stat-item:hover .stat-tv svg { filter: drop-shadow(0 0 6px rgba(240,201,106,0.6)); }
+
+/* ─── 3. SCREENS (2 flux) : 2 écrans s'allument + ondes Wi-Fi ─── */
+.stat-screens .screen-frame {
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 1.8;
+}
+.stat-screens .screen-fill {
+  fill: var(--gold);
+  opacity: 0;
+  transform-origin: bottom;
+  transform: scaleY(0);
+}
+.stat-item:hover .stat-screens .screen-fill.s1 { animation: screen-fill 0.4s ease-out 0.0s forwards; }
+.stat-item:hover .stat-screens .screen-fill.s2 { animation: screen-fill 0.4s ease-out 0.2s forwards; }
+@keyframes screen-fill {
+  0%   { opacity: 0; transform: scaleY(0); }
+  100% { opacity: 0.55; transform: scaleY(1); }
+}
+.stat-screens .wifi-arc {
+  fill: none;
+  stroke: var(--gold2);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  opacity: 0;
+  transform-origin: center bottom;
+}
+.stat-item:hover .stat-screens .wifi-arc.w1a { animation: wifi-pulse 1.4s ease-out 0.4s forwards; }
+.stat-item:hover .stat-screens .wifi-arc.w1b { animation: wifi-pulse 1.4s ease-out 0.55s forwards; }
+.stat-item:hover .stat-screens .wifi-arc.w2a { animation: wifi-pulse 1.4s ease-out 0.6s forwards; }
+.stat-item:hover .stat-screens .wifi-arc.w2b { animation: wifi-pulse 1.4s ease-out 0.75s forwards; }
+@keyframes wifi-pulse {
+  0%   { opacity: 0; transform: scale(0.6); }
+  30%  { opacity: 1; }
+  100% { opacity: 0; transform: scale(1.4); }
+}
+.stat-item:hover .stat-screens svg { filter: drop-shadow(0 0 4px rgba(240,201,106,0.5)); }
+
+/* ─── 4. CLOCK → SABLIER (24h) : Morph horloge en sablier + sable qui s'écoule ─── */
+.stat-clock .clock-frame {
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.stat-clock .clock-hand {
+  stroke: var(--gold);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  transform-origin: 12px 14px;
+}
+.stat-clock .clock-hand.minute { animation: clock-spin-idle 8s linear infinite; }
+@keyframes clock-spin-idle {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+.stat-clock .clock-group {
+  transform-origin: center;
+}
+.stat-item:hover .stat-clock .clock-group { animation: clock-fade-out 0.4s ease-out forwards; }
+@keyframes clock-fade-out {
+  0%   { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.6); }
+}
+.stat-clock .hourglass {
+  opacity: 0;
+  transform: scale(0.6);
+  transform-origin: center;
+}
+.stat-item:hover .stat-clock .hourglass { animation: hourglass-appear 0.4s ease-out 0.3s forwards; }
+@keyframes hourglass-appear {
+  0%   { opacity: 0; transform: scale(0.6); }
+  100% { opacity: 1; transform: scale(1); }
+}
+.stat-clock .hourglass-frame {
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.stat-clock .sand-top {
+  fill: var(--gold2);
+  transform-origin: 12px 9px;
+  transform: scaleY(0); /* invisible avant hover */
+}
+.stat-clock .sand-bottom {
+  fill: var(--gold2);
+  transform-origin: 12px 19px;
+  transform: scaleY(0);
+}
+.stat-clock .sand-stream {
+  fill: var(--gold2);
+  opacity: 0;
+  transform-origin: 12px 14px;
+}
+.stat-item:hover .stat-clock .sand-top    { animation: sand-empty  1.6s ease-in-out 0.5s forwards; }
+.stat-item:hover .stat-clock .sand-bottom { animation: sand-fill   1.6s ease-in-out 0.5s forwards; }
+.stat-item:hover .stat-clock .sand-stream { animation: sand-stream 1.6s ease-in-out 0.5s forwards; }
+@keyframes sand-empty {
+  0%   { transform: scaleY(1); }
+  100% { transform: scaleY(0); }
+}
+@keyframes sand-fill {
+  0%   { transform: scaleY(0); }
+  100% { transform: scaleY(1); }
+}
+@keyframes sand-stream {
+  0%   { opacity: 0; transform: scaleY(0); }
+  10%  { opacity: 1; transform: scaleY(1); }
+  90%  { opacity: 1; transform: scaleY(1); }
+  100% { opacity: 0; transform: scaleY(0); }
+}
+.stat-item:hover .stat-clock svg { filter: drop-shadow(0 0 4px rgba(212,168,67,0.5)); }
+
+/* Accessibilité stats */
+@media (prefers-reduced-motion: reduce) {
+  .stat-storage .storage-led,
+  .stat-clock .clock-hand.minute,
+  .stat-item:hover .stat-storage *,
+  .stat-item:hover .stat-tv *,
+  .stat-item:hover .stat-screens *,
+  .stat-item:hover .stat-clock * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
 /* ==================== REVIEWS ==================== */
 .reviews-section { background: var(--bg2); padding: 120px 40px; }
 .reviews-inner { max-width: 1200px; margin: 0 auto; text-align: center; }
@@ -2408,36 +2633,79 @@ footer {
 
     <div class="hero-stats">
       <div class="stat-item">
-        <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <ellipse cx="12" cy="5" rx="9" ry="3"/>
-          <path d="M3 5v6c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/>
-          <path d="M3 11v6c0 1.66 4.03 3 9 3s9-1.34 9-3v-6"/>
-        </svg>
+        <div class="stat-icon-wrap">
+          <div class="stat-storage">
+            <svg viewBox="0 0 24 28" aria-hidden="true">
+              <ellipse class="storage-disc" cx="12" cy="4" rx="8" ry="2.5"/>
+              <path class="storage-disc" d="M4 4v4c0 1.4 3.6 2.5 8 2.5s8-1.1 8-2.5V4"/>
+              <ellipse class="storage-disc" cx="12" cy="13" rx="8" ry="2.5"/>
+              <path class="storage-disc" d="M4 13v4c0 1.4 3.6 2.5 8 2.5s8-1.1 8-2.5v-4"/>
+              <ellipse class="storage-disc" cx="12" cy="22" rx="8" ry="2.5"/>
+              <path class="storage-disc" d="M4 22v4c0 1.4 3.6 2.5 8 2.5s8-1.1 8-2.5v-4"/>
+              <circle class="storage-led" cx="18" cy="2" r="0.9"/>
+              <path class="storage-fill f1" d="M4 4v4c0 1.4 3.6 2.5 8 2.5s8-1.1 8-2.5V4c0 1.4-3.6 2.5-8 2.5S4 5.4 4 4z"/>
+              <path class="storage-fill f2" d="M4 13v4c0 1.4 3.6 2.5 8 2.5s8-1.1 8-2.5v-4c0 1.4-3.6 2.5-8 2.5s-8-1.1-8-2.5z"/>
+              <path class="storage-fill f3" d="M4 22v4c0 1.4 3.6 2.5 8 2.5s8-1.1 8-2.5v-4c0 1.4-3.6 2.5-8 2.5s-8-1.1-8-2.5z"/>
+            </svg>
+          </div>
+        </div>
         <span class="stat-number" data-target="60" data-suffix=" To" data-duration="2200">0<span class="unit"> To</span></span>
         <span class="stat-label">Contenu stocké</span>
       </div>
       <div class="stat-item">
-        <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect x="2" y="4" width="20" height="14" rx="2"/>
-          <path d="M2 18l4 4h12l4-4"/>
-        </svg>
+        <div class="stat-icon-wrap">
+          <div class="stat-tv">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect class="tv-screen" x="2.5" y="4.5" width="19" height="13" rx="1.5"/>
+              <rect class="tv-frame" x="2" y="4" width="20" height="14" rx="2"/>
+              <path class="tv-frame" d="M2 18l4 4h12l4-4" fill="none"/>
+              <text class="tv-text" x="12" y="12">4K</text>
+              <rect class="tv-scanline" x="2.5" y="4.5" width="19" height="1.2"/>
+              <rect class="tv-flash" x="2.5" y="4.5" width="19" height="13" rx="1.5"/>
+            </svg>
+          </div>
+        </div>
         <span class="stat-number">4K</span>
         <span class="stat-label">Ultra HD disponible</span>
       </div>
       <div class="stat-item">
-        <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect x="2" y="3" width="9" height="13" rx="1.5"/>
-          <rect x="13" y="3" width="9" height="13" rx="1.5"/>
-          <line x1="2" y1="20" x2="22" y2="20"/>
-        </svg>
+        <div class="stat-icon-wrap">
+          <div class="stat-screens">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect class="screen-fill s1" x="2.5" y="3.5" width="8" height="12" rx="1"/>
+              <rect class="screen-frame" x="2" y="3" width="9" height="13" rx="1.5"/>
+              <rect class="screen-fill s2" x="13.5" y="3.5" width="8" height="12" rx="1"/>
+              <rect class="screen-frame" x="13" y="3" width="9" height="13" rx="1.5"/>
+              <line class="screen-frame" x1="2" y1="20" x2="22" y2="20"/>
+              <path class="wifi-arc w1a" d="M4 2 Q 6.5 0.5 9 2"/>
+              <path class="wifi-arc w1b" d="M5 1 Q 6.5 -0.2 8 1"/>
+              <path class="wifi-arc w2a" d="M15 2 Q 17.5 0.5 20 2"/>
+              <path class="wifi-arc w2b" d="M16 1 Q 17.5 -0.2 19 1"/>
+            </svg>
+          </div>
+        </div>
         <span class="stat-number" data-target="2" data-duration="900">0</span>
         <span class="stat-label">Flux simultanés</span>
       </div>
       <div class="stat-item">
-        <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="12" cy="12" r="9"/>
-          <polyline points="12 7 12 12 15 14"/>
-        </svg>
+        <div class="stat-icon-wrap">
+          <div class="stat-clock">
+            <svg viewBox="0 0 24 28" aria-hidden="true">
+              <g class="clock-group">
+                <circle class="clock-frame" cx="12" cy="14" r="9"/>
+                <line class="clock-hand" x1="12" y1="14" x2="12" y2="8"/>
+                <line class="clock-hand minute" x1="12" y1="14" x2="16" y2="14"/>
+              </g>
+              <g class="hourglass">
+                <path class="hourglass-frame" d="M6 4 L18 4 M6 24 L18 24"/>
+                <path class="hourglass-frame" d="M6 4 L18 4 L12 14 L18 24 L6 24 L12 14 Z"/>
+                <path class="sand-top" d="M7.5 5.2 L16.5 5.2 L12 13 Z"/>
+                <rect class="sand-stream" x="11.6" y="13" width="0.8" height="6"/>
+                <path class="sand-bottom" d="M7.5 22.8 L16.5 22.8 L12 15 Z"/>
+              </g>
+            </svg>
+          </div>
+        </div>
         <span class="stat-number" data-target="24" data-suffix="h" data-duration="1500">0<span class="unit">h</span></span>
         <span class="stat-label">Test gratuit</span>
       </div>
