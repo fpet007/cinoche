@@ -1,13 +1,13 @@
 [
   {
-    "title": "Wedding Nightmare : Deuxième Partie",
+    "title": "Wedding Nightmare : Deuxième partie",
     "plex_release": "5 mai 2026",
     "tmdb_id": 1266127,
     "poster_path": "/ygbalhUdg7RnQKwnnyyqqSXoSvY.jpg",
     "original_title": "Ready or Not 2: Here I Come",
     "cinema_date": "8 avril 2026",
     "vote_average": 7.5,
-    "vote_count": 644,
+    "vote_count": 657,
     "genres": [
       "Horreur",
       "Comédie"
@@ -32,7 +32,7 @@
     "original_title": "The Drama",
     "cinema_date": "1 avril 2026",
     "vote_average": 7,
-    "vote_count": 734,
+    "vote_count": 737,
     "genres": [
       "Romance",
       "Comédie",
@@ -82,7 +82,7 @@
     "original_title": "Project Hail Mary",
     "cinema_date": "15 mars 2026",
     "vote_average": 8.5,
-    "vote_count": 2873,
+    "vote_count": 2954,
     "genres": [
       "Science-Fiction",
       "Aventure"
@@ -99,6 +99,32 @@
     },
     "tier": "blockbuster",
     "lead_studio": "Lord Miller"
+  },
+  {
+    "title": "L’affaire Bojarski",
+    "plex_release": "14 mai 2026",
+    "tmdb_id": 1376415,
+    "poster_path": "/v12qqT8GrLjdGj4mnp4iMik7kvx.jpg",
+    "original_title": "L’affaire Bojarski",
+    "cinema_date": "14 janvier 2026",
+    "vote_average": 7.1,
+    "vote_count": 101,
+    "genres": [
+      "Histoire",
+      "Drame",
+      "Crime"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
   },
   {
     "title": "Furcy, né libre",
@@ -126,40 +152,14 @@
     "lead_studio": null
   },
   {
-    "title": "L’affaire Bojarski",
-    "plex_release": "14 mai 2026",
-    "tmdb_id": 1376415,
-    "poster_path": "/v12qqT8GrLjdGj4mnp4iMik7kvx.jpg",
-    "original_title": "L’affaire Bojarski",
-    "cinema_date": "14 janvier 2026",
-    "vote_average": 7,
-    "vote_count": 98,
-    "genres": [
-      "Histoire",
-      "Drame",
-      "Crime"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
     "title": "Dhurandhar : The Revenge",
     "plex_release": "15 mai 2026",
     "tmdb_id": 1582770,
-    "poster_path": "/dI7CjJA4cC92UcKMBnCh5BTDHVQ.jpg",
+    "poster_path": "/bAupKTbSAzdNAb0PtTH1vQGuqYf.jpg",
     "original_title": "धुरंधर: द रिवेंज",
     "cinema_date": "18 mars 2026",
     "vote_average": 7.5,
-    "vote_count": 67,
+    "vote_count": 68,
     "genres": [
       "Action",
       "Crime",
@@ -185,7 +185,7 @@
     "original_title": "The Super Mario Galaxy Movie",
     "cinema_date": "1 avril 2026",
     "vote_average": 6.7,
-    "vote_count": 831,
+    "vote_count": 837,
     "genres": [
       "Familial",
       "Comédie",
@@ -214,7 +214,7 @@
     "original_title": "Lee Cronin's The Mummy",
     "cinema_date": "15 avril 2026",
     "vote_average": 6.7,
-    "vote_count": 195,
+    "vote_count": 197,
     "genres": [
       "Horreur",
       "Mystère"
@@ -357,30 +357,6 @@
     "lead_studio": null
   },
   {
-    "title": "Baise-en-ville",
-    "plex_release": "28 mai 2026",
-    "tmdb_id": 1235303,
-    "poster_path": "/37bcY42oSbPpVq683KQ3nOtV867.jpg",
-    "original_title": "Baise-en-ville",
-    "cinema_date": "28 janvier 2026",
-    "vote_average": 6.4,
-    "vote_count": 17,
-    "genres": [
-      "Comédie"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
     "title": "Les Légendaires",
     "plex_release": "28 mai 2026",
     "tmdb_id": 677561,
@@ -396,6 +372,30 @@
       "Comédie",
       "Familial",
       "Fantastique"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Baise-en-ville",
+    "plex_release": "28 mai 2026",
+    "tmdb_id": 1235303,
+    "poster_path": "/37bcY42oSbPpVq683KQ3nOtV867.jpg",
+    "original_title": "Baise-en-ville",
+    "cinema_date": "28 janvier 2026",
+    "vote_average": 6.4,
+    "vote_count": 17,
+    "genres": [
+      "Comédie"
     ],
     "is_french": true,
     "source": "prédite",
