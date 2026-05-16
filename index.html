@@ -749,28 +749,11 @@ section { padding: 120px 40px; position: relative; }
   border-color: rgba(212,168,67,0.25);
 }
 .feature-icon {
+  /* L'ancien emoji 32px est remplacé par des SVG animés.
+     Cette règle reste pour rétrocompatibilité au cas où, mais ne s'applique plus. */
   font-size: 32px;
   flex-shrink: 0;
   display: inline-block;
-  transform-origin: center center;
-  filter: drop-shadow(0 4px 8px rgba(212,168,67,0.3));
-  transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1);
-  animation: featureFloat 3s ease-in-out infinite;
-}
-.feature-card:nth-child(2) .feature-icon { animation-delay: 0.4s; }
-.feature-card:nth-child(3) .feature-icon { animation-delay: 0.8s; }
-.feature-card:nth-child(4) .feature-icon { animation-delay: 1.2s; }
-.feature-card:nth-child(5) .feature-icon { animation-delay: 1.6s; }
-
-@keyframes featureFloat {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-6px) rotate(-4deg); }
-}
-
-.feature-card:hover .feature-icon,
-.feature-card:active .feature-icon {
-  animation: none;
-  transform: scale(1.3) rotate(-10deg);
 }
 
 .feature-name {
@@ -2167,6 +2150,466 @@ section { padding: 120px 40px; position: relative; }
   }
 }
 
+/* ==================== FEATURES ANIMÉES (Clap / Bolt / NoAd / Multi / Cal) ==================== */
+/* Mini-animations SVG sur les 5 cartes feature de la section "Pourquoi Cinoche".
+   Wrapper standard 44×44px, animations déclenchées au :hover du .feature-card. */
+
+.feature-icon-wrap {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  position: relative;
+  color: var(--gold);
+}
+.feature-icon-wrap svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  transition: filter 0.3s;
+}
+.feature-card:hover .feature-icon-wrap svg {
+  filter: drop-shadow(0 0 6px rgba(212,168,67,0.55));
+}
+
+/* ─── 1. CLAP CINÉMA : Emoji 🎬 qui vibre + étincelles + pellicule rouge ─── */
+.feat-clap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.feat-clap .clap-emoji {
+  font-size: 32px;
+  line-height: 1;
+  display: inline-block;
+  transform-origin: center;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+  transition: filter 0.3s;
+  animation: clap-idle 5s ease-in-out infinite;
+}
+@keyframes clap-idle {
+  0%, 92%, 100% { transform: rotate(0deg); }
+  96%           { transform: rotate(-5deg); }
+}
+.feature-card:hover .feat-clap .clap-emoji {
+  animation: clap-shake 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+  filter: drop-shadow(0 0 8px rgba(255,80,80,0.5)) drop-shadow(0 0 4px rgba(212,168,67,0.6));
+}
+@keyframes clap-shake {
+  0%, 100% { transform: rotate(0deg); }
+  10%      { transform: rotate(-15deg) scale(1.05); }
+  20%      { transform: rotate(12deg); }
+  30%      { transform: rotate(-10deg); }
+  40%      { transform: rotate(8deg); }
+  50%      { transform: rotate(-6deg); }
+  60%      { transform: rotate(4deg); }
+  70%      { transform: rotate(-2deg); }
+}
+/* Étincelles dorées qui pop autour */
+.feat-clap .clap-spark {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: var(--gold2);
+  border-radius: 50%;
+  box-shadow: 0 0 4px var(--gold2);
+  opacity: 0;
+  pointer-events: none;
+}
+.feat-clap .clap-spark.sp1 { top: 4px;  left: 8px; }
+.feat-clap .clap-spark.sp2 { top: 2px;  left: 50%; transform: translateX(-50%); }
+.feat-clap .clap-spark.sp3 { top: 4px;  right: 8px; }
+.feat-clap .clap-spark.sp4 { top: 50%;  left: 2px; }
+.feat-clap .clap-spark.sp5 { top: 50%;  right: 2px; }
+.feature-card:hover .feat-clap .clap-spark.sp1 { animation: clap-sparkle 0.7s ease-out 0.1s forwards; }
+.feature-card:hover .feat-clap .clap-spark.sp2 { animation: clap-sparkle 0.7s ease-out 0.05s forwards; }
+.feature-card:hover .feat-clap .clap-spark.sp3 { animation: clap-sparkle 0.7s ease-out 0.15s forwards; }
+.feature-card:hover .feat-clap .clap-spark.sp4 { animation: clap-sparkle 0.7s ease-out 0.2s forwards; }
+.feature-card:hover .feat-clap .clap-spark.sp5 { animation: clap-sparkle 0.7s ease-out 0.18s forwards; }
+@keyframes clap-sparkle {
+  0%   { opacity: 0; transform: scale(0) translateY(0); }
+  30%  { opacity: 1; transform: scale(1.5) translateY(-4px); }
+  100% { opacity: 0; transform: scale(0.3) translateY(-12px); }
+}
+/* Bande pellicule rouge cinéma qui défile en bas */
+.feat-clap .clap-filmstrip {
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(90deg, transparent, #c8423a 20%, #8a2820 50%, #c8423a 80%, transparent);
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  opacity: 0;
+  border-radius: 1px;
+  pointer-events: none;
+}
+.feat-clap .clap-filmstrip::before,
+.feat-clap .clap-filmstrip::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 1px;
+  background: rgba(0,0,0,0.5);
+}
+.feat-clap .clap-filmstrip::before { top: 1px; }
+.feat-clap .clap-filmstrip::after  { bottom: 1px; }
+.feature-card:hover .feat-clap .clap-filmstrip { animation: clap-film-scroll 1.4s ease-out 0.3s forwards; }
+@keyframes clap-film-scroll {
+  0%   { opacity: 0; background-position: 100% 0; }
+  20%  { opacity: 1; }
+  80%  { opacity: 1; }
+  100% { opacity: 0; background-position: -100% 0; }
+}
+
+/* ─── 4. MULTI-ÉCRANS : Emoji 📱 + Tablette grise + TV noire avec écrans bleus ─── */
+.feat-multi {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.feat-multi .multi-emoji {
+  font-size: 30px;
+  line-height: 1;
+  display: inline-block;
+  position: relative;
+  z-index: 3;
+  transition: transform 0.4s ease-out, filter 0.3s;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+  animation: multi-idle 3s ease-in-out infinite;
+}
+@keyframes multi-idle {
+  0%, 100% { filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4)); }
+  50%      { filter: drop-shadow(0 0 6px rgba(74,158,255,0.6)) drop-shadow(0 2px 4px rgba(0,0,0,0.4)); }
+}
+.feature-card:hover .feat-multi .multi-emoji {
+  transform: scale(0.85);
+  filter: drop-shadow(0 0 6px rgba(74,158,255,0.7));
+}
+/* Tablette grise à gauche */
+.feat-multi .multi-tablet,
+.feat-multi .multi-tv {
+  position: absolute;
+  top: 50%;
+  opacity: 0;
+  transition: opacity 0.4s ease-out, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.feat-multi .multi-tablet {
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.5);
+  width: 14px;
+  height: 18px;
+  background: linear-gradient(180deg, #4a4a52, #2a2a32);
+  border: 1px solid #6a6a72;
+  border-radius: 2px;
+  padding: 1px;
+  z-index: 1;
+}
+.feat-multi .multi-tablet-screen {
+  width: 100%;
+  height: 100%;
+  background: #1a1a22;
+  border-radius: 1px;
+  opacity: 0;
+  transition: background 0.3s, opacity 0.3s;
+}
+.feat-multi .multi-tv {
+  right: 50%;
+  transform: translate(50%, -50%) scale(0.5);
+  width: 18px;
+  height: 14px;
+  background: linear-gradient(180deg, #1a1a1a, #0a0a0a);
+  border: 1px solid #3a3a3a;
+  border-radius: 1.5px;
+  padding: 1px;
+  z-index: 1;
+}
+.feat-multi .multi-tv::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 2px;
+  background: #2a2a2a;
+  border-radius: 0 0 2px 2px;
+}
+.feat-multi .multi-tv-screen {
+  width: 100%;
+  height: 100%;
+  background: #0a0a0a;
+  border-radius: 1px;
+  opacity: 0;
+  transition: background 0.3s, opacity 0.3s;
+}
+.feature-card:hover .feat-multi .multi-tablet {
+  opacity: 1;
+  transform: translate(calc(-50% - 18px), -50%) scale(1);
+  transition-delay: 0.1s;
+}
+.feature-card:hover .feat-multi .multi-tv {
+  opacity: 1;
+  transform: translate(calc(50% + 18px), -50%) scale(1);
+  transition-delay: 0.2s;
+}
+/* Écrans bleus Plex qui s'allument */
+.feature-card:hover .feat-multi .multi-tablet-screen {
+  opacity: 1;
+  background: radial-gradient(circle at center, #6ab4ff, #2670c4);
+  transition-delay: 0.5s;
+  box-shadow: inset 0 0 4px rgba(255,255,255,0.3);
+}
+.feature-card:hover .feat-multi .multi-tv-screen {
+  opacity: 1;
+  background: radial-gradient(circle at center, #6ab4ff, #2670c4);
+  transition-delay: 0.65s;
+  box-shadow: inset 0 0 4px rgba(255,255,255,0.3);
+}
+/* Petits arcs Wi-Fi cyan au-dessus de chaque device */
+.feat-multi .multi-wifi {
+  position: absolute;
+  width: 8px;
+  height: 6px;
+  opacity: 0;
+  pointer-events: none;
+}
+.feat-multi .multi-wifi svg { width: 100%; height: 100%; }
+.feat-multi .multi-wifi.wt { top: 6px; left: 4px; }
+.feat-multi .multi-wifi.wtv { top: 6px; right: 4px; }
+.feature-card:hover .feat-multi .multi-wifi.wt  { animation: multi-wifi-pulse 1.2s ease-out 0.7s forwards; }
+.feature-card:hover .feat-multi .multi-wifi.wtv { animation: multi-wifi-pulse 1.2s ease-out 0.85s forwards; }
+@keyframes multi-wifi-pulse {
+  0%   { opacity: 0; transform: scale(0.6); }
+  30%  { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.4); }
+}
+
+/* ─── 5. CALENDRIER NEW : Emoji 🆕 + paillettes multicolores + badge +1 ─── */
+.feat-cal {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.feat-cal .cal-emoji {
+  font-size: 30px;
+  line-height: 1;
+  display: inline-block;
+  transform-origin: center;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+  transition: filter 0.3s;
+  animation: cal-idle 4s ease-in-out infinite;
+}
+@keyframes cal-idle {
+  0%, 90%, 100% { transform: scale(1); }
+  95%           { transform: scale(1.08); }
+}
+.feature-card:hover .feat-cal .cal-emoji {
+  animation: cal-bounce 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  filter: drop-shadow(0 0 8px rgba(255,100,200,0.5)) drop-shadow(0 0 4px rgba(106,180,255,0.4));
+}
+@keyframes cal-bounce {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  30%      { transform: scale(1.25) rotate(-6deg); }
+  60%      { transform: scale(0.95) rotate(4deg); }
+  80%      { transform: scale(1.05) rotate(-2deg); }
+}
+/* Paillettes multicolores */
+.feat-cal .cal-confetti {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 1px;
+  opacity: 0;
+  pointer-events: none;
+  top: 50%;
+  left: 50%;
+}
+.feat-cal .cal-confetti.c1 { background: #ff5fa0; box-shadow: 0 0 4px #ff5fa0; }
+.feat-cal .cal-confetti.c2 { background: #6ab4ff; box-shadow: 0 0 4px #6ab4ff; }
+.feat-cal .cal-confetti.c3 { background: #f0c96a; box-shadow: 0 0 4px #f0c96a; }
+.feat-cal .cal-confetti.c4 { background: #5ee08a; box-shadow: 0 0 4px #5ee08a; }
+.feat-cal .cal-confetti.c5 { background: #c878ff; box-shadow: 0 0 4px #c878ff; }
+.feat-cal .cal-confetti.c6 { background: #ff5fa0; box-shadow: 0 0 4px #ff5fa0; }
+.feat-cal .cal-confetti.c7 { background: #f0c96a; box-shadow: 0 0 4px #f0c96a; }
+.feat-cal .cal-confetti.c8 { background: #6ab4ff; box-shadow: 0 0 4px #6ab4ff; }
+.feature-card:hover .feat-cal .cal-confetti.c1 { animation: cal-confetti-1 1.2s ease-out 0.2s forwards; }
+.feature-card:hover .feat-cal .cal-confetti.c2 { animation: cal-confetti-2 1.2s ease-out 0.25s forwards; }
+.feature-card:hover .feat-cal .cal-confetti.c3 { animation: cal-confetti-3 1.2s ease-out 0.3s forwards; }
+.feature-card:hover .feat-cal .cal-confetti.c4 { animation: cal-confetti-4 1.2s ease-out 0.22s forwards; }
+.feature-card:hover .feat-cal .cal-confetti.c5 { animation: cal-confetti-5 1.2s ease-out 0.28s forwards; }
+.feature-card:hover .feat-cal .cal-confetti.c6 { animation: cal-confetti-6 1.2s ease-out 0.32s forwards; }
+.feature-card:hover .feat-cal .cal-confetti.c7 { animation: cal-confetti-7 1.2s ease-out 0.18s forwards; }
+.feature-card:hover .feat-cal .cal-confetti.c8 { animation: cal-confetti-8 1.2s ease-out 0.26s forwards; }
+@keyframes cal-confetti-1 { 0%{opacity:0;transform:translate(-50%,-50%);} 20%{opacity:1;} 100%{opacity:0; transform:translate(-220%,-180%) rotate(360deg);} }
+@keyframes cal-confetti-2 { 0%{opacity:0;transform:translate(-50%,-50%);} 20%{opacity:1;} 100%{opacity:0; transform:translate(120%,-180%) rotate(360deg);} }
+@keyframes cal-confetti-3 { 0%{opacity:0;transform:translate(-50%,-50%);} 20%{opacity:1;} 100%{opacity:0; transform:translate(-180%,80%) rotate(-360deg);} }
+@keyframes cal-confetti-4 { 0%{opacity:0;transform:translate(-50%,-50%);} 20%{opacity:1;} 100%{opacity:0; transform:translate(80%,100%) rotate(360deg);} }
+@keyframes cal-confetti-5 { 0%{opacity:0;transform:translate(-50%,-50%);} 20%{opacity:1;} 100%{opacity:0; transform:translate(-260%,-50%) rotate(-360deg);} }
+@keyframes cal-confetti-6 { 0%{opacity:0;transform:translate(-50%,-50%);} 20%{opacity:1;} 100%{opacity:0; transform:translate(160%,-50%) rotate(360deg);} }
+@keyframes cal-confetti-7 { 0%{opacity:0;transform:translate(-50%,-50%);} 20%{opacity:1;} 100%{opacity:0; transform:translate(-130%,-220%) rotate(720deg);} }
+@keyframes cal-confetti-8 { 0%{opacity:0;transform:translate(-50%,-50%);} 20%{opacity:1;} 100%{opacity:0; transform:translate(170%,170%) rotate(-360deg);} }
+/* Petit badge "+1" doré qui pop */
+.feat-cal .cal-plus-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: linear-gradient(180deg, var(--gold2), var(--gold));
+  color: #1a1612;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-family: 'Outfit', sans-serif;
+  opacity: 0;
+  transform: scale(0) rotate(-15deg);
+  transform-origin: center;
+  box-shadow: 0 0 8px rgba(212,168,67,0.6);
+  pointer-events: none;
+}
+.feature-card:hover .feat-cal .cal-plus-badge { animation: cal-plus-pop 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s forwards; }
+@keyframes cal-plus-pop {
+  0%   { opacity: 0; transform: scale(0) rotate(-15deg); }
+  30%  { opacity: 1; transform: scale(1.3) rotate(8deg); }
+  50%  { transform: scale(1) rotate(-4deg); }
+  85%  { opacity: 1; transform: scale(1) rotate(-2deg); }
+  100% { opacity: 0; transform: scale(0.8) rotate(0deg) translateY(-8px); }
+}
+
+/* ─── 2. ÉCLAIR 4K : Charge + flash + satellites ─── */
+.feat-bolt .bolt-shape {
+  fill: var(--gold);
+  stroke: var(--gold);
+  stroke-width: 0.5;
+  stroke-linejoin: round;
+  animation: bolt-idle 6s ease-in-out infinite;
+}
+@keyframes bolt-idle {
+  0%, 88%, 100% { filter: drop-shadow(0 0 2px rgba(212,168,67,0.4)); }
+  90%, 94%      { filter: drop-shadow(0 0 8px rgba(240,201,106,1)) brightness(1.3); }
+  92%           { filter: drop-shadow(0 0 4px rgba(240,201,106,0.7)); }
+}
+.feat-bolt .bolt-charge {
+  fill: var(--gold2);
+  opacity: 0;
+  clip-path: inset(100% 0 0 0);
+}
+.feature-card:hover .feat-bolt .bolt-charge { animation: bolt-charge 0.7s ease-in forwards; }
+@keyframes bolt-charge {
+  0%   { opacity: 0; clip-path: inset(100% 0 0 0); }
+  10%  { opacity: 1; }
+  100% { opacity: 1; clip-path: inset(0 0 0 0); }
+}
+.feat-bolt .bolt-flash { fill: #fff; opacity: 0; }
+.feature-card:hover .feat-bolt .bolt-flash { animation: bolt-flash 0.4s ease-out 0.7s forwards; }
+@keyframes bolt-flash {
+  0%   { opacity: 0; }
+  20%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+.feat-bolt .bolt-sat {
+  fill: none;
+  stroke: var(--gold2);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  opacity: 0;
+}
+.feature-card:hover .feat-bolt .bolt-sat.b1 { animation: bolt-sat-pop 0.5s ease-out 0.75s forwards; }
+.feature-card:hover .feat-bolt .bolt-sat.b2 { animation: bolt-sat-pop 0.5s ease-out 0.82s forwards; }
+.feature-card:hover .feat-bolt .bolt-sat.b3 { animation: bolt-sat-pop 0.5s ease-out 0.78s forwards; }
+@keyframes bolt-sat-pop {
+  0%   { opacity: 0; transform: scale(0.3); }
+  40%  { opacity: 1; transform: scale(1.1); }
+  100% { opacity: 0; transform: scale(0.8); }
+}
+
+/* ─── 3. ZÉRO PUB : AD apparaît + barre rouge + fragments ─── */
+.feat-noad .noad-circle {
+  fill: none;
+  stroke: var(--red);
+  stroke-width: 2.5;
+}
+.feat-noad .noad-bar {
+  stroke: var(--red);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+.feat-noad .noad-circle,
+.feat-noad .noad-bar {
+  animation: noad-idle 3s ease-in-out infinite;
+}
+@keyframes noad-idle {
+  0%, 100% { filter: drop-shadow(0 0 0 transparent); }
+  50%      { filter: drop-shadow(0 0 4px rgba(224,85,85,0.5)); }
+}
+.feat-noad .noad-text {
+  fill: var(--gold2);
+  font-size: 12px;
+  font-weight: 900;
+  font-family: 'Outfit', sans-serif;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  opacity: 0;
+  transform-origin: center;
+}
+.feature-card:hover .feat-noad .noad-text { animation: noad-text-pop 1.2s ease-out forwards; }
+@keyframes noad-text-pop {
+  0%   { opacity: 0; transform: scale(0); }
+  25%  { opacity: 1; transform: scale(1.1); }
+  50%  { opacity: 1; transform: scale(1); }
+  60%  { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.4) rotate(15deg); }
+}
+.feat-noad .noad-bar-sweep {
+  stroke: var(--red);
+  stroke-width: 3;
+  stroke-linecap: round;
+  opacity: 0;
+}
+.feature-card:hover .feat-noad .noad-bar-sweep { animation: noad-sweep 0.4s ease-out 0.7s forwards; }
+@keyframes noad-sweep {
+  0%   { opacity: 0; stroke-dasharray: 0 60; }
+  30%  { opacity: 1; }
+  100% { opacity: 0.9; stroke-dasharray: 60 0; }
+}
+.feat-noad .noad-frag { fill: var(--gold2); opacity: 0; }
+.feature-card:hover .feat-noad .noad-frag.fr1 { animation: noad-frag-1 0.6s ease-out 0.7s forwards; }
+.feature-card:hover .feat-noad .noad-frag.fr2 { animation: noad-frag-2 0.6s ease-out 0.7s forwards; }
+.feature-card:hover .feat-noad .noad-frag.fr3 { animation: noad-frag-3 0.6s ease-out 0.7s forwards; }
+.feature-card:hover .feat-noad .noad-frag.fr4 { animation: noad-frag-4 0.6s ease-out 0.7s forwards; }
+@keyframes noad-frag-1 { 0%{opacity:0;} 30%{opacity:1;} 100%{opacity:0; transform: translate(-12px, -10px) rotate(-90deg);} }
+@keyframes noad-frag-2 { 0%{opacity:0;} 30%{opacity:1;} 100%{opacity:0; transform: translate(12px, -10px) rotate(90deg);} }
+@keyframes noad-frag-3 { 0%{opacity:0;} 30%{opacity:1;} 100%{opacity:0; transform: translate(-10px, 12px) rotate(180deg);} }
+@keyframes noad-frag-4 { 0%{opacity:0;} 30%{opacity:1;} 100%{opacity:0; transform: translate(10px, 12px) rotate(-180deg);} }
+
+/* Accessibilité features */
+@media (prefers-reduced-motion: reduce) {
+  .feat-clap .clap-emoji,
+  .feat-bolt .bolt-shape,
+  .feat-noad .noad-circle,
+  .feat-noad .noad-bar,
+  .feat-multi .multi-emoji,
+  .feat-cal .cal-emoji,
+  .feature-card:hover .feat-clap *,
+  .feature-card:hover .feat-bolt *,
+  .feature-card:hover .feat-noad *,
+  .feature-card:hover .feat-multi *,
+  .feature-card:hover .feat-cal * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
 /* ==================== REVIEWS ==================== */
 .reviews-section { background: var(--bg2); padding: 120px 40px; }
 .reviews-inner { max-width: 1200px; margin: 0 auto; text-align: center; }
@@ -2755,16 +3198,87 @@ footer {
       </div>
       <div class="features-right reveal">
         <div class="feature-card featured">
-          <span class="feature-icon">🎬</span>
+          <div class="feature-icon-wrap">
+            <div class="feat-clap">
+              <span class="clap-emoji" aria-hidden="true">🎬</span>
+              <span class="clap-spark sp1"></span>
+              <span class="clap-spark sp2"></span>
+              <span class="clap-spark sp3"></span>
+              <span class="clap-spark sp4"></span>
+              <span class="clap-spark sp5"></span>
+              <span class="clap-filmstrip"></span>
+            </div>
+          </div>
           <div>
             <div class="feature-name">60 To de contenu</div>
             <div class="feature-desc">Le plus grand catalogue privé francophone. Films, séries, animés — tout en qualité source depuis les meilleures plateformes.</div>
           </div>
         </div>
-        <div class="feature-card"><span class="feature-icon">⚡</span><div><div class="feature-name">Ultra HD &amp; 4K</div><div class="feature-desc">Qualité maximale UHD, source originale, aucun recompressage.</div></div></div>
-        <div class="feature-card"><span class="feature-icon">🚫</span><div><div class="feature-name">Zéro publicité</div><div class="feature-desc">Pas d'interruptions, pas de cookies, pas de tracking. Juste du contenu.</div></div></div>
-        <div class="feature-card"><span class="feature-icon">📱</span><div><div class="feature-name">Plex sur tous vos écrans</div><div class="feature-desc">TV, mobile, tablette, PC. Interface fluide et intuitive.</div></div></div>
-        <div class="feature-card"><span class="feature-icon">🆕</span><div><div class="feature-name">Nouveautés chaque jour</div><div class="feature-desc">Sorties VOD ajoutées quotidiennement. Catalogue vivant et à jour.</div></div></div>
+        <div class="feature-card">
+          <div class="feature-icon-wrap">
+            <div class="feat-bolt">
+              <svg viewBox="0 0 44 44" aria-hidden="true">
+                <polygon class="bolt-shape"  points="24,4 12,24 20,24 18,40 32,18 24,18"/>
+                <polygon class="bolt-charge" points="24,4 12,24 20,24 18,40 32,18 24,18"/>
+                <polygon class="bolt-flash"  points="24,4 12,24 20,24 18,40 32,18 24,18"/>
+                <path class="bolt-sat b1" d="M4 10 L 8 14"/>
+                <path class="bolt-sat b2" d="M40 10 L 36 14"/>
+                <path class="bolt-sat b3" d="M38 32 L 34 36"/>
+              </svg>
+            </div>
+          </div>
+          <div><div class="feature-name">Full HD &amp; 4K</div><div class="feature-desc">Qualité maximale, source originale, aucun recompressage.</div></div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon-wrap">
+            <div class="feat-noad">
+              <svg viewBox="0 0 44 44" aria-hidden="true">
+                <circle class="noad-circle" cx="22" cy="22" r="16"/>
+                <text class="noad-text" x="22" y="22">AD</text>
+                <rect class="noad-frag fr1" x="18" y="18" width="3" height="3"/>
+                <rect class="noad-frag fr2" x="23" y="18" width="3" height="3"/>
+                <rect class="noad-frag fr3" x="18" y="23" width="3" height="3"/>
+                <rect class="noad-frag fr4" x="23" y="23" width="3" height="3"/>
+                <line class="noad-bar" x1="10" y1="10" x2="34" y2="34"/>
+                <line class="noad-bar-sweep" x1="12" y1="22" x2="32" y2="22"/>
+              </svg>
+            </div>
+          </div>
+          <div><div class="feature-name">Zéro publicité</div><div class="feature-desc">Pas d'interruptions, pas de cookies, pas de tracking. Juste du contenu.</div></div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon-wrap">
+            <div class="feat-multi">
+              <div class="multi-tablet" aria-hidden="true"><div class="multi-tablet-screen"></div></div>
+              <span class="multi-emoji" aria-hidden="true">📱</span>
+              <div class="multi-tv" aria-hidden="true"><div class="multi-tv-screen"></div></div>
+              <div class="multi-wifi wt" aria-hidden="true">
+                <svg viewBox="0 0 8 6"><path d="M1 5 Q 4 1 7 5" fill="none" stroke="#6ab4ff" stroke-width="1" stroke-linecap="round"/><path d="M2 5 Q 4 3 6 5" fill="none" stroke="#6ab4ff" stroke-width="1" stroke-linecap="round"/></svg>
+              </div>
+              <div class="multi-wifi wtv" aria-hidden="true">
+                <svg viewBox="0 0 8 6"><path d="M1 5 Q 4 1 7 5" fill="none" stroke="#6ab4ff" stroke-width="1" stroke-linecap="round"/><path d="M2 5 Q 4 3 6 5" fill="none" stroke="#6ab4ff" stroke-width="1" stroke-linecap="round"/></svg>
+              </div>
+            </div>
+          </div>
+          <div><div class="feature-name">Plex sur tous vos écrans</div><div class="feature-desc">TV, mobile, tablette, PC. Interface fluide et intuitive.</div></div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon-wrap">
+            <div class="feat-cal">
+              <span class="cal-emoji" aria-hidden="true">🆕</span>
+              <span class="cal-plus-badge" aria-hidden="true">+1</span>
+              <span class="cal-confetti c1"></span>
+              <span class="cal-confetti c2"></span>
+              <span class="cal-confetti c3"></span>
+              <span class="cal-confetti c4"></span>
+              <span class="cal-confetti c5"></span>
+              <span class="cal-confetti c6"></span>
+              <span class="cal-confetti c7"></span>
+              <span class="cal-confetti c8"></span>
+            </div>
+          </div>
+          <div><div class="feature-name">Nouveautés chaque jour</div><div class="feature-desc">Sorties VOD ajoutées quotidiennement. Catalogue vivant et à jour.</div></div>
+        </div>
       </div>
     </div>
   </div>
