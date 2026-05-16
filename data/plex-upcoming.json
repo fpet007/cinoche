@@ -4,11 +4,12 @@
     "plex_release": "5 mai 2026",
     "tmdb_id": 1266127,
     "poster_path": "/ygbalhUdg7RnQKwnnyyqqSXoSvY.jpg",
-    "original_title": "Ready or Not 2: Here I Come",
+    "original_title": "Ready or Not: Here I Come",
     "cinema_date": "8 avril 2026",
     "vote_average": 7.5,
-    "vote_count": 657,
+    "vote_count": 672,
     "genres": [
+      "Thriller",
       "Horreur",
       "Comédie"
     ],
@@ -32,7 +33,7 @@
     "original_title": "The Drama",
     "cinema_date": "1 avril 2026",
     "vote_average": 7,
-    "vote_count": 737,
+    "vote_count": 741,
     "genres": [
       "Romance",
       "Comédie",
@@ -82,7 +83,7 @@
     "original_title": "Project Hail Mary",
     "cinema_date": "15 mars 2026",
     "vote_average": 8.5,
-    "vote_count": 2954,
+    "vote_count": 3107,
     "genres": [
       "Science-Fiction",
       "Aventure"
@@ -108,7 +109,7 @@
     "original_title": "L’affaire Bojarski",
     "cinema_date": "14 janvier 2026",
     "vote_average": 7.1,
-    "vote_count": 101,
+    "vote_count": 102,
     "genres": [
       "Histoire",
       "Drame",
@@ -155,11 +156,11 @@
     "title": "Dhurandhar : The Revenge",
     "plex_release": "15 mai 2026",
     "tmdb_id": 1582770,
-    "poster_path": "/bAupKTbSAzdNAb0PtTH1vQGuqYf.jpg",
+    "poster_path": "/ov8vrRLZGoXHpYjSY9Vpv1tHJX7.jpg",
     "original_title": "धुरंधर: द रिवेंज",
     "cinema_date": "18 mars 2026",
     "vote_average": 7.5,
-    "vote_count": 68,
+    "vote_count": 69,
     "genres": [
       "Action",
       "Crime",
@@ -185,7 +186,7 @@
     "original_title": "The Super Mario Galaxy Movie",
     "cinema_date": "1 avril 2026",
     "vote_average": 6.7,
-    "vote_count": 837,
+    "vote_count": 844,
     "genres": [
       "Familial",
       "Comédie",
@@ -214,7 +215,7 @@
     "original_title": "Lee Cronin's The Mummy",
     "cinema_date": "15 avril 2026",
     "vote_average": 6.7,
-    "vote_count": 197,
+    "vote_count": 200,
     "genres": [
       "Horreur",
       "Mystère"
@@ -239,7 +240,7 @@
     "original_title": "Le mage du Kremlin",
     "cinema_date": "21 janvier 2026",
     "vote_average": 6.5,
-    "vote_count": 133,
+    "vote_count": 134,
     "genres": [
       "Drame"
     ],
@@ -357,6 +358,30 @@
     "lead_studio": null
   },
   {
+    "title": "Baise-en-ville",
+    "plex_release": "28 mai 2026",
+    "tmdb_id": 1235303,
+    "poster_path": "/37bcY42oSbPpVq683KQ3nOtV867.jpg",
+    "original_title": "Baise-en-ville",
+    "cinema_date": "28 janvier 2026",
+    "vote_average": 6.4,
+    "vote_count": 17,
+    "genres": [
+      "Comédie"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
     "title": "Les Légendaires",
     "plex_release": "28 mai 2026",
     "tmdb_id": 677561,
@@ -372,30 +397,6 @@
       "Comédie",
       "Familial",
       "Fantastique"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "Baise-en-ville",
-    "plex_release": "28 mai 2026",
-    "tmdb_id": 1235303,
-    "poster_path": "/37bcY42oSbPpVq683KQ3nOtV867.jpg",
-    "original_title": "Baise-en-ville",
-    "cinema_date": "28 janvier 2026",
-    "vote_average": 6.4,
-    "vote_count": 17,
-    "genres": [
-      "Comédie"
     ],
     "is_french": true,
     "source": "prédite",
