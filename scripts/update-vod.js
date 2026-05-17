@@ -239,8 +239,14 @@ function isCacheEntryFresh(entry, ttlHours = CACHE_TTL_HOURS) {
 
 function loadOverrides() {
   const fileOverrides = loadJsonSafe(OVERRIDES_PATH, {});
+  // Normalise les clés du fichier pour matcher le lookup (qui utilise normalizeTitle)
+  // Ex: "Wicked : Partie II" → "wicked  partie ii" pour matcher slugNorm
+  const normalizedFile = {};
+  for (const [key, val] of Object.entries(fileOverrides)) {
+    normalizedFile[normalizeTitle(key)] = val;
+  }
   // Merge : les overrides du fichier ont priorité sur les défauts
-  return { ...DEFAULT_OVERRIDES, ...fileOverrides };
+  return { ...DEFAULT_OVERRIDES, ...normalizedFile };
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
