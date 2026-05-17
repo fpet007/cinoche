@@ -1,4 +1,36 @@
+# robots.txt — Cinoche FR
+# https://plex.cinochefr.space/
+
 User-agent: *
 Allow: /
 
+# Bloquer l'indexation des dossiers techniques (s'ils existent)
+Disallow: /data/
+Disallow: /sw.js
+Disallow: /manifest.webmanifest
+
+# Autoriser explicitement les bots des moteurs principaux
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+# Bloquer les bots agressifs / IA scrapers (optionnel, à ajuster selon ta préférence)
+User-agent: GPTBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+# Emplacement du sitemap
 Sitemap: https://plex.cinochefr.space/sitemap.xml
