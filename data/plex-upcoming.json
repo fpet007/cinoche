@@ -1,5 +1,31 @@
 [
   {
+    "title": "Wicked : Partie II",
+    "plex_release": "1 mai 2026",
+    "tmdb_id": 967941,
+    "poster_path": "/A16dlyaV3FCYGYIsYhQJr0tIjo5.jpg",
+    "original_title": "Wicked: For Good",
+    "cinema_date": "19 novembre 2025",
+    "vote_average": 6.6,
+    "vote_count": 974,
+    "genres": [
+      "Fantastique",
+      "Aventure",
+      "Romance"
+    ],
+    "is_french": false,
+    "source": "override-manuel",
+    "confidence": {
+      "level": "override",
+      "score": 1,
+      "sources": [
+        "override-manuel"
+      ]
+    },
+    "tier": "blockbuster",
+    "lead_studio": "Universal Pictures"
+  },
+  {
     "title": "Wedding Nightmare : Deuxième partie",
     "plex_release": "5 mai 2026",
     "tmdb_id": 1266127,
@@ -89,12 +115,12 @@
       "Aventure"
     ],
     "is_french": false,
-    "source": "officielle-us",
+    "source": "override-manuel",
     "confidence": {
-      "level": "high",
-      "score": 0.88,
+      "level": "override",
+      "score": 1,
       "sources": [
-        "officielle-us",
+        "override-manuel",
         "maxblizz"
       ]
     },
@@ -307,32 +333,6 @@
     },
     "tier": "niche",
     "lead_studio": null
-  },
-  {
-    "title": "Wicked : Partie II",
-    "plex_release": "22 mai 2026",
-    "tmdb_id": 967941,
-    "poster_path": "/A16dlyaV3FCYGYIsYhQJr0tIjo5.jpg",
-    "original_title": "Wicked: For Good",
-    "cinema_date": "19 novembre 2025",
-    "vote_average": 6.6,
-    "vote_count": 974,
-    "genres": [
-      "Fantastique",
-      "Aventure",
-      "Romance"
-    ],
-    "is_french": false,
-    "source": "officielle-fr",
-    "confidence": {
-      "level": "high",
-      "score": 0.95,
-      "sources": [
-        "officielle-fr"
-      ]
-    },
-    "tier": "blockbuster",
-    "lead_studio": "Universal Pictures"
   },
   {
     "title": "Gourou",
