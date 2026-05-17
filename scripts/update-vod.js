@@ -240,7 +240,6 @@ function isCacheEntryFresh(entry, ttlHours = CACHE_TTL_HOURS) {
 function loadOverrides() {
   const fileOverrides = loadJsonSafe(OVERRIDES_PATH, {});
   // Normalise les clés du fichier pour matcher le lookup (qui utilise normalizeTitle)
-  // Ex: "Wicked : Partie II" → "wicked  partie ii" pour matcher slugNorm
   const normalizedFile = {};
   for (const [key, val] of Object.entries(fileOverrides)) {
     normalizedFile[normalizeTitle(key)] = val;
@@ -1184,6 +1183,19 @@ async function updateVOD() {
       vodDate    = predicted.date;
       source     = 'prédite';
       leadStudio = null;
+    }
+
+    // ── Override manuel : priorité absolue, écrase même une date officielle ──
+    const titleNorm = normalizeTitle(details.title || movie.title);
+    const origNorm  = normalizeTitle(details.original_title || '');
+    const overrideMatch = overrides[titleNorm] || overrides[origNorm];
+    if (overrideMatch) {
+      const overrideDate = new Date(overrideMatch.date);
+      if (!isNaN(overrideDate)) {
+        log(`     ★ Override "${details.title || movie.title}" → ${formatDateFR(overrideDate)} (${overrideMatch.reason})`);
+        vodDate = overrideDate;
+        source  = 'override-manuel';
+      }
     }
 
     const actualDelayDays = (vodDate - cinemaDate) / 86400000;
