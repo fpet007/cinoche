@@ -7,7 +7,7 @@
     "original_title": "Ready or Not: Here I Come",
     "cinema_date": "8 avril 2026",
     "vote_average": 7.6,
-    "vote_count": 753,
+    "vote_count": 759,
     "genres": [
       "Thriller",
       "Horreur",
@@ -176,31 +176,6 @@
       ]
     },
     "tier": "mid",
-    "lead_studio": null
-  },
-  {
-    "title": "Des preuves d'amour",
-    "plex_release": "15 mai 2026",
-    "tmdb_id": 1119537,
-    "poster_path": "/cgE5Oo0qBJ8VAtQaF4vIDFK4OI7.jpg",
-    "original_title": "Des preuves d'amour",
-    "cinema_date": "19 novembre 2025",
-    "vote_average": 7.6,
-    "vote_count": 36,
-    "genres": [
-      "Drame",
-      "Comédie"
-    ],
-    "is_french": true,
-    "source": "override-manuel",
-    "confidence": {
-      "level": "override",
-      "score": 1,
-      "sources": [
-        "override-manuel"
-      ]
-    },
-    "tier": "niche",
     "lead_studio": null
   },
   {
