@@ -33,7 +33,7 @@
     "original_title": "The Drama",
     "cinema_date": "1 avril 2026",
     "vote_average": 6.9,
-    "vote_count": 777,
+    "vote_count": 778,
     "genres": [
       "Romance",
       "Comédie",
@@ -83,7 +83,7 @@
     "original_title": "Project Hail Mary",
     "cinema_date": "15 mars 2026",
     "vote_average": 8.6,
-    "vote_count": 3565,
+    "vote_count": 3597,
     "genres": [
       "Science-Fiction",
       "Aventure"
@@ -192,12 +192,12 @@
       "Comédie"
     ],
     "is_french": true,
-    "source": "officielle-us",
+    "source": "override-manuel",
     "confidence": {
-      "level": "high",
-      "score": 0.82,
+      "level": "override",
+      "score": 1,
       "sources": [
-        "officielle-us"
+        "override-manuel"
       ]
     },
     "tier": "niche",
@@ -239,8 +239,8 @@
     "poster_path": "/f77yGBGOjainowvlGHU70CCQrjV.jpg",
     "original_title": "Lee Cronin's The Mummy",
     "cinema_date": "15 avril 2026",
-    "vote_average": 6.7,
-    "vote_count": 227,
+    "vote_average": 7,
+    "vote_count": 275,
     "genres": [
       "Horreur",
       "Mystère"
