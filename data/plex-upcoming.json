@@ -6,8 +6,8 @@
     "poster_path": "/ygbalhUdg7RnQKwnnyyqqSXoSvY.jpg",
     "original_title": "Ready or Not: Here I Come",
     "cinema_date": "8 avril 2026",
-    "vote_average": 7.6,
-    "vote_count": 759,
+    "vote_average": 7.7,
+    "vote_count": 769,
     "genres": [
       "Thriller",
       "Horreur",
@@ -33,7 +33,7 @@
     "original_title": "The Drama",
     "cinema_date": "1 avril 2026",
     "vote_average": 6.9,
-    "vote_count": 778,
+    "vote_count": 779,
     "genres": [
       "Romance",
       "Comédie",
@@ -83,7 +83,7 @@
     "original_title": "Project Hail Mary",
     "cinema_date": "15 mars 2026",
     "vote_average": 8.6,
-    "vote_count": 3597,
+    "vote_count": 3637,
     "genres": [
       "Science-Fiction",
       "Aventure"
@@ -109,7 +109,7 @@
     "original_title": "L’affaire Bojarski",
     "cinema_date": "14 janvier 2026",
     "vote_average": 7.1,
-    "vote_count": 106,
+    "vote_count": 107,
     "genres": [
       "Histoire",
       "Drame",
@@ -159,8 +159,8 @@
     "poster_path": "/ov8vrRLZGoXHpYjSY9Vpv1tHJX7.jpg",
     "original_title": "धुरंधर: द रिवेंज",
     "cinema_date": "18 mars 2026",
-    "vote_average": 7.3,
-    "vote_count": 74,
+    "vote_average": 7.4,
+    "vote_count": 77,
     "genres": [
       "Action",
       "Crime",
@@ -185,8 +185,8 @@
     "poster_path": "/aSQktALDmbunDbwkuZbZFMEWVFr.jpg",
     "original_title": "The Super Mario Galaxy Movie",
     "cinema_date": "1 avril 2026",
-    "vote_average": 6.7,
-    "vote_count": 878,
+    "vote_average": 7,
+    "vote_count": 1008,
     "genres": [
       "Familial",
       "Comédie",
@@ -214,8 +214,8 @@
     "poster_path": "/f77yGBGOjainowvlGHU70CCQrjV.jpg",
     "original_title": "Lee Cronin's The Mummy",
     "cinema_date": "15 avril 2026",
-    "vote_average": 7,
-    "vote_count": 275,
+    "vote_average": 7.6,
+    "vote_count": 401,
     "genres": [
       "Horreur",
       "Mystère"
@@ -240,7 +240,7 @@
     "original_title": "Le mage du Kremlin",
     "cinema_date": "21 janvier 2026",
     "vote_average": 6.4,
-    "vote_count": 136,
+    "vote_count": 137,
     "genres": [
       "Drame"
     ],
@@ -358,16 +358,21 @@
     "lead_studio": null
   },
   {
-    "title": "Baise-en-ville",
+    "title": "Les Légendaires",
     "plex_release": "28 mai 2026",
-    "tmdb_id": 1235303,
-    "poster_path": "/37bcY42oSbPpVq683KQ3nOtV867.jpg",
-    "original_title": "Baise-en-ville",
+    "tmdb_id": 677561,
+    "poster_path": "/h1FVf2kiS1964VsGmkYQHJoVsHe.jpg",
+    "original_title": "Les Légendaires",
     "cinema_date": "28 janvier 2026",
-    "vote_average": 6.4,
-    "vote_count": 17,
+    "vote_average": 6.2,
+    "vote_count": 14,
     "genres": [
-      "Comédie"
+      "Action",
+      "Aventure",
+      "Animation",
+      "Comédie",
+      "Familial",
+      "Fantastique"
     ],
     "is_french": true,
     "source": "prédite",
@@ -382,21 +387,16 @@
     "lead_studio": null
   },
   {
-    "title": "Les Légendaires",
+    "title": "Baise-en-ville",
     "plex_release": "28 mai 2026",
-    "tmdb_id": 677561,
-    "poster_path": "/plDx1dcPE8U2Ukj8zOOYKLTdp7T.jpg",
-    "original_title": "Les Légendaires",
+    "tmdb_id": 1235303,
+    "poster_path": "/37bcY42oSbPpVq683KQ3nOtV867.jpg",
+    "original_title": "Baise-en-ville",
     "cinema_date": "28 janvier 2026",
-    "vote_average": 6.2,
-    "vote_count": 14,
+    "vote_average": 6.4,
+    "vote_count": 17,
     "genres": [
-      "Action",
-      "Aventure",
-      "Animation",
-      "Comédie",
-      "Familial",
-      "Fantastique"
+      "Comédie"
     ],
     "is_french": true,
     "source": "prédite",
