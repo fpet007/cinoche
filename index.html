@@ -249,14 +249,31 @@ body::after {
   mix-blend-mode: overlay;
   opacity: 0.6;
 }
-/* Mobile : grain plus léger pour économiser le GPU des appareils bas de gamme */
+/* Mobile : on retire le mix-blend-mode (très coûteux à recomposer à chaque frame de scroll
+   sur une couche fixed plein écran) tout en gardant le grain visible. Scroll nettement plus fluide. */
 @media (max-width: 768px) {
-  body::after { opacity: 0.25; }
+  body::after {
+    opacity: 0.18;
+    mix-blend-mode: normal;
+  }
 }
 /* Accessibilité : utilisateurs préférant moins d'effets visuels */
 @media (prefers-reduced-motion: reduce) {
   body::after { display: none; }
   .hero-overlay-grain { display: none; }
+}
+
+/* ==================== PAUSE DES ANIMATIONS HORS ÉCRAN ==================== */
+/* Une animation CSS en boucle continue de consommer le GPU/la batterie même quand
+   son élément est scrollé hors de l'écran : le navigateur ne l'arrête pas tout seul.
+   Quand une section sort du viewport, le JS lui ajoute .anim-paused, ce qui met en pause
+   TOUTES ses animations (et celles de ses enfants). Reprise exacte au retour à l'écran.
+   Invisible à l'œil, gain majeur sur mobile. */
+.anim-paused,
+.anim-paused *,
+.anim-paused *::before,
+.anim-paused *::after {
+  animation-play-state: paused !important;
 }
 
 /* ==================== INTRO LOADER ==================== */
@@ -5031,6 +5048,36 @@ const revealObs = new IntersectionObserver((entries) => {
 }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 revealEls.forEach(el => revealObs.observe(el));
 
+// ============== PAUSE DES ANIMATIONS HORS ÉCRAN (perf mobile) ==============
+// Met en pause les animations CSS des blocs sortis du viewport (cf. règle .anim-paused).
+// On observe les gros conteneurs animés : sections, hero, ticker, bandeaux de posters/CTA.
+// rootMargin de 200px = marge de sécurité pour réactiver AVANT l'arrivée à l'écran (aucun "pop").
+(function initOffscreenAnimPause() {
+  const animatedBlocks = document.querySelectorAll(
+    'section, .ticker'
+  );
+  if (!animatedBlocks.length || !('IntersectionObserver' in window)) return;
+
+  const pauseObs = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      e.target.classList.toggle('anim-paused', !e.isIntersecting);
+    });
+  }, { rootMargin: '200px 0px 200px 0px', threshold: 0 });
+
+  animatedBlocks.forEach(el => pauseObs.observe(el));
+
+  // Bonus batterie : on met TOUT en pause quand l'onglet passe en arrière-plan,
+  // et on restaure l'état réel (selon visibilité) au retour.
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      animatedBlocks.forEach(el => el.classList.add('anim-paused'));
+    } else {
+      // Force un recalcul : l'observer remettra les bonnes classes au prochain tick
+      animatedBlocks.forEach(el => el.classList.remove('anim-paused'));
+    }
+  });
+})();
+
 // ============== STAT COUNTERS (time-based, identique PC/mobile) ==============
 (function initStatCounters() {
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -5077,7 +5124,9 @@ revealEls.forEach(el => revealObs.observe(el));
 (function initHeroBackdrops() {
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const { CONFIG, cache, log } = window.CINOCHE;
-  const IMG_BASE = `${CONFIG.IMG_BASE}/original`;
+  // Taille backdrop adaptative : on ne charge JAMAIS le "original" (jusqu'à 3840px / plusieurs Mo).
+  // Mobile → w780, desktop → w1280. Invisible à l'œil sur un écran, mais ×6 images = gros gain de data + chargement.
+  const IMG_BASE = `${CONFIG.IMG_BASE}/${window.innerWidth <= 768 ? 'w780' : 'w1280'}`;
   const container = document.getElementById('heroBackdrops');
   const featuredEl = document.getElementById('heroFeatured');
   const titleEl = document.getElementById('heroFeaturedTitle');
@@ -5189,7 +5238,7 @@ revealEls.forEach(el => revealObs.observe(el));
   const API_KEY = CONFIG.TMDB_KEY;
   const BASE = CONFIG.TMDB_BASE;
   const IMG_W = `${CONFIG.IMG_BASE}/w500`;
-  const IMG_ORIG = `${CONFIG.IMG_BASE}/original`;
+  const IMG_ORIG = `${CONFIG.IMG_BASE}/${window.innerWidth <= 768 ? 'w780' : 'w1280'}`;
   const IMG_FALLBACK = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='750' viewBox='0 0 500 750'%3E%3Crect fill='%231a1a24' width='500' height='750'/%3E%3Ctext x='50%25' y='50%25' fill='%23a09d96' font-size='18' text-anchor='middle' dominant-baseline='middle' font-family='sans-serif'%3EPas d%27image%3C/text%3E%3C/svg%3E";
 
   // Données Plex chargées depuis data/plex-upcoming.json (mis à jour par scripts/update-vod.js)
