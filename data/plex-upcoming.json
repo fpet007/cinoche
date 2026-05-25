@@ -7,7 +7,7 @@
     "original_title": "Ready or Not: Here I Come",
     "cinema_date": "8 avril 2026",
     "vote_average": 7.7,
-    "vote_count": 824,
+    "vote_count": 847,
     "genres": [
       "Thriller",
       "Horreur",
@@ -33,7 +33,7 @@
     "original_title": "The Drama",
     "cinema_date": "1 avril 2026",
     "vote_average": 6.9,
-    "vote_count": 802,
+    "vote_count": 804,
     "genres": [
       "Romance",
       "Comédie",
@@ -83,7 +83,7 @@
     "original_title": "Project Hail Mary",
     "cinema_date": "15 mars 2026",
     "vote_average": 8.6,
-    "vote_count": 3903,
+    "vote_count": 4030,
     "genres": [
       "Science-Fiction",
       "Aventure"
@@ -156,11 +156,11 @@
     "title": "Dhurandhar : The Revenge",
     "plex_release": "15 mai 2026",
     "tmdb_id": 1582770,
-    "poster_path": "/hsJG5r6etrMNwW00BVp4NC7zi67.jpg",
+    "poster_path": "/w5oW8zE7dudapyNwF8FQoQfU2Bz.jpg",
     "original_title": "धुरंधर: द रिवेंज",
     "cinema_date": "18 mars 2026",
     "vote_average": 7.3,
-    "vote_count": 86,
+    "vote_count": 88,
     "genres": [
       "Action",
       "Crime",
@@ -185,8 +185,8 @@
     "poster_path": "/aSQktALDmbunDbwkuZbZFMEWVFr.jpg",
     "original_title": "The Super Mario Galaxy Movie",
     "cinema_date": "1 avril 2026",
-    "vote_average": 7.8,
-    "vote_count": 1625,
+    "vote_average": 7.9,
+    "vote_count": 1793,
     "genres": [
       "Familial",
       "Comédie",
@@ -215,7 +215,7 @@
     "original_title": "Lee Cronin's The Mummy",
     "cinema_date": "15 avril 2026",
     "vote_average": 8,
-    "vote_count": 904,
+    "vote_count": 1063,
     "genres": [
       "Horreur",
       "Mystère"
@@ -240,7 +240,7 @@
     "original_title": "Le mage du Kremlin",
     "cinema_date": "21 janvier 2026",
     "vote_average": 6.5,
-    "vote_count": 143,
+    "vote_count": 146,
     "genres": [
       "Drame"
     ],
