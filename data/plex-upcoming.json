@@ -7,7 +7,7 @@
     "original_title": "Ready or Not: Here I Come",
     "cinema_date": "8 avril 2026",
     "vote_average": 7.7,
-    "vote_count": 847,
+    "vote_count": 861,
     "genres": [
       "Thriller",
       "Horreur",
@@ -33,7 +33,7 @@
     "original_title": "The Drama",
     "cinema_date": "1 avril 2026",
     "vote_average": 6.9,
-    "vote_count": 804,
+    "vote_count": 811,
     "genres": [
       "Romance",
       "Comédie",
@@ -59,7 +59,7 @@
     "original_title": "Ma frère",
     "cinema_date": "7 janvier 2026",
     "vote_average": 7.2,
-    "vote_count": 37,
+    "vote_count": 38,
     "genres": [
       "Comédie"
     ],
@@ -76,6 +76,58 @@
     "lead_studio": null
   },
   {
+    "title": "Mortal Kombat II",
+    "plex_release": "8 mai 2026",
+    "tmdb_id": 931285,
+    "poster_path": "/yPkeeBEJdQO85AGCwi2XEIfMOxa.jpg",
+    "original_title": "Mortal Kombat II",
+    "cinema_date": "6 mai 2026",
+    "vote_average": 6.8,
+    "vote_count": 298,
+    "genres": [
+      "Action",
+      "Fantastique",
+      "Aventure"
+    ],
+    "is_french": false,
+    "source": "maxblizz",
+    "confidence": {
+      "level": "medium",
+      "score": 0.7,
+      "sources": [
+        "maxblizz"
+      ]
+    },
+    "tier": "blockbuster",
+    "lead_studio": null
+  },
+  {
+    "title": "Send Help",
+    "plex_release": "8 mai 2026",
+    "tmdb_id": 1198994,
+    "poster_path": "/bMAn4qERdEfxotddEHWfMmkfjRv.jpg",
+    "original_title": "Send Help",
+    "cinema_date": "22 janvier 2026",
+    "vote_average": 7,
+    "vote_count": 1568,
+    "genres": [
+      "Horreur",
+      "Thriller",
+      "Comédie"
+    ],
+    "is_french": false,
+    "source": "maxblizz",
+    "confidence": {
+      "level": "medium",
+      "score": 0.7,
+      "sources": [
+        "maxblizz"
+      ]
+    },
+    "tier": "blockbuster",
+    "lead_studio": "20th Century Studios"
+  },
+  {
     "title": "Projet Dernière Chance",
     "plex_release": "12 mai 2026",
     "tmdb_id": 687163,
@@ -83,7 +135,7 @@
     "original_title": "Project Hail Mary",
     "cinema_date": "15 mars 2026",
     "vote_average": 8.6,
-    "vote_count": 4030,
+    "vote_count": 4092,
     "genres": [
       "Science-Fiction",
       "Aventure"
@@ -109,7 +161,7 @@
     "original_title": "L’affaire Bojarski",
     "cinema_date": "14 janvier 2026",
     "vote_average": 7,
-    "vote_count": 112,
+    "vote_count": 115,
     "genres": [
       "Histoire",
       "Drame",
@@ -160,7 +212,7 @@
     "original_title": "धुरंधर: द रिवेंज",
     "cinema_date": "18 mars 2026",
     "vote_average": 7.3,
-    "vote_count": 88,
+    "vote_count": 92,
     "genres": [
       "Action",
       "Crime",
@@ -185,8 +237,8 @@
     "poster_path": "/aSQktALDmbunDbwkuZbZFMEWVFr.jpg",
     "original_title": "The Super Mario Galaxy Movie",
     "cinema_date": "1 avril 2026",
-    "vote_average": 7.9,
-    "vote_count": 1793,
+    "vote_average": 8,
+    "vote_count": 1854,
     "genres": [
       "Familial",
       "Comédie",
@@ -215,7 +267,7 @@
     "original_title": "Lee Cronin's The Mummy",
     "cinema_date": "15 avril 2026",
     "vote_average": 8,
-    "vote_count": 1063,
+    "vote_count": 1189,
     "genres": [
       "Horreur",
       "Mystère"
@@ -316,7 +368,7 @@
     "original_title": "Gourou",
     "cinema_date": "28 janvier 2026",
     "vote_average": 6.2,
-    "vote_count": 178,
+    "vote_count": 179,
     "genres": [
       "Drame",
       "Thriller"
