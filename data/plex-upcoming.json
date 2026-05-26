@@ -231,6 +231,31 @@
     "lead_studio": null
   },
   {
+    "title": "Des preuves d'amour",
+    "plex_release": "15 mai 2026",
+    "tmdb_id": 1119537,
+    "poster_path": "/cgE5Oo0qBJ8VAtQaF4vIDFK4OI7.jpg",
+    "original_title": "Des preuves d'amour",
+    "cinema_date": "19 novembre 2025",
+    "vote_average": 7.6,
+    "vote_count": 36,
+    "genres": [
+      "Drame",
+      "Comédie"
+    ],
+    "is_french": true,
+    "source": "officielle-us",
+    "confidence": {
+      "level": "high",
+      "score": 0.82,
+      "sources": [
+        "officielle-us"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
     "title": "Super Mario Galaxy, le film",
     "plex_release": "19 mai 2026",
     "tmdb_id": 1226863,
@@ -359,6 +384,32 @@
     },
     "tier": "niche",
     "lead_studio": null
+  },
+  {
+    "title": "Wicked : Partie II",
+    "plex_release": "22 mai 2026",
+    "tmdb_id": 967941,
+    "poster_path": "/A16dlyaV3FCYGYIsYhQJr0tIjo5.jpg",
+    "original_title": "Wicked: For Good",
+    "cinema_date": "19 novembre 2025",
+    "vote_average": 6.6,
+    "vote_count": 988,
+    "genres": [
+      "Fantastique",
+      "Aventure",
+      "Romance"
+    ],
+    "is_french": false,
+    "source": "officielle-fr",
+    "confidence": {
+      "level": "high",
+      "score": 0.95,
+      "sources": [
+        "officielle-fr"
+      ]
+    },
+    "tier": "blockbuster",
+    "lead_studio": "Universal Pictures"
   },
   {
     "title": "Gourou",
