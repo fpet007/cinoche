@@ -7,7 +7,7 @@
     "original_title": "Ready or Not: Here I Come",
     "cinema_date": "8 avril 2026",
     "vote_average": 7.7,
-    "vote_count": 861,
+    "vote_count": 874,
     "genres": [
       "Thriller",
       "Horreur",
@@ -33,7 +33,7 @@
     "original_title": "The Drama",
     "cinema_date": "1 avril 2026",
     "vote_average": 6.9,
-    "vote_count": 811,
+    "vote_count": 815,
     "genres": [
       "Romance",
       "Comédie",
@@ -76,32 +76,6 @@
     "lead_studio": null
   },
   {
-    "title": "Send Help",
-    "plex_release": "8 mai 2026",
-    "tmdb_id": 1198994,
-    "poster_path": "/bMAn4qERdEfxotddEHWfMmkfjRv.jpg",
-    "original_title": "Send Help",
-    "cinema_date": "22 janvier 2026",
-    "vote_average": 7,
-    "vote_count": 1568,
-    "genres": [
-      "Horreur",
-      "Thriller",
-      "Comédie"
-    ],
-    "is_french": false,
-    "source": "maxblizz",
-    "confidence": {
-      "level": "medium",
-      "score": 0.7,
-      "sources": [
-        "maxblizz"
-      ]
-    },
-    "tier": "blockbuster",
-    "lead_studio": "20th Century Studios"
-  },
-  {
     "title": "Projet Dernière Chance",
     "plex_release": "12 mai 2026",
     "tmdb_id": 687163,
@@ -109,7 +83,7 @@
     "original_title": "Project Hail Mary",
     "cinema_date": "15 mars 2026",
     "vote_average": 8.6,
-    "vote_count": 4092,
+    "vote_count": 4144,
     "genres": [
       "Science-Fiction",
       "Aventure"
@@ -120,8 +94,7 @@
       "level": "override",
       "score": 1,
       "sources": [
-        "override-manuel",
-        "maxblizz"
+        "override-manuel"
       ]
     },
     "tier": "blockbuster",
@@ -135,7 +108,7 @@
     "original_title": "L’affaire Bojarski",
     "cinema_date": "14 janvier 2026",
     "vote_average": 7,
-    "vote_count": 115,
+    "vote_count": 117,
     "genres": [
       "Histoire",
       "Drame",
@@ -182,7 +155,7 @@
     "title": "Dhurandhar : The Revenge",
     "plex_release": "15 mai 2026",
     "tmdb_id": 1582770,
-    "poster_path": "/w5oW8zE7dudapyNwF8FQoQfU2Bz.jpg",
+    "poster_path": "/hsJG5r6etrMNwW00BVp4NC7zi67.jpg",
     "original_title": "धुरंधर: द रिवेंज",
     "cinema_date": "18 mars 2026",
     "vote_average": 7.3,
@@ -212,7 +185,7 @@
     "original_title": "The Super Mario Galaxy Movie",
     "cinema_date": "1 avril 2026",
     "vote_average": 8,
-    "vote_count": 1854,
+    "vote_count": 1939,
     "genres": [
       "Familial",
       "Comédie",
@@ -224,39 +197,13 @@
     "source": "officielle-us",
     "confidence": {
       "level": "high",
-      "score": 0.88,
+      "score": 0.82,
       "sources": [
-        "officielle-us",
-        "maxblizz"
+        "officielle-us"
       ]
     },
     "tier": "blockbuster",
     "lead_studio": "Illumination"
-  },
-  {
-    "title": "Le Réveil de la Momie",
-    "plex_release": "19 mai 2026",
-    "tmdb_id": 1304313,
-    "poster_path": "/f77yGBGOjainowvlGHU70CCQrjV.jpg",
-    "original_title": "Lee Cronin's The Mummy",
-    "cinema_date": "15 avril 2026",
-    "vote_average": 8,
-    "vote_count": 1189,
-    "genres": [
-      "Horreur",
-      "Mystère"
-    ],
-    "is_french": false,
-    "source": "maxblizz",
-    "confidence": {
-      "level": "medium",
-      "score": 0.7,
-      "sources": [
-        "maxblizz"
-      ]
-    },
-    "tier": "blockbuster",
-    "lead_studio": null
   },
   {
     "title": "Le Mage du Kremlin",
@@ -266,7 +213,7 @@
     "original_title": "Le mage du Kremlin",
     "cinema_date": "21 janvier 2026",
     "vote_average": 6.5,
-    "vote_count": 146,
+    "vote_count": 147,
     "genres": [
       "Drame"
     ],
@@ -286,7 +233,7 @@
     "title": "Olivia",
     "plex_release": "21 mai 2026",
     "tmdb_id": 676679,
-    "poster_path": "/2r9tfYVbozubLCroqSkJBWrdC8e.jpg",
+    "poster_path": "/mLSKDnhmgXOAxrN2JrTAjNvKevX.jpg",
     "original_title": "L'Olívia i el terratrèmol invisible",
     "cinema_date": "21 janvier 2026",
     "vote_average": 7.2,
