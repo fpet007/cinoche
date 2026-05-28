@@ -7,7 +7,7 @@
     "original_title": "Ready or Not: Here I Come",
     "cinema_date": "8 avril 2026",
     "vote_average": 7.7,
-    "vote_count": 874,
+    "vote_count": 880,
     "genres": [
       "Thriller",
       "Horreur",
@@ -33,7 +33,7 @@
     "original_title": "The Drama",
     "cinema_date": "1 avril 2026",
     "vote_average": 6.9,
-    "vote_count": 815,
+    "vote_count": 819,
     "genres": [
       "Romance",
       "Comédie",
@@ -76,6 +76,32 @@
     "lead_studio": null
   },
   {
+    "title": "Send Help",
+    "plex_release": "8 mai 2026",
+    "tmdb_id": 1198994,
+    "poster_path": "/bMAn4qERdEfxotddEHWfMmkfjRv.jpg",
+    "original_title": "Send Help",
+    "cinema_date": "22 janvier 2026",
+    "vote_average": 7,
+    "vote_count": 1595,
+    "genres": [
+      "Horreur",
+      "Thriller",
+      "Comédie"
+    ],
+    "is_french": false,
+    "source": "maxblizz",
+    "confidence": {
+      "level": "medium",
+      "score": 0.7,
+      "sources": [
+        "maxblizz"
+      ]
+    },
+    "tier": "blockbuster",
+    "lead_studio": "20th Century Studios"
+  },
+  {
     "title": "Projet Dernière Chance",
     "plex_release": "12 mai 2026",
     "tmdb_id": 687163,
@@ -83,7 +109,7 @@
     "original_title": "Project Hail Mary",
     "cinema_date": "15 mars 2026",
     "vote_average": 8.6,
-    "vote_count": 4144,
+    "vote_count": 4193,
     "genres": [
       "Science-Fiction",
       "Aventure"
@@ -94,7 +120,8 @@
       "level": "override",
       "score": 1,
       "sources": [
-        "override-manuel"
+        "override-manuel",
+        "maxblizz"
       ]
     },
     "tier": "blockbuster",
@@ -158,8 +185,8 @@
     "poster_path": "/hsJG5r6etrMNwW00BVp4NC7zi67.jpg",
     "original_title": "धुरंधर: द रिवेंज",
     "cinema_date": "18 mars 2026",
-    "vote_average": 7.3,
-    "vote_count": 92,
+    "vote_average": 7.4,
+    "vote_count": 93,
     "genres": [
       "Action",
       "Crime",
@@ -185,7 +212,7 @@
     "original_title": "The Super Mario Galaxy Movie",
     "cinema_date": "1 avril 2026",
     "vote_average": 8,
-    "vote_count": 1939,
+    "vote_count": 1978,
     "genres": [
       "Familial",
       "Comédie",
@@ -197,13 +224,39 @@
     "source": "officielle-us",
     "confidence": {
       "level": "high",
-      "score": 0.82,
+      "score": 0.88,
       "sources": [
-        "officielle-us"
+        "officielle-us",
+        "maxblizz"
       ]
     },
     "tier": "blockbuster",
     "lead_studio": "Illumination"
+  },
+  {
+    "title": "Le Réveil de la Momie",
+    "plex_release": "19 mai 2026",
+    "tmdb_id": 1304313,
+    "poster_path": "/f77yGBGOjainowvlGHU70CCQrjV.jpg",
+    "original_title": "Lee Cronin's The Mummy",
+    "cinema_date": "15 avril 2026",
+    "vote_average": 8.1,
+    "vote_count": 1295,
+    "genres": [
+      "Horreur",
+      "Mystère"
+    ],
+    "is_french": false,
+    "source": "maxblizz",
+    "confidence": {
+      "level": "medium",
+      "score": 0.7,
+      "sources": [
+        "maxblizz"
+      ]
+    },
+    "tier": "blockbuster",
+    "lead_studio": null
   },
   {
     "title": "Le Mage du Kremlin",
@@ -307,16 +360,16 @@
     "lead_studio": null
   },
   {
-    "title": "Baise-en-ville",
+    "title": "Promis le ciel",
     "plex_release": "28 mai 2026",
-    "tmdb_id": 1235303,
-    "poster_path": "/37bcY42oSbPpVq683KQ3nOtV867.jpg",
-    "original_title": "Baise-en-ville",
+    "tmdb_id": 1218412,
+    "poster_path": "/i2HNCMGzIuY4oQyDrI6zuTDrOfk.jpg",
+    "original_title": "Promis le ciel",
     "cinema_date": "28 janvier 2026",
-    "vote_average": 6.4,
-    "vote_count": 17,
+    "vote_average": 5.9,
+    "vote_count": 20,
     "genres": [
-      "Comédie"
+      "Drame"
     ],
     "is_french": true,
     "source": "prédite",
@@ -331,16 +384,16 @@
     "lead_studio": null
   },
   {
-    "title": "Promis le ciel",
+    "title": "Baise-en-ville",
     "plex_release": "28 mai 2026",
-    "tmdb_id": 1218412,
-    "poster_path": "/i2HNCMGzIuY4oQyDrI6zuTDrOfk.jpg",
-    "original_title": "Promis le ciel",
+    "tmdb_id": 1235303,
+    "poster_path": "/37bcY42oSbPpVq683KQ3nOtV867.jpg",
+    "original_title": "Baise-en-ville",
     "cinema_date": "28 janvier 2026",
-    "vote_average": 5.9,
-    "vote_count": 20,
+    "vote_average": 6.4,
+    "vote_count": 17,
     "genres": [
-      "Drame"
+      "Comédie"
     ],
     "is_french": true,
     "source": "prédite",
