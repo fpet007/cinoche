@@ -7,7 +7,7 @@
     "original_title": "Ready or Not: Here I Come",
     "cinema_date": "8 avril 2026",
     "vote_average": 7.7,
-    "vote_count": 880,
+    "vote_count": 888,
     "genres": [
       "Thriller",
       "Horreur",
@@ -33,7 +33,7 @@
     "original_title": "The Drama",
     "cinema_date": "1 avril 2026",
     "vote_average": 6.9,
-    "vote_count": 819,
+    "vote_count": 822,
     "genres": [
       "Romance",
       "Comédie",
@@ -83,7 +83,7 @@
     "original_title": "Send Help",
     "cinema_date": "22 janvier 2026",
     "vote_average": 7,
-    "vote_count": 1595,
+    "vote_count": 1606,
     "genres": [
       "Horreur",
       "Thriller",
@@ -109,7 +109,7 @@
     "original_title": "Project Hail Mary",
     "cinema_date": "15 mars 2026",
     "vote_average": 8.6,
-    "vote_count": 4193,
+    "vote_count": 4258,
     "genres": [
       "Science-Fiction",
       "Aventure"
@@ -185,8 +185,8 @@
     "poster_path": "/hsJG5r6etrMNwW00BVp4NC7zi67.jpg",
     "original_title": "धुरंधर: द रिवेंज",
     "cinema_date": "18 mars 2026",
-    "vote_average": 7.4,
-    "vote_count": 93,
+    "vote_average": 7.3,
+    "vote_count": 95,
     "genres": [
       "Action",
       "Crime",
@@ -212,7 +212,7 @@
     "original_title": "The Super Mario Galaxy Movie",
     "cinema_date": "1 avril 2026",
     "vote_average": 8,
-    "vote_count": 1978,
+    "vote_count": 2017,
     "genres": [
       "Familial",
       "Comédie",
@@ -241,7 +241,7 @@
     "original_title": "Lee Cronin's The Mummy",
     "cinema_date": "15 avril 2026",
     "vote_average": 8.1,
-    "vote_count": 1295,
+    "vote_count": 1334,
     "genres": [
       "Horreur",
       "Mystère"
@@ -342,34 +342,10 @@
     "original_title": "Gourou",
     "cinema_date": "28 janvier 2026",
     "vote_average": 6.2,
-    "vote_count": 179,
+    "vote_count": 186,
     "genres": [
       "Drame",
       "Thriller"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "Promis le ciel",
-    "plex_release": "28 mai 2026",
-    "tmdb_id": 1218412,
-    "poster_path": "/i2HNCMGzIuY4oQyDrI6zuTDrOfk.jpg",
-    "original_title": "Promis le ciel",
-    "cinema_date": "28 janvier 2026",
-    "vote_average": 5.9,
-    "vote_count": 20,
-    "genres": [
-      "Drame"
     ],
     "is_french": true,
     "source": "prédite",
@@ -411,7 +387,7 @@
     "title": "Les Légendaires",
     "plex_release": "28 mai 2026",
     "tmdb_id": 677561,
-    "poster_path": "/h1FVf2kiS1964VsGmkYQHJoVsHe.jpg",
+    "poster_path": "/AlfndBQucnWC7igEIG2L0sk6tiF.jpg",
     "original_title": "Les Légendaires",
     "cinema_date": "28 janvier 2026",
     "vote_average": 6.2,
@@ -423,6 +399,30 @@
       "Comédie",
       "Familial",
       "Fantastique"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Promis le ciel",
+    "plex_release": "28 mai 2026",
+    "tmdb_id": 1218412,
+    "poster_path": "/i2HNCMGzIuY4oQyDrI6zuTDrOfk.jpg",
+    "original_title": "Promis le ciel",
+    "cinema_date": "28 janvier 2026",
+    "vote_average": 5.9,
+    "vote_count": 20,
+    "genres": [
+      "Drame"
     ],
     "is_french": true,
     "source": "prédite",
