@@ -7,7 +7,7 @@
     "original_title": "Ready or Not: Here I Come",
     "cinema_date": "8 avril 2026",
     "vote_average": 7.7,
-    "vote_count": 891,
+    "vote_count": 894,
     "genres": [
       "Thriller",
       "Horreur",
@@ -33,7 +33,7 @@
     "original_title": "The Drama",
     "cinema_date": "1 avril 2026",
     "vote_average": 6.9,
-    "vote_count": 824,
+    "vote_count": 844,
     "genres": [
       "Romance",
       "Comédie",
@@ -83,7 +83,7 @@
     "original_title": "Send Help",
     "cinema_date": "22 janvier 2026",
     "vote_average": 7,
-    "vote_count": 1606,
+    "vote_count": 1615,
     "genres": [
       "Horreur",
       "Thriller",
@@ -109,7 +109,7 @@
     "original_title": "Project Hail Mary",
     "cinema_date": "15 mars 2026",
     "vote_average": 8.6,
-    "vote_count": 4258,
+    "vote_count": 4308,
     "genres": [
       "Science-Fiction",
       "Aventure"
@@ -212,7 +212,7 @@
     "original_title": "The Super Mario Galaxy Movie",
     "cinema_date": "1 avril 2026",
     "vote_average": 8,
-    "vote_count": 2034,
+    "vote_count": 2065,
     "genres": [
       "Familial",
       "Comédie",
@@ -241,7 +241,7 @@
     "original_title": "Lee Cronin's The Mummy",
     "cinema_date": "15 avril 2026",
     "vote_average": 8.1,
-    "vote_count": 1334,
+    "vote_count": 1353,
     "genres": [
       "Horreur",
       "Mystère"
@@ -338,38 +338,14 @@
     "title": "Gourou",
     "plex_release": "28 mai 2026",
     "tmdb_id": 1259983,
-    "poster_path": "/gLEnkNw8BTudY3DpKICeqcxgrXV.jpg",
+    "poster_path": "/ufdcPu8CdcsC0c73pATNjYXEmMR.jpg",
     "original_title": "Gourou",
     "cinema_date": "28 janvier 2026",
-    "vote_average": 6.2,
-    "vote_count": 186,
+    "vote_average": 6.1,
+    "vote_count": 189,
     "genres": [
       "Drame",
       "Thriller"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "Baise-en-ville",
-    "plex_release": "28 mai 2026",
-    "tmdb_id": 1235303,
-    "poster_path": "/37bcY42oSbPpVq683KQ3nOtV867.jpg",
-    "original_title": "Baise-en-ville",
-    "cinema_date": "28 janvier 2026",
-    "vote_average": 6.4,
-    "vote_count": 17,
-    "genres": [
-      "Comédie"
     ],
     "is_french": true,
     "source": "prédite",
@@ -399,6 +375,30 @@
       "Comédie",
       "Familial",
       "Fantastique"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Baise-en-ville",
+    "plex_release": "28 mai 2026",
+    "tmdb_id": 1235303,
+    "poster_path": "/37bcY42oSbPpVq683KQ3nOtV867.jpg",
+    "original_title": "Baise-en-ville",
+    "cinema_date": "28 janvier 2026",
+    "vote_average": 6.4,
+    "vote_count": 17,
+    "genres": [
+      "Comédie"
     ],
     "is_french": true,
     "source": "prédite",
