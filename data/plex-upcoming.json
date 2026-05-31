@@ -7,7 +7,7 @@
     "original_title": "Ready or Not: Here I Come",
     "cinema_date": "8 avril 2026",
     "vote_average": 7.7,
-    "vote_count": 894,
+    "vote_count": 912,
     "genres": [
       "Thriller",
       "Horreur",
@@ -33,7 +33,7 @@
     "original_title": "The Drama",
     "cinema_date": "1 avril 2026",
     "vote_average": 6.9,
-    "vote_count": 844,
+    "vote_count": 864,
     "genres": [
       "Romance",
       "Comédie",
@@ -83,7 +83,7 @@
     "original_title": "Send Help",
     "cinema_date": "22 janvier 2026",
     "vote_average": 7,
-    "vote_count": 1615,
+    "vote_count": 1627,
     "genres": [
       "Horreur",
       "Thriller",
@@ -102,6 +102,32 @@
     "lead_studio": "20th Century Studios"
   },
   {
+    "title": "Scream 7",
+    "plex_release": "8 mai 2026",
+    "tmdb_id": 1159559,
+    "poster_path": "/j6Y7vqULt8tRlXVFXHK5aj3nCo4.jpg",
+    "original_title": "Scream 7",
+    "cinema_date": "25 février 2026",
+    "vote_average": 6.1,
+    "vote_count": 950,
+    "genres": [
+      "Horreur",
+      "Mystère",
+      "Crime"
+    ],
+    "is_french": false,
+    "source": "maxblizz",
+    "confidence": {
+      "level": "medium",
+      "score": 0.7,
+      "sources": [
+        "maxblizz"
+      ]
+    },
+    "tier": "blockbuster",
+    "lead_studio": "Paramount Pictures"
+  },
+  {
     "title": "Projet Dernière Chance",
     "plex_release": "12 mai 2026",
     "tmdb_id": 687163,
@@ -109,7 +135,7 @@
     "original_title": "Project Hail Mary",
     "cinema_date": "15 mars 2026",
     "vote_average": 8.6,
-    "vote_count": 4308,
+    "vote_count": 4368,
     "genres": [
       "Science-Fiction",
       "Aventure"
@@ -186,7 +212,7 @@
     "original_title": "धुरंधर: द रिवेंज",
     "cinema_date": "18 mars 2026",
     "vote_average": 7.3,
-    "vote_count": 95,
+    "vote_count": 97,
     "genres": [
       "Action",
       "Crime",
@@ -211,8 +237,8 @@
     "poster_path": "/aSQktALDmbunDbwkuZbZFMEWVFr.jpg",
     "original_title": "The Super Mario Galaxy Movie",
     "cinema_date": "1 avril 2026",
-    "vote_average": 8,
-    "vote_count": 2065,
+    "vote_average": 8.1,
+    "vote_count": 2126,
     "genres": [
       "Familial",
       "Comédie",
@@ -241,7 +267,7 @@
     "original_title": "Lee Cronin's The Mummy",
     "cinema_date": "15 avril 2026",
     "vote_average": 8.1,
-    "vote_count": 1353,
+    "vote_count": 1406,
     "genres": [
       "Horreur",
       "Mystère"
@@ -266,7 +292,7 @@
     "original_title": "Le mage du Kremlin",
     "cinema_date": "21 janvier 2026",
     "vote_average": 6.5,
-    "vote_count": 147,
+    "vote_count": 148,
     "genres": [
       "Drame"
     ],
@@ -341,8 +367,8 @@
     "poster_path": "/ufdcPu8CdcsC0c73pATNjYXEmMR.jpg",
     "original_title": "Gourou",
     "cinema_date": "28 janvier 2026",
-    "vote_average": 6.1,
-    "vote_count": 189,
+    "vote_average": 6.2,
+    "vote_count": 192,
     "genres": [
       "Drame",
       "Thriller"
@@ -369,9 +395,9 @@
     "vote_average": 6.2,
     "vote_count": 14,
     "genres": [
+      "Animation",
       "Action",
       "Aventure",
-      "Animation",
       "Comédie",
       "Familial",
       "Fantastique"
@@ -392,7 +418,7 @@
     "title": "Baise-en-ville",
     "plex_release": "28 mai 2026",
     "tmdb_id": 1235303,
-    "poster_path": "/37bcY42oSbPpVq683KQ3nOtV867.jpg",
+    "poster_path": "/ucbCT3Nr5BOzPDS50JdaLSTHty5.jpg",
     "original_title": "Baise-en-ville",
     "cinema_date": "28 janvier 2026",
     "vote_average": 6.4,
@@ -416,7 +442,7 @@
     "title": "Promis le ciel",
     "plex_release": "28 mai 2026",
     "tmdb_id": 1218412,
-    "poster_path": "/i2HNCMGzIuY4oQyDrI6zuTDrOfk.jpg",
+    "poster_path": "/yJ013hlggkUTckwxYN5wGCIdycA.jpg",
     "original_title": "Promis le ciel",
     "cinema_date": "28 janvier 2026",
     "vote_average": 5.9,
@@ -434,6 +460,32 @@
       ]
     },
     "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Iron Lung",
+    "plex_release": "29 mai 2026",
+    "tmdb_id": 1116201,
+    "poster_path": "/sIwakdbMGS1krtgendTWpxTY9Hw.jpg",
+    "original_title": "Iron Lung",
+    "cinema_date": "19 février 2026",
+    "vote_average": 7.3,
+    "vote_count": 156,
+    "genres": [
+      "Horreur",
+      "Mystère",
+      "Science-Fiction"
+    ],
+    "is_french": false,
+    "source": "officielle-us",
+    "confidence": {
+      "level": "high",
+      "score": 0.82,
+      "sources": [
+        "officielle-us"
+      ]
+    },
+    "tier": "mid",
     "lead_studio": null
   }
 ]
