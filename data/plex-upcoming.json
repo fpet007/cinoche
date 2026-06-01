@@ -1,66 +1,15 @@
 [
   {
-    "title": "Wedding Nightmare : Deuxième partie",
-    "plex_release": "5 mai 2026",
-    "tmdb_id": 1266127,
-    "poster_path": "/ygbalhUdg7RnQKwnnyyqqSXoSvY.jpg",
-    "original_title": "Ready or Not: Here I Come",
-    "cinema_date": "8 avril 2026",
-    "vote_average": 7.7,
-    "vote_count": 912,
+    "title": "Marsupilami",
+    "plex_release": "4 juin 2026",
+    "tmdb_id": 1145899,
+    "poster_path": "/rJNHFa07Id2ylQgw0ttzGwpeczE.jpg",
+    "original_title": "Marsupilami",
+    "cinema_date": "4 février 2026",
+    "vote_average": 6.6,
+    "vote_count": 72,
     "genres": [
-      "Thriller",
-      "Horreur",
-      "Comédie"
-    ],
-    "is_french": false,
-    "source": "officielle-us",
-    "confidence": {
-      "level": "high",
-      "score": 0.82,
-      "sources": [
-        "officielle-us"
-      ]
-    },
-    "tier": "mid",
-    "lead_studio": null
-  },
-  {
-    "title": "The Drama",
-    "plex_release": "5 mai 2026",
-    "tmdb_id": 1325734,
-    "poster_path": "/37r0FZuv9OAQgMApDoJ8gvd5LWs.jpg",
-    "original_title": "The Drama",
-    "cinema_date": "1 avril 2026",
-    "vote_average": 6.9,
-    "vote_count": 864,
-    "genres": [
-      "Romance",
-      "Comédie",
-      "Drame"
-    ],
-    "is_french": false,
-    "source": "officielle-us",
-    "confidence": {
-      "level": "high",
-      "score": 0.82,
-      "sources": [
-        "officielle-us"
-      ]
-    },
-    "tier": "mid",
-    "lead_studio": "A24"
-  },
-  {
-    "title": "Ma frère",
-    "plex_release": "7 mai 2026",
-    "tmdb_id": 1290436,
-    "poster_path": "/xOgEHI9GTLhKQCQ2BL8c2biUIzp.jpg",
-    "original_title": "Ma frère",
-    "cinema_date": "7 janvier 2026",
-    "vote_average": 7.2,
-    "vote_count": 38,
-    "genres": [
+      "Aventure",
       "Comédie"
     ],
     "is_french": true,
@@ -76,203 +25,44 @@
     "lead_studio": null
   },
   {
-    "title": "Send Help",
-    "plex_release": "8 mai 2026",
-    "tmdb_id": 1198994,
-    "poster_path": "/bMAn4qERdEfxotddEHWfMmkfjRv.jpg",
-    "original_title": "Send Help",
-    "cinema_date": "22 janvier 2026",
-    "vote_average": 7,
-    "vote_count": 1627,
+    "title": "À pied d’œuvre",
+    "plex_release": "4 juin 2026",
+    "tmdb_id": 1430820,
+    "poster_path": "/pRECZt7LEHL4ZMkr1Hyol7lHkMi.jpg",
+    "original_title": "À pied d’œuvre",
+    "cinema_date": "4 février 2026",
+    "vote_average": 6.5,
+    "vote_count": 55,
     "genres": [
-      "Horreur",
-      "Thriller",
-      "Comédie"
+      "Drame"
     ],
-    "is_french": false,
-    "source": "maxblizz",
+    "is_french": true,
+    "source": "prédite",
     "confidence": {
-      "level": "medium",
-      "score": 0.7,
+      "level": "low",
+      "score": 0.45,
       "sources": [
-        "maxblizz"
+        "prédite"
       ]
     },
-    "tier": "blockbuster",
-    "lead_studio": "20th Century Studios"
+    "tier": "niche",
+    "lead_studio": null
   },
   {
-    "title": "Scream 7",
-    "plex_release": "8 mai 2026",
-    "tmdb_id": 1159559,
-    "poster_path": "/j6Y7vqULt8tRlXVFXHK5aj3nCo4.jpg",
-    "original_title": "Scream 7",
-    "cinema_date": "25 février 2026",
-    "vote_average": 6.1,
-    "vote_count": 950,
+    "title": "Mortal Kombat II",
+    "plex_release": "9 juin 2026",
+    "tmdb_id": 931285,
+    "poster_path": "/yPkeeBEJdQO85AGCwi2XEIfMOxa.jpg",
+    "original_title": "Mortal Kombat II",
+    "cinema_date": "6 mai 2026",
+    "vote_average": 6.8,
+    "vote_count": 351,
     "genres": [
-      "Horreur",
-      "Mystère",
-      "Crime"
-    ],
-    "is_french": false,
-    "source": "maxblizz",
-    "confidence": {
-      "level": "medium",
-      "score": 0.7,
-      "sources": [
-        "maxblizz"
-      ]
-    },
-    "tier": "blockbuster",
-    "lead_studio": "Paramount Pictures"
-  },
-  {
-    "title": "Projet Dernière Chance",
-    "plex_release": "12 mai 2026",
-    "tmdb_id": 687163,
-    "poster_path": "/wzyy8ZrsuHfAt4iz4iH3rT0tdoT.jpg",
-    "original_title": "Project Hail Mary",
-    "cinema_date": "15 mars 2026",
-    "vote_average": 8.6,
-    "vote_count": 4368,
-    "genres": [
-      "Science-Fiction",
+      "Action",
+      "Fantastique",
       "Aventure"
     ],
     "is_french": false,
-    "source": "override-manuel",
-    "confidence": {
-      "level": "override",
-      "score": 1,
-      "sources": [
-        "override-manuel",
-        "maxblizz"
-      ]
-    },
-    "tier": "blockbuster",
-    "lead_studio": "Lord Miller"
-  },
-  {
-    "title": "L’affaire Bojarski",
-    "plex_release": "14 mai 2026",
-    "tmdb_id": 1376415,
-    "poster_path": "/r60UQDxVX3ayqlvUDdjPWUfD3x4.jpg",
-    "original_title": "L’affaire Bojarski",
-    "cinema_date": "14 janvier 2026",
-    "vote_average": 7,
-    "vote_count": 117,
-    "genres": [
-      "Histoire",
-      "Drame",
-      "Crime"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "Furcy, né libre",
-    "plex_release": "14 mai 2026",
-    "tmdb_id": 960051,
-    "poster_path": "/mhUpF3oNp0QgpIYK6deb5CciIfa.jpg",
-    "original_title": "Furcy, né libre",
-    "cinema_date": "14 janvier 2026",
-    "vote_average": 6.8,
-    "vote_count": 14,
-    "genres": [
-      "Histoire",
-      "Drame"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "Dhurandhar : The Revenge",
-    "plex_release": "15 mai 2026",
-    "tmdb_id": 1582770,
-    "poster_path": "/hsJG5r6etrMNwW00BVp4NC7zi67.jpg",
-    "original_title": "धुरंधर: द रिवेंज",
-    "cinema_date": "18 mars 2026",
-    "vote_average": 7.3,
-    "vote_count": 97,
-    "genres": [
-      "Action",
-      "Crime",
-      "Thriller"
-    ],
-    "is_french": false,
-    "source": "officielle-us",
-    "confidence": {
-      "level": "high",
-      "score": 0.82,
-      "sources": [
-        "officielle-us"
-      ]
-    },
-    "tier": "mid",
-    "lead_studio": null
-  },
-  {
-    "title": "Super Mario Galaxy, le film",
-    "plex_release": "19 mai 2026",
-    "tmdb_id": 1226863,
-    "poster_path": "/aSQktALDmbunDbwkuZbZFMEWVFr.jpg",
-    "original_title": "The Super Mario Galaxy Movie",
-    "cinema_date": "1 avril 2026",
-    "vote_average": 8.1,
-    "vote_count": 2126,
-    "genres": [
-      "Familial",
-      "Comédie",
-      "Aventure",
-      "Fantastique",
-      "Animation"
-    ],
-    "is_french": false,
-    "source": "officielle-us",
-    "confidence": {
-      "level": "high",
-      "score": 0.88,
-      "sources": [
-        "officielle-us",
-        "maxblizz"
-      ]
-    },
-    "tier": "blockbuster",
-    "lead_studio": "Illumination"
-  },
-  {
-    "title": "Le Réveil de la Momie",
-    "plex_release": "19 mai 2026",
-    "tmdb_id": 1304313,
-    "poster_path": "/f77yGBGOjainowvlGHU70CCQrjV.jpg",
-    "original_title": "Lee Cronin's The Mummy",
-    "cinema_date": "15 avril 2026",
-    "vote_average": 8.1,
-    "vote_count": 1406,
-    "genres": [
-      "Horreur",
-      "Mystère"
-    ],
-    "is_french": false,
     "source": "maxblizz",
     "confidence": {
       "level": "medium",
@@ -285,144 +75,14 @@
     "lead_studio": null
   },
   {
-    "title": "Le Mage du Kremlin",
-    "plex_release": "21 mai 2026",
-    "tmdb_id": 1291659,
-    "poster_path": "/efxlwMqMiZzDF2DABswC5VWptRC.jpg",
-    "original_title": "Le mage du Kremlin",
-    "cinema_date": "21 janvier 2026",
-    "vote_average": 6.5,
-    "vote_count": 148,
-    "genres": [
-      "Drame"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "Olivia",
-    "plex_release": "21 mai 2026",
-    "tmdb_id": 676679,
-    "poster_path": "/mLSKDnhmgXOAxrN2JrTAjNvKevX.jpg",
-    "original_title": "L'Olívia i el terratrèmol invisible",
-    "cinema_date": "21 janvier 2026",
-    "vote_average": 7.2,
-    "vote_count": 5,
-    "genres": [
-      "Animation",
-      "Comédie",
-      "Drame",
-      "Familial"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "Grand Ciel",
-    "plex_release": "21 mai 2026",
-    "tmdb_id": 1000879,
-    "poster_path": "/bgLFIN6dx1MkGLrGXcCxJfXS9gK.jpg",
-    "original_title": "Grand Ciel",
-    "cinema_date": "21 janvier 2026",
-    "vote_average": 5.6,
-    "vote_count": 17,
-    "genres": [
-      "Thriller",
-      "Fantastique"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "Gourou",
-    "plex_release": "28 mai 2026",
-    "tmdb_id": 1259983,
-    "poster_path": "/ufdcPu8CdcsC0c73pATNjYXEmMR.jpg",
-    "original_title": "Gourou",
-    "cinema_date": "28 janvier 2026",
-    "vote_average": 6.2,
-    "vote_count": 192,
-    "genres": [
-      "Drame",
-      "Thriller"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "Les Légendaires",
-    "plex_release": "28 mai 2026",
-    "tmdb_id": 677561,
-    "poster_path": "/AlfndBQucnWC7igEIG2L0sk6tiF.jpg",
-    "original_title": "Les Légendaires",
-    "cinema_date": "28 janvier 2026",
-    "vote_average": 6.2,
-    "vote_count": 14,
-    "genres": [
-      "Animation",
-      "Action",
-      "Aventure",
-      "Comédie",
-      "Familial",
-      "Fantastique"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "Baise-en-ville",
-    "plex_release": "28 mai 2026",
-    "tmdb_id": 1235303,
-    "poster_path": "/ucbCT3Nr5BOzPDS50JdaLSTHty5.jpg",
-    "original_title": "Baise-en-ville",
-    "cinema_date": "28 janvier 2026",
-    "vote_average": 6.4,
-    "vote_count": 17,
+    "title": "LOL 2.0",
+    "plex_release": "11 juin 2026",
+    "tmdb_id": 1477170,
+    "poster_path": "/8b4pjaQTspOOacfB6bGYFy8BCda.jpg",
+    "original_title": "LOL 2.0",
+    "cinema_date": "11 février 2026",
+    "vote_average": 6.3,
+    "vote_count": 41,
     "genres": [
       "Comédie"
     ],
@@ -439,14 +99,65 @@
     "lead_studio": null
   },
   {
-    "title": "Promis le ciel",
-    "plex_release": "28 mai 2026",
-    "tmdb_id": 1218412,
-    "poster_path": "/yJ013hlggkUTckwxYN5wGCIdycA.jpg",
-    "original_title": "Promis le ciel",
-    "cinema_date": "28 janvier 2026",
-    "vote_average": 5.9,
-    "vote_count": 20,
+    "title": "Les Enfants de la Résistance",
+    "plex_release": "11 juin 2026",
+    "tmdb_id": 1309400,
+    "poster_path": "/uoBOi1xbfbJ9l8xg76uwI2B4MZX.jpg",
+    "original_title": "Les Enfants de la Résistance",
+    "cinema_date": "11 février 2026",
+    "vote_average": 6.4,
+    "vote_count": 30,
+    "genres": [
+      "Histoire",
+      "Drame",
+      "Guerre",
+      "Aventure"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "L'infiltrée",
+    "plex_release": "11 juin 2026",
+    "tmdb_id": 1420742,
+    "poster_path": "/ys6twzUhtNacnnhXTnHFZTMiOPM.jpg",
+    "original_title": "L'infiltrée",
+    "cinema_date": "11 février 2026",
+    "vote_average": 6.7,
+    "vote_count": 5,
+    "genres": [
+      "Comédie"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Coutures",
+    "plex_release": "18 juin 2026",
+    "tmdb_id": 1390382,
+    "poster_path": "/zN2hnZzj3DjJH2CzB76kDo1zYFu.jpg",
+    "original_title": "Coutures",
+    "cinema_date": "18 février 2026",
+    "vote_average": 5.7,
+    "vote_count": 28,
     "genres": [
       "Drame"
     ],
@@ -463,29 +174,103 @@
     "lead_studio": null
   },
   {
-    "title": "Iron Lung",
-    "plex_release": "29 mai 2026",
-    "tmdb_id": 1116201,
-    "poster_path": "/sIwakdbMGS1krtgendTWpxTY9Hw.jpg",
-    "original_title": "Iron Lung",
-    "cinema_date": "19 février 2026",
-    "vote_average": 7.3,
-    "vote_count": 156,
+    "title": "Le rêve américain",
+    "plex_release": "18 juin 2026",
+    "tmdb_id": 1365378,
+    "poster_path": "/uXGqYv2cahBG062OQ93oMqWQCs5.jpg",
+    "original_title": "Le rêve américain",
+    "cinema_date": "18 février 2026",
+    "vote_average": 7.4,
+    "vote_count": 91,
     "genres": [
-      "Horreur",
-      "Mystère",
-      "Science-Fiction"
+      "Comédie"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Maigret et le mort amoureux",
+    "plex_release": "18 juin 2026",
+    "tmdb_id": 1398486,
+    "poster_path": "/t7KsplyJOPYvQitQmgVixVz8vpL.jpg",
+    "original_title": "Maigret et le mort amoureux",
+    "cinema_date": "18 février 2026",
+    "vote_average": 6.1,
+    "vote_count": 17,
+    "genres": [
+      "Crime",
+      "Mystère"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "The Criminals",
+    "plex_release": "20 juin 2026",
+    "tmdb_id": 1242265,
+    "poster_path": "/vUvZuBWRsjO2tnUo2yesrdbhKal.jpg",
+    "original_title": "Fuze",
+    "cinema_date": "6 mai 2026",
+    "vote_average": 6.4,
+    "vote_count": 79,
+    "genres": [
+      "Action",
+      "Crime",
+      "Drame",
+      "Thriller"
     ],
     "is_french": false,
-    "source": "officielle-us",
+    "source": "prédite",
     "confidence": {
-      "level": "high",
-      "score": 0.82,
+      "level": "low",
+      "score": 0.45,
       "sources": [
-        "officielle-us"
+        "prédite"
       ]
     },
     "tier": "mid",
+    "lead_studio": null
+  },
+  {
+    "title": "Chers parents",
+    "plex_release": "25 juin 2026",
+    "tmdb_id": 1368830,
+    "poster_path": "/dOTZP3gnMjJHva914Xrzljhyl7c.jpg",
+    "original_title": "Chers parents",
+    "cinema_date": "25 février 2026",
+    "vote_average": 6.7,
+    "vote_count": 28,
+    "genres": [
+      "Comédie"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
     "lead_studio": null
   }
 ]
