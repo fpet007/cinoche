@@ -1,20 +1,30 @@
 /**
- * updateVOD.js — v8.2 (ultimate + fenêtre FR corrigée)
- * =====================================================
+ * updateVOD.js — v8.4 (+ ComingSoon.net/Mandatory scraping)
+ * ==========================================================
  * Génère la liste des FILMS DE CINÉMA en VOD pour le mois en cours STRICT.
  * Plex FR — uniquement de vrais longs-métrages sortis en salle, avec un focus
  * blockbusters internationaux + films français + blockbusters VFQ.
  *
- * 🆕 NOUVEAUTÉS v8.2 (vs v8) :
+ * 🆕 NOUVEAUTÉS v8.4 (vs v8.3) :
+ * ─────────────────────────────────────────────────────────────────────────────
+ * ✅ Nouveau module ComingSoon (comingsoon.net via mandatory.com) :
+ *    Source de scraping dédiée aux annonces officielles de sortie digitale
+ *    des gros blockbusters US. Fonctionne comme MaxBlizz mais scrape le fil
+ *    d'actualités ComingSoon qui publie des articles dédiés quand une date
+ *    digitale officielle est annoncée (ex: "Michael announces digital release").
+ *    Stratégie : scrape /movies/news/ sur mandatory.com (miroir accessible),
+ *    filtre les articles de type "*-digital-*-release-date*", extrait la date.
+ *    Enrichit finalResults exactement comme MaxBlizz (cross-confirm + ajout).
+ *
+ * ✅ Override manuel ajouté pour Michael (Lionsgate, 2026) : 9 juin 2026.
+ *    Cause : le film n'était pas détecté via TMDB discover (sortie US-only
+ *    sans release_dates FR enregistrée à temps).
+ *
+ * 🔒 Toute la logique v8.3 est préservée.
+ *
+ * NOUVEAUTÉS v8.2 (rappel) :
  * ─────────────────────────────────────────────────────────────────────────────
  * ✅ Fenêtre FR de scan élargie : frEnd = monthStart - 85j (au lieu de -100j).
- *    Cause : un film sorti fin janvier (ex: Gourou le 28/01) a sa VOD à 120j,
- *    soit le 28 mai, qui tombe dans le mois cible. Avec frEnd à -100j,
- *    le scan s'arrêtait au 21 janvier et ratait toutes les sorties de fin
- *    janvier dont la VOD tombe dans le mois en cours.
- *
- * 🔒 Toute la logique v8 est préservée (studios, tiers, AlloCiné, MaxBlizz,
- *    anti-QC, confiance, etc.). Aucun changement de format JSON de sortie.
  *
  * NOUVEAUTÉS v8 (rappel) :
  * ─────────────────────────────────────────────────────────────────────────────
@@ -46,6 +56,7 @@ const DATA_PATH         = path.join(__dirname, '../data/plex-upcoming.json');
 const CACHE_PATH        = path.join(__dirname, '../data/.tmdb-cache.json');
 const MAXBLIZZ_CACHE    = path.join(__dirname, '../data/.maxblizz-cache.json');
 const ALLOCINE_CACHE    = path.join(__dirname, '../data/.allocine-cache.json');
+const COMINGSOON_CACHE  = path.join(__dirname, '../data/.comingsoon-cache.json');   // 🆕 v8.4
 const OVERRIDES_PATH    = path.join(__dirname, '../data/overrides.json');
 
 // CLI flags
@@ -63,6 +74,7 @@ const DELAYS = {
 const CACHE_TTL_HOURS     = 24;
 const MAXBLIZZ_TTL_HOURS  = 12;
 const ALLOCINE_TTL_HOURS  = 8;   // FR : peut bouger plus souvent
+const COMINGSOON_TTL_HOURS = 12; // 🆕 v8.4 : annonces officielles US
 const API_DELAY_MS        = 130;
 const MAX_PAGES_PER_ENDPOINT = 6;
 const MIN_RUNTIME         = 40;
@@ -146,6 +158,9 @@ const TELEFILM_TITLE_PATTERNS = [
 // Overrides par défaut (codés en dur, hérités v7). Le fichier externe peut les compléter.
 const DEFAULT_OVERRIDES = {
   'project hail mary': { date: '2026-05-12', reason: 'film à fort potentiel, repoussé' },
+  // 🆕 v8.4 — Michael (biopic Jackson, Lionsgate/Fuqua) : date digitale officielle
+  // Source : comingsoon.net/mandatory.com, 2 juin 2026. Sorti salles US 24 avril 2026.
+  'michael': { date: '2026-06-09', reason: 'date digitale officielle Lionsgate (comingsoon.net, 02/06/2026)' },
 };
 
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -230,6 +245,8 @@ const loadMaxblizzCache     = () => loadJsonSafe(MAXBLIZZ_CACHE, {});
 const saveMaxblizzCache     = (c) => saveJsonAtomic(MAXBLIZZ_CACHE, c);
 const loadAllocineCache     = () => loadJsonSafe(ALLOCINE_CACHE, {});
 const saveAllocineCache     = (c) => saveJsonAtomic(ALLOCINE_CACHE, c);
+const loadComingSoonCache   = () => loadJsonSafe(COMINGSOON_CACHE, {});  // 🆕 v8.4
+const saveComingSoonCache   = (c) => saveJsonAtomic(COMINGSOON_CACHE, c); // 🆕 v8.4
 
 function isCacheEntryFresh(entry, ttlHours = CACHE_TTL_HOURS) {
   if (!entry?._cachedAt) return false;
@@ -461,6 +478,13 @@ function computeConfidence({ source, crossConfirmedBy }) {
     if (set.has('allocine'))     return { level: 'very-high', score: 0.92, sources };
     if (set.has('studio-mapped'))return { level: 'high',      score: 0.78, sources };
     return                            { level: 'medium',    score: 0.70, sources };
+  }
+
+  // 4b. ComingSoon (annonce officielle studio US) — 🆕 v8.4
+  if (source === 'comingsoon') {
+    if (set.has('allocine'))  return { level: 'very-high', score: 0.93, sources };
+    if (set.has('maxblizz'))  return { level: 'high',      score: 0.88, sources };
+    return                        { level: 'high',      score: 0.85, sources };
   }
 
   // 5. AlloCiné seul (sortie FR officielle annoncée)
@@ -1072,12 +1096,325 @@ async function enrichWithMaxblizz({ finalResults, monthStart, monthEnd, cache, o
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
+// 🆕 MODULE COMINGSOON (v8.4) — Annonces officielles digitales US
+// ═══════════════════════════════════════════════════════════════════════════════
+//
+// Stratégie :
+//  1. Scrape le fil d'articles "movies/news" sur mandatory.com (miroir de
+//     comingsoon.net accessible sans bot-detection).
+//  2. Filtre les articles dont le slug contient "digital" ET ("release-date"
+//     ou "blu-ray" ou "4k") — ce sont les annonces de dates digitales.
+//  3. Pour chaque article retenu : extrait le titre du film depuis le slug
+//     et la date digitale depuis le corps de l'article (même regex que MaxBlizz).
+//  4. Résultat : tableau de { slug, title, date, url } identique à MaxBlizz.
+//     Enrichit finalResults via enrichWithComingSoon() calqué sur enrichWithMaxblizz.
+//
+// Pourquoi mandatory.com plutôt que comingsoon.net directement ?
+//   comingsoon.net bloque les bots (Cloudflare). mandatory.com est le miroir
+//   Evolve Media du même contenu sans protection anti-bot.
+
+const COMINGSOON_BASE_URL = 'https://www.mandatory.com/movies';
+
+/**
+ * Extrait le titre probable du film depuis un slug d'article ComingSoon.
+ * Ex: "michael-jackson-movie-announces-digital-4k-uhd-blu-ray-release-dates"
+ *   → "michael jackson movie"
+ * Stratégie : on prend le début du slug jusqu'au premier mot-clé pivot
+ * (announces, digital, blu-ray, 4k, release, sets, gets, coming, arrives).
+ */
+function extractTitleFromComingSoonSlug(slug) {
+  // Retire le préfixe numérique éventuel (ex: "1784140-michael-...")
+  const cleaned = slug.replace(/^\d+-/, '').replace(/-/g, ' ');
+  // Mots-clés pivot qui signalent la fin du titre
+  const pivotRx = /\b(announces?|digital|blu.?ray|4k|uhd|release|sets?|gets?|coming|arrives?|now|available|heads?|lands?|streaming|vod|home.?video|physical)\b/i;
+  const match   = pivotRx.exec(cleaned);
+  if (match && match.index > 3) {
+    return cleaned.slice(0, match.index).trim();
+  }
+  // Fallback : 3 premiers mots (titres courts)
+  return cleaned.split(/\s+/).slice(0, 3).join(' ');
+}
+
+/**
+ * Scrape la liste des articles "digital release" depuis mandatory.com/movies.
+ * Retourne les { slug, articleUrl } des articles pertinents.
+ */
+async function fetchComingSoonArticleList() {
+  // On scrape les 2 premières pages de /movies pour avoir les dernières annonces
+  const urls = [
+    `${COMINGSOON_BASE_URL}/`,
+    `${COMINGSOON_BASE_URL}/page/2/`,
+  ];
+  const articles = new Map();
+  // Regex : liens internes mandatory.com avec slug contenant "digital" ou "blu-ray"
+  const linkRx = /href="(https?:\/\/www\.mandatory\.com\/movies\/(\d+-[a-z0-9-]+(?:digital|blu-ray|4k|uhd|home-video|vod)[a-z0-9-]*))"[\s>]/gi;
+
+  for (const url of urls) {
+    try {
+      await sleep(400);
+      const html = await fetchTextWithRetry(url, 2);
+      let m;
+      while ((m = linkRx.exec(html)) !== null) {
+        const fullUrl = m[1];
+        const slug    = m[2];
+        if (!articles.has(fullUrl)) articles.set(fullUrl, slug);
+      }
+    } catch (err) {
+      console.warn(`  ⚠️  ComingSoon list scrape (${url}) : ${err.message}`);
+    }
+  }
+  return articles;
+}
+
+/**
+ * Récupère les sorties digitales annoncées sur ComingSoon/Mandatory.
+ * Cache avec TTL identique à MaxBlizz.
+ */
+async function fetchComingSoonReleases() {
+  const PARSER_VERSION = 1;
+  const cache      = loadComingSoonCache();
+  const cacheValid = cache._parserVersion === PARSER_VERSION;
+  const articleCache = cacheValid ? (cache.articles || {}) : {};
+  const listFresh  = cacheValid && cache._listCachedAt
+    && (Date.now() - cache._listCachedAt) / 3600000 < COMINGSOON_TTL_HOURS;
+
+  if (listFresh && Array.isArray(cache.releases)) {
+    log(`  💾 ComingSoon : cache valide (${cache.releases.length} entrées)`);
+    return cache.releases.map((r) => ({ ...r, date: new Date(r.date) }));
+  }
+
+  if (!cacheValid && cache._parserVersion !== undefined) {
+    log(`  🔄 ComingSoon : invalidation cache (parser v${cache._parserVersion} → v${PARSER_VERSION})`);
+  }
+
+  log(`  🌐 ComingSoon : scraping en cours...`);
+  const releases = [];
+
+  try {
+    const articles = await fetchComingSoonArticleList();
+    log(`     ${articles.size} articles digitaux trouvés`);
+
+    const monthPattern = '(January|February|March|April|May|June|July|August|September|October|November|December)';
+    const datePart     = `${monthPattern}\\s+(\\d{1,2}),?\\s+(\\d{4})`;
+
+    let fromCache = 0, fetched = 0, skipped = 0;
+    const newArticleCache = {};
+
+    for (const [url, slug] of articles) {
+      let articleData;
+      const cached    = articleCache[url];
+      const cachedFresh = cached && (Date.now() - cached._cachedAt) / 3600000 < 24 * 7;
+
+      if (cachedFresh) {
+        articleData = cached;
+        fromCache++;
+      } else {
+        try {
+          await sleep(300);
+          const html = await fetchTextWithRetry(url, 2);
+
+          // Patterns de date dans le corps de l'article
+          // Pattern "fort" : date en gras ou avec contexte "digital" explicite
+          const strongDateRx = new RegExp(
+            `(?:<strong>|\\*\\*)\\s*${datePart}\\s*(?:</strong>|\\*\\*)`, 'gi'
+          );
+          const contextDateRx = new RegExp(
+            `(?:digitally?|digital\\s+release|available\\s+(?:on|digitally?)|arrives?\\s+(?:on|digitally?)|rent|buy|purchase|streaming\\s+on)\\s+(?:on\\s+)?${datePart}`,
+            'gi'
+          );
+          // Pattern plus large : "on June 9, 2026" après "digital" dans le même paragraphe
+          const paragraphRx  = new RegExp(
+            `digital[^.]{0,120}${datePart}`, 'gi'
+          );
+
+          const body = html.length > 3000 ? html.slice(1500) : html;
+          const candidates = [];
+          let dm;
+          while ((dm = strongDateRx.exec(body))   !== null)
+            candidates.push({ src: 'strong',    date: new Date(`${dm[1]} ${dm[2]}, ${dm[3]} 12:00:00 UTC`) });
+          while ((dm = contextDateRx.exec(body)) !== null)
+            candidates.push({ src: 'context',   date: new Date(`${dm[1]} ${dm[2]}, ${dm[3]} 12:00:00 UTC`) });
+          while ((dm = paragraphRx.exec(body))   !== null)
+            candidates.push({ src: 'paragraph', date: new Date(`${dm[1]} ${dm[2]}, ${dm[3]} 12:00:00 UTC`) });
+
+          const valid = candidates.filter((c) =>
+            !isNaN(c.date) &&
+            c.date.getTime() >= Date.now() - 60 * 86400000 &&
+            c.date.getTime() <= Date.now() + 730 * 86400000
+          );
+
+          const strongs   = valid.filter((c) => c.src === 'strong');
+          const contexts  = valid.filter((c) => c.src === 'context');
+          const paras     = valid.filter((c) => c.src === 'paragraph');
+          let chosenDate = null;
+          if (strongs.length  > 0) chosenDate = strongs.sort((a, b) => a.date - b.date)[0].date;
+          else if (contexts.length > 0) chosenDate = contexts.sort((a, b) => a.date - b.date)[0].date;
+          else if (paras.length > 0)    chosenDate = paras.sort((a, b) => a.date - b.date)[0].date;
+
+          articleData = { _cachedAt: Date.now(), date: chosenDate ? chosenDate.toISOString() : null, slug };
+          fetched++;
+        } catch (err) {
+          articleData = { _cachedAt: Date.now(), date: null, slug, error: err.message };
+        }
+      }
+
+      newArticleCache[url] = articleData;
+      if (!articleData.date) { skipped++; continue; }
+      const date = new Date(articleData.date);
+      if (isNaN(date)) { skipped++; continue; }
+
+      const titleGuess = extractTitleFromComingSoonSlug(slug);
+      releases.push({ slug, title: titleGuess, date, url });
+    }
+
+    log(`     ✓ ${releases.length} films extraits (${fromCache} cache, ${fetched} fetchés, ${skipped} sans date)`);
+    saveComingSoonCache({
+      _parserVersion : PARSER_VERSION,
+      _listCachedAt  : Date.now(),
+      articles       : newArticleCache,
+      releases       : releases.map((r) => ({ ...r, date: r.date.toISOString() })),
+    });
+  } catch (err) {
+    console.warn(`  ⚠️  ComingSoon scraping a échoué : ${err.message} — on continue sans.`);
+  }
+  return releases;
+}
+
+/**
+ * Enrichit finalResults avec les dates digitales officielles de ComingSoon.
+ * Calqué sur enrichWithMaxblizz : cross-confirm en priorité, ajout ensuite.
+ * On n'ajoute QUE des blockbusters/mid (pas de niche non-FR) pour garder
+ * la pertinence de la source — ComingSoon ne couvre que les grosses sorties.
+ */
+async function enrichWithComingSoon({ finalResults, monthStart, monthEnd, cache, overrides }) {
+  log('\n  📡  Enrichissement ComingSoon (annonces digitales officielles US) :');
+  const csReleases = await fetchComingSoonReleases();
+  if (csReleases.length === 0) {
+    log('     (aucune donnée ComingSoon — on continue sans)');
+    return { added: 0, overridden: 0 };
+  }
+
+  const existingIds       = new Set(finalResults.map((m) => m.tmdb_id));
+  const existingTitles    = new Set(finalResults.map((m) => normalizeTitle(m.title)));
+  const existingOriginals = new Set(finalResults.map((m) => normalizeTitle(m.original_title || '')));
+
+  let added = 0, overridden = 0, skipped = 0, dropNiche = 0;
+
+  for (const cs of csReleases) {
+    const slugNorm = normalizeTitle(cs.title);
+    let csDate    = cs.date;
+    let isOverride = false;
+
+    // Applique l'override manuel si présent (même logique que MaxBlizz)
+    const tokens = slugNorm.split(' ');
+    const overrideKeys = [slugNorm];
+    if (tokens.length >= 3) overrideKeys.push(tokens.slice(1).join(' '));
+    if (tokens.length >= 4) overrideKeys.push(tokens.slice(2).join(' '));
+    for (const k of overrideKeys) {
+      if (overrides[k]) {
+        csDate = new Date(overrides[k].date);
+        isOverride = true;
+        log(`     ★ Override "${cs.title}" → ${formatDateFR(csDate)} (${overrides[k].reason})`);
+        break;
+      }
+    }
+
+    if (csDate < monthStart || csDate > monthEnd) { skipped++; continue; }
+
+    const tmdbHit = await tmdbSearchByTitle(cs.title);
+    await sleep(API_DELAY_MS);
+    if (!tmdbHit) {
+      vlog(`     ✗ TMDB sans match pour "${cs.title}"`);
+      skipped++;
+      continue;
+    }
+
+    // Déjà présent : cross-confirmation + correction date si besoin
+    if (existingIds.has(tmdbHit.id)) {
+      const existing = finalResults.find((m) => m.tmdb_id === tmdbHit.id);
+      existing._crossConfirmedBy = existing._crossConfirmedBy || [];
+      if (!existing._crossConfirmedBy.includes('comingsoon')) {
+        existing._crossConfirmedBy.push('comingsoon');
+      }
+      const oldDate = existing.plex_release;
+      if (existing.plex_release !== formatDateFR(csDate)) {
+        existing.plex_release = formatDateFR(csDate);
+        existing._sortDate    = csDate.getTime();
+        // ComingSoon = annonce officielle studio, prime sur prédictions et maxblizz
+        if (existing.source !== 'override-manuel' && existing.source !== 'officielle-fr') {
+          existing.source = isOverride ? 'override-manuel' : 'comingsoon';
+        }
+        log(`     ↻ "${tmdbHit.title}" : ${oldDate} → ${formatDateFR(csDate)} (comingsoon)`);
+        overridden++;
+      }
+      continue;
+    }
+
+    // Garde-fou titres
+    const tmdbTitleNorm = normalizeTitle(tmdbHit.title);
+    const tmdbOrigNorm  = normalizeTitle(tmdbHit.original_title || '');
+    if (existingTitles.has(tmdbTitleNorm) || existingOriginals.has(tmdbOrigNorm)) {
+      skipped++; continue;
+    }
+
+    let details;
+    try {
+      details = await fetchMovieDetails(tmdbHit.id, cache);
+      await sleep(API_DELAY_MS);
+    } catch {
+      skipped++; continue;
+    }
+
+    if (isQuebecLocalProduction(details)) { skipped++; continue; }
+
+    const isFrench = isFrenchProduction(details);
+    const tierInfo = classifyTier(details);
+    // ComingSoon est une source US : on ne garde que blockbuster/mid
+    if (tierInfo.tier === 'niche') {
+      vlog(`     🚫 "${tmdbHit.title}" filtré (niche, score=${tierInfo.score}) [ComingSoon]`);
+      dropNiche++; continue;
+    }
+
+    const cinemaDate = details.release_date ? new Date(details.release_date) : null;
+    const studios    = details.production_companies || [];
+    const leadStudio = studios.find((s) => STUDIO_VOD_DELAYS[s.id]);
+
+    finalResults.push({
+      title          : details.title || tmdbHit.title,
+      plex_release   : formatDateFR(csDate),
+      tmdb_id        : tmdbHit.id,
+      poster_path    : details.poster_path || tmdbHit.poster_path,
+      original_title : details.original_title || tmdbHit.original_title,
+      cinema_date    : cinemaDate ? formatDateFR(cinemaDate) : null,
+      vote_average   : Math.round((details.vote_average ?? 0) * 10) / 10,
+      vote_count     : details.vote_count ?? 0,
+      genres         : (details.genres || []).map((g) => g.name),
+      is_french      : isFrench,
+      source         : isOverride ? 'override-manuel' : 'comingsoon',
+      _tier          : tierInfo.tier,
+      _tierScore     : tierInfo.score,
+      _leadStudio    : leadStudio?.name || null,
+      _sortDate      : csDate.getTime(),
+      _popularity    : details.popularity ?? tmdbHit.popularity ?? 0,
+      _crossConfirmedBy: [],
+    });
+
+    log(`     ✓ Ajouté : ${details.title || tmdbHit.title} → ${formatDateFR(csDate)} [${tierInfo.tier}]`);
+    added++;
+    existingIds.add(tmdbHit.id);
+  }
+
+  log(`     📊 ${added} ajouts, ${overridden} dates corrigées, ${dropNiche} niche jetés, ${skipped} ignorés`);
+  return { added, overridden };
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
 // PIPELINE PRINCIPAL
 // ═══════════════════════════════════════════════════════════════════════════════
 
 async function updateVOD() {
   const t0 = Date.now();
-  log('🎬  updateVOD v8 (ultimate) — démarrage...');
+  log('🎬  updateVOD v8.4 (+ ComingSoon) — démarrage...');
   if (DRY_RUN)  log('   ⚙️  Mode --dry-run actif : aucune écriture du JSON final');
   if (VERBOSE)  log('   ⚙️  Mode --verbose actif : logs détaillés');
   log('');
@@ -1235,6 +1572,9 @@ async function updateVOD() {
 
   // ─── Phase 3 : Enrichissement MaxBlizz ───────────────────────────────────────
   await enrichWithMaxblizz({ finalResults, monthStart, monthEnd, cache, overrides });
+
+  // ─── Phase 3b : 🆕 Enrichissement ComingSoon (annonces digitales officielles) ──
+  await enrichWithComingSoon({ finalResults, monthStart, monthEnd, cache, overrides });
 
   // ─── Phase 4 : 🆕 Triangulation AlloCiné ─────────────────────────────────────
   await enrichWithAllocine({ finalResults, monthStart, monthEnd, cache });
