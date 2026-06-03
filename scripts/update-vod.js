@@ -1,28 +1,32 @@
 /**
- * updateVOD.js — v8.2 (ultimate + fenêtre FR corrigée)
+ * updateVOD.js — v8.3 (+ World of Reel)
  * =====================================================
  * Génère la liste des FILMS DE CINÉMA en VOD pour le mois en cours STRICT.
  * Plex FR — uniquement de vrais longs-métrages sortis en salle, avec un focus
  * blockbusters internationaux + films français + blockbusters VFQ.
  *
- * 🆕 NOUVEAUTÉS v8.2 (vs v8) :
+ * 🆕 NOUVEAUTÉS v8.3 :
+ * ─────────────────────────────────────────────────────────────────────────────
+ * ✅ Nouveau module World of Reel (worldofreel.com) :
+ *    Blog ciné US qui publie des news sur les sorties digitales. Les dates
+ *    apparaissent dans les titres d'articles ("Digital Release Set for June 9")
+ *    et dans les corps d'articles. Le module scrape la homepage + 3 pages
+ *    suivantes, filtre par mots-clés VOD, et cross-référence via TMDB.
+ *    Rôle : source complémentaire pour les blockbusters US (Lionsgate, etc.)
+ *    dont les fenêtres courtes (~35-46j) peuvent être annoncées tôt.
+ *    Cache TTL : 10h. Même filtres anti-bruit/niche que les autres modules.
+ *
+ * 🔒 Toute la logique v8.2 est préservée. Aucun changement de format JSON.
+ *
+ * PIPELINE : TMDB scan → MaxBlizz → 🆕 World of Reel → AlloCiné → Confiance
+ *
+ * NOUVEAUTÉS v8.2 (rappel) :
  * ─────────────────────────────────────────────────────────────────────────────
  * ✅ Fenêtre FR de scan élargie : frEnd = monthStart - 85j (au lieu de -100j).
- *    Cause : un film sorti fin janvier (ex: Gourou le 28/01) a sa VOD à 120j,
- *    soit le 28 mai, qui tombe dans le mois cible. Avec frEnd à -100j,
- *    le scan s'arrêtait au 21 janvier et ratait toutes les sorties de fin
- *    janvier dont la VOD tombe dans le mois en cours.
- *
- * 🔒 Toute la logique v8 est préservée (studios, tiers, AlloCiné, MaxBlizz,
- *    anti-QC, confiance, etc.). Aucun changement de format JSON de sortie.
  *
  * NOUVEAUTÉS v8 (rappel) :
  * ─────────────────────────────────────────────────────────────────────────────
- * ✅ Délais VOD par studio (mapping TMDB) :
- *      Disney/Marvel/Pixar  ~85j  |  Universal  ~35j  |  Warner ~55j
- *      Sony ~45j  |  Paramount ~50j  |  Lionsgate ~45j  |  A24 ~75j
- *      Le délai US générique 45j reste en fallback pour studios inconnus.
- *
+ * ✅ Délais VOD par studio (mapping TMDB)
  * ✅ Système de tiers (blockbuster / mid / niche)
  * ✅ Filtre anti-production québécoise locale
  * ✅ Couche AlloCiné — Triangulation FR
@@ -468,14 +472,22 @@ function computeConfidence({ source, crossConfirmedBy }) {
     return { level: 'high', score: 0.80, sources };
   }
 
-  // 6. Prédite avec mapping studio (assez fiable pour blockbusters connus)
+  // 6. World of Reel (annonce digitale US — fiable pour les gros titres)
+  if (source === 'worldofreel') {
+    if (set.has('allocine'))     return { level: 'very-high', score: 0.90, sources };
+    if (set.has('maxblizz'))     return { level: 'high',      score: 0.82, sources };
+    if (set.has('studio-mapped'))return { level: 'medium',    score: 0.72, sources };
+    return                            { level: 'medium',    score: 0.68, sources };
+  }
+
+  // 7. Prédite avec mapping studio (assez fiable pour blockbusters connus)
   if (source === 'studio-mapped') {
     if (set.has('allocine'))     return { level: 'medium', score: 0.75, sources };
     if (set.has('maxblizz'))     return { level: 'medium', score: 0.72, sources };
     return                            { level: 'medium', score: 0.62, sources };
   }
 
-  // 7. Prédite générique (délai 45j/120j sans info studio)
+  // 8. Prédite générique (délai 45j/120j sans info studio)
   return { level: 'low', score: 0.45, sources };
 }
 
@@ -948,6 +960,334 @@ async function enrichWithAllocine({ finalResults, monthStart, monthEnd, cache, t
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
+// 🆕 MODULE WORLDOFREEL (v8.3) — Source complémentaire dates digitales US
+// ═══════════════════════════════════════════════════════════════════════════════
+//
+// Stratégie :
+//  1. Scrape la homepage + pages /blog?offset=N (Squarespace)
+//  2. Filtre les articles dont le titre contient des mots-clés VOD/digital
+//  3. Pour chaque article candidat : fetch complet + extraction film + date
+//  4. Normalisation du titre du film (les guillemets 'X' et "X" sont fréquents)
+//  5. Cross-référence avec TMDB + enrichissement de la liste finale
+//
+// Particularité : World of Reel est un blog d'actualité (pas une liste VOD
+// structurée comme MaxBlizz). Les dates apparaissent dans les titres d'articles
+// ("Digital Release Set for June 9") et/ou dans le corps du texte.
+// On priorise les extractions du titre car elles sont plus stables.
+
+const WORLDOFREEL_CACHE         = path.join(__dirname, '../data/.worldofreel-cache.json');
+const WORLDOFREEL_TTL_HOURS     = 10;
+const WORLDOFREEL_BASE_URL      = 'https://www.worldofreel.com';
+const WORLDOFREEL_MAX_PAGES     = 4;   // homepage + 3 pages suivantes (~7 articles/page)
+const WORLDOFREEL_PARSER_VERSION = 1;
+
+// Mots-clés dans le titre d'article signalant une date VOD/digitale
+const WOR_TITLE_KEYWORDS = [
+  'digital', 'vod', 'streaming', 'home video', 'blu-ray', '4k release',
+  'available on', 'hits digital', 'digital release', 'digital date',
+  'now streaming', 'arrives on', 'heads to digital', 'goes digital',
+  'home release', 'on demand',
+];
+
+const loadWorldofreelCache = () => loadJsonSafe(WORLDOFREEL_CACHE, {});
+const saveWorldofreelCache = (c) => saveJsonAtomic(WORLDOFREEL_CACHE, c);
+
+/**
+ * Extrait le titre du film depuis un titre d'article WoR.
+ * Les titres WoR sont quasi-systématiquement entre guillemets typographiques.
+ */
+function extractFilmTitleFromArticleTitle(articleTitle) {
+  const re = /[''""'"]([^''""'"]{2,80})[''""'"]/g;
+  const matches = [];
+  let m;
+  while ((m = re.exec(articleTitle)) !== null) {
+    matches.push(m[1].trim());
+  }
+  return matches[0] || null;
+}
+
+/**
+ * Extrait une date anglaise US depuis un texte (titre ou corps d'article).
+ * Retourne un Date ou null. Si l'année est absente, on détermine
+ * dynamiquement si le mois est passé ou futur.
+ */
+function parseEnglishDate(text, fallbackYear = new Date().getFullYear()) {
+  if (!text) return null;
+  const MONTHS = {
+    january:0, february:1, march:2, april:3, may:4, june:5,
+    july:6, august:7, september:8, october:9, november:10, december:11,
+  };
+  const re = /\b(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2})(?:st|nd|rd|th)?(?:,?\s+(\d{4}))?\b/gi;
+  const candidates = [];
+  let m;
+  while ((m = re.exec(text)) !== null) {
+    const month = MONTHS[m[1].toLowerCase()];
+    const day   = parseInt(m[2], 10);
+    let year    = m[3] ? parseInt(m[3], 10) : null;
+    if (year === null) {
+      const testThis = new Date(Date.UTC(fallbackYear, month, day, 12, 0, 0));
+      year = testThis < new Date() ? fallbackYear + 1 : fallbackYear;
+    }
+    const d = new Date(Date.UTC(year, month, day, 12, 0, 0));
+    if (!isNaN(d) &&
+        d.getTime() >= Date.now() - 90 * 86400000 &&
+        d.getTime() <= Date.now() + 730 * 86400000) {
+      candidates.push(d);
+    }
+  }
+  if (!candidates.length) return null;
+  return candidates.sort((a, b) => a - b)[0];
+}
+
+/**
+ * Scrape la homepage + pages suivantes et retourne les articles candidats VOD.
+ */
+async function fetchWorldofreelArticleLinks() {
+  const links = new Map(); // url → articleTitle
+  const urlsToFetch = [WORLDOFREEL_BASE_URL + '/'];
+  // Squarespace utilise ?offset=N (par tranche de ~7 articles)
+  for (let i = 1; i < WORLDOFREEL_MAX_PAGES; i++) {
+    urlsToFetch.push(`${WORLDOFREEL_BASE_URL}/?offset=${i * 7}`);
+  }
+
+  for (const pageUrl of urlsToFetch) {
+    try {
+      await sleep(500);
+      const html = await fetchTextWithRetry(pageUrl, 2);
+      // Liens articles Squarespace : href="/blog/YYYY/M/D/slug"
+      const linkRe = /href="(\/blog\/\d{4}\/\d{1,2}\/[^"#?]+)"[^>]*>\s*([^<]{5,200}?)\s*<\//gi;
+      let m;
+      while ((m = linkRe.exec(html)) !== null) {
+        const relPath = m[1].trim();
+        if (relPath === '/blog/' || relPath === '/blog') continue;
+        const fullUrl = WORLDOFREEL_BASE_URL + relPath;
+        if (links.has(fullUrl)) continue;
+        const anchorText = m[2].trim().replace(/\s+/g, ' ');
+        if (anchorText.length < 5) continue;
+        links.set(fullUrl, anchorText);
+      }
+    } catch (err) {
+      vlog(`     ⚠️  WoR page ${pageUrl} : ${err.message}`);
+    }
+  }
+
+  // Filtre : uniquement articles contenant un mot-clé VOD dans le titre
+  const candidates = [];
+  for (const [url, title] of links) {
+    const lc = title.toLowerCase();
+    if (WOR_TITLE_KEYWORDS.some((kw) => lc.includes(kw))) {
+      candidates.push({ url, title });
+    }
+  }
+  return candidates;
+}
+
+/**
+ * Récupère et parse les sorties digitales depuis World of Reel.
+ * Cache avec TTL court (les news peuvent sortir à tout moment).
+ */
+async function fetchWorldofreelReleases() {
+  const cache = loadWorldofreelCache();
+  const cacheValid = cache._parserVersion === WORLDOFREEL_PARSER_VERSION;
+  const articleCache = cacheValid ? (cache.articles || {}) : {};
+  const listFresh = cacheValid && cache._listCachedAt
+    && (Date.now() - cache._listCachedAt) / 3600000 < WORLDOFREEL_TTL_HOURS;
+
+  if (listFresh && Array.isArray(cache.releases)) {
+    log(`  💾 WorldOfReel : cache valide (${cache.releases.length} entrées)`);
+    return cache.releases.map((r) => ({ ...r, date: new Date(r.date) }));
+  }
+
+  log(`  🌐 WorldOfReel : scraping en cours...`);
+  const releases = [];
+  const newArticleCache = { ...articleCache };
+
+  try {
+    const candidates = await fetchWorldofreelArticleLinks();
+    log(`     ${candidates.length} articles candidats VOD trouvés`);
+
+    let fromCache = 0, fetched = 0, extracted = 0;
+
+    for (const { url, title: articleTitle } of candidates) {
+      const cached = newArticleCache[url];
+      const cachedFresh = cached && (Date.now() - cached._cachedAt) / 3600000 < 24 * 5;
+
+      let filmTitle  = null;
+      let vodDate    = null;
+      let dateSource = null;
+
+      if (cachedFresh && cached.filmTitle) {
+        filmTitle  = cached.filmTitle;
+        vodDate    = cached.date ? new Date(cached.date) : null;
+        dateSource = cached.dateSource || 'title';
+        fromCache++;
+      } else {
+        // 1. Extraction depuis le titre de l'article (rapide, sans fetch)
+        filmTitle = extractFilmTitleFromArticleTitle(articleTitle);
+        vodDate   = parseEnglishDate(articleTitle);
+        if (vodDate) dateSource = 'article-title';
+
+        // 2. Si pas de date dans le titre → fetch le corps de l'article
+        if (!vodDate && filmTitle) {
+          try {
+            await sleep(350);
+            const bodyHtml = await fetchTextWithRetry(url, 2);
+            // On scanne les 6000 premiers caractères (l'essentiel est en tête)
+            const bodySlice = bodyHtml.slice(0, 6000);
+            vodDate = parseEnglishDate(bodySlice);
+            if (vodDate) dateSource = 'article-body';
+          } catch (err) {
+            vlog(`     ⚠️  WoR fetch ${url} : ${err.message}`);
+          }
+        }
+        fetched++;
+        newArticleCache[url] = {
+          _cachedAt   : Date.now(),
+          filmTitle,
+          date        : vodDate ? vodDate.toISOString() : null,
+          dateSource,
+          articleTitle,
+        };
+      }
+
+      if (!filmTitle || !vodDate || isNaN(vodDate)) continue;
+
+      // Déduplication par titre normalisé
+      const key = normalizeTitle(filmTitle);
+      if (releases.some((r) => normalizeTitle(r.title) === key)) continue;
+
+      releases.push({ title: filmTitle, date: vodDate, url, dateSource });
+      extracted++;
+    }
+
+    log(`     ✓ ${extracted} films extraits (${fromCache} cache, ${fetched} fetchés)`);
+    saveWorldofreelCache({
+      _parserVersion : WORLDOFREEL_PARSER_VERSION,
+      _listCachedAt  : Date.now(),
+      articles       : newArticleCache,
+      releases       : releases.map((r) => ({ ...r, date: r.date.toISOString() })),
+    });
+  } catch (err) {
+    console.warn(`  ⚠️  WorldOfReel scraping a échoué : ${err.message} — on continue sans.`);
+  }
+
+  return releases;
+}
+
+/**
+ * Enrichit la liste finale avec les données World of Reel.
+ * Même pattern que enrichWithMaxblizz / enrichWithAllocine.
+ */
+async function enrichWithWorldofreel({ finalResults, monthStart, monthEnd, cache }) {
+  log('\n  📡  Enrichissement World of Reel :');
+  const worReleases = await fetchWorldofreelReleases();
+  if (worReleases.length === 0) {
+    log('     (aucune donnée WoR — on saute)');
+    return { confirmed: 0, added: 0 };
+  }
+
+  const existingIds       = new Set(finalResults.map((m) => m.tmdb_id));
+  const existingTitles    = new Set(finalResults.map((m) => normalizeTitle(m.title)));
+  const existingOriginals = new Set(finalResults.map((m) => normalizeTitle(m.original_title || '')));
+
+  let confirmed = 0, added = 0, skipped = 0, dropNiche = 0;
+
+  for (const wor of worReleases) {
+    const worDate = wor.date;
+    if (worDate < monthStart || worDate > monthEnd) { skipped++; continue; }
+
+    const worNorm = normalizeTitle(wor.title);
+
+    // Cross-confirmation si le film est déjà dans la liste
+    const existingByTitle = finalResults.find((m) =>
+      normalizeTitle(m.title) === worNorm ||
+      normalizeTitle(m.original_title || '') === worNorm
+    );
+    if (existingByTitle) {
+      existingByTitle._crossConfirmedBy = existingByTitle._crossConfirmedBy || [];
+      if (!existingByTitle._crossConfirmedBy.includes('worldofreel')) {
+        existingByTitle._crossConfirmedBy.push('worldofreel');
+        confirmed++;
+        vlog(`     ✓ WoR confirme "${existingByTitle.title}" → ${formatDateFR(worDate)}`);
+      }
+      continue;
+    }
+
+    // Pas dans la liste → tentative d'ajout via TMDB
+    const tmdbHit = await tmdbSearchByTitle(wor.title);
+    await sleep(API_DELAY_MS);
+    if (!tmdbHit) { vlog(`     ✗ TMDB sans match pour "${wor.title}"`); skipped++; continue; }
+
+    // Déjà présent par ID TMDB — cross-confirm seulement
+    if (existingIds.has(tmdbHit.id)) {
+      const existingById = finalResults.find((m) => m.tmdb_id === tmdbHit.id);
+      if (existingById) {
+        existingById._crossConfirmedBy = existingById._crossConfirmedBy || [];
+        if (!existingById._crossConfirmedBy.includes('worldofreel')) {
+          existingById._crossConfirmedBy.push('worldofreel');
+          confirmed++;
+        }
+      }
+      skipped++;
+      continue;
+    }
+
+    // Titre déjà présent sous forme normalisée
+    if (existingTitles.has(normalizeTitle(tmdbHit.title)) ||
+        existingOriginals.has(normalizeTitle(tmdbHit.original_title || ''))) {
+      skipped++; continue;
+    }
+
+    let details;
+    try {
+      details = await fetchMovieDetails(tmdbHit.id, cache);
+      await sleep(API_DELAY_MS);
+    } catch { skipped++; continue; }
+
+    // Filtres anti-bruit identiques au pipeline principal
+    if (hasExcludedGenre(details))        { skipped++; continue; }
+    if (isTelefilmByTitle(details))       { skipped++; continue; }
+    if (isSpectacle(details))             { skipped++; continue; }
+    if (isQuebecLocalProduction(details)) { skipped++; continue; }
+
+    const isFrench = isFrenchProduction(details);
+    const tierInfo = classifyTier(details);
+    if (!isFrench && tierInfo.tier === 'niche') { dropNiche++; continue; }
+
+    const cinemaDate = details.release_date ? new Date(details.release_date) : null;
+    const studios    = details.production_companies || [];
+    const leadStudio = studios.find((s) => STUDIO_VOD_DELAYS[s.id]);
+
+    finalResults.push({
+      title           : details.title || tmdbHit.title,
+      plex_release    : formatDateFR(worDate),
+      tmdb_id         : tmdbHit.id,
+      poster_path     : details.poster_path || tmdbHit.poster_path,
+      original_title  : details.original_title || tmdbHit.original_title,
+      cinema_date     : cinemaDate ? formatDateFR(cinemaDate) : null,
+      vote_average    : Math.round((details.vote_average ?? 0) * 10) / 10,
+      vote_count      : details.vote_count ?? 0,
+      genres          : (details.genres || []).map((g) => g.name),
+      is_french       : isFrench,
+      source          : 'worldofreel',
+      _tier           : tierInfo.tier,
+      _tierScore      : tierInfo.score,
+      _leadStudio     : leadStudio?.name || null,
+      _sortDate       : worDate.getTime(),
+      _popularity     : details.popularity ?? tmdbHit.popularity ?? 0,
+      _crossConfirmedBy: [],
+    });
+
+    log(`     ➕ WoR ajouté : ${details.title || tmdbHit.title} → ${formatDateFR(worDate)} [${tierInfo.tier}]`);
+    added++;
+    existingIds.add(tmdbHit.id);
+  }
+
+  log(`     📊 ${confirmed} confirmations, ${added} ajouts, ${dropNiche} niche non-FR jetés, ${skipped} ignorés`);
+  return { confirmed, added };
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
 // MODULE MAXBLIZZ — Enrichissement (hérité v7, étendu pour tier + overrides ext.)
 // ═══════════════════════════════════════════════════════════════════════════════
 
@@ -1236,10 +1576,13 @@ async function updateVOD() {
   // ─── Phase 3 : Enrichissement MaxBlizz ───────────────────────────────────────
   await enrichWithMaxblizz({ finalResults, monthStart, monthEnd, cache, overrides });
 
-  // ─── Phase 4 : 🆕 Triangulation AlloCiné ─────────────────────────────────────
+  // ─── Phase 4 : 🆕 Enrichissement World of Reel (v8.3) ────────────────────────
+  await enrichWithWorldofreel({ finalResults, monthStart, monthEnd, cache });
+
+  // ─── Phase 5 : 🆕 Triangulation AlloCiné ─────────────────────────────────────
   await enrichWithAllocine({ finalResults, monthStart, monthEnd, cache });
 
-  // ─── Phase 5 : Scoring de confiance final ────────────────────────────────────
+  // ─── Phase 6 : Scoring de confiance final ────────────────────────────────────
   log('\n  🎯  Calcul des scores de confiance :');
   for (const item of finalResults) {
     item.confidence = computeConfidence({
@@ -1248,7 +1591,7 @@ async function updateVOD() {
     });
   }
 
-  // ─── Phase 6 : Tri, dédup, sérialisation ─────────────────────────────────────
+  // ─── Phase 7 : Tri, dédup, sérialisation ─────────────────────────────────────
   finalResults.sort((a, b) => {
     if (a._sortDate !== b._sortDate) return a._sortDate - b._sortDate;
     return b._popularity - a._popularity;
@@ -1278,7 +1621,7 @@ async function updateVOD() {
     fs.renameSync(tmpPath, DATA_PATH);
   }
 
-  // ─── Phase 7 : Cleanup cache & récap ─────────────────────────────────────────
+  // ─── Phase 8 : Cleanup cache & récap ─────────────────────────────────────────
   const cutoff = Date.now() - 7 * 24 * 3600000;
   for (const k of Object.keys(cache)) {
     if (!cache[k]?._cachedAt || cache[k]._cachedAt < cutoff) delete cache[k];
@@ -1319,6 +1662,8 @@ async function updateVOD() {
   log(`        • Hors fenêtre (avant) : ${dropReasons.beforeWindow}`);
   log(`        • Hors fenêtre (après) : ${dropReasons.afterWindow}`);
   log(`     Cache TMDB hits        : ${cacheHits} / ${uniqueMovies.length}`);
+  log('  ─────────────────────────────────────────────────────────────────────');
+  log(`     Sources actives : TMDB | MaxBlizz | World of Reel 🆕 | AlloCiné`);
   log('  ═══════════════════════════════════════════════════════════════════════');
 
   if (DRY_RUN) log('\n  ⚙️  Mode dry-run : le fichier final N\'a PAS été écrit.');
