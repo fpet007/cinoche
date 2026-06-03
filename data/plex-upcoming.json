@@ -1,1 +1,276 @@
-
+[
+  {
+    "title": "Marsupilami",
+    "plex_release": "4 juin 2026",
+    "tmdb_id": 1145899,
+    "poster_path": "/rJNHFa07Id2ylQgw0ttzGwpeczE.jpg",
+    "original_title": "Marsupilami",
+    "cinema_date": "4 février 2026",
+    "vote_average": 6.6,
+    "vote_count": 72,
+    "genres": [
+      "Aventure",
+      "Comédie"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "À pied d’œuvre",
+    "plex_release": "4 juin 2026",
+    "tmdb_id": 1430820,
+    "poster_path": "/pRECZt7LEHL4ZMkr1Hyol7lHkMi.jpg",
+    "original_title": "À pied d’œuvre",
+    "cinema_date": "4 février 2026",
+    "vote_average": 6.5,
+    "vote_count": 56,
+    "genres": [
+      "Drame"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Mortal Kombat II",
+    "plex_release": "9 juin 2026",
+    "tmdb_id": 931285,
+    "poster_path": "/yPkeeBEJdQO85AGCwi2XEIfMOxa.jpg",
+    "original_title": "Mortal Kombat II",
+    "cinema_date": "6 mai 2026",
+    "vote_average": 6.7,
+    "vote_count": 361,
+    "genres": [
+      "Action",
+      "Fantastique",
+      "Aventure"
+    ],
+    "is_french": false,
+    "source": "maxblizz",
+    "confidence": {
+      "level": "medium",
+      "score": 0.7,
+      "sources": [
+        "maxblizz"
+      ]
+    },
+    "tier": "blockbuster",
+    "lead_studio": null
+  },
+  {
+    "title": "LOL 2.0",
+    "plex_release": "11 juin 2026",
+    "tmdb_id": 1477170,
+    "poster_path": "/8b4pjaQTspOOacfB6bGYFy8BCda.jpg",
+    "original_title": "LOL 2.0",
+    "cinema_date": "11 février 2026",
+    "vote_average": 6.3,
+    "vote_count": 41,
+    "genres": [
+      "Comédie"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Les Enfants de la Résistance",
+    "plex_release": "11 juin 2026",
+    "tmdb_id": 1309400,
+    "poster_path": "/uoBOi1xbfbJ9l8xg76uwI2B4MZX.jpg",
+    "original_title": "Les Enfants de la Résistance",
+    "cinema_date": "11 février 2026",
+    "vote_average": 6.4,
+    "vote_count": 30,
+    "genres": [
+      "Histoire",
+      "Drame",
+      "Guerre",
+      "Aventure"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "L'infiltrée",
+    "plex_release": "11 juin 2026",
+    "tmdb_id": 1420742,
+    "poster_path": "/ys6twzUhtNacnnhXTnHFZTMiOPM.jpg",
+    "original_title": "L'infiltrée",
+    "cinema_date": "11 février 2026",
+    "vote_average": 6.7,
+    "vote_count": 5,
+    "genres": [
+      "Comédie"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Coutures",
+    "plex_release": "18 juin 2026",
+    "tmdb_id": 1390382,
+    "poster_path": "/zN2hnZzj3DjJH2CzB76kDo1zYFu.jpg",
+    "original_title": "Coutures",
+    "cinema_date": "18 février 2026",
+    "vote_average": 5.7,
+    "vote_count": 28,
+    "genres": [
+      "Drame"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Le rêve américain",
+    "plex_release": "18 juin 2026",
+    "tmdb_id": 1365378,
+    "poster_path": "/uXGqYv2cahBG062OQ93oMqWQCs5.jpg",
+    "original_title": "Le rêve américain",
+    "cinema_date": "18 février 2026",
+    "vote_average": 7.4,
+    "vote_count": 91,
+    "genres": [
+      "Comédie"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Maigret et le mort amoureux",
+    "plex_release": "18 juin 2026",
+    "tmdb_id": 1398486,
+    "poster_path": "/t7KsplyJOPYvQitQmgVixVz8vpL.jpg",
+    "original_title": "Maigret et le mort amoureux",
+    "cinema_date": "18 février 2026",
+    "vote_average": 6.1,
+    "vote_count": 17,
+    "genres": [
+      "Crime",
+      "Mystère"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "The Criminals",
+    "plex_release": "20 juin 2026",
+    "tmdb_id": 1242265,
+    "poster_path": "/vUvZuBWRsjO2tnUo2yesrdbhKal.jpg",
+    "original_title": "Fuze",
+    "cinema_date": "6 mai 2026",
+    "vote_average": 6.5,
+    "vote_count": 86,
+    "genres": [
+      "Action",
+      "Crime",
+      "Drame",
+      "Thriller"
+    ],
+    "is_french": false,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "mid",
+    "lead_studio": null
+  },
+  {
+    "title": "Chers parents",
+    "plex_release": "25 juin 2026",
+    "tmdb_id": 1368830,
+    "poster_path": "/dOTZP3gnMjJHva914Xrzljhyl7c.jpg",
+    "original_title": "Chers parents",
+    "cinema_date": "25 février 2026",
+    "vote_average": 6.7,
+    "vote_count": 28,
+    "genres": [
+      "Comédie"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  }
+]
