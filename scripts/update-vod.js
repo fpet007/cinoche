@@ -1,9 +1,17 @@
 /**
- * updateVOD.js — v8.2 (ultimate + fenêtre FR corrigée)
- * =====================================================
+ * updateVOD.js — v8.4 (+ Mandatory + ComingSoon scrapers)
+ * =========================================================
  * Génère la liste des FILMS DE CINÉMA en VOD pour le mois en cours STRICT.
  * Plex FR — uniquement de vrais longs-métrages sortis en salle, avec un focus
  * blockbusters internationaux + films français + blockbusters VFQ.
+ *
+ * 🆕 NOUVEAUTÉS v8.4 :
+ * ─────────────────────────────────────────────────────────────────────────────
+ * ✅ Module Mandatory.com : scrape les articles VOD/streaming du site
+ *    (pattern "Available on Digital/VOD [date]"). Source US complémentaire.
+ * ✅ Module ComingSoon.net : scrape la page des dates digital/VOD.
+ *    Très fiable pour les dates US officielles annoncées en avance.
+ * ✅ Les deux sources participent au scoring de confiance (cross-confirm).
  *
  * 🆕 NOUVEAUTÉS v8.2 (vs v8) :
  * ─────────────────────────────────────────────────────────────────────────────
@@ -46,6 +54,8 @@ const DATA_PATH         = path.join(__dirname, '../data/plex-upcoming.json');
 const CACHE_PATH        = path.join(__dirname, '../data/.tmdb-cache.json');
 const MAXBLIZZ_CACHE    = path.join(__dirname, '../data/.maxblizz-cache.json');
 const ALLOCINE_CACHE    = path.join(__dirname, '../data/.allocine-cache.json');
+const MANDATORY_CACHE   = path.join(__dirname, '../data/.mandatory-cache.json');
+const COMINGSOON_CACHE  = path.join(__dirname, '../data/.comingsoon-cache.json');
 const OVERRIDES_PATH    = path.join(__dirname, '../data/overrides.json');
 
 // CLI flags
@@ -63,6 +73,8 @@ const DELAYS = {
 const CACHE_TTL_HOURS     = 24;
 const MAXBLIZZ_TTL_HOURS  = 12;
 const ALLOCINE_TTL_HOURS  = 8;   // FR : peut bouger plus souvent
+const MANDATORY_TTL_HOURS = 12;  // 🆕 v8.4
+const COMINGSOON_TTL_HOURS = 12; // 🆕 v8.4
 const API_DELAY_MS        = 130;
 const MAX_PAGES_PER_ENDPOINT = 6;
 const MIN_RUNTIME         = 40;
@@ -230,6 +242,10 @@ const loadMaxblizzCache     = () => loadJsonSafe(MAXBLIZZ_CACHE, {});
 const saveMaxblizzCache     = (c) => saveJsonAtomic(MAXBLIZZ_CACHE, c);
 const loadAllocineCache     = () => loadJsonSafe(ALLOCINE_CACHE, {});
 const saveAllocineCache     = (c) => saveJsonAtomic(ALLOCINE_CACHE, c);
+const loadMandatoryCache    = () => loadJsonSafe(MANDATORY_CACHE, {});   // 🆕 v8.4
+const saveMandatoryCache    = (c) => saveJsonAtomic(MANDATORY_CACHE, c); // 🆕 v8.4
+const loadComingSoonCache   = () => loadJsonSafe(COMINGSOON_CACHE, {});  // 🆕 v8.4
+const saveComingSoonCache   = (c) => saveJsonAtomic(COMINGSOON_CACHE, c);// 🆕 v8.4
 
 function isCacheEntryFresh(entry, ttlHours = CACHE_TTL_HOURS) {
   if (!entry?._cachedAt) return false;
@@ -458,14 +474,33 @@ function computeConfidence({ source, crossConfirmedBy }) {
 
   // 4. MaxBlizz (US) + AlloCiné (FR) qui s'accordent : excellent
   if (source === 'maxblizz') {
-    if (set.has('allocine'))     return { level: 'very-high', score: 0.92, sources };
-    if (set.has('studio-mapped'))return { level: 'high',      score: 0.78, sources };
-    return                            { level: 'medium',    score: 0.70, sources };
+    if (set.has('allocine'))        return { level: 'very-high', score: 0.92, sources };
+    if (set.has('comingsoon'))      return { level: 'very-high', score: 0.91, sources };
+    if (set.has('mandatory'))       return { level: 'high',      score: 0.85, sources };
+    if (set.has('studio-mapped'))   return { level: 'high',      score: 0.78, sources };
+    return                               { level: 'medium',    score: 0.70, sources };
   }
 
   // 5. AlloCiné seul (sortie FR officielle annoncée)
   if (source === 'allocine') {
+    if (set.has('comingsoon') || set.has('mandatory')) return { level: 'very-high', score: 0.91, sources };
     return { level: 'high', score: 0.80, sources };
+  }
+
+  // 5b. Mandatory seul
+  if (source === 'mandatory') {
+    if (set.has('allocine'))   return { level: 'very-high', score: 0.91, sources };
+    if (set.has('comingsoon')) return { level: 'very-high', score: 0.90, sources };
+    if (set.has('maxblizz'))   return { level: 'high',      score: 0.85, sources };
+    return                          { level: 'medium',    score: 0.65, sources };
+  }
+
+  // 5c. ComingSoon seul
+  if (source === 'comingsoon') {
+    if (set.has('allocine'))   return { level: 'very-high', score: 0.91, sources };
+    if (set.has('mandatory'))  return { level: 'very-high', score: 0.90, sources };
+    if (set.has('maxblizz'))   return { level: 'high',      score: 0.85, sources };
+    return                          { level: 'medium',    score: 0.68, sources };
   }
 
   // 6. Prédite avec mapping studio (assez fiable pour blockbusters connus)
@@ -1072,6 +1107,482 @@ async function enrichWithMaxblizz({ finalResults, monthStart, monthEnd, cache, o
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
+// 🆕 MODULE MANDATORY.COM (v8.4) — Source VOD US complémentaire
+// ═══════════════════════════════════════════════════════════════════════════════
+//
+// Stratégie :
+//  1. Scrape la page index VOD/Digital de mandatory.com
+//     (ex : /category/movies/home-entertainment/ ou /tag/digital-release/)
+//  2. Pour chaque article détecté, visite la page et extrait le titre + date
+//     grâce à des patterns typiques du site :
+//       "Available on Digital [date]"  |  "on VOD [date]"
+//       "Available to rent/buy on [date]"
+//  3. Les résultats enrichissent la liste comme MaxBlizz (cross-confirm ou ajout)
+//
+// mandatory.com publie régulièrement des articles du type :
+//   "[Movie Title] Is Available On Digital And On Demand Starting [date]"
+//   "[Movie Title] Available On 4K, Blu-ray, And Digital On [date]"
+//   "[Movie Title] Arrives On Digital And On Demand [date]"
+
+const MANDATORY_LIST_URLS = [
+  'https://www.mandatory.com/category/movies/home-entertainment/',
+  'https://www.mandatory.com/category/movies/home-entertainment/page/2/',
+];
+
+/**
+ * Extrait titre + date VOD depuis le HTML d'un article Mandatory.com.
+ * Les articles ont typiquement le titre du film dans le <h1> ou <title>
+ * et la date dans le corps du texte avec des patterns anglais.
+ */
+function parseMandatoryArticle(html, slug) {
+  // 1. Titre : <h1 class="...">…</h1> ou <title>…  | Mandatory</title>
+  let title = null;
+  const h1Match = html.match(/<h1[^>]*class="[^"]*(?:entry-title|post-title|article-title)[^"]*"[^>]*>([^<]{3,120})<\/h1>/i);
+  if (h1Match) {
+    title = h1Match[1].trim();
+  } else {
+    const titleTagMatch = html.match(/<title>([^|<–—-]{3,100})(?:\s*[\|–—-].*)?<\/title>/i);
+    if (titleTagMatch) title = titleTagMatch[1].trim();
+  }
+
+  // Fallback : titre depuis le slug
+  if (!title) {
+    title = slug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+  }
+
+  // Nettoie les suffixes marketing du titre extrait
+  title = title
+    .replace(/\s+(?:is\s+)?(?:now\s+)?available\s+on\s+digital.*$/i, '')
+    .replace(/\s+(?:arrives?|coming)\s+on\s+digital.*$/i, '')
+    .replace(/\s+review$/i, '')
+    .replace(/\s+blu[-\s]?ray.*$/i, '')
+    .trim();
+
+  // 2. Date : patterns typiques mandatory.com
+  const body = html.length > 2000 ? html.slice(1500) : html;
+  const monthPattern = '(January|February|March|April|May|June|July|August|September|October|November|December)';
+  const datePart     = `${monthPattern}\\s+(\\d{1,2})(?:st|nd|rd|th)?,?\\s+(\\d{4})`;
+
+  const patterns = [
+    // "available on digital / VOD / demand ... January 1, 2026"
+    new RegExp(`available\\s+(?:on\\s+)?(?:digital|vod|on\\s+demand|to\\s+(?:rent|buy|purchase))\\s+[^<]{0,60}?${datePart}`, 'gi'),
+    // "arrives? / coming / release date ... January 1, 2026"
+    new RegExp(`(?:arrives?|coming|premieres?|release[sd]?)\\s+(?:on\\s+)?(?:digital|vod|on\\s+demand)?[^<]{0,60}?${datePart}`, 'gi'),
+    // "starting January 1, 2026"
+    new RegExp(`starting\\s+${datePart}`, 'gi'),
+    // "<strong>January 1, 2026</strong>"
+    new RegExp(`<strong>\\s*${datePart}\\s*<\\/strong>`, 'gi'),
+  ];
+
+  const candidates = [];
+  for (const rx of patterns) {
+    let m;
+    rx.lastIndex = 0;
+    while ((m = rx.exec(body)) !== null) {
+      // Selon le pattern, les groupes capturants pour mois/jour/année varient
+      // On cherche le dernier triplet (mois, jour, année) dans les groupes
+      const groups = [...m].slice(1).filter(Boolean);
+      const monthIdx = groups.findIndex((g) =>
+        /^(January|February|March|April|May|June|July|August|September|October|November|December)$/i.test(g)
+      );
+      if (monthIdx === -1) continue;
+      const month = groups[monthIdx];
+      const day   = groups[monthIdx + 1];
+      const year  = groups[monthIdx + 2];
+      if (!day || !year) continue;
+      const d = new Date(`${month} ${day}, ${year} 12:00:00 UTC`);
+      if (!isNaN(d) &&
+          d.getTime() >= Date.now() - 90 * 86400000 &&
+          d.getTime() <= Date.now() + 730 * 86400000) {
+        candidates.push(d);
+      }
+    }
+  }
+
+  if (!candidates.length) return null;
+  const date = candidates.sort((a, b) => a - b)[0];
+  return { title, date };
+}
+
+/**
+ * Scrape mandatory.com et retourne les { title, date, url } trouvés.
+ */
+async function fetchMandatoryReleases() {
+  const PARSER_VERSION = 1;
+  const cache = loadMandatoryCache();
+  const cacheValid = cache._parserVersion === PARSER_VERSION;
+  const articleCache = cacheValid ? (cache.articles || {}) : {};
+  const listFresh = cacheValid && cache._listCachedAt
+    && (Date.now() - cache._listCachedAt) / 3600000 < MANDATORY_TTL_HOURS;
+
+  if (listFresh && Array.isArray(cache.releases)) {
+    log(`  💾 Mandatory : cache valide (${cache.releases.length} entrées)`);
+    return cache.releases.map((r) => ({ ...r, date: new Date(r.date) }));
+  }
+
+  log('  🌐 Mandatory : scraping en cours...');
+  const articleUrls = new Map(); // url → slug
+  const releases    = [];
+
+  // 1. Collecte des liens d'articles sur les pages listing
+  for (const listUrl of MANDATORY_LIST_URLS) {
+    try {
+      await sleep(400);
+      const listHtml = await fetchTextWithRetry(listUrl, 2);
+      // Liens d'articles : href="/YYYY/MM/DD/slug/" ou "/movies/slug/"
+      // mandatory.com utilise WordPress : href="https://www.mandatory.com/..."
+      const linkRx = /href="(https:\/\/www\.mandatory\.com\/[a-z0-9\-\/]+(?:digital|vod|blu-ray|home-entertainment|on-demand)[a-z0-9\-\/]*)"/gi;
+      let m;
+      while ((m = linkRx.exec(listHtml)) !== null) {
+        const url  = m[1].replace(/\/$/, '') + '/';
+        const slug = url.split('/').filter(Boolean).pop() || '';
+        if (!articleUrls.has(url) && slug.length > 3) {
+          articleUrls.set(url, slug);
+        }
+      }
+      vlog(`     ${listUrl} : ${articleUrls.size} liens trouvés`);
+    } catch (err) {
+      console.warn(`     ⚠️  ${listUrl} échoué : ${err.message}`);
+    }
+  }
+
+  log(`     ${articleUrls.size} articles Mandatory candidats`);
+
+  // 2. Visite chaque article et extraction date
+  const newArticleCache = {};
+  let fromCache = 0, fetched = 0, skipped = 0;
+
+  for (const [url, slug] of articleUrls) {
+    const cached    = articleCache[url];
+    const weekInMs  = 7 * 24 * 3600000;
+    const cachedFresh = cached && (Date.now() - cached._cachedAt) < weekInMs;
+
+    let articleData;
+    if (cachedFresh) {
+      articleData = cached;
+      fromCache++;
+    } else {
+      try {
+        await sleep(300);
+        const html  = await fetchTextWithRetry(url, 2);
+        const parsed = parseMandatoryArticle(html, slug);
+        articleData  = {
+          _cachedAt: Date.now(),
+          title: parsed?.title || null,
+          date : parsed?.date ? parsed.date.toISOString() : null,
+          slug,
+        };
+        fetched++;
+      } catch (err) {
+        articleData = { _cachedAt: Date.now(), title: null, date: null, slug, error: err.message };
+      }
+    }
+
+    newArticleCache[url] = articleData;
+    if (!articleData.date || !articleData.title) { skipped++; continue; }
+
+    const date = new Date(articleData.date);
+    if (isNaN(date)) { skipped++; continue; }
+
+    releases.push({ title: articleData.title, date, url, slug });
+  }
+
+  log(`     ✓ ${releases.length} films Mandatory (${fromCache} cache, ${fetched} fetchés, ${skipped} sans date)`);
+
+  saveMandatoryCache({
+    _parserVersion: PARSER_VERSION,
+    _listCachedAt : Date.now(),
+    articles      : newArticleCache,
+    releases      : releases.map((r) => ({ ...r, date: r.date.toISOString() })),
+  });
+
+  return releases;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// 🆕 MODULE COMINGSOON.NET (v8.4) — Dates Digital/VOD US officielles
+// ═══════════════════════════════════════════════════════════════════════════════
+//
+// Stratégie :
+//  1. Scrape la page des sorties "Digital & VOD" de comingsoon.net
+//     (/movies/digital-vod-release-dates/ et /movies/dvd-release-dates/)
+//  2. La structure du site présente les films avec titre + date groupés
+//     par semaine ou par date, ex :
+//       <h2>January 7, 2025</h2>
+//       <div class="film-title">Movie Title</div>
+//     ou via des listes de type article "Movie X Digital Release Date: January 7"
+//  3. Cross-confirm + ajout dans le pipeline final
+
+const COMINGSOON_URLS = [
+  'https://www.comingsoon.net/movies/digital-vod-release-dates/',
+  'https://www.comingsoon.net/movies/dvd-release-dates/',
+];
+
+/**
+ * Parse le HTML d'une page comingsoon.net pour en extraire { title, date }.
+ *
+ * comingsoon.net utilise principalement deux structures :
+ *  A) Page de dates groupées : <h2>March 4, 2025</h2> puis liste de titres
+ *  B) Articles individuels : titre dans <h1> + date en texte
+ */
+function parseComingSoonHtml(html) {
+  const items   = [];
+  const seen    = new Set();
+  const monthPat = '(January|February|March|April|May|June|July|August|September|October|November|December)';
+  const datePat  = `${monthPat}\\s+(\\d{1,2})(?:st|nd|rd|th)?,?\\s+(\\d{4})`;
+
+  // ── Structure A : dates groupées (page principale) ────────────────────────
+  // Pattern : header de date → puis titres jusqu'au prochain header
+  const sectionRx = new RegExp(
+    `(?:<h[23][^>]*>\\s*${datePat}\\s*<\\/h[23]>)([\\s\\S]{0,3000}?)(?=<h[23]|$)`, 'gi'
+  );
+  let sm;
+  while ((sm = sectionRx.exec(html)) !== null) {
+    const month = sm[1], day = sm[2], year = sm[3];
+    const sectionBody = sm[4] || '';
+    const sectionDate = new Date(`${month} ${day}, ${year} 12:00:00 UTC`);
+    if (isNaN(sectionDate) ||
+        sectionDate.getTime() < Date.now() - 90 * 86400000 ||
+        sectionDate.getTime() > Date.now() + 730 * 86400000) continue;
+
+    // Titres dans la section : <strong>, liens <a>, ou texte brut dans <li>
+    const titlePatterns = [
+      /<(?:strong|b)>([^<]{3,100})<\/(?:strong|b)>/gi,
+      /<a[^>]+href="\/movies\/[^"]+\/[^"]*"[^>]*>([^<]{3,100})<\/a>/gi,
+      /<li[^>]*>\s*([A-Z][^<]{3,100})\s*<\/li>/g,
+    ];
+    for (const tRx of titlePatterns) {
+      let tm;
+      tRx.lastIndex = 0;
+      while ((tm = tRx.exec(sectionBody)) !== null) {
+        const rawTitle = tm[1].trim();
+        const key = rawTitle.toLowerCase();
+        // Filtre les faux-positifs (liens de navigation, catégories…)
+        if (key.length < 3 || key.length > 100) continue;
+        if (/^(?:digital|vod|blu.?ray|dvd|stream|rent|buy|purchase|4k|movies?|home\s+ent)/i.test(rawTitle)) continue;
+        if (seen.has(key)) continue;
+        seen.add(key);
+        items.push({ title: rawTitle, date: sectionDate });
+      }
+    }
+  }
+
+  // ── Structure B : articles individuels avec date en texte ─────────────────
+  // Pattern : <h1 ...>Titre</h1> ... "Digital Release Date: January 1, 2026"
+  if (items.length < 3) {
+    const articleRx = /<h1[^>]*>([^<]{3,100})<\/h1>[\s\S]{0,2000}?digital\s+(?:release\s+date|date\s+is|on)[^<]{0,60}?/gi;
+    const fullDateRx = new RegExp(datePat, 'i');
+    let am;
+    while ((am = articleRx.exec(html)) !== null) {
+      const rawTitle = am[1].trim()
+        .replace(/\s+(?:digital|blu.?ray|dvd|vod).*$/i, '')
+        .trim();
+      const key = rawTitle.toLowerCase();
+      if (seen.has(key) || rawTitle.length < 3) continue;
+      // cherche la date dans les 200 chars qui suivent
+      const context = html.slice(am.index + am[0].length, am.index + am[0].length + 300);
+      const dateMatch = fullDateRx.exec(context);
+      if (!dateMatch) continue;
+      const d = new Date(`${dateMatch[1]} ${dateMatch[2]}, ${dateMatch[3]} 12:00:00 UTC`);
+      if (isNaN(d) || d.getTime() < Date.now() - 90 * 86400000) continue;
+      seen.add(key);
+      items.push({ title: rawTitle, date: d });
+    }
+  }
+
+  // ── Structure C : listes simples type "Movie — January 1" ─────────────────
+  // comingsoon.net publie parfois des tableaux ou listes condensées
+  if (items.length < 3) {
+    const rowRx = new RegExp(
+      `<(?:td|li|div)[^>]*>\\s*([A-Z][^<]{3,80}?)\\s*(?:—|-|:)?\\s*${datePat}\\s*<\\/(?:td|li|div)>`, 'gi'
+    );
+    let rm;
+    while ((rm = rowRx.exec(html)) !== null) {
+      const rawTitle = rm[1].trim();
+      const key = rawTitle.toLowerCase();
+      if (seen.has(key) || rawTitle.length < 3) continue;
+      const d = new Date(`${rm[2]} ${rm[3]}, ${rm[4]} 12:00:00 UTC`);
+      if (isNaN(d) || d.getTime() < Date.now() - 90 * 86400000) continue;
+      seen.add(key);
+      items.push({ title: rawTitle, date: d });
+    }
+  }
+
+  return items;
+}
+
+/**
+ * Scrape comingsoon.net et retourne les { title, date, source_url }.
+ */
+async function fetchComingSoonReleases() {
+  const PARSER_VERSION = 1;
+  const cache = loadComingSoonCache();
+  const cacheValid = cache._parserVersion === PARSER_VERSION;
+  const fresh = cacheValid && cache._cachedAt
+    && (Date.now() - cache._cachedAt) / 3600000 < COMINGSOON_TTL_HOURS;
+
+  if (fresh && Array.isArray(cache.releases)) {
+    log(`  💾 ComingSoon : cache valide (${cache.releases.length} entrées)`);
+    return cache.releases.map((r) => ({ ...r, date: new Date(r.date) }));
+  }
+
+  log('  🌐 ComingSoon : scraping en cours...');
+  const releases = [];
+  const seen     = new Set();
+
+  for (const url of COMINGSOON_URLS) {
+    try {
+      await sleep(500);
+      const html  = await fetchTextWithRetry(url, 2);
+      const items = parseComingSoonHtml(html);
+      vlog(`     ${url.split('/').filter(Boolean).pop()} : ${items.length} films extraits`);
+      for (const it of items) {
+        const key = normalizeTitle(it.title);
+        if (!key || seen.has(key)) continue;
+        seen.add(key);
+        releases.push({ title: it.title, date: it.date, source_url: url });
+      }
+    } catch (err) {
+      console.warn(`     ⚠️  ${url} échoué : ${err.message}`);
+    }
+  }
+
+  log(`     ✓ ${releases.length} films ComingSoon extraits (dédupliqués)`);
+
+  saveComingSoonCache({
+    _parserVersion: PARSER_VERSION,
+    _cachedAt     : Date.now(),
+    releases      : releases.map((r) => ({ ...r, date: r.date.toISOString() })),
+  });
+
+  return releases;
+}
+
+/**
+ * Enrichit la liste finale avec Mandatory.com et ComingSoon.net.
+ * Logique identique à enrichWithMaxblizz :
+ *   - Cross-confirm si film déjà présent (boost confiance)
+ *   - Ajout si le film n'est pas dans la liste et passe les filtres
+ *
+ * @param {object} opts
+ * @param {string} opts.sourceName   - 'mandatory' | 'comingsoon'
+ * @param {Function} opts.fetchFn    - fetchMandatoryReleases | fetchComingSoonReleases
+ * @param {Array}  opts.finalResults
+ * @param {Date}   opts.monthStart
+ * @param {Date}   opts.monthEnd
+ * @param {object} opts.cache
+ */
+async function enrichWithExternalSource({ sourceName, fetchFn, finalResults, monthStart, monthEnd, cache }) {
+  log(`\n  📡  Enrichissement ${sourceName} :`);
+  let releases;
+  try {
+    releases = await fetchFn();
+  } catch (err) {
+    console.warn(`     ⚠️  ${sourceName} : fetch global échoué — ${err.message}`);
+    return { added: 0, confirmed: 0 };
+  }
+  if (!releases || releases.length === 0) {
+    log(`     (aucune donnée ${sourceName} — on saute)`);
+    return { added: 0, confirmed: 0 };
+  }
+
+  const existingById    = new Map(finalResults.map((m) => [m.tmdb_id, m]));
+  const existingTitles  = new Map();
+  for (const m of finalResults) {
+    existingTitles.set(normalizeTitle(m.title), m);
+    if (m.original_title) existingTitles.set(normalizeTitle(m.original_title), m);
+  }
+
+  let added = 0, confirmed = 0, skipped = 0, dropQc = 0, dropNiche = 0;
+
+  for (const rel of releases) {
+    // Ne traite que les films qui tombent dans le mois cible
+    if (rel.date < monthStart || rel.date > monthEnd) { skipped++; continue; }
+
+    const key      = normalizeTitle(rel.title);
+    const existing = existingTitles.get(key);
+
+    if (existing) {
+      // Cross-confirmation
+      existing._crossConfirmedBy = existing._crossConfirmedBy || [];
+      if (!existing._crossConfirmedBy.includes(sourceName)) {
+        existing._crossConfirmedBy.push(sourceName);
+        confirmed++;
+        vlog(`     ✓ Confirmation \"${existing.title}\" par ${sourceName}`);
+      }
+      continue;
+    }
+
+    // Recherche TMDB
+    const tmdbHit = await tmdbSearchByTitle(rel.title);
+    await sleep(API_DELAY_MS);
+    if (!tmdbHit) { vlog(`     ✗ TMDB sans match pour \"${rel.title}\"`); skipped++; continue; }
+    if (existingById.has(tmdbHit.id)) {
+      // Déjà présent sous un autre titre → cross-confirm
+      const ex = existingById.get(tmdbHit.id);
+      ex._crossConfirmedBy = ex._crossConfirmedBy || [];
+      if (!ex._crossConfirmedBy.includes(sourceName)) {
+        ex._crossConfirmedBy.push(sourceName);
+        confirmed++;
+      }
+      continue;
+    }
+
+    let details;
+    try {
+      details = await fetchMovieDetails(tmdbHit.id, cache);
+      await sleep(API_DELAY_MS);
+    } catch { skipped++; continue; }
+
+    // Filtres anti-bruit (mêmes que pipeline principal)
+    if (hasExcludedGenre(details))         { skipped++; continue; }
+    if (isTelefilmByTitle(details))        { skipped++; continue; }
+    if (isSpectacle(details))              { skipped++; continue; }
+    if (isQuebecLocalProduction(details))  { dropQc++; continue; }
+
+    const isFrench = isFrenchProduction(details);
+    const tierInfo = classifyTier(details);
+    if (!isFrench && tierInfo.tier === 'niche') { dropNiche++; continue; }
+
+    const cinemaDateFR = getTheatricalDateFR(details.release_dates);
+    const cinemaDate   = cinemaDateFR ?? (details.release_date ? new Date(details.release_date) : null);
+    const studios      = details.production_companies || [];
+    const leadStudio   = studios.find((s) => STUDIO_VOD_DELAYS[s.id]);
+
+    const entry = {
+      title          : details.title || tmdbHit.title,
+      plex_release   : formatDateFR(rel.date),
+      tmdb_id        : tmdbHit.id,
+      poster_path    : details.poster_path || tmdbHit.poster_path,
+      original_title : details.original_title || tmdbHit.original_title,
+      cinema_date    : cinemaDate ? formatDateFR(cinemaDate) : null,
+      vote_average   : Math.round((details.vote_average ?? 0) * 10) / 10,
+      vote_count     : details.vote_count ?? 0,
+      genres         : (details.genres || []).map((g) => g.name),
+      is_french      : isFrench,
+      source         : sourceName,
+      _tier          : tierInfo.tier,
+      _tierScore     : tierInfo.score,
+      _leadStudio    : leadStudio?.name || null,
+      _sortDate      : rel.date.getTime(),
+      _popularity    : details.popularity ?? tmdbHit.popularity ?? 0,
+      _crossConfirmedBy: [],
+    };
+
+    finalResults.push(entry);
+    existingById.set(tmdbHit.id, entry);
+    existingTitles.set(normalizeTitle(entry.title), entry);
+    if (entry.original_title) existingTitles.set(normalizeTitle(entry.original_title), entry);
+
+    log(`     ➕ Ajouté via ${sourceName} : ${entry.title} → ${formatDateFR(rel.date)} [${tierInfo.tier}]`);
+    added++;
+  }
+
+  log(`     📊 ${confirmed} confirmations, ${added} ajouts, ${dropQc} QC, ${dropNiche} niche non-FR, ${skipped} ignorés`);
+  return { added, confirmed };
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
 // PIPELINE PRINCIPAL
 // ═══════════════════════════════════════════════════════════════════════════════
 
@@ -1236,6 +1747,26 @@ async function updateVOD() {
   // ─── Phase 3 : Enrichissement MaxBlizz ───────────────────────────────────────
   await enrichWithMaxblizz({ finalResults, monthStart, monthEnd, cache, overrides });
 
+  // ─── Phase 3b : 🆕 Enrichissement Mandatory.com ──────────────────────────────
+  await enrichWithExternalSource({
+    sourceName  : 'mandatory',
+    fetchFn     : fetchMandatoryReleases,
+    finalResults,
+    monthStart,
+    monthEnd,
+    cache,
+  });
+
+  // ─── Phase 3c : 🆕 Enrichissement ComingSoon.net ─────────────────────────────
+  await enrichWithExternalSource({
+    sourceName  : 'comingsoon',
+    fetchFn     : fetchComingSoonReleases,
+    finalResults,
+    monthStart,
+    monthEnd,
+    cache,
+  });
+
   // ─── Phase 4 : 🆕 Triangulation AlloCiné ─────────────────────────────────────
   await enrichWithAllocine({ finalResults, monthStart, monthEnd, cache });
 
@@ -1304,6 +1835,8 @@ async function updateVOD() {
   log(`     Par source    : ${Object.entries(bySource).map(([k,v]) => `${k}=${v}`).join('  |  ')}`);
   log(`     Par confiance : ${Object.entries(byConf).map(([k,v]) => `${k}=${v}`).join('  |  ')}`);
   log(`     Confiance moyenne : ${avgConf} / 1.00`);
+  log('  ─────────────────────────────────────────────────────────────────────');
+  log(`     Sources actives : TMDB, MaxBlizz, AlloCiné, Mandatory, ComingSoon 🆕`);
   log('  ─────────────────────────────────────────────────────────────────────');
   log(`     Filtres écartés :`);
   log(`        • Qualité faible       : ${dropReasons.lowQuality}`);
