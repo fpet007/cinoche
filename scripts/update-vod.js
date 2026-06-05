@@ -1,25 +1,33 @@
 /**
- * updateVOD.js — v8.4 (ultimate + BingeBase integration)
+ * updateVOD.js — v8.2 (ultimate + fenêtre FR corrigée)
  * =====================================================
  * Génère la liste des FILMS DE CINÉMA en VOD pour le mois en cours STRICT.
  * Plex FR — uniquement de vrais longs-métrages sortis en salle, avec un focus
  * blockbusters internationaux + films français + blockbusters VFQ.
  *
- * 🆕 NOUVEAUTÉS v8.4 :
+ * 🆕 NOUVEAUTÉS v8.2 (vs v8) :
  * ─────────────────────────────────────────────────────────────────────────────
- * ✅ Intégration complète de BingeBase (bingebase.com/releases/digital/)
- * - Génération dynamique de l'URL cible (ex: june-2026) selon le mois en cours.
- * - Scraper HTML séquentiel et robuste avec cache dédié (TTL 12h).
- * - Triangulation et enrichissement du pipeline principal (Phase 3.5).
- * - Prise en compte dans le scoring de confiance final.
+ * ✅ Fenêtre FR de scan élargie : frEnd = monthStart - 85j (au lieu de -100j).
+ *    Cause : un film sorti fin janvier (ex: Gourou le 28/01) a sa VOD à 120j,
+ *    soit le 28 mai, qui tombe dans le mois cible. Avec frEnd à -100j,
+ *    le scan s'arrêtait au 21 janvier et ratait toutes les sorties de fin
+ *    janvier dont la VOD tombe dans le mois en cours.
  *
- * NOUVEAUTÉS HISTORIQUES (v8.2 & v8) :
+ * 🔒 Toute la logique v8 est préservée (studios, tiers, AlloCiné, MaxBlizz,
+ *    anti-QC, confiance, etc.). Aucun changement de format JSON de sortie.
+ *
+ * NOUVEAUTÉS v8 (rappel) :
  * ─────────────────────────────────────────────────────────────────────────────
- * ✅ Fenêtre FR élargie (frEnd = monthStart - 85j) pour ne rater aucune fin de mois.
- * ✅ Délais VOD par studio (Disney ~85j, Universal ~35j, Warner ~55j, etc.).
- * ✅ Système de tiers (blockbuster / mid / niche).
- * ✅ Filtre anti-production québécoise locale de faible envergure.
- * ✅ Couche AlloCiné (Triangulation FR) & Scoring de confiance adaptatif.
+ * ✅ Délais VOD par studio (mapping TMDB) :
+ *      Disney/Marvel/Pixar  ~85j  |  Universal  ~35j  |  Warner ~55j
+ *      Sony ~45j  |  Paramount ~50j  |  Lionsgate ~45j  |  A24 ~75j
+ *      Le délai US générique 45j reste en fallback pour studios inconnus.
+ *
+ * ✅ Système de tiers (blockbuster / mid / niche)
+ * ✅ Filtre anti-production québécoise locale
+ * ✅ Couche AlloCiné — Triangulation FR
+ * ✅ Scoring de confiance par film
+ * ✅ Overrides externes (data/overrides.json)
  *
  * Usage  : node updateVOD.js [--dry-run] [--verbose]
  * Cron   : 0 2 * * *
@@ -37,7 +45,6 @@ const TMDB_API_KEY      = process.env.TMDB_API_KEY || '3fd2be6f0c70a2a598f084ddf
 const DATA_PATH         = path.join(__dirname, '../data/plex-upcoming.json');
 const CACHE_PATH        = path.join(__dirname, '../data/.tmdb-cache.json');
 const MAXBLIZZ_CACHE    = path.join(__dirname, '../data/.maxblizz-cache.json');
-const BINGEBASE_CACHE   = path.join(__dirname, '../data/.bingebase-cache.json');
 const ALLOCINE_CACHE    = path.join(__dirname, '../data/.allocine-cache.json');
 const OVERRIDES_PATH    = path.join(__dirname, '../data/overrides.json');
 
@@ -55,14 +62,16 @@ const DELAYS = {
 // Cache TTLs
 const CACHE_TTL_HOURS     = 24;
 const MAXBLIZZ_TTL_HOURS  = 12;
-const BINGEBASE_TTL_HOURS = 12;
 const ALLOCINE_TTL_HOURS  = 8;   // FR : peut bouger plus souvent
 const API_DELAY_MS        = 130;
 const MAX_PAGES_PER_ENDPOINT = 6;
 const MIN_RUNTIME         = 40;
 
 // ─── Délais par studio (TMDB production_companies.id → jours) ─────────────────
+// Sources : observation historique des fenêtres PVOD US 2022-2025 par studio.
+// On prend toujours le MAX parmi les studios du film (le "lead" dicte la fenêtre).
 const STUDIO_VOD_DELAYS = {
+  // Disney empire — hold long pour pousser vers Disney+
   2     : 85,  // Walt Disney Pictures
   3     : 85,  // Pixar
   420   : 85,  // Marvel Studios
@@ -70,37 +79,49 @@ const STUDIO_VOD_DELAYS = {
   127928: 75,  // 20th Century Studios
   43924 : 75,  // Searchlight Pictures
   10342 : 80,  // Walt Disney Animation Studios
+  // Warner Bros — fenêtre moyenne
   174   : 55,  // Warner Bros
   9993  : 55,  // DC Studios / DC Entertainment
   17    : 55,  // New Line Cinema
   1645  : 55,  // Warner Animation Group
+  // Universal — fenêtre courte (deal AMC/Cinemark depuis 2020)
   33    : 35,  // Universal Pictures
   6704  : 35,  // Illumination
-  10146 : 60,  // Focus Features (filiale Universal)
+  10146 : 60,  // Focus Features (filiale Universal, fenêtre plus longue)
   21887 : 35,  // DreamWorks Animation (sous Universal)
+  // Sony / Columbia
   5     : 45,  // Columbia Pictures
   34    : 45,  // Sony Pictures
   2251  : 45,  // Sony Pictures Animation
   77973 : 45,  // Sony Pictures Releasing
+  // Paramount
   4     : 50,  // Paramount Pictures
   333   : 50,  // Orion Pictures
+  // Lionsgate
   1632  : 45,
   35    : 45,  // Lionsgate Films
-  21    : 55,  // MGM
+  // MGM (Amazon)
+  21    : 55,
+  // Indés premium (souvent hold long avant streaming)
   41077 : 75,  // A24
   61    : 60,  // Miramax
   491   : 60,  // United Artists
+  // Apple / Amazon (théâtrales rares mais quand ça arrive : court)
   194232: 30,  // Apple Studios
   20580 : 30,  // Amazon Studios / MGM Amazon
 };
 
+// Seuils du système de tiers (scoring composite)
 const TIER_THRESHOLDS = {
   BLOCKBUSTER_SCORE: 7,   // ≥ 7 points = blockbuster
-  MID_SCORE        : 4,   // 4-6 points = mid-tier
+  MID_SCORE        : 4,   // 4-6 points = mid-tier (A24, prestige, prestige indés)
+                          // < 4 points = niche (jetable côté international)
 };
 
+// Genres TMDB exclus : Documentaire (99), Musique (10402), Téléfilm (10770)
 const EXCLUDED_GENRE_IDS = new Set([99, 10402, 10770]);
 
+// Mots-clés titres : captation spectacle vivant / théâtre
 const SPECTACLE_KEYWORDS = [
   'symphony', 'symphonie', 'philharmonic', 'philharmonique',
   ' opera', 'opera:', "l'opéra", 'opéra de paris', 'paris opera',
@@ -113,6 +134,7 @@ const SPECTACLE_KEYWORDS = [
   'molière', 'charbon dans les veines'
 ];
 
+// Téléfilms policiers régionaux FR
 const TELEFILM_TITLE_PATTERNS = [
   /^meurtres? à /i,
   /^crimes? à /i,
@@ -121,6 +143,7 @@ const TELEFILM_TITLE_PATTERNS = [
   /^un (mystère|crime) à /i,
 ];
 
+// Overrides par défaut (codés en dur, hérités v7). Le fichier externe peut les compléter.
 const DEFAULT_OVERRIDES = {
   'project hail mary': { date: '2026-05-12', reason: 'film à fort potentiel, repoussé' },
 };
@@ -152,7 +175,7 @@ async function fetchTextWithRetry(url, retries = 3) {
     try {
       const res = await fetch(url, {
         headers: {
-          'User-Agent': 'Mozilla/5.0 (compatible; CinocheFR-Bot/8.4; +https://cinochefr.space)',
+          'User-Agent': 'Mozilla/5.0 (compatible; CinocheFR-Bot/8.0; +https://cinochefr.space)',
           'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
           'Accept-Language': 'fr-FR,fr;q=0.9,en;q=0.8',
         },
@@ -180,7 +203,7 @@ async function fetchAllPages(baseUrl, maxPages = MAX_PAGES_PER_ENDPOINT) {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// CACHES
+// CACHES (TMDB / MaxBlizz / AlloCiné)
 // ═══════════════════════════════════════════════════════════════════════════════
 
 function loadJsonSafe(filepath, fallback = {}) {
@@ -205,8 +228,6 @@ const loadCache             = () => loadJsonSafe(CACHE_PATH, {});
 const saveCache             = (c) => saveJsonAtomic(CACHE_PATH, c);
 const loadMaxblizzCache     = () => loadJsonSafe(MAXBLIZZ_CACHE, {});
 const saveMaxblizzCache     = (c) => saveJsonAtomic(MAXBLIZZ_CACHE, c);
-const loadBingebaseCache    = () => loadJsonSafe(BINGEBASE_CACHE, {});
-const saveBingebaseCache   = (c) => saveJsonAtomic(BINGEBASE_CACHE, c);
 const loadAllocineCache     = () => loadJsonSafe(ALLOCINE_CACHE, {});
 const saveAllocineCache     = (c) => saveJsonAtomic(ALLOCINE_CACHE, c);
 
@@ -218,15 +239,17 @@ function isCacheEntryFresh(entry, ttlHours = CACHE_TTL_HOURS) {
 
 function loadOverrides() {
   const fileOverrides = loadJsonSafe(OVERRIDES_PATH, {});
+  // Normalise les clés du fichier pour matcher le lookup (qui utilise normalizeTitle)
   const normalizedFile = {};
   for (const [key, val] of Object.entries(fileOverrides)) {
     normalizedFile[normalizeTitle(key)] = val;
   }
+  // Merge : les overrides du fichier ont priorité sur les défauts
   return { ...DEFAULT_OVERRIDES, ...normalizedFile };
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// HELPERS MÉTIER
+// HELPERS MÉTIER (existants v7 + nouveaux v8)
 // ═══════════════════════════════════════════════════════════════════════════════
 
 function isFrenchProduction(details) {
@@ -298,6 +321,15 @@ function getOfficialDigitalDate(releaseDates) {
   return null;
 }
 
+// ─── NOUVEAU v8 : Anti-prod québécoise locale ─────────────────────────────────
+/**
+ * Détecte une production québécoise locale qu'on veut filtrer.
+ * Critères : pays = CA, langue originale = fr, PAS de coproduction FR/US/UK,
+ * et faible portée (budget OU popularité faibles).
+ *
+ * Un blockbuster US doublé VFQ ne sera PAS détecté ici car son pays = US.
+ * Un Xavier Dolan avec coprod française passera aussi (coprod FR détectée).
+ */
 function isQuebecLocalProduction(details) {
   const countries = details.production_countries?.map((c) => c.iso_3166_1) || [];
   const isCanadian   = countries.includes('CA');
@@ -306,9 +338,11 @@ function isQuebecLocalProduction(details) {
   const isFrenchLang = details.original_language === 'fr';
   if (!isFrenchLang) return false;
 
+  // Coproduction internationale "noble" : on garde
   const hasIntlCoprod = countries.some((c) => ['FR', 'US', 'GB', 'BE', 'DE', 'IT', 'ES'].includes(c));
   if (hasIntlCoprod) return false;
 
+  // Faible portée = prod locale Québec
   const lowBudget   = (details.budget ?? 0) < 5_000_000;
   const lowReach    = (details.popularity ?? 0) < 8;
   const fewVotes    = (details.vote_count ?? 0) < 100;
@@ -316,6 +350,11 @@ function isQuebecLocalProduction(details) {
   return lowBudget && (lowReach || fewVotes);
 }
 
+// ─── NOUVEAU v8 : Système de tiers ─────────────────────────────────────────────
+/**
+ * Classifie un film en blockbuster / mid / niche selon un score composite.
+ * Score = somme pondérée de budget, popularité, vote_count, revenue.
+ */
 function classifyTier(details) {
   const budget     = details.budget     ?? 0;
   const popularity = details.popularity ?? 0;
@@ -344,13 +383,14 @@ function classifyTier(details) {
   const score = budgetScore + popScore + voteScore + revScore;
 
   let tier;
-  if (score >= TIER_THRESHOLD.BLOCKBUSTER_SCORE) tier = 'blockbuster';
+  if (score >= TIER_THRESHOLDS.BLOCKBUSTER_SCORE) tier = 'blockbuster';
   else if (score >= TIER_THRESHOLDS.MID_SCORE)    tier = 'mid';
   else                                            tier = 'niche';
 
   return { tier, score, breakdown: { budgetScore, popScore, voteScore, revScore } };
 }
 
+// ─── NOUVEAU v8 : Prédiction VOD avec mapping studio ──────────────────────────
 function predictVODDate(cinemaDate, details, isFrench) {
   if (isFrench) {
     const vod = new Date(cinemaDate);
@@ -358,12 +398,14 @@ function predictVODDate(cinemaDate, details, isFrench) {
     return { date: vod, delay: DELAYS.FRENCH, method: 'fr-chronologie' };
   }
 
+  // Cherche le délai studio
   const studios = details.production_companies || [];
   const studioDelays = studios
     .map((s) => ({ id: s.id, name: s.name, delay: STUDIO_VOD_DELAYS[s.id] }))
     .filter((s) => s.delay !== undefined);
 
   if (studioDelays.length > 0) {
+    // Le studio "lead" (fenêtre la plus longue) dicte
     const lead = studioDelays.sort((a, b) => b.delay - a.delay)[0];
     const vod = new Date(cinemaDate);
     vod.setDate(vod.getDate() + lead.delay);
@@ -375,11 +417,17 @@ function predictVODDate(cinemaDate, details, isFrench) {
     };
   }
 
+  // Fallback : délai générique US
   const vod = new Date(cinemaDate);
   vod.setDate(vod.getDate() + DELAYS.AMERICAN);
   return { date: vod, delay: DELAYS.AMERICAN, method: 'us-generic' };
 }
 
+// ─── NOUVEAU v8 : Scoring de confiance ─────────────────────────────────────────
+/**
+ * Calcule un score de confiance pour la date VOD selon les sources disponibles.
+ * Retourne { level, score, sources[] }.
+ */
 function computeConfidence({ source, crossConfirmedBy }) {
   const sources = [source];
   if (crossConfirmedBy && crossConfirmedBy.length) {
@@ -387,10 +435,12 @@ function computeConfidence({ source, crossConfirmedBy }) {
   }
   const set = new Set(sources);
 
+  // 1. Override manuel = on a tranché à la main, max confiance
   if (source === 'override-manuel') {
     return { level: 'override', score: 1.0, sources };
   }
 
+  // 2. Officielle TMDB FR : très haute confiance
   if (source === 'officielle-fr') {
     return {
       level: set.has('allocine') ? 'very-high' : 'high',
@@ -399,31 +449,37 @@ function computeConfidence({ source, crossConfirmedBy }) {
     };
   }
 
+  // 3. Officielle TMDB US + confirmation FR (AlloCiné) : très bonne triangulation
   if (source === 'officielle-us') {
     if (set.has('allocine')) return { level: 'very-high', score: 0.93, sources };
-    if (set.has('maxblizz') || set.has('bingebase')) return { level: 'high', score: 0.88, sources };
-    return { level: 'high', score: 0.82, sources };
+    if (set.has('maxblizz'))  return { level: 'high',      score: 0.88, sources };
+    return                        { level: 'high',      score: 0.82, sources };
   }
 
-  if (source === 'maxblizz' || source === 'bingebase') {
-    if (set.has('allocine'))      return { level: 'very-high', score: 0.92, sources };
-    if (set.has('studio-mapped')) return { level: 'high',      score: 0.78, sources };
-    return { level: 'medium', score: 0.70, sources };
+  // 4. MaxBlizz (US) + AlloCiné (FR) qui s'accordent : excellent
+  if (source === 'maxblizz') {
+    if (set.has('allocine'))     return { level: 'very-high', score: 0.92, sources };
+    if (set.has('studio-mapped'))return { level: 'high',      score: 0.78, sources };
+    return                            { level: 'medium',    score: 0.70, sources };
   }
 
+  // 5. AlloCiné seul (sortie FR officielle annoncée)
   if (source === 'allocine') {
     return { level: 'high', score: 0.80, sources };
   }
 
+  // 6. Prédite avec mapping studio (assez fiable pour blockbusters connus)
   if (source === 'studio-mapped') {
-    if (set.has('allocine')) return { level: 'medium', score: 0.75, sources };
-    if (set.has('maxblizz') || set.has('bingebase')) return { level: 'medium', score: 0.72, sources };
-    return { level: 'medium', score: 0.62, sources };
+    if (set.has('allocine'))     return { level: 'medium', score: 0.75, sources };
+    if (set.has('maxblizz'))     return { level: 'medium', score: 0.72, sources };
+    return                            { level: 'medium', score: 0.62, sources };
   }
 
+  // 7. Prédite générique (délai 45j/120j sans info studio)
   return { level: 'low', score: 0.45, sources };
 }
 
+// ─── Normalisation titre ──────────────────────────────────────────────────────
 function normalizeTitle(s) {
   if (!s) return '';
   return s
@@ -454,6 +510,10 @@ function computeTargetWindow(now = new Date()) {
 }
 
 function buildScanEndpoints(monthStart, windowEnd) {
+  // 🆕 v8.2 : fenêtre FR ajustée pour capter les sorties tardives du mois
+  // qui auraient leur VOD à 120j tomber dans le mois cible.
+  // Ex : un film sorti le 28 janvier 2026 → VOD le 28 mai 2026.
+  // frEnd doit donc être ≥ monthStart - (120 - durée_mois). Marge: monthStart - 85j.
   const frStart = new Date(windowEnd);
   frStart.setMonth(frStart.getMonth() - 6); frStart.setDate(frStart.getDate() - 15);
   const frEnd   = new Date(monthStart); frEnd.setDate(frEnd.getDate() - 85);
@@ -464,19 +524,27 @@ function buildScanEndpoints(monthStart, windowEnd) {
 
   const base = `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=fr-FR&include_adult=false`;
   return [
-    { name: 'FR/origin/popular',   url: `${base}&with_origin_country=FR&primary_release_date.gte=${ymd(frStart)}&primary_release_date.lte=${ymd(frEnd)}&sort_by=popularity.desc` },
-    { name: 'FR/origin/quality',   url: `${base}&with_origin_country=FR&primary_release_date.gte=${ymd(frStart)}&primary_release_date.lte=${ymd(frEnd)}&sort_by=vote_average.desc&vote_count.gte=10` },
-    { name: 'FR/lang+region',      url: `${base}&with_original_language=fr&region=FR&with_release_type=2|3&primary_release_date.gte=${ymd(frStart)}&primary_release_date.lte=${ymd(frEnd)}&sort_by=popularity.desc` },
-    { name: 'FR/origin/recent',     url: `${base}&with_origin_country=FR&primary_release_date.gte=${ymd(frStart)}&primary_release_date.lte=${ymd(frEnd)}&sort_by=primary_release_date.desc` },
-    { name: 'FR/theatrical-net',   url: `${base}&region=FR&with_release_type=3&primary_release_date.gte=${ymd(frStart)}&primary_release_date.lte=${ymd(frEnd)}&sort_by=popularity.desc` },
-    { name: 'INTL/popular',        url: `${base}&region=FR&with_release_type=3&primary_release_date.gte=${ymd(intlStart)}&primary_release_date.lte=${ymd(intlEnd)}&sort_by=popularity.desc` },
-    { name: 'INTL/quality',        url: `${base}&region=FR&with_release_type=3&primary_release_date.gte=${ymd(intlStart)}&primary_release_date.lte=${ymd(intlEnd)}&sort_by=vote_average.desc&vote_count.gte=40` },
-    { name: 'INTL/fresh',          url: `${base}&region=FR&with_release_type=3&primary_release_date.gte=${ymd(intlStart)}&primary_release_date.lte=${ymd(intlEnd)}&sort_by=primary_release_date.desc` },
+    { name: 'FR/origin/popular',
+      url: `${base}&with_origin_country=FR&primary_release_date.gte=${ymd(frStart)}&primary_release_date.lte=${ymd(frEnd)}&sort_by=popularity.desc` },
+    { name: 'FR/origin/quality',
+      url: `${base}&with_origin_country=FR&primary_release_date.gte=${ymd(frStart)}&primary_release_date.lte=${ymd(frEnd)}&sort_by=vote_average.desc&vote_count.gte=10` },
+    { name: 'FR/lang+region',
+      url: `${base}&with_original_language=fr&region=FR&with_release_type=2|3&primary_release_date.gte=${ymd(frStart)}&primary_release_date.lte=${ymd(frEnd)}&sort_by=popularity.desc` },
+    { name: 'FR/origin/recent',
+      url: `${base}&with_origin_country=FR&primary_release_date.gte=${ymd(frStart)}&primary_release_date.lte=${ymd(frEnd)}&sort_by=primary_release_date.desc` },
+    { name: 'FR/theatrical-net',
+      url: `${base}&region=FR&with_release_type=3&primary_release_date.gte=${ymd(frStart)}&primary_release_date.lte=${ymd(frEnd)}&sort_by=popularity.desc` },
+    { name: 'INTL/popular',
+      url: `${base}&region=FR&with_release_type=3&primary_release_date.gte=${ymd(intlStart)}&primary_release_date.lte=${ymd(intlEnd)}&sort_by=popularity.desc` },
+    { name: 'INTL/quality',
+      url: `${base}&region=FR&with_release_type=3&primary_release_date.gte=${ymd(intlStart)}&primary_release_date.lte=${ymd(intlEnd)}&sort_by=vote_average.desc&vote_count.gte=40` },
+    { name: 'INTL/fresh',
+      url: `${base}&region=FR&with_release_type=3&primary_release_date.gte=${ymd(intlStart)}&primary_release_date.lte=${ymd(intlEnd)}&sort_by=primary_release_date.desc` },
   ];
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// DÉTAILS FILM (TMDB)
+// DÉTAILS FILM (TMDB avec cache)
 // ═══════════════════════════════════════════════════════════════════════════════
 
 async function fetchMovieDetails(movieId, cache) {
@@ -484,6 +552,8 @@ async function fetchMovieDetails(movieId, cache) {
   if (cache[key] && isCacheEntryFresh(cache[key])) {
     return cache[key].data;
   }
+  // append_to_response : release_dates pour la chronologie + on a déjà
+  // production_companies/budget/revenue via /movie/{id} natif
   const url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${TMDB_API_KEY}&language=fr-FR&append_to_response=release_dates`;
   const data = await fetchWithRetry(url);
   cache[key] = { _cachedAt: Date.now(), data };
@@ -518,7 +588,7 @@ async function tmdbSearchByTitle(title, year = null) {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// MODULE MAXBLIZZ
+// MODULE MAXBLIZZ (scrape + extraction date VOD US — hérité v7)
 // ═══════════════════════════════════════════════════════════════════════════════
 
 async function fetchMaxblizzReleases() {
@@ -534,6 +604,10 @@ async function fetchMaxblizzReleases() {
     return cache.releases.map((r) => ({ ...r, date: new Date(r.date) }));
   }
 
+  if (!cacheValid && cache._parserVersion !== undefined) {
+    log(`  🔄 MaxBlizz : invalidation cache (parser v${cache._parserVersion} → v${PARSER_VERSION})`);
+  }
+
   log(`  🌐 MaxBlizz : scraping en cours...`);
   const releases = [];
 
@@ -545,21 +619,32 @@ async function fetchMaxblizzReleases() {
     while ((m = linkRegex.exec(listHtml)) !== null) {
       if (!articles.has(m[1])) articles.set(m[1], m[2]);
     }
+    log(`     ${articles.size} articles VOD trouvés sur la liste`);
 
+    let fromCache = 0, fetched = 0, skipped = 0;
+    const newArticleCache = {};
     const monthPattern = '(January|February|March|April|May|June|July|August|September|October|November|December)';
     const datePart = `${monthPattern}\\s+(\\d{1,2}),?\\s+(\\d{4})`;
-    const newArticleCache = {};
 
     for (const [url, slug] of articles) {
-      let articleData = articleCache[url];
-      const cachedFresh = articleData && (Date.now() - articleData._cachedAt) / 3600000 < 168;
+      let articleData;
+      const cached = articleCache[url];
+      const cachedFresh = cached && (Date.now() - cached._cachedAt) / 3600000 < 24 * 7;
 
-      if (!cachedFresh) {
+      if (cachedFresh) {
+        articleData = cached;
+        fromCache++;
+      } else {
         try {
           await sleep(250);
           const html = await fetchTextWithRetry(url, 2);
-          const strongDateRegex = new RegExp(`(?:<strong>|\\*\\*)\\s*${datePart}\\s*(?:</strong>|\\*\\*)`, 'gi');
-          const contextDateRegex = new RegExp(`(?:starting|available\\s+(?:on|to)|rent\\s+(?:on|it)|buy\\s+(?:on|it)|arrives?\\s+on|arriving\\s+on|release\\s+date\\s+(?:is|will\\s+be))\\s+${datePart}`, 'gi');
+          const strongDateRegex = new RegExp(
+            `(?:<strong>|\\*\\*)\\s*${datePart}\\s*(?:</strong>|\\*\\*)`, 'gi'
+          );
+          const contextDateRegex = new RegExp(
+            `(?:starting|available\\s+(?:on|to)|rent\\s+(?:on|it)|buy\\s+(?:on|it)|arrives?\\s+on|arriving\\s+on|release\\s+date\\s+(?:is|will\\s+be))\\s+${datePart}`,
+            'gi'
+          );
           const body = html.length > 3000 ? html.slice(2000) : html;
           const candidates = [];
           let dm;
@@ -569,250 +654,55 @@ async function fetchMaxblizzReleases() {
           while ((dm = contextDateRegex.exec(body)) !== null) {
             candidates.push({ src: 'context', date: new Date(`${dm[1]} ${dm[2]}, ${dm[3]} 12:00:00 UTC`) });
           }
-          const valid = candidates.filter((c) => !isNaN(c.date));
+          const valid = candidates.filter((c) =>
+            !isNaN(c.date) &&
+            c.date.getTime() >= Date.now() - 60 * 86400000 &&
+            c.date.getTime() <= Date.now() + 730 * 86400000
+          );
           let chosenDate = null;
-          if (valid.filter(c => c.src === 'strong').length > 0) chosenDate = valid.filter(c => c.src === 'strong').sort((a,b)=>a.date-b.date)[0].date;
-          else if (valid.filter(c => c.src === 'context').length > 0) chosenDate = valid.filter(c => c.src === 'context').sort((a,b)=>a.date-b.date)[0].date;
-          
+          const strongs  = valid.filter((c) => c.src === 'strong');
+          const contexts = valid.filter((c) => c.src === 'context');
+          if (strongs.length > 0)       chosenDate = strongs.sort((a, b) => a.date - b.date)[0].date;
+          else if (contexts.length > 0) chosenDate = contexts.sort((a, b) => a.date - b.date)[0].date;
           articleData = { _cachedAt: Date.now(), date: chosenDate ? chosenDate.toISOString() : null, slug };
-        } catch {
-          articleData = { _cachedAt: Date.now(), date: null, slug };
+          fetched++;
+        } catch (err) {
+          articleData = { _cachedAt: Date.now(), date: null, slug, error: err.message };
         }
       }
 
       newArticleCache[url] = articleData;
-      if (articleData.date) {
-        releases.push({ slug, title: slug.replace(/-/g, ' '), date: new Date(articleData.date), url });
-      }
+      if (!articleData.date) { skipped++; continue; }
+      const date = new Date(articleData.date);
+      if (isNaN(date)) { skipped++; continue; }
+      const title = slug.replace(/-/g, ' ');
+      releases.push({ slug, title, date, url });
     }
 
-    saveMaxblizzCache({ _parserVersion: PARSER_VERSION, _listCachedAt: Date.now(), articles: newArticleCache, releases: releases.map(r => ({...r, date: r.date.toISOString()})) });
-  } catch (err) {
-    console.warn(`  ⚠️  MaxBlizz scraping échoué : ${err.message}`);
-  }
-  return releases;
-}
-
-// ═══════════════════════════════════════════════════════════════════════════════
-// 🆕 MODULE BINGEBASE
-// ═══════════════════════════════════════════════════════════════════════════════
-
-function parseBingebaseHtml(html, fallbackYear) {
-  const items = [];
-  const monthMap = { january:0, february:1, march:2, april:3, may:4, june:5, july:6, august:7, september:8, october:9, november:10, december:11 };
-  
-  const dateRx = /(?:##|h[23]|class="[^"]*")?\s*(?:[A-Za-z]+,?\s+)?(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2}),?\\s+(\d{4})/gi;
-  const dateMatches = [];
-  let match;
-  
-  while ((match = dateRx.exec(html)) !== null) {
-    const monthStr = match[1].toLowerCase();
-    const day = parseInt(match[2], 10);
-    const year = parseInt(match[3], 10);
-    const dateObj = new Date(Date.UTC(year, monthMap[monthStr], day, 12, 0, 0));
-    if (!isNaN(dateObj)) {
-      dateMatches.push({ index: match.index, length: match[0].length, date: dateObj });
-    }
-  }
-  
-  const movieRx = /(?:href="\/movies\/([a-z0-9-]+)"[^>]*>([^<]+)|###\s*(?:[\d.]+\s+)?([^\n(]+)\s*\((\d{4})\))/gi;
-  
-  for (let i = 0; i < dateMatches.length; i++) {
-    const startIdx = dateMatches[i].index + dateMatches[i].length;
-    const endIdx = (i + 1 < dateMatches.length) ? dateMatches[i+1].index : html.length;
-    const sectionHtml = html.slice(startIdx, endIdx);
-    
-    let mMatch;
-    movieRx.lastIndex = 0;
-    while ((mMatch = movieRx.exec(sectionHtml)) !== null) {
-      let title = '';
-      let slug = '';
-      if (mMatch[1]) {
-        slug = mMatch[1];
-        title = mMatch[2].replace(/<[^>]+>/g, '').trim();
-      } else if (mMatch[3]) {
-        title = mMatch[3].trim();
-      }
-      
-      if (title && title.length > 1) {
-        title = title.replace(/&amp;/g, '&').replace(/&quot;/g, '"');
-        items.push({ title, date: dateMatches[i].date, slug });
-      }
-    }
-  }
-  
-  if (items.length === 0) {
-    const genericRx = /href="\/movies\/([a-z0-9-]+)"[^>]*>([^<]+)/gi;
-    let genMatch;
-    while ((genMatch = genericRx.exec(html)) !== null) {
-      const title = genMatch[2].replace(/<[^>]+>/g, '').trim().replace(/&amp;/g, '&');
-      items.push({ title, date: null, slug: genMatch[1] });
-    }
-  }
-  
-  return items;
-}
-
-async function fetchBingebaseReleases(targetDate = new Date()) {
-  const PARSER_VERSION = 1;
-  const cache = loadBingebaseCache();
-  const cacheValid = cache._parserVersion === PARSER_VERSION;
-  const listFresh = cacheValid && cache._listCachedAt
-    && (Date.now() - cache._listCachedAt) / 3600000 < BINGEBASE_TTL_HOURS;
-
-  if (listFresh && Array.isArray(cache.releases)) {
-    log(`  💾 BingeBase : cache valide (${cache.releases.length} entrées)`);
-    return cache.releases.map((r) => ({ ...r, date: r.date ? new Date(r.date) : null }));
-  }
-
-  log(`  🌐 BingeBase : scraping en cours...`);
-  const releases = [];
-  
-  const MONTH_NAMES_EN = ['january','february','march','april','may','june','july','august','september','october','november','december'];
-  const monthName = MONTH_NAMES_EN[targetDate.getMonth()];
-  const year = targetDate.getFullYear();
-  const url = `https://bingebase.com/releases/digital/${monthName}-${year}`;
-
-  try {
-    const html = await fetchTextWithRetry(url, 2);
-    const items = parseBingebaseHtml(html, year);
-    
-    for (const it of items) {
-      if (it.date) {
-        releases.push({ title: it.title, date: it.date, slug: it.slug, url });
-      }
-    }
-    
-    log(`     ✓ ${releases.length} films extraits de BingeBase`);
-    saveBingebaseCache({
+    log(`     ✓ ${releases.length} films extraits (${fromCache} cache, ${fetched} fetchés, ${skipped} sans date)`);
+    saveMaxblizzCache({
       _parserVersion: PARSER_VERSION,
-      _listCachedAt: Date.now(),
-      releases: releases.map((r) => ({ ...r, date: r.date.toISOString() })),
+      _listCachedAt : Date.now(),
+      articles      : newArticleCache,
+      releases      : releases.map((r) => ({ ...r, date: r.date.toISOString() })),
     });
   } catch (err) {
-    console.warn(`  ⚠️  BingeBase scraping échoué : ${err.message} — on continue sans.`);
+    console.warn(`  ⚠️  MaxBlizz scraping a échoué : ${err.message} — on continue sans.`);
   }
   return releases;
 }
 
-async function enrichWithBingebase({ finalResults, monthStart, monthEnd, cache, overrides }) {
-  log('\n  📡  Enrichissement BingeBase :');
-  const bbReleases = await fetchBingebaseReleases(monthStart);
-  if (bbReleases.length === 0) return { added: 0, overridden: 0 };
-
-  const existingIds       = new Set(finalResults.map((m) => m.tmdb_id));
-  const existingTitles    = new Set(finalResults.map((m) => normalizeTitle(m.title)));
-  const existingOriginals = new Set(finalResults.map((m) => normalizeTitle(m.original_title || '')));
-
-  let added = 0, overridden = 0, skipped = 0, dropQc = 0, dropNiche = 0;
-
-  for (const bb of bbReleases) {
-    if (!bb.date) { skipped++; continue; }
-    const slugNorm = normalizeTitle(bb.title);
-    let bbDate = bb.date;
-    let isOverride = false;
-
-    const tokens = slugNorm.split(' ');
-    const overrideKeys = [slugNorm];
-    if (tokens.length >= 3) overrideKeys.push(tokens.slice(1).join(' '));
-    if (tokens.length >= 4) overrideKeys.push(tokens.slice(2).join(' '));
-    for (const k of overrideKeys) {
-      if (overrides[k]) {
-        bbDate = new Date(overrides[k].date);
-        isOverride = true;
-        log(`     ★ Override "${bb.title}" → ${formatDateFR(bbDate)} (${overrides[k].reason})`);
-        break;
-      }
-    }
-
-    if (bbDate < monthStart || bbDate > monthEnd) { skipped++; continue; }
-
-    const tmdbHit = await tmdbSearchByTitle(bb.title);
-    await sleep(API_DELAY_MS);
-    if (!tmdbHit) {
-      vlog(`     ✗ TMDB sans match pour "${bb.title}"`);
-      skipped++; continue;
-    }
-
-    if (existingIds.has(tmdbHit.id)) {
-      const existing = finalResults.find((m) => m.tmdb_id === tmdbHit.id);
-      existing._crossConfirmedBy = existing._crossConfirmedBy || [];
-      if (!existing._crossConfirmedBy.includes('bingebase')) {
-        existing._crossConfirmedBy.push('bingebase');
-      }
-      const oldDate = existing.plex_release;
-      if (existing.plex_release !== formatDateFR(bbDate)) {
-        if (existing.source === 'studio-mapped' || existing.source === 'prédite') {
-          existing.plex_release = formatDateFR(bbDate);
-          existing._sortDate    = bbDate.getTime();
-          existing.source       = isOverride ? 'override-manuel' : 'bingebase';
-          log(`     ↻ "${tmdbHit.title}" : ${oldDate} → ${formatDateFR(bbDate)} (bingebase)`);
-          overridden++;
-        }
-      }
-      continue;
-    }
-
-    const tmdbTitleNorm = normalizeTitle(tmdbHit.title);
-    const tmdbOrigNorm  = normalizeTitle(tmdbHit.original_title || '');
-    if (existingTitles.has(tmdbTitleNorm) || existingOriginals.has(tmdbOrigNorm)) {
-      skipped++; continue;
-    }
-
-    let details;
-    try {
-      details = await fetchMovieDetails(tmdbHit.id, cache);
-      await sleep(API_DELAY_MS);
-    } catch { skipped++; continue; }
-
-    if (isQuebecLocalProduction(details)) {
-      vlog(`     🚫 "${tmdbHit.title}" filtré (prod QC locale)`);
-      dropQc++; continue;
-    }
-
-    const isFrench = isFrenchProduction(details);
-    const tierInfo = classifyTier(details);
-    if (!isFrench && tierInfo.tier === 'niche') {
-      vlog(`     🚫 "${tmdbHit.title}" filtré (niche non-FR, score=${tierInfo.score})`);
-      dropNiche++; continue;
-    }
-
-    const cinemaDate = details.release_date ? new Date(details.release_date) : null;
-    const studios    = details.production_companies || [];
-    const leadStudio = studios.find((s) => STUDIO_VOD_DELAYS[s.id]);
-
-    finalResults.push({
-      title          : details.title || tmdbHit.title,
-      plex_release   : formatDateFR(bbDate),
-      tmdb_id        : tmdbHit.id,
-      poster_path    : details.poster_path || tmdbHit.poster_path,
-      original_title : details.original_title || tmdbHit.original_title,
-      cinema_date    : cinemaDate ? formatDateFR(cinemaDate) : null,
-      vote_average   : Math.round((details.vote_average ?? 0) * 10) / 10,
-      vote_count     : details.vote_count ?? 0,
-      genres         : (details.genres || []).map((g) => g.name),
-      is_french      : isFrench,
-      source         : isOverride ? 'override-manuel' : 'bingebase',
-      _tier          : tierInfo.tier,
-      _tierScore     : tierInfo.score,
-      _leadStudio    : leadStudio?.name || null,
-      _sortDate      : bbDate.getTime(),
-      _popularity    : details.popularity ?? tmdbHit.popularity ?? 0,
-      _crossConfirmedBy: [],
-    });
-
-    log(`     ✓ Ajouté via BingeBase : ${details.title || tmdbHit.title} → ${formatDateFR(bbDate)} [${tierInfo.tier}]`);
-    added++;
-    existingIds.add(tmdbHit.id);
-  }
-
-  log(`     📊 ${added} ajouts, ${overridden} dates corrigées, ${dropQc} QC locaux jetés, ${dropNiche} niche non-FR jetés, ${skipped} ignorés`);
-  return { added, overridden };
-}
-
 // ═══════════════════════════════════════════════════════════════════════════════
-// MODULE ALLOCINE
+// 🆕 MODULE ALLOCINE (NOUVEAU v8) — Triangulation FR
 // ═══════════════════════════════════════════════════════════════════════════════
+//
+// Stratégie :
+//  1. Scrape les pages AlloCiné des sorties VOD ("à louer" + "à acheter")
+//  2. Extraction des titres + dates de sortie VOD FR
+//  3. Cross-référence avec TMDB pour récupérer ID, poster, genres
+//  4. Deux usages :
+//     a) Ajouter à la liste finale si pas déjà présent (sortie FR officielle)
+//     b) Cross-confirmer une date MaxBlizz/TMDB existante (boost de confiance)
 
 const ALLOCINE_URLS = [
   'https://www.allocine.fr/video/aladelocation/',
@@ -820,13 +710,23 @@ const ALLOCINE_URLS = [
 ];
 
 const FR_MONTHS = {
-  'janvier':0, 'février':1, 'fevrier':1, 'mars':2, 'avril':3, 'mai':4, 'juin':5,
-  'juillet':6, 'août':7, 'aout':7, 'septembre':8, 'octobre':9, 'novembre':10, 'décembre':11, 'decembre':11,
+  'janvier'  :  0, 'février' :  1, 'fevrier' :  1, 'mars'     :  2,
+  'avril'    :  3, 'mai'     :  4, 'juin'    :  5, 'juillet'  :  6,
+  'août'     :  7, 'aout'    :  7, 'septembre':  8, 'octobre' :  9,
+  'novembre' : 10, 'décembre': 11, 'decembre': 11,
 };
 
+/**
+ * Parse une date FR sous forme texte : "15 mai 2026", "1er avril 2026",
+ * "le 5 juin", "à partir du 12 mai 2026", etc.
+ * Retourne un Date ou null. Si l'année n'est pas explicite, on prend l'année courante.
+ */
 function parseFrenchDate(text, fallbackYear = new Date().getFullYear()) {
   if (!text) return null;
-  const cleaned = text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/1er/g, '1');
+  const cleaned = text.toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // enlève accents pour matcher
+    .replace(/1er/g, '1');
+  // Cherche "JJ mois AAAA?" — pas trop greedy
   const rx = /(\d{1,2})\s+(janvier|fevrier|mars|avril|mai|juin|juillet|aout|septembre|octobre|novembre|decembre)(?:\s+(\d{4}))?/g;
   const candidates = [];
   let m;
@@ -838,24 +738,37 @@ function parseFrenchDate(text, fallbackYear = new Date().getFullYear()) {
     const d = new Date(Date.UTC(year, month, day, 12, 0, 0));
     if (!isNaN(d)) candidates.push(d);
   }
-  return candidates.length ? candidates.sort((a, b) => a - b)[0] : null;
+  if (!candidates.length) return null;
+  return candidates.sort((a, b) => a - b)[0];
 }
 
+/**
+ * Extrait des { title, date } depuis le HTML d'une page AlloCiné VOD.
+ * Defensif : essaie plusieurs patterns pour résister aux changements de structure.
+ */
 function parseAllocineHtml(html) {
   const items = [];
   const seenTitles = new Set();
 
+  // Pattern 1 : structure "fiche film" type meta-title + meta-date
+  // <a class="meta-title-link" href="/film/fichefilm_gen_cfilm=NNNN.html">Titre</a>
+  // ... "Sortie le 5 mai 2026" ou "VOD le 5 mai 2026"
   const filmCardRegex = /<a[^>]*class="[^"]*meta-title-link[^"]*"[^>]*>([^<]{2,100})<\/a>([\s\S]{0,800}?)(?=<a[^>]*class="[^"]*meta-title-link|$)/gi;
   let m;
   while ((m = filmCardRegex.exec(html)) !== null) {
     const rawTitle = m[1].trim();
+    const context  = m[2];
     if (!rawTitle || seenTitles.has(rawTitle.toLowerCase())) continue;
-    const date = parseFrenchDate(m[2]);
+
+    // Recherche d'une date FR dans le contexte
+    const date = parseFrenchDate(context);
     if (!date) continue;
     seenTitles.add(rawTitle.toLowerCase());
     items.push({ title: rawTitle, date });
   }
 
+  // Pattern 2 : fallback générique — toute balise <a> avec titre + "Sortie ... <date>"
+  // (utile si AlloCiné refactor la classe CSS)
   if (items.length < 3) {
     const fallbackRegex = /<a[^>]+href="\/film\/fichefilm[^"]+"[^>]*>([^<]{2,100})<\/a>([\s\S]{0,500}?)(sortie|vod|disponibilit[ée])[^<]{0,50}(\d{1,2}\s+(?:janvier|f[ée]vrier|mars|avril|mai|juin|juillet|ao[uû]t|septembre|octobre|novembre|d[ée]cembre)(?:\s+\d{4})?)/gi;
     while ((m = fallbackRegex.exec(html)) !== null) {
@@ -867,14 +780,20 @@ function parseAllocineHtml(html) {
       items.push({ title: rawTitle, date });
     }
   }
+
   return items;
 }
 
+/**
+ * Récupère les sorties VOD FR annoncées sur AlloCiné.
+ * Cache léger (TTL court car les annonces FR peuvent changer).
+ */
 async function fetchAllocineReleases() {
   const PARSER_VERSION = 1;
   const cache = loadAllocineCache();
   const cacheValid = cache._parserVersion === PARSER_VERSION;
-  const fresh = cacheValid && cache._cachedAt && (Date.now() - cache._cachedAt) / 3600000 < ALLOCINE_TTL_HOURS;
+  const fresh = cacheValid && cache._cachedAt
+    && (Date.now() - cache._cachedAt) / 3600000 < ALLOCINE_TTL_HOURS;
 
   if (fresh && Array.isArray(cache.releases)) {
     log(`  💾 AlloCiné : cache valide (${cache.releases.length} entrées)`);
@@ -890,6 +809,7 @@ async function fetchAllocineReleases() {
       await sleep(400);
       const html = await fetchTextWithRetry(url, 2);
       const items = parseAllocineHtml(html);
+      vlog(`     ${path.basename(url, '/')} : ${items.length} films extraits`);
       for (const it of items) {
         const key = normalizeTitle(it.title);
         if (!key || seen.has(key)) continue;
@@ -901,14 +821,30 @@ async function fetchAllocineReleases() {
     }
   }
 
-  saveAllocineCache({ _parserVersion: PARSER_VERSION, _cachedAt: Date.now(), releases: releases.map(r => ({ ...r, date: r.date.toISOString() })) });
+  log(`     ✓ ${releases.length} films AlloCiné extraits (dédupliqués)`);
+  saveAllocineCache({
+    _parserVersion: PARSER_VERSION,
+    _cachedAt: Date.now(),
+    releases: releases.map((r) => ({ ...r, date: r.date.toISOString() })),
+  });
+
   return releases;
 }
 
-async function enrichWithAllocine({ finalResults, monthStart, monthEnd, cache }) {
+/**
+ * Cross-confirme et enrichit la liste finale avec les données AlloCiné.
+ * - Si un film de finalResults match un film AlloCiné → ajoute "allocine" aux sources
+ *   et éventuellement corrige la date (si la date AlloCiné diffère, AlloCiné = source FR
+ *   officielle donc priorité sur la prédiction)
+ * - Si un film AlloCiné n'est pas dans la liste et tombe dans le mois cible → ajout
+ */
+async function enrichWithAllocine({ finalResults, monthStart, monthEnd, cache, tier_filter }) {
   log('\n  📡  Cross-référence AlloCiné (triangulation FR) :');
   const allocineReleases = await fetchAllocineReleases();
-  if (allocineReleases.length === 0) return { confirmed: 0, added: 0, corrected: 0 };
+  if (allocineReleases.length === 0) {
+    log('     (aucune donnée AlloCiné — on saute)');
+    return { confirmed: 0, added: 0, corrected: 0 };
+  }
 
   const existingByTitle = new Map();
   for (const r of finalResults) {
@@ -919,39 +855,60 @@ async function enrichWithAllocine({ finalResults, monthStart, monthEnd, cache })
   let confirmed = 0, added = 0, corrected = 0, skipped = 0;
 
   for (const ac of allocineReleases) {
+    // Le film AlloCiné doit tomber dans le mois cible (sinon on ignore)
     if (ac.date < monthStart || ac.date > monthEnd) { skipped++; continue; }
+
     const key = normalizeTitle(ac.title);
     const existing = existingByTitle.get(key);
 
     if (existing) {
+      // Cross-confirmation : ajoute "allocine" aux sources
       existing._crossConfirmedBy = existing._crossConfirmedBy || [];
       if (!existing._crossConfirmedBy.includes('allocine')) {
         existing._crossConfirmedBy.push('allocine');
         confirmed++;
 
+        // Si la date AlloCiné diffère de plus de 5 jours, on corrige
+        // (AlloCiné = source FR officielle, prime sur les prédictions)
         const diffDays = Math.abs(existing._sortDate - ac.date.getTime()) / 86400000;
-        if (diffDays > 5 && ['studio-mapped', 'prédite', 'maxblizz', 'bingebase'].includes(existing.source)) {
+        if (diffDays > 5 && (existing.source === 'studio-mapped' || existing.source === 'prédite' || existing.source === 'maxblizz')) {
           const oldDate = existing.plex_release;
           existing.plex_release = formatDateFR(ac.date);
           existing._sortDate    = ac.date.getTime();
           existing.source       = 'officielle-allocine';
           corrected++;
           log(`     ↻ "${existing.title}" : ${oldDate} → ${formatDateFR(ac.date)} (AlloCiné prime)`);
+        } else {
+          vlog(`     ✓ Confirmation "${existing.title}" → ${formatDateFR(ac.date)}`);
         }
       }
       continue;
     }
 
+    // Pas dans la liste : tentative d'ajout via recherche TMDB
     const tmdbHit = await tmdbSearchByTitle(ac.title);
     await sleep(API_DELAY_MS);
-    if (!tmdbHit) { skipped++; continue; }
+    if (!tmdbHit) {
+      vlog(`     ✗ TMDB sans match pour "${ac.title}"`);
+      skipped++;
+      continue;
+    }
 
     let details;
-    try { details = await fetchMovieDetails(tmdbHit.id, cache); await sleep(API_DELAY_MS); }
-    catch { skipped++; continue; }
+    try {
+      details = await fetchMovieDetails(tmdbHit.id, cache);
+      await sleep(API_DELAY_MS);
+    } catch {
+      skipped++; continue;
+    }
 
-    if (hasExcludedGenre(details) || isTelefilmByTitle(details) || isSpectacle(details) || isQuebecLocalProduction(details)) { skipped++; continue; }
+    // Mêmes filtres anti-bruit que le pipeline principal
+    if (hasExcludedGenre(details))      { skipped++; continue; }
+    if (isTelefilmByTitle(details))     { skipped++; continue; }
+    if (isSpectacle(details))           { skipped++; continue; }
+    if (isQuebecLocalProduction(details)){ skipped++; continue; }
 
+    // Tier filter : on ne veut pas de niche non-français en ajout AlloCiné non plus
     const isFrench = isFrenchProduction(details);
     const tierInfo = classifyTier(details);
     if (!isFrench && tierInfo.tier === 'niche') { skipped++; continue; }
@@ -991,13 +948,138 @@ async function enrichWithAllocine({ finalResults, monthStart, monthEnd, cache })
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
+// MODULE MAXBLIZZ — Enrichissement (hérité v7, étendu pour tier + overrides ext.)
+// ═══════════════════════════════════════════════════════════════════════════════
+
+async function enrichWithMaxblizz({ finalResults, monthStart, monthEnd, cache, overrides }) {
+  log('\n  📡  Enrichissement MaxBlizz :');
+  const mbReleases = await fetchMaxblizzReleases();
+  if (mbReleases.length === 0) return { added: 0, overridden: 0 };
+
+  const existingIds       = new Set(finalResults.map((m) => m.tmdb_id));
+  const existingTitles    = new Set(finalResults.map((m) => normalizeTitle(m.title)));
+  const existingOriginals = new Set(finalResults.map((m) => normalizeTitle(m.original_title || '')));
+
+  let added = 0, overridden = 0, skipped = 0, dropQc = 0, dropNiche = 0;
+
+  for (const mb of mbReleases) {
+    const slugNorm = normalizeTitle(mb.title);
+    let mbDate = mb.date;
+    let isOverride = false;
+
+    // Applique l'override manuel si présent
+    const tokens = slugNorm.split(' ');
+    const overrideKeys = [slugNorm];
+    if (tokens.length >= 3) overrideKeys.push(tokens.slice(1).join(' '));
+    if (tokens.length >= 4) overrideKeys.push(tokens.slice(2).join(' '));
+    for (const k of overrideKeys) {
+      if (overrides[k]) {
+        mbDate = new Date(overrides[k].date);
+        isOverride = true;
+        log(`     ★ Override "${mb.title}" → ${formatDateFR(mbDate)} (${overrides[k].reason})`);
+        break;
+      }
+    }
+
+    if (mbDate < monthStart || mbDate > monthEnd) { skipped++; continue; }
+
+    const tmdbHit = await tmdbSearchByTitle(mb.title);
+    await sleep(API_DELAY_MS);
+    if (!tmdbHit) {
+      vlog(`     ✗ TMDB sans match pour "${mb.title}"`);
+      skipped++;
+      continue;
+    }
+
+    // Déjà présent par TMDB ID : on peut corriger la date si MaxBlizz est plus précis
+    if (existingIds.has(tmdbHit.id)) {
+      const existing = finalResults.find((m) => m.tmdb_id === tmdbHit.id);
+      existing._crossConfirmedBy = existing._crossConfirmedBy || [];
+      if (!existing._crossConfirmedBy.includes('maxblizz')) {
+        existing._crossConfirmedBy.push('maxblizz');
+      }
+      const oldDate = existing.plex_release;
+      if (existing.plex_release !== formatDateFR(mbDate)) {
+        existing.plex_release = formatDateFR(mbDate);
+        existing._sortDate    = mbDate.getTime();
+        existing.source       = isOverride ? 'override-manuel' : 'maxblizz';
+        log(`     ↻ "${tmdbHit.title}" : ${oldDate} → ${formatDateFR(mbDate)} (maxblizz)`);
+        overridden++;
+      }
+      continue;
+    }
+
+    // Garde-fou titres
+    const tmdbTitleNorm = normalizeTitle(tmdbHit.title);
+    const tmdbOrigNorm  = normalizeTitle(tmdbHit.original_title || '');
+    if (existingTitles.has(tmdbTitleNorm) || existingOriginals.has(tmdbOrigNorm)) {
+      skipped++; continue;
+    }
+
+    let details;
+    try {
+      details = await fetchMovieDetails(tmdbHit.id, cache);
+      await sleep(API_DELAY_MS);
+    } catch {
+      skipped++; continue;
+    }
+
+    // 🆕 v8 : filtre prod québécoise locale
+    if (isQuebecLocalProduction(details)) {
+      vlog(`     🚫 "${tmdbHit.title}" filtré (prod QC locale)`);
+      dropQc++; continue;
+    }
+
+    // 🆕 v8 : filtre tier pour non-FR (on ne veut PAS de niche international)
+    const isFrench = isFrenchProduction(details);
+    const tierInfo = classifyTier(details);
+    if (!isFrench && tierInfo.tier === 'niche') {
+      vlog(`     🚫 "${tmdbHit.title}" filtré (niche non-FR, score=${tierInfo.score})`);
+      dropNiche++; continue;
+    }
+
+    const cinemaDate = details.release_date ? new Date(details.release_date) : null;
+    const studios    = details.production_companies || [];
+    const leadStudio = studios.find((s) => STUDIO_VOD_DELAYS[s.id]);
+
+    finalResults.push({
+      title          : details.title || tmdbHit.title,
+      plex_release   : formatDateFR(mbDate),
+      tmdb_id        : tmdbHit.id,
+      poster_path    : details.poster_path || tmdbHit.poster_path,
+      original_title : details.original_title || tmdbHit.original_title,
+      cinema_date    : cinemaDate ? formatDateFR(cinemaDate) : null,
+      vote_average   : Math.round((details.vote_average ?? 0) * 10) / 10,
+      vote_count     : details.vote_count ?? 0,
+      genres         : (details.genres || []).map((g) => g.name),
+      is_french      : isFrench,
+      source         : isOverride ? 'override-manuel' : 'maxblizz',
+      _tier          : tierInfo.tier,
+      _tierScore     : tierInfo.score,
+      _leadStudio    : leadStudio?.name || null,
+      _sortDate      : mbDate.getTime(),
+      _popularity    : details.popularity ?? tmdbHit.popularity ?? 0,
+      _crossConfirmedBy: [],
+    });
+
+    log(`     ✓ Ajouté : ${details.title || tmdbHit.title} → ${formatDateFR(mbDate)} [${tierInfo.tier}]`);
+    added++;
+    existingIds.add(tmdbHit.id);
+  }
+
+  log(`     📊 ${added} ajouts, ${overridden} dates corrigées, ${dropQc} QC locaux jetés, ${dropNiche} niche non-FR jetés, ${skipped} ignorés`);
+  return { added, overridden };
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
 // PIPELINE PRINCIPAL
 // ═══════════════════════════════════════════════════════════════════════════════
 
 async function updateVOD() {
   const t0 = Date.now();
-  log('🎬  updateVOD v8.4 — démarrage...');
-  if (DRY_RUN) log('   ⚙️  Mode --dry-run actif : aucune écriture du JSON final');
+  log('🎬  updateVOD v8 (ultimate) — démarrage...');
+  if (DRY_RUN)  log('   ⚙️  Mode --dry-run actif : aucune écriture du JSON final');
+  if (VERBOSE)  log('   ⚙️  Mode --verbose actif : logs détaillés');
   log('');
 
   const now = new Date();
@@ -1006,6 +1088,8 @@ async function updateVOD() {
 
   const cache     = loadCache();
   const overrides = loadOverrides();
+  log(`💾  Cache TMDB : ${Object.keys(cache).length} entrées chargées`);
+  log(`📋  Overrides chargés : ${Object.keys(overrides).length} entrées (${OVERRIDES_PATH})\n`);
 
   // ─── Phase 1 : Scan TMDB ─────────────────────────────────────────────────────
   const endpoints = buildScanEndpoints(monthStart, windowEnd);
@@ -1017,7 +1101,9 @@ async function updateVOD() {
       const results = await fetchAllPages(url);
       rawMovies.push(...results);
       log(`→ ${results.length} films`);
-    } catch (err) { log(`⚠️  ${err.message}`); }
+    } catch (err) {
+      log(`⚠️  ${err.message}`);
+    }
     await sleep(API_DELAY_MS);
   }
 
@@ -1030,7 +1116,8 @@ async function updateVOD() {
     noDetails: 0, noReleaseDate: 0, excludedGenre: 0, telefilmByTitle: 0,
     spectacle: 0, tooShort: 0, ghostEntry: 0, noGenresAtAll: 0,
     noFRTheatrical: 0, lowQuality: 0, beforeWindow: 0, afterWindow: 0, delayTooShort: 0,
-    quebecLocal: 0, nicheNonFrench: 0,
+    quebecLocal: 0,        // 🆕 v8
+    nicheNonFrench: 0,     // 🆕 v8
   };
   let cacheHits = 0;
 
@@ -1038,7 +1125,7 @@ async function updateVOD() {
   for (const movie of uniqueMovies) {
     const cachedBefore = cache[String(movie.id)] && isCacheEntryFresh(cache[String(movie.id)]);
     if (cachedBefore) cacheHits++;
-    else await sleep(API_DELAY_MS);
+    if (!cachedBefore) await sleep(API_DELAY_MS);
 
     let details;
     try { details = await fetchMovieDetails(movie.id, cache); }
@@ -1051,23 +1138,35 @@ async function updateVOD() {
     if (isTooShort(details))        { dropReasons.tooShort++; continue; }
     if (isGhostEntry(details))      { dropReasons.ghostEntry++; continue; }
     if (!details.genres || details.genres.length === 0) { dropReasons.noGenresAtAll++; continue; }
+
+    // 🆕 v8 : Anti-prod québécoise locale
     if (isQuebecLocalProduction(details)) { dropReasons.quebecLocal++; continue; }
 
     const isFrench  = isFrenchProduction(details);
     const minDelay  = isFrench ? DELAYS.FRENCH : DELAYS.AMERICAN;
-    if (!hasTheatricalReleaseFR(details.release_dates)) { dropReasons.noFRTheatrical++; continue; }
+    const hasFRCine = hasTheatricalReleaseFR(details.release_dates);
+    if (!hasFRCine) { dropReasons.noFRTheatrical++; continue; }
 
+    // ── Filtre Qualité Composite v6 (préservé) ──────────────────────────────
     const voteCount  = details.vote_count ?? 0;
     const popularity = movie.popularity ?? details.popularity ?? 0;
-    if (voteCount < 5 && popularity < 1.5) { dropReasons.lowQuality++; continue; }
+    const isSafeVolume   = voteCount >= 5;
+    const isNicheButReal = popularity >= 1.5;
+    if (!isSafeVolume && !isNicheButReal) { dropReasons.lowQuality++; continue; }
 
+    // 🆕 v8 : Tier classification + filtre niche non-français
     const tierInfo = classifyTier(details);
-    if (!isFrench && tierInfo.tier === 'niche') { dropReasons.nicheNonFrench++; continue; }
+    if (!isFrench && tierInfo.tier === 'niche') {
+      vlog(`     🚫 ${details.title} filtré (niche non-FR, score=${tierInfo.score})`);
+      dropReasons.nicheNonFrench++;
+      continue;
+    }
 
     const cinemaDateFR = getTheatricalDateFR(details.release_dates);
     const cinemaDate   = cinemaDateFR ?? new Date(details.release_date);
     if (isNaN(cinemaDate)) { dropReasons.noReleaseDate++; continue; }
 
+    // 🆕 v8 : Prédiction avec délai par studio
     const officialDigital = getOfficialDigitalDate(details.release_dates);
     const predicted       = predictVODDate(cinemaDate, details, isFrench);
 
@@ -1086,6 +1185,7 @@ async function updateVOD() {
       leadStudio = null;
     }
 
+    // ── Override manuel : priorité absolue, écrase même une date officielle ──
     const titleNorm = normalizeTitle(details.title || movie.title);
     const origNorm  = normalizeTitle(details.original_title || '');
     const overrideMatch = overrides[titleNorm] || overrides[origNorm];
@@ -1098,7 +1198,11 @@ async function updateVOD() {
       }
     }
 
-    if ((vodDate - cinemaDate) / 86400000 < minDelay && !officialDigital) { dropReasons.delayTooShort++; continue; }
+    const actualDelayDays = (vodDate - cinemaDate) / 86400000;
+    if (actualDelayDays < minDelay && !officialDigital) {
+      // Garde-fou : si la prédiction génère un délai trop court pour la France, on jette
+      dropReasons.delayTooShort++; continue;
+    }
     if (vodDate < monthStart) { dropReasons.beforeWindow++; continue; }
     if (vodDate > windowEnd)  { dropReasons.afterWindow++;  continue; }
 
@@ -1132,16 +1236,16 @@ async function updateVOD() {
   // ─── Phase 3 : Enrichissement MaxBlizz ───────────────────────────────────────
   await enrichWithMaxblizz({ finalResults, monthStart, monthEnd, cache, overrides });
 
-  // ─── Phase 3.5 : Enrichissement BingeBase ────────────────────────────────────
-  await enrichWithBingebase({ finalResults, monthStart, monthEnd, cache, overrides });
-
-  // ─── Phase 4 : Triangulation AlloCiné ────────────────────────────────────────
+  // ─── Phase 4 : 🆕 Triangulation AlloCiné ─────────────────────────────────────
   await enrichWithAllocine({ finalResults, monthStart, monthEnd, cache });
 
   // ─── Phase 5 : Scoring de confiance final ────────────────────────────────────
   log('\n  🎯  Calcul des scores de confiance :');
   for (const item of finalResults) {
-    item.confidence = computeConfidence({ source: item.source, crossConfirmedBy: item._crossConfirmedBy || [] });
+    item.confidence = computeConfidence({
+      source: item.source,
+      crossConfirmedBy: item._crossConfirmedBy || [],
+    });
   }
 
   // ─── Phase 6 : Tri, dédup, sérialisation ─────────────────────────────────────
@@ -1150,13 +1254,18 @@ async function updateVOD() {
     return b._popularity - a._popularity;
   });
 
-  const deduped = Array.from(new Map(finalResults.map((m) => [m.title.toLowerCase().trim(), m])).values());
+  const deduped = Array.from(
+    new Map(finalResults.map((m) => [m.title.toLowerCase().trim(), m])).values()
+  );
+
+  // On sépare les champs internes (commençant par _) avant écriture
   const output = deduped.map((m) => {
     const clean = {};
     for (const [k, v] of Object.entries(m)) {
       if (k.startsWith('_')) continue;
       clean[k] = v;
     }
+    // On expose le tier et le studio dans l'output (utile pour le front)
     clean.tier        = m._tier;
     clean.lead_studio = m._leadStudio;
     return clean;
@@ -1169,8 +1278,11 @@ async function updateVOD() {
     fs.renameSync(tmpPath, DATA_PATH);
   }
 
+  // ─── Phase 7 : Cleanup cache & récap ─────────────────────────────────────────
   const cutoff = Date.now() - 7 * 24 * 3600000;
-  for (const k of Object.keys(cache)) { if (!cache[k]?._cachedAt || cache[k]._cachedAt < cutoff) delete cache[k]; }
+  for (const k of Object.keys(cache)) {
+    if (!cache[k]?._cachedAt || cache[k]._cachedAt < cutoff) delete cache[k];
+  }
   saveCache(cache);
 
   // Récap détaillé
@@ -1180,7 +1292,9 @@ async function updateVOD() {
   const byTier     = output.reduce((acc, m) => { acc[m.tier] = (acc[m.tier] || 0) + 1; return acc; }, {});
   const bySource   = output.reduce((acc, m) => { acc[m.source] = (acc[m.source] || 0) + 1; return acc; }, {});
   const byConf     = output.reduce((acc, m) => { acc[m.confidence.level] = (acc[m.confidence.level] || 0) + 1; return acc; }, {});
-  const avgConf    = output.length ? (output.reduce((s, m) => s + m.confidence.score, 0) / output.length).toFixed(2) : 'N/A';
+  const avgConf    = output.length
+    ? (output.reduce((s, m) => s + m.confidence.score, 0) / output.length).toFixed(2)
+    : 'N/A';
 
   log('\n  ═══════════════════════════════════════════════════════════════════════');
   log(`  ✅ Terminé en ${elapsed}s — ${output.length} films générés`);
@@ -1190,10 +1304,25 @@ async function updateVOD() {
   log(`     Par source    : ${Object.entries(bySource).map(([k,v]) => `${k}=${v}`).join('  |  ')}`);
   log(`     Par confiance : ${Object.entries(byConf).map(([k,v]) => `${k}=${v}`).join('  |  ')}`);
   log(`     Confiance moyenne : ${avgConf} / 1.00`);
+  log('  ─────────────────────────────────────────────────────────────────────');
+  log(`     Filtres écartés :`);
+  log(`        • Qualité faible       : ${dropReasons.lowQuality}`);
+  log(`        • Niche non-FR         : ${dropReasons.nicheNonFrench}  🆕`);
+  log(`        • Prod québécoise loc. : ${dropReasons.quebecLocal}  🆕`);
+  log(`        • Pas de sortie FR     : ${dropReasons.noFRTheatrical}`);
+  log(`        • Théâtre/spectacle    : ${dropReasons.spectacle}`);
+  log(`        • Téléfilm par titre   : ${dropReasons.telefilmByTitle}`);
+  log(`        • Genre exclu          : ${dropReasons.excludedGenre}`);
+  log(`        • Fantôme              : ${dropReasons.ghostEntry}`);
+  log(`        • Trop court           : ${dropReasons.tooShort}`);
+  log(`        • Délai trop court     : ${dropReasons.delayTooShort}`);
+  log(`        • Hors fenêtre (avant) : ${dropReasons.beforeWindow}`);
+  log(`        • Hors fenêtre (après) : ${dropReasons.afterWindow}`);
+  log(`     Cache TMDB hits        : ${cacheHits} / ${uniqueMovies.length}`);
   log('  ═══════════════════════════════════════════════════════════════════════');
 
   if (DRY_RUN) log('\n  ⚙️  Mode dry-run : le fichier final N\'a PAS été écrit.');
-  else log(`\n  💾  Fichier écrit : ${DATA_PATH}`);
+  else         log(`\n  💾  Fichier écrit : ${DATA_PATH}`);
 }
 
 updateVOD().catch((err) => {
