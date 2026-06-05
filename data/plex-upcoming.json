@@ -1,5 +1,29 @@
 [
   {
+    "title": "Hokum",
+    "plex_release": "2 juin 2026",
+    "tmdb_id": 1430077,
+    "poster_path": "/2sq0GooVOtvGAQRyuYsSg9GA8Fy.jpg",
+    "original_title": "Hokum",
+    "cinema_date": "29 avril 2026",
+    "vote_average": 7,
+    "vote_count": 116,
+    "genres": [
+      "Horreur"
+    ],
+    "is_french": false,
+    "source": "officielle-us",
+    "confidence": {
+      "level": "high",
+      "score": 0.82,
+      "sources": [
+        "officielle-us"
+      ]
+    },
+    "tier": "mid",
+    "lead_studio": null
+  },
+  {
     "title": "Marsupilami",
     "plex_release": "4 juin 2026",
     "tmdb_id": 1145899,
@@ -7,7 +31,7 @@
     "original_title": "Marsupilami",
     "cinema_date": "4 février 2026",
     "vote_average": 6.6,
-    "vote_count": 73,
+    "vote_count": 78,
     "genres": [
       "Aventure",
       "Comédie"
@@ -56,7 +80,7 @@
     "original_title": "Mortal Kombat II",
     "cinema_date": "6 mai 2026",
     "vote_average": 6.7,
-    "vote_count": 366,
+    "vote_count": 373,
     "genres": [
       "Action",
       "Fantastique",
@@ -156,8 +180,8 @@
     "poster_path": "/zN2hnZzj3DjJH2CzB76kDo1zYFu.jpg",
     "original_title": "Coutures",
     "cinema_date": "18 février 2026",
-    "vote_average": 5.7,
-    "vote_count": 28,
+    "vote_average": 5.8,
+    "vote_count": 29,
     "genres": [
       "Drame"
     ],
@@ -230,7 +254,7 @@
     "original_title": "Fuze",
     "cinema_date": "6 mai 2026",
     "vote_average": 6.4,
-    "vote_count": 90,
+    "vote_count": 95,
     "genres": [
       "Action",
       "Crime",
