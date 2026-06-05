@@ -1,11 +1,20 @@
 /**
- * updateVOD.js — v8.2 (ultimate + fenêtre FR corrigée)
+ * updateVOD.js — v8.3 (+ BingeBase digital calendar)
  * =====================================================
  * Génère la liste des FILMS DE CINÉMA en VOD pour le mois en cours STRICT.
  * Plex FR — uniquement de vrais longs-métrages sortis en salle, avec un focus
  * blockbusters internationaux + films français + blockbusters VFQ.
  *
- * 🆕 NOUVEAUTÉS v8.2 (vs v8) :
+ * 🆕 NOUVEAUTÉS v8.3 (vs v8.2) :
+ * ─────────────────────────────────────────────────────────────────────────────
+ * ✅ Module BingeBase : scrape https://bingebase.com/releases/digital/<month>-<year>
+ *    (calendrier officiel des sorties digitales du mois en cours).
+ *    Structure : sections "## Weekday, Month D, YYYY" + titres "### score Title (year)".
+ *    URL construite dynamiquement → toujours le mois courant, jamais en dur.
+ *    Même logique de cache (TTL 10h), cross-confirmation et ajout que MaxBlizz.
+ *    Boost de confiance : 'bingebase' intégré dans computeConfidence().
+ *
+ * NOUVEAUTÉS v8.2 (rappel) :
  * ─────────────────────────────────────────────────────────────────────────────
  * ✅ Fenêtre FR de scan élargie : frEnd = monthStart - 85j (au lieu de -100j).
  *    Cause : un film sorti fin janvier (ex: Gourou le 28/01) a sa VOD à 120j,
@@ -46,6 +55,7 @@ const DATA_PATH         = path.join(__dirname, '../data/plex-upcoming.json');
 const CACHE_PATH        = path.join(__dirname, '../data/.tmdb-cache.json');
 const MAXBLIZZ_CACHE    = path.join(__dirname, '../data/.maxblizz-cache.json');
 const ALLOCINE_CACHE    = path.join(__dirname, '../data/.allocine-cache.json');
+const BINGEBASE_CACHE   = path.join(__dirname, '../data/.bingebase-cache.json');
 const OVERRIDES_PATH    = path.join(__dirname, '../data/overrides.json');
 
 // CLI flags
@@ -63,6 +73,7 @@ const DELAYS = {
 const CACHE_TTL_HOURS     = 24;
 const MAXBLIZZ_TTL_HOURS  = 12;
 const ALLOCINE_TTL_HOURS  = 8;   // FR : peut bouger plus souvent
+const BINGEBASE_TTL_HOURS = 10;  // 🆕 v8.3 : calendrier US officiel, assez stable
 const API_DELAY_MS        = 130;
 const MAX_PAGES_PER_ENDPOINT = 6;
 const MIN_RUNTIME         = 40;
@@ -230,6 +241,8 @@ const loadMaxblizzCache     = () => loadJsonSafe(MAXBLIZZ_CACHE, {});
 const saveMaxblizzCache     = (c) => saveJsonAtomic(MAXBLIZZ_CACHE, c);
 const loadAllocineCache     = () => loadJsonSafe(ALLOCINE_CACHE, {});
 const saveAllocineCache     = (c) => saveJsonAtomic(ALLOCINE_CACHE, c);
+const loadBingebaseCache    = () => loadJsonSafe(BINGEBASE_CACHE, {});
+const saveBingebaseCache    = (c) => saveJsonAtomic(BINGEBASE_CACHE, c);
 
 function isCacheEntryFresh(entry, ttlHours = CACHE_TTL_HOURS) {
   if (!entry?._cachedAt) return false;
@@ -451,16 +464,26 @@ function computeConfidence({ source, crossConfirmedBy }) {
 
   // 3. Officielle TMDB US + confirmation FR (AlloCiné) : très bonne triangulation
   if (source === 'officielle-us') {
-    if (set.has('allocine')) return { level: 'very-high', score: 0.93, sources };
-    if (set.has('maxblizz'))  return { level: 'high',      score: 0.88, sources };
-    return                        { level: 'high',      score: 0.82, sources };
+    if (set.has('allocine'))   return { level: 'very-high', score: 0.93, sources };
+    if (set.has('bingebase'))  return { level: 'very-high', score: 0.91, sources };
+    if (set.has('maxblizz'))   return { level: 'high',      score: 0.88, sources };
+    return                         { level: 'high',      score: 0.82, sources };
   }
 
   // 4. MaxBlizz (US) + AlloCiné (FR) qui s'accordent : excellent
   if (source === 'maxblizz') {
-    if (set.has('allocine'))     return { level: 'very-high', score: 0.92, sources };
-    if (set.has('studio-mapped'))return { level: 'high',      score: 0.78, sources };
-    return                            { level: 'medium',    score: 0.70, sources };
+    if (set.has('allocine'))      return { level: 'very-high', score: 0.92, sources };
+    if (set.has('bingebase'))     return { level: 'very-high', score: 0.90, sources };
+    if (set.has('studio-mapped')) return { level: 'high',      score: 0.78, sources };
+    return                             { level: 'medium',    score: 0.70, sources };
+  }
+
+  // 4b. BingeBase (US calendar) seul ou croisé
+  if (source === 'bingebase') {
+    if (set.has('allocine'))      return { level: 'very-high', score: 0.91, sources };
+    if (set.has('maxblizz'))      return { level: 'very-high', score: 0.90, sources };
+    if (set.has('studio-mapped')) return { level: 'high',      score: 0.77, sources };
+    return                             { level: 'medium',    score: 0.72, sources };
   }
 
   // 5. AlloCiné seul (sortie FR officielle annoncée)
@@ -470,9 +493,10 @@ function computeConfidence({ source, crossConfirmedBy }) {
 
   // 6. Prédite avec mapping studio (assez fiable pour blockbusters connus)
   if (source === 'studio-mapped') {
-    if (set.has('allocine'))     return { level: 'medium', score: 0.75, sources };
-    if (set.has('maxblizz'))     return { level: 'medium', score: 0.72, sources };
-    return                            { level: 'medium', score: 0.62, sources };
+    if (set.has('allocine'))   return { level: 'medium', score: 0.75, sources };
+    if (set.has('bingebase'))  return { level: 'medium', score: 0.74, sources };
+    if (set.has('maxblizz'))   return { level: 'medium', score: 0.72, sources };
+    return                          { level: 'medium', score: 0.62, sources };
   }
 
   // 7. Prédite générique (délai 45j/120j sans info studio)
@@ -944,6 +968,305 @@ async function enrichWithAllocine({ finalResults, monthStart, monthEnd, cache, t
   }
 
   log(`     📊 ${confirmed} confirmations, ${corrected} dates corrigées, ${added} ajouts, ${skipped} ignorés`);
+  return { confirmed, added, corrected };
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// 🆕 MODULE BINGEBASE (NOUVEAU v8.3) — Calendrier digital US officiel
+// ═══════════════════════════════════════════════════════════════════════════════
+//
+// Stratégie :
+//  1. Construit l'URL du mois courant dynamiquement :
+//     https://bingebase.com/releases/digital/<month>-<year>
+//     ex. juin 2026 → https://bingebase.com/releases/digital/june-2026
+//  2. Parse la page HTML :
+//     - Sections de date : "## Weekday, Month D, YYYY"
+//     - Films           : "### <score> Title (year)"
+//  3. Cross-référence avec TMDB, même logique de filtre / tier / QC que les
+//     autres modules.
+//  4. Deux usages identiques à MaxBlizz / AlloCiné :
+//     a) Cross-confirmer une entrée déjà présente (boost de confiance)
+//     b) Ajouter un nouveau film non encore trouvé
+
+// Noms de mois anglais → suffixe d'URL BingeBase
+const BB_MONTH_SLUGS = [
+  'january','february','march','april','may','june',
+  'july','august','september','october','november','december',
+];
+
+// Noms anglais → numéro (0-based) — pour le parser HTML
+const BB_MONTH_NUMS = {
+  january: 0, february: 1, march: 2,    april: 3,
+  may: 4,     june: 5,     july: 6,     august: 7,
+  september: 8, october: 9, november: 10, december: 11,
+};
+
+/**
+ * Construit l'URL BingeBase pour le mois en cours (ou le mois donné en param).
+ * @param {Date} [date=new Date()] — la date dont on veut le mois
+ * @returns {string} URL complète
+ */
+function buildBingebaseUrl(date = new Date()) {
+  const slug = `${BB_MONTH_SLUGS[date.getMonth()]}-${date.getFullYear()}`;
+  return `https://bingebase.com/releases/digital/${slug}`;
+}
+
+/**
+ * Parse le HTML (ou le texte markdown extrait) de la page BingeBase.
+ *
+ * La page rendue contient deux patterns caractéristiques :
+ *
+ * 1. Titres de section (date) :
+ *    ## Tuesday, June 2, 2026
+ *    ## Friday, June 5, 2026
+ *
+ * 2. Titres de film :
+ *    ### 8.3 I Swear (2025)
+ *    ### 0.0 Mortal Kombat II (2026)
+ *
+ * On lit le texte ligne par ligne pour tenir compte de l'ordre.
+ * Défensif : si un des deux patterns ne matche pas, on passe au suivant.
+ *
+ * @param {string} text — contenu texte/markdown de la page
+ * @returns {{ title: string, year: number|null, date: Date }[]}
+ */
+function parseBingebaseText(text) {
+  const items   = [];
+  const seen    = new Set();
+  let currentDate = null;
+
+  // Pattern date de section :  ## Weekday, Month D, YYYY
+  const rxSection = /^##\s+\w+,\s+(\w+)\s+(\d{1,2}),\s+(\d{4})\s*$/;
+  // Pattern titre film     :  ### <score> Title (year)
+  // Le score peut être "0.0" ou "8.3" ; le titre peut contenir parenthèses, tirets, etc.
+  // On capture tout jusqu'à la dernière paire de parenthèses contenant 4 chiffres.
+  const rxFilm  = /^###\s+[\d.]+\s+(.+?)\s+\((\d{4})\)\s*$/;
+
+  for (const rawLine of text.split('\n')) {
+    const line = rawLine.trim();
+    if (!line) continue;
+
+    // --- Détection d'une nouvelle date de section ---
+    const mSec = rxSection.exec(line);
+    if (mSec) {
+      const monthStr = mSec[1].toLowerCase();
+      const day      = parseInt(mSec[2], 10);
+      const year     = parseInt(mSec[3], 10);
+      const month    = BB_MONTH_NUMS[monthStr];
+      if (month !== undefined && day >= 1 && day <= 31) {
+        currentDate = new Date(Date.UTC(year, month, day, 12, 0, 0));
+        if (isNaN(currentDate)) currentDate = null;
+      }
+      continue;
+    }
+
+    // --- Détection d'un film ---
+    if (!currentDate) continue; // pas de date courante → on ignore
+    const mFilm = rxFilm.exec(line);
+    if (!mFilm) continue;
+
+    const rawTitle = mFilm[1].trim();
+    const filmYear = parseInt(mFilm[2], 10);
+    if (!rawTitle || rawTitle.length < 2) continue;
+
+    const key = rawTitle.toLowerCase();
+    if (seen.has(key)) continue;
+    seen.add(key);
+
+    items.push({ title: rawTitle, year: filmYear, date: new Date(currentDate) });
+  }
+
+  return items;
+}
+
+/**
+ * Scrape la page BingeBase du mois courant et retourne un tableau de releases.
+ * Utilise un cache TTL de BINGEBASE_TTL_HOURS heures.
+ *
+ * @returns {Promise<{ title: string, year: number|null, date: Date, url: string }[]>}
+ */
+async function fetchBingebaseReleases(targetDate = new Date()) {
+  const PARSER_VERSION = 1;
+  const cache = loadBingebaseCache();
+  const pageUrl = buildBingebaseUrl(targetDate);
+
+  // Vérification du cache
+  const cacheValid = cache._parserVersion === PARSER_VERSION
+    && cache._pageUrl === pageUrl;
+  const fresh = cacheValid && cache._cachedAt
+    && (Date.now() - cache._cachedAt) / 3600000 < BINGEBASE_TTL_HOURS;
+
+  if (fresh && Array.isArray(cache.releases)) {
+    log(`  💾 BingeBase : cache valide (${cache.releases.length} entrées — ${pageUrl})`);
+    return cache.releases.map((r) => ({ ...r, date: new Date(r.date) }));
+  }
+
+  if (!cacheValid && cache._parserVersion !== undefined) {
+    log(`  🔄 BingeBase : invalidation cache (parser v${cache._parserVersion} → v${PARSER_VERSION} ou URL changée)`);
+  }
+
+  log(`  🌐 BingeBase : scraping ${pageUrl} ...`);
+  const releases = [];
+
+  try {
+    const text = await fetchTextWithRetry(pageUrl, 3);
+
+    // La page peut être servie en HTML ou en texte ; on passe dans parseBingebaseText
+    // qui est robuste aux deux (il cherche les patterns ## et ###).
+    const items = parseBingebaseText(text);
+    vlog(`     ${items.length} entrées parsées depuis BingeBase`);
+
+    const seen = new Set();
+    for (const it of items) {
+      if (!it.title || !it.date || isNaN(it.date)) continue;
+      const key = it.title.toLowerCase();
+      if (seen.has(key)) continue;
+      seen.add(key);
+      releases.push({ title: it.title, year: it.year, date: it.date, url: pageUrl });
+    }
+
+    log(`     ✓ ${releases.length} films extraits depuis BingeBase`);
+    saveBingebaseCache({
+      _parserVersion: PARSER_VERSION,
+      _pageUrl      : pageUrl,
+      _cachedAt     : Date.now(),
+      releases      : releases.map((r) => ({ ...r, date: r.date.toISOString() })),
+    });
+  } catch (err) {
+    console.warn(`  ⚠️  BingeBase scraping a échoué : ${err.message} — on continue sans.`);
+  }
+
+  return releases;
+}
+
+/**
+ * Enrichit finalResults avec les données BingeBase :
+ * - Cross-confirme les entrées existantes (boost confiance)
+ * - Ajoute les films absents tombant dans le mois cible
+ */
+async function enrichWithBingebase({ finalResults, monthStart, monthEnd, cache }) {
+  log('\n  📡  Enrichissement BingeBase :');
+  const bbReleases = await fetchBingebaseReleases(monthStart);
+  if (bbReleases.length === 0) {
+    log('     (aucune donnée BingeBase — on saute)');
+    return { confirmed: 0, added: 0, corrected: 0 };
+  }
+
+  // Index des films déjà présents
+  const existingIds    = new Set(finalResults.map((m) => m.tmdb_id));
+  const existingByTitle = new Map();
+  for (const r of finalResults) {
+    existingByTitle.set(normalizeTitle(r.title), r);
+    if (r.original_title) existingByTitle.set(normalizeTitle(r.original_title), r);
+  }
+
+  let confirmed = 0, added = 0, corrected = 0, skipped = 0, dropQc = 0, dropNiche = 0;
+
+  for (const bb of bbReleases) {
+    // Filtre sur le mois cible (BingeBase n'affiche que le mois demandé mais on double-check)
+    if (bb.date < monthStart || bb.date > monthEnd) { skipped++; continue; }
+
+    const key      = normalizeTitle(bb.title);
+    const existing = existingByTitle.get(key);
+
+    if (existing) {
+      // ── Cross-confirmation ──────────────────────────────────────────────────
+      existing._crossConfirmedBy = existing._crossConfirmedBy || [];
+      if (!existing._crossConfirmedBy.includes('bingebase')) {
+        existing._crossConfirmedBy.push('bingebase');
+        confirmed++;
+
+        // Si BingeBase donne une date différente de plus de 3 jours ET que la
+        // source actuelle est une prédiction (pas officielle FR), on corrige.
+        const diffDays = Math.abs(existing._sortDate - bb.date.getTime()) / 86400000;
+        if (
+          diffDays > 3 &&
+          (existing.source === 'studio-mapped' || existing.source === 'prédite')
+        ) {
+          const oldDate = existing.plex_release;
+          existing.plex_release = formatDateFR(bb.date);
+          existing._sortDate    = bb.date.getTime();
+          existing.source       = 'bingebase';
+          corrected++;
+          log(`     ↻ "${existing.title}" : ${oldDate} → ${formatDateFR(bb.date)} (BingeBase prime)`);
+        } else {
+          vlog(`     ✓ Confirmation "${existing.title}" → ${formatDateFR(bb.date)} (BingeBase)`);
+        }
+      }
+      continue;
+    }
+
+    // ── Film absent : tentative d'ajout via TMDB ─────────────────────────────
+    const tmdbHit = await tmdbSearchByTitle(bb.title, bb.year);
+    await sleep(API_DELAY_MS);
+    if (!tmdbHit) {
+      vlog(`     ✗ TMDB sans match pour "${bb.title}"`);
+      skipped++;
+      continue;
+    }
+
+    // Déjà présent par TMDB ID → cross-confirmation par ID
+    if (existingIds.has(tmdbHit.id)) {
+      const existingById = finalResults.find((m) => m.tmdb_id === tmdbHit.id);
+      existingById._crossConfirmedBy = existingById._crossConfirmedBy || [];
+      if (!existingById._crossConfirmedBy.includes('bingebase')) {
+        existingById._crossConfirmedBy.push('bingebase');
+        confirmed++;
+        vlog(`     ✓ Confirmation ID "${existingById.title}" → ${formatDateFR(bb.date)} (BingeBase)`);
+      }
+      continue;
+    }
+
+    let details;
+    try {
+      details = await fetchMovieDetails(tmdbHit.id, cache);
+      await sleep(API_DELAY_MS);
+    } catch {
+      skipped++; continue;
+    }
+
+    // Mêmes filtres anti-bruit que le pipeline principal
+    if (hasExcludedGenre(details))       { skipped++;  continue; }
+    if (isTelefilmByTitle(details))      { skipped++;  continue; }
+    if (isSpectacle(details))            { skipped++;  continue; }
+    if (isQuebecLocalProduction(details)){ dropQc++;   continue; }
+
+    const isFrench = isFrenchProduction(details);
+    const tierInfo = classifyTier(details);
+    if (!isFrench && tierInfo.tier === 'niche') { dropNiche++; continue; }
+
+    const cinemaDateFR = getTheatricalDateFR(details.release_dates);
+    const cinemaDate   = cinemaDateFR ?? (details.release_date ? new Date(details.release_date) : null);
+    const studios      = details.production_companies || [];
+    const leadStudio   = studios.find((s) => STUDIO_VOD_DELAYS[s.id]);
+
+    finalResults.push({
+      title          : details.title || tmdbHit.title,
+      plex_release   : formatDateFR(bb.date),
+      tmdb_id        : tmdbHit.id,
+      poster_path    : details.poster_path || tmdbHit.poster_path,
+      original_title : details.original_title || tmdbHit.original_title,
+      cinema_date    : cinemaDate ? formatDateFR(cinemaDate) : null,
+      vote_average   : Math.round((details.vote_average ?? 0) * 10) / 10,
+      vote_count     : details.vote_count ?? 0,
+      genres         : (details.genres || []).map((g) => g.name),
+      is_french      : isFrench,
+      source         : 'bingebase',
+      _tier          : tierInfo.tier,
+      _tierScore     : tierInfo.score,
+      _leadStudio    : leadStudio?.name || null,
+      _sortDate      : bb.date.getTime(),
+      _popularity    : details.popularity ?? tmdbHit.popularity ?? 0,
+      _crossConfirmedBy: [],
+    });
+
+    log(`     ➕ Ajouté via BingeBase : ${details.title || tmdbHit.title} → ${formatDateFR(bb.date)} [${tierInfo.tier}]`);
+    added++;
+    existingIds.add(tmdbHit.id);
+    existingByTitle.set(normalizeTitle(details.title || tmdbHit.title), finalResults[finalResults.length - 1]);
+  }
+
+  log(`     📊 ${confirmed} confirmations, ${corrected} dates corrigées, ${added} ajouts, ${dropQc} QC locaux jetés, ${dropNiche} niche non-FR jetés, ${skipped} ignorés`);
   return { confirmed, added, corrected };
 }
 
