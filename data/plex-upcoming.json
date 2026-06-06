@@ -73,6 +73,31 @@
     "lead_studio": null
   },
   {
+    "title": "Michael",
+    "plex_release": "9 juin 2026",
+    "tmdb_id": 936075,
+    "poster_path": "/2sDgNilJGVFpl1x4DMzYHjk0L0f.jpg",
+    "original_title": "Michael",
+    "cinema_date": "22 avril 2026",
+    "vote_average": 7.6,
+    "vote_count": 911,
+    "genres": [
+      "Musique",
+      "Drame"
+    ],
+    "is_french": false,
+    "source": "override-manuel",
+    "confidence": {
+      "level": "override",
+      "score": 1,
+      "sources": [
+        "override-manuel"
+      ]
+    },
+    "tier": "blockbuster",
+    "lead_studio": "Lionsgate"
+  },
+  {
     "title": "Mortal Kombat II",
     "plex_release": "9 juin 2026",
     "tmdb_id": 931285,
