@@ -3,6 +3,10 @@ on:
   schedule:
     - cron: '0 2 * * *'
   workflow_dispatch:
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   update-data:
     runs-on: ubuntu-latest
@@ -15,8 +19,17 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Show environment
+        run: |
+          node --version
+          pwd
+          ls -la scripts/
+          ls -la data/ 2>/dev/null || echo "⚠️  dossier data/ absent"
+
       - name: Run VOD Script
-        run: node scripts/updateVOD.js
+        run: node scripts/updateVOD.js --dry-run --verbose
+        env:
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
 
       - name: Commit and Push changes
         run: |
