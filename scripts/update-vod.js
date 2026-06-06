@@ -129,8 +129,11 @@ const TIER_THRESHOLDS = {
                           // < 4 points = niche (jetable côté international)
 };
 
-// Genres TMDB exclus : Documentaire (99), Musique (10402), Téléfilm (10770)
-const EXCLUDED_GENRE_IDS = new Set([99, 10402, 10770]);
+// Genres TMDB exclus : Documentaire (99), Téléfilm (10770).
+// ⚠️ Music (10402) retiré en v8.3 : un biopic musical comme "Michael" (2026) porte
+// ce genre mais est bien un long-métrage de cinéma. Les vrais spectacles/concerts
+// sont déjà filtrés par SPECTACLE_KEYWORDS (in concert, live at, world tour, etc.).
+const EXCLUDED_GENRE_IDS = new Set([99, 10770]);
 
 // Mots-clés titres : captation spectacle vivant / théâtre
 const SPECTACLE_KEYWORDS = [
@@ -157,6 +160,8 @@ const TELEFILM_TITLE_PATTERNS = [
 // Overrides par défaut (codés en dur, hérités v7). Le fichier externe peut les compléter.
 const DEFAULT_OVERRIDES = {
   'project hail mary': { date: '2026-05-12', reason: 'film à fort potentiel, repoussé' },
+  // 🆕 v8.3 : biopic MJ — date officielle BingeBase/Lionsgate confirmée
+  'michael'          : { date: '2026-06-09', reason: 'date officielle Lionsgate/Universal — 9 juin 2026' },
 };
 
 // ═══════════════════════════════════════════════════════════════════════════════
