@@ -19,15 +19,8 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Show environment
-        run: |
-          node --version
-          pwd
-          ls -la scripts/
-          ls -la data/ 2>/dev/null || echo "⚠️  dossier data/ absent"
-
       - name: Run VOD Script
-        run: node scripts/updateVOD.js --dry-run --verbose
+        run: node scripts/update-vod.js
         env:
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
 
