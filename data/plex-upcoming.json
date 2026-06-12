@@ -7,7 +7,7 @@
     "original_title": "Hokum",
     "cinema_date": "29 avril 2026",
     "vote_average": 6.7,
-    "vote_count": 199,
+    "vote_count": 204,
     "genres": [
       "Horreur"
     ],
@@ -79,8 +79,8 @@
     "poster_path": "/2sDgNilJGVFpl1x4DMzYHjk0L0f.jpg",
     "original_title": "Michael",
     "cinema_date": "22 avril 2026",
-    "vote_average": 8.4,
-    "vote_count": 1631,
+    "vote_average": 8.5,
+    "vote_count": 1790,
     "genres": [
       "Musique",
       "Drame"
@@ -105,7 +105,7 @@
     "original_title": "Mortal Kombat II",
     "cinema_date": "6 mai 2026",
     "vote_average": 7.9,
-    "vote_count": 894,
+    "vote_count": 966,
     "genres": [
       "Action",
       "Fantastique",
@@ -131,36 +131,9 @@
     "original_title": "LOL 2.0",
     "cinema_date": "11 février 2026",
     "vote_average": 6.3,
-    "vote_count": 41,
+    "vote_count": 42,
     "genres": [
       "Comédie"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "Les Enfants de la Résistance",
-    "plex_release": "11 juin 2026",
-    "tmdb_id": 1309400,
-    "poster_path": "/uoBOi1xbfbJ9l8xg76uwI2B4MZX.jpg",
-    "original_title": "Les Enfants de la Résistance",
-    "cinema_date": "11 février 2026",
-    "vote_average": 6.4,
-    "vote_count": 30,
-    "genres": [
-      "Histoire",
-      "Drame",
-      "Guerre",
-      "Aventure"
     ],
     "is_french": true,
     "source": "prédite",
@@ -181,8 +154,8 @@
     "poster_path": "/ys6twzUhtNacnnhXTnHFZTMiOPM.jpg",
     "original_title": "L'infiltrée",
     "cinema_date": "11 février 2026",
-    "vote_average": 6.7,
-    "vote_count": 5,
+    "vote_average": 6.3,
+    "vote_count": 8,
     "genres": [
       "Comédie"
     ],
@@ -205,8 +178,8 @@
     "poster_path": "/zN2hnZzj3DjJH2CzB76kDo1zYFu.jpg",
     "original_title": "Coutures",
     "cinema_date": "18 février 2026",
-    "vote_average": 5.8,
-    "vote_count": 29,
+    "vote_average": 6.1,
+    "vote_count": 31,
     "genres": [
       "Drame"
     ],
@@ -279,7 +252,7 @@
     "original_title": "Fuze",
     "cinema_date": "6 mai 2026",
     "vote_average": 6.5,
-    "vote_count": 112,
+    "vote_count": 113,
     "genres": [
       "Action",
       "Crime",
@@ -296,6 +269,33 @@
       ]
     },
     "tier": "mid",
+    "lead_studio": null
+  },
+  {
+    "title": "Les Enfants de la Résistance",
+    "plex_release": "25 juin 2026",
+    "tmdb_id": 1309400,
+    "poster_path": "/uoBOi1xbfbJ9l8xg76uwI2B4MZX.jpg",
+    "original_title": "Les Enfants de la Résistance",
+    "cinema_date": "11 février 2026",
+    "vote_average": 6.4,
+    "vote_count": 30,
+    "genres": [
+      "Histoire",
+      "Drame",
+      "Guerre",
+      "Aventure"
+    ],
+    "is_french": true,
+    "source": "override-manuel",
+    "confidence": {
+      "level": "override",
+      "score": 1,
+      "sources": [
+        "override-manuel"
+      ]
+    },
+    "tier": "niche",
     "lead_studio": null
   },
   {
