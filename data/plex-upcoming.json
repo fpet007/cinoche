@@ -49,6 +49,30 @@
     "lead_studio": null
   },
   {
+    "title": "N121 Bus de nuit",
+    "plex_release": "4 juin 2026",
+    "tmdb_id": 1433929,
+    "poster_path": "/jGKB0T4Jr75Oktcru6e1um8poWw.jpg",
+    "original_title": "N121 Bus de nuit",
+    "cinema_date": "4 février 2026",
+    "vote_average": 8,
+    "vote_count": 3,
+    "genres": [
+      "Thriller"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
     "title": "Michael",
     "plex_release": "9 juin 2026",
     "tmdb_id": 936075,
@@ -56,7 +80,7 @@
     "original_title": "Michael",
     "cinema_date": "22 avril 2026",
     "vote_average": 8.6,
-    "vote_count": 2482,
+    "vote_count": 2548,
     "genres": [
       "Musique",
       "Drame"
@@ -81,7 +105,7 @@
     "original_title": "Mortal Kombat II",
     "cinema_date": "6 mai 2026",
     "vote_average": 8,
-    "vote_count": 1378,
+    "vote_count": 1422,
     "genres": [
       "Action",
       "Fantastique",
@@ -154,8 +178,8 @@
     "poster_path": "/zN2hnZzj3DjJH2CzB76kDo1zYFu.jpg",
     "original_title": "Coutures",
     "cinema_date": "18 février 2026",
-    "vote_average": 6.3,
-    "vote_count": 33,
+    "vote_average": 6.4,
+    "vote_count": 34,
     "genres": [
       "Drame"
     ],
@@ -228,7 +252,7 @@
     "original_title": "Fuze",
     "cinema_date": "6 mai 2026",
     "vote_average": 6.5,
-    "vote_count": 122,
+    "vote_count": 124,
     "genres": [
       "Action",
       "Crime",
@@ -255,7 +279,7 @@
     "original_title": "Les Enfants de la Résistance",
     "cinema_date": "11 février 2026",
     "vote_average": 6.8,
-    "vote_count": 34,
+    "vote_count": 35,
     "genres": [
       "Histoire",
       "Drame",
@@ -269,6 +293,30 @@
       "score": 1,
       "sources": [
         "override-manuel"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "L'Engloutie",
+    "plex_release": "25 juin 2026",
+    "tmdb_id": 1069650,
+    "poster_path": "/utDCem9XVnpeJ6U3HL9BJxbPd5h.jpg",
+    "original_title": "L'Engloutie",
+    "cinema_date": "24 décembre 2025",
+    "vote_average": 5.8,
+    "vote_count": 12,
+    "genres": [
+      "Drame"
+    ],
+    "is_french": true,
+    "source": "officielle-fr",
+    "confidence": {
+      "level": "high",
+      "score": 0.95,
+      "sources": [
+        "officielle-fr"
       ]
     },
     "tier": "niche",
