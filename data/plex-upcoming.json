@@ -56,7 +56,7 @@
     "original_title": "À pied d’œuvre",
     "cinema_date": "4 février 2026",
     "vote_average": 6.5,
-    "vote_count": 60,
+    "vote_count": 61,
     "genres": [
       "Drame"
     ],
@@ -80,7 +80,7 @@
     "original_title": "Michael",
     "cinema_date": "22 avril 2026",
     "vote_average": 8.7,
-    "vote_count": 2757,
+    "vote_count": 2840,
     "genres": [
       "Musique",
       "Drame"
@@ -105,7 +105,7 @@
     "original_title": "Mortal Kombat II",
     "cinema_date": "6 mai 2026",
     "vote_average": 8,
-    "vote_count": 1521,
+    "vote_count": 1578,
     "genres": [
       "Action",
       "Fantastique",
@@ -154,8 +154,8 @@
     "poster_path": "/ys6twzUhtNacnnhXTnHFZTMiOPM.jpg",
     "original_title": "L'Infiltrée",
     "cinema_date": "11 février 2026",
-    "vote_average": 4.7,
-    "vote_count": 20,
+    "vote_average": 5.2,
+    "vote_count": 24,
     "genres": [
       "Comédie"
     ],
@@ -178,8 +178,8 @@
     "poster_path": "/zN2hnZzj3DjJH2CzB76kDo1zYFu.jpg",
     "original_title": "Coutures",
     "cinema_date": "18 février 2026",
-    "vote_average": 6.4,
-    "vote_count": 34,
+    "vote_average": 6.3,
+    "vote_count": 36,
     "genres": [
       "Drame"
     ],
@@ -203,7 +203,7 @@
     "original_title": "Le rêve américain",
     "cinema_date": "18 février 2026",
     "vote_average": 7.5,
-    "vote_count": 99,
+    "vote_count": 100,
     "genres": [
       "Comédie"
     ],
@@ -253,7 +253,7 @@
     "original_title": "Fuze",
     "cinema_date": "6 mai 2026",
     "vote_average": 6.5,
-    "vote_count": 130,
+    "vote_count": 131,
     "genres": [
       "Action",
       "Crime",
@@ -279,8 +279,8 @@
     "poster_path": "/uoBOi1xbfbJ9l8xg76uwI2B4MZX.jpg",
     "original_title": "Les Enfants de la Résistance",
     "cinema_date": "11 février 2026",
-    "vote_average": 6.7,
-    "vote_count": 39,
+    "vote_average": 6.6,
+    "vote_count": 40,
     "genres": [
       "Histoire",
       "Drame",
@@ -355,7 +355,7 @@
     "original_title": "The Devil Wears Prada 2",
     "cinema_date": "29 avril 2026",
     "vote_average": 6.6,
-    "vote_count": 817,
+    "vote_count": 822,
     "genres": [
       "Comédie",
       "Drame"
