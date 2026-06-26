@@ -80,7 +80,7 @@
     "original_title": "Michael",
     "cinema_date": "22 avril 2026",
     "vote_average": 8.7,
-    "vote_count": 2952,
+    "vote_count": 2977,
     "genres": [
       "Musique",
       "Drame"
@@ -105,7 +105,7 @@
     "original_title": "Mortal Kombat II",
     "cinema_date": "6 mai 2026",
     "vote_average": 8,
-    "vote_count": 1638,
+    "vote_count": 1650,
     "genres": [
       "Action",
       "Fantastique",
@@ -154,8 +154,8 @@
     "poster_path": "/ys6twzUhtNacnnhXTnHFZTMiOPM.jpg",
     "original_title": "L'Infiltrée",
     "cinema_date": "11 février 2026",
-    "vote_average": 5.2,
-    "vote_count": 24,
+    "vote_average": 5,
+    "vote_count": 25,
     "genres": [
       "Comédie"
     ],
@@ -203,7 +203,7 @@
     "original_title": "Le rêve américain",
     "cinema_date": "18 février 2026",
     "vote_average": 7.4,
-    "vote_count": 105,
+    "vote_count": 108,
     "genres": [
       "Comédie"
     ],
@@ -253,7 +253,7 @@
     "original_title": "Fuze",
     "cinema_date": "6 mai 2026",
     "vote_average": 6.4,
-    "vote_count": 134,
+    "vote_count": 135,
     "genres": [
       "Action",
       "Crime",
@@ -273,6 +273,30 @@
     "lead_studio": null
   },
   {
+    "title": "Chers parents",
+    "plex_release": "25 juin 2026",
+    "tmdb_id": 1368830,
+    "poster_path": "/dOTZP3gnMjJHva914Xrzljhyl7c.jpg",
+    "original_title": "Chers parents",
+    "cinema_date": "25 février 2026",
+    "vote_average": 6.7,
+    "vote_count": 32,
+    "genres": [
+      "Comédie"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
     "title": "Les Enfants de la Résistance",
     "plex_release": "25 juin 2026",
     "tmdb_id": 1309400,
@@ -280,7 +304,7 @@
     "original_title": "Les Enfants de la Résistance",
     "cinema_date": "11 février 2026",
     "vote_average": 6.6,
-    "vote_count": 41,
+    "vote_count": 42,
     "genres": [
       "Histoire",
       "Drame",
@@ -294,30 +318,6 @@
       "score": 1,
       "sources": [
         "override-manuel"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "Chers parents",
-    "plex_release": "25 juin 2026",
-    "tmdb_id": 1368830,
-    "poster_path": "/dOTZP3gnMjJHva914Xrzljhyl7c.jpg",
-    "original_title": "Chers parents",
-    "cinema_date": "25 février 2026",
-    "vote_average": 6.7,
-    "vote_count": 29,
-    "genres": [
-      "Comédie"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
       ]
     },
     "tier": "niche",
@@ -354,8 +354,8 @@
     "poster_path": "/pD5fSVgDW2L5993eAlDd2GFXwIp.jpg",
     "original_title": "The Devil Wears Prada 2",
     "cinema_date": "29 avril 2026",
-    "vote_average": 6.5,
-    "vote_count": 830,
+    "vote_average": 6.6,
+    "vote_count": 834,
     "genres": [
       "Comédie",
       "Drame"
