@@ -80,7 +80,7 @@
     "original_title": "Michael",
     "cinema_date": "22 avril 2026",
     "vote_average": 8.7,
-    "vote_count": 2977,
+    "vote_count": 3013,
     "genres": [
       "Musique",
       "Drame"
@@ -105,7 +105,7 @@
     "original_title": "Mortal Kombat II",
     "cinema_date": "6 mai 2026",
     "vote_average": 8,
-    "vote_count": 1650,
+    "vote_count": 1662,
     "genres": [
       "Action",
       "Fantastique",
@@ -203,7 +203,7 @@
     "original_title": "Le rêve américain",
     "cinema_date": "18 février 2026",
     "vote_average": 7.4,
-    "vote_count": 108,
+    "vote_count": 110,
     "genres": [
       "Comédie"
     ],
@@ -273,38 +273,14 @@
     "lead_studio": null
   },
   {
-    "title": "Chers parents",
-    "plex_release": "25 juin 2026",
-    "tmdb_id": 1368830,
-    "poster_path": "/dOTZP3gnMjJHva914Xrzljhyl7c.jpg",
-    "original_title": "Chers parents",
-    "cinema_date": "25 février 2026",
-    "vote_average": 6.7,
-    "vote_count": 32,
-    "genres": [
-      "Comédie"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
     "title": "Les Enfants de la Résistance",
     "plex_release": "25 juin 2026",
     "tmdb_id": 1309400,
     "poster_path": "/uoBOi1xbfbJ9l8xg76uwI2B4MZX.jpg",
     "original_title": "Les Enfants de la Résistance",
     "cinema_date": "11 février 2026",
-    "vote_average": 6.6,
-    "vote_count": 42,
+    "vote_average": 6.5,
+    "vote_count": 43,
     "genres": [
       "Histoire",
       "Drame",
@@ -324,6 +300,30 @@
     "lead_studio": null
   },
   {
+    "title": "Chers parents",
+    "plex_release": "25 juin 2026",
+    "tmdb_id": 1368830,
+    "poster_path": "/dOTZP3gnMjJHva914Xrzljhyl7c.jpg",
+    "original_title": "Chers parents",
+    "cinema_date": "25 février 2026",
+    "vote_average": 6.4,
+    "vote_count": 34,
+    "genres": [
+      "Comédie"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
     "title": "L'Engloutie",
     "plex_release": "25 juin 2026",
     "tmdb_id": 1069650,
@@ -331,7 +331,7 @@
     "original_title": "L'Engloutie",
     "cinema_date": "24 décembre 2025",
     "vote_average": 5.8,
-    "vote_count": 12,
+    "vote_count": 13,
     "genres": [
       "Drame"
     ],
@@ -354,8 +354,8 @@
     "poster_path": "/pD5fSVgDW2L5993eAlDd2GFXwIp.jpg",
     "original_title": "The Devil Wears Prada 2",
     "cinema_date": "29 avril 2026",
-    "vote_average": 6.6,
-    "vote_count": 834,
+    "vote_average": 6.5,
+    "vote_count": 837,
     "genres": [
       "Comédie",
       "Drame"
