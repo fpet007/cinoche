@@ -1,63 +1,38 @@
 [
   {
-    "title": "Marsupilami",
-    "plex_release": "4 juin 2026",
-    "tmdb_id": 1145899,
-    "poster_path": "/rJNHFa07Id2ylQgw0ttzGwpeczE.jpg",
-    "original_title": "Marsupilami",
-    "cinema_date": "4 février 2026",
-    "vote_average": 6.3,
-    "vote_count": 125,
-    "genres": [
-      "Aventure",
-      "Comédie"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "mid",
-    "lead_studio": null
-  },
-  {
-    "title": "N121 Bus de nuit",
-    "plex_release": "4 juin 2026",
-    "tmdb_id": 1433929,
-    "poster_path": "/kyqgCGP7GkAeBD5wTErqoABzY1u.jpg",
-    "original_title": "N121 Bus de nuit",
-    "cinema_date": "4 février 2026",
-    "vote_average": 7.6,
-    "vote_count": 8,
-    "genres": [
-      "Thriller"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "À pied d’œuvre",
-    "plex_release": "4 juin 2026",
-    "tmdb_id": 1430820,
-    "poster_path": "/iqeF5Yr65hPlEJojJGESjVclf6h.jpg",
-    "original_title": "À pied d’œuvre",
-    "cinema_date": "4 février 2026",
-    "vote_average": 6.5,
+    "title": "Alter ego",
+    "plex_release": "2 juillet 2026",
+    "tmdb_id": 1266791,
+    "poster_path": "/kpS1FLAA0Jg16oTueSZiEdxQ37A.jpg",
+    "original_title": "Alter ego",
+    "cinema_date": "4 mars 2026",
+    "vote_average": 6.6,
     "vote_count": 61,
     "genres": [
+      "Comédie"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "La Maison des Femmes",
+    "plex_release": "2 juillet 2026",
+    "tmdb_id": 1318417,
+    "poster_path": "/3blpQb6lMwX3VW4enxNpkX9po1c.jpg",
+    "original_title": "La Maison des Femmes",
+    "cinema_date": "4 mars 2026",
+    "vote_average": 8.6,
+    "vote_count": 36,
+    "genres": [
       "Drame"
     ],
     "is_french": true,
@@ -73,65 +48,66 @@
     "lead_studio": null
   },
   {
-    "title": "Michael",
-    "plex_release": "9 juin 2026",
-    "tmdb_id": 936075,
-    "poster_path": "/2sDgNilJGVFpl1x4DMzYHjk0L0f.jpg",
-    "original_title": "Michael",
-    "cinema_date": "22 avril 2026",
-    "vote_average": 8.7,
-    "vote_count": 3153,
-    "genres": [
-      "Musique",
-      "Drame"
-    ],
-    "is_french": false,
-    "source": "override-manuel",
-    "confidence": {
-      "level": "override",
-      "score": 1,
-      "sources": [
-        "override-manuel"
-      ]
-    },
-    "tier": "blockbuster",
-    "lead_studio": "Lionsgate"
-  },
-  {
-    "title": "Mortal Kombat II",
-    "plex_release": "9 juin 2026",
-    "tmdb_id": 931285,
-    "poster_path": "/yPkeeBEJdQO85AGCwi2XEIfMOxa.jpg",
-    "original_title": "Mortal Kombat II",
-    "cinema_date": "6 mai 2026",
-    "vote_average": 8,
-    "vote_count": 1745,
+    "title": "The Mandalorian and Grogu",
+    "plex_release": "4 juillet 2026",
+    "tmdb_id": 1228710,
+    "poster_path": "/qkH4ntQtO5qnL17RFOvmkNHKpGt.jpg",
+    "original_title": "The Mandalorian and Grogu",
+    "cinema_date": "20 mai 2026",
+    "vote_average": 6.7,
+    "vote_count": 540,
     "genres": [
       "Action",
-      "Fantastique",
-      "Aventure"
+      "Aventure",
+      "Science-Fiction"
     ],
     "is_french": false,
-    "source": "maxblizz",
+    "source": "prédite",
     "confidence": {
-      "level": "medium",
-      "score": 0.7,
+      "level": "low",
+      "score": 0.45,
       "sources": [
-        "maxblizz"
+        "prédite"
       ]
     },
     "tier": "blockbuster",
     "lead_studio": null
   },
   {
-    "title": "LOL 2.0",
-    "plex_release": "11 juin 2026",
-    "tmdb_id": 1477170,
-    "poster_path": "/dNjZ6lQCVZMWAxKlqMVAlzGC5FQ.jpg",
-    "original_title": "LOL 2.0",
-    "cinema_date": "11 février 2026",
-    "vote_average": 6.1,
-    "vote_count": 53,
+    "title": "Vulvitis",
+    "plex_release": "7 juillet 2026",
+    "tmdb_id": 1714672,
+    "poster_path": "/6cObUwomw9sZefIGszccQcpgOKP.jpg",
+    "original_title": "Vulvitis",
+    "cinema_date": "9 mars 2026",
+    "vote_average": 10,
+    "vote_count": 1,
+    "genres": [
+      "Drame",
+      "Crime",
+      "Romance"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Les K d'Or",
+    "plex_release": "9 juillet 2026",
+    "tmdb_id": 1295722,
+    "poster_path": "/xZODXZeys9ARnXe2DekYFoUx385.jpg",
+    "original_title": "Les K d'Or",
+    "cinema_date": "11 mars 2026",
+    "vote_average": 4.8,
+    "vote_count": 14,
     "genres": [
       "Comédie"
     ],
@@ -148,88 +124,16 @@
     "lead_studio": null
   },
   {
-    "title": "L'Infiltrée",
-    "plex_release": "11 juin 2026",
-    "tmdb_id": 1420742,
-    "poster_path": "/ys6twzUhtNacnnhXTnHFZTMiOPM.jpg",
-    "original_title": "L'Infiltrée",
-    "cinema_date": "11 février 2026",
-    "vote_average": 5,
-    "vote_count": 25,
+    "title": "Le Crime du 3e étage",
+    "plex_release": "9 juillet 2026",
+    "tmdb_id": 1471224,
+    "poster_path": "/5FHAlQPHFyJEIN1UOxsADog1KUy.jpg",
+    "original_title": "Le Crime du 3e étage",
+    "cinema_date": "11 mars 2026",
+    "vote_average": 6.8,
+    "vote_count": 38,
     "genres": [
-      "Comédie"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "Coutures",
-    "plex_release": "18 juin 2026",
-    "tmdb_id": 1390382,
-    "poster_path": "/zN2hnZzj3DjJH2CzB76kDo1zYFu.jpg",
-    "original_title": "Coutures",
-    "cinema_date": "18 février 2026",
-    "vote_average": 6.3,
-    "vote_count": 41,
-    "genres": [
-      "Drame"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "Le rêve américain",
-    "plex_release": "18 juin 2026",
-    "tmdb_id": 1365378,
-    "poster_path": "/uXGqYv2cahBG062OQ93oMqWQCs5.jpg",
-    "original_title": "Le rêve américain",
-    "cinema_date": "18 février 2026",
-    "vote_average": 7.4,
-    "vote_count": 111,
-    "genres": [
-      "Comédie"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "Maigret et le mort amoureux",
-    "plex_release": "18 juin 2026",
-    "tmdb_id": 1398486,
-    "poster_path": "/yfFRDEWHalKnNnBisirTaBeLLPM.jpg",
-    "original_title": "Maigret et le mort amoureux",
-    "cinema_date": "18 février 2026",
-    "vote_average": 6.5,
-    "vote_count": 19,
-    "genres": [
-      "Mystère",
+      "Comédie",
       "Drame",
       "Crime"
     ],
@@ -246,21 +150,19 @@
     "lead_studio": null
   },
   {
-    "title": "The Criminals",
-    "plex_release": "20 juin 2026",
-    "tmdb_id": 1242265,
-    "poster_path": "/vUvZuBWRsjO2tnUo2yesrdbhKal.jpg",
-    "original_title": "Fuze",
-    "cinema_date": "6 mai 2026",
-    "vote_average": 6.4,
-    "vote_count": 136,
+    "title": "Victor comme tout le monde",
+    "plex_release": "9 juillet 2026",
+    "tmdb_id": 1454680,
+    "poster_path": "/sYRssxFzHMr3Rz0VTEF21m6iVDU.jpg",
+    "original_title": "Victor comme tout le monde",
+    "cinema_date": "11 mars 2026",
+    "vote_average": 6.9,
+    "vote_count": 17,
     "genres": [
-      "Action",
-      "Crime",
       "Drame",
-      "Thriller"
+      "Comédie"
     ],
-    "is_french": false,
+    "is_french": true,
     "source": "prédite",
     "confidence": {
       "level": "low",
@@ -269,18 +171,217 @@
         "prédite"
       ]
     },
-    "tier": "mid",
+    "tier": "niche",
     "lead_studio": null
   },
   {
-    "title": "Chers parents",
-    "plex_release": "25 juin 2026",
-    "tmdb_id": 1368830,
-    "poster_path": "/rOYf8JDUsCI4EoHeS2p399Q9wyi.jpg",
-    "original_title": "Chers parents",
-    "cinema_date": "25 février 2026",
-    "vote_average": 6.5,
-    "vote_count": 38,
+    "title": "La Danse des renards",
+    "plex_release": "16 juillet 2026",
+    "tmdb_id": 1020829,
+    "poster_path": "/wXBOd6QQE4fLBF0zWlARBMMkh3T.jpg",
+    "original_title": "La Danse des renards",
+    "cinema_date": "18 mars 2026",
+    "vote_average": 6.3,
+    "vote_count": 8,
+    "genres": [
+      "Drame"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Les rayons et les ombres",
+    "plex_release": "16 juillet 2026",
+    "tmdb_id": 1318335,
+    "poster_path": "/kZL29CVH0cYxN8IMtsj2jMpFJTj.jpg",
+    "original_title": "Les rayons et les ombres",
+    "cinema_date": "18 mars 2026",
+    "vote_average": 7.5,
+    "vote_count": 84,
+    "genres": [
+      "Drame",
+      "Histoire",
+      "Familial"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Police Flash 80",
+    "plex_release": "16 juillet 2026",
+    "tmdb_id": 1002109,
+    "poster_path": "/2HD9MuSt5Fk6i7uAgI3m75VATjk.jpg",
+    "original_title": "Police Flash 80",
+    "cinema_date": "18 mars 2026",
+    "vote_average": 6.9,
+    "vote_count": 22,
+    "genres": [
+      "Comédie",
+      "Crime"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "La Guerre des Prix",
+    "plex_release": "16 juillet 2026",
+    "tmdb_id": 1376412,
+    "poster_path": "/vyjgmwVgSn10aqDojeztAwnDqWL.jpg",
+    "original_title": "La Guerre des Prix",
+    "cinema_date": "18 mars 2026",
+    "vote_average": 6.8,
+    "vote_count": 17,
+    "genres": [
+      "Drame",
+      "Thriller"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Scary Movie",
+    "plex_release": "21 juillet 2026",
+    "tmdb_id": 1273221,
+    "poster_path": "/gIComZ1TfZdWmuD4L4mJ8sEv0km.jpg",
+    "original_title": "Scary Movie",
+    "cinema_date": "3 juin 2026",
+    "vote_average": 5.5,
+    "vote_count": 381,
+    "genres": [
+      "Comédie",
+      "Horreur"
+    ],
+    "is_french": false,
+    "source": "maxblizz",
+    "confidence": {
+      "level": "medium",
+      "score": 0.7,
+      "sources": [
+        "maxblizz"
+      ]
+    },
+    "tier": "blockbuster",
+    "lead_studio": null
+  },
+  {
+    "title": "Ceux qui comptent",
+    "plex_release": "23 juillet 2026",
+    "tmdb_id": 1421963,
+    "poster_path": "/gtmENvIUyH4J7x8UcrsdFkmTpJq.jpg",
+    "original_title": "Ceux qui comptent",
+    "cinema_date": "25 mars 2026",
+    "vote_average": 6.7,
+    "vote_count": 28,
+    "genres": [
+      "Comédie",
+      "Drame"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Yellow Letters",
+    "plex_release": "30 juillet 2026",
+    "tmdb_id": 1315657,
+    "poster_path": "/39XGBgqfBCTCWNiUD1TQDkxGRtk.jpg",
+    "original_title": "Gelbe Briefe",
+    "cinema_date": "1 avril 2026",
+    "vote_average": 7.4,
+    "vote_count": 37,
+    "genres": [
+      "Drame"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Compostelle",
+    "plex_release": "30 juillet 2026",
+    "tmdb_id": 1404604,
+    "poster_path": "/4FaoBpDtzhZk9R907epSN5WCelq.jpg",
+    "original_title": "Compostelle",
+    "cinema_date": "1 avril 2026",
+    "vote_average": 7.1,
+    "vote_count": 27,
+    "genres": [
+      "Drame",
+      "Comédie"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Mauvaise Pioche",
+    "plex_release": "30 juillet 2026",
+    "tmdb_id": 1440304,
+    "poster_path": "/bLKDM4BEowhzck0Bdhy2hbMDecp.jpg",
+    "original_title": "Mauvaise Pioche",
+    "cinema_date": "1 avril 2026",
+    "vote_average": 6.9,
+    "vote_count": 11,
     "genres": [
       "Comédie"
     ],
@@ -297,80 +398,28 @@
     "lead_studio": null
   },
   {
-    "title": "Les Enfants de la Résistance",
-    "plex_release": "25 juin 2026",
-    "tmdb_id": 1309400,
-    "poster_path": "/uoBOi1xbfbJ9l8xg76uwI2B4MZX.jpg",
-    "original_title": "Les Enfants de la Résistance",
-    "cinema_date": "11 février 2026",
-    "vote_average": 6.5,
-    "vote_count": 45,
-    "genres": [
-      "Aventure",
-      "Drame",
-      "Histoire",
-      "Familial"
-    ],
-    "is_french": true,
-    "source": "override-manuel",
-    "confidence": {
-      "level": "override",
-      "score": 1,
-      "sources": [
-        "override-manuel"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "L'Engloutie",
-    "plex_release": "25 juin 2026",
-    "tmdb_id": 1069650,
-    "poster_path": "/bBHi3IK1WGrHVHnnz1ALXQhvKqn.jpg",
-    "original_title": "L'Engloutie",
-    "cinema_date": "24 décembre 2025",
+    "title": "Derrière les palmiers",
+    "plex_release": "30 juillet 2026",
+    "tmdb_id": 1046699,
+    "poster_path": "/1pccPSZiuytLXVc0l0RRv3dOhSn.jpg",
+    "original_title": "Derrière les palmiers",
+    "cinema_date": "1 avril 2026",
     "vote_average": 5.8,
-    "vote_count": 13,
+    "vote_count": 5,
     "genres": [
-      "Drame"
+      "Drame",
+      "Romance"
     ],
     "is_french": true,
-    "source": "officielle-fr",
+    "source": "prédite",
     "confidence": {
-      "level": "high",
-      "score": 0.95,
+      "level": "low",
+      "score": 0.45,
       "sources": [
-        "officielle-fr"
+        "prédite"
       ]
     },
     "tier": "niche",
     "lead_studio": null
-  },
-  {
-    "title": "Le Diable s'habille en Prada 2",
-    "plex_release": "30 juin 2026",
-    "tmdb_id": 1314481,
-    "poster_path": "/pD5fSVgDW2L5993eAlDd2GFXwIp.jpg",
-    "original_title": "The Devil Wears Prada 2",
-    "cinema_date": "29 avril 2026",
-    "vote_average": 6.6,
-    "vote_count": 880,
-    "genres": [
-      "Comédie",
-      "Drame"
-    ],
-    "is_french": false,
-    "source": "officielle-us",
-    "confidence": {
-      "level": "high",
-      "score": 0.88,
-      "sources": [
-        "officielle-us",
-        "maxblizz"
-      ]
-    },
-    "tier": "blockbuster",
-    "lead_studio": "20th Century Studios"
   }
 ]
