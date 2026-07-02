@@ -81,7 +81,7 @@
     "original_title": "Backrooms",
     "cinema_date": "17 juin 2026",
     "vote_average": 6.8,
-    "vote_count": 808,
+    "vote_count": 815,
     "genres": [
       "Horreur",
       "Mystère",
@@ -98,32 +98,6 @@
     },
     "tier": "blockbuster",
     "lead_studio": "A24"
-  },
-  {
-    "title": "Vulvitis",
-    "plex_release": "7 juillet 2026",
-    "tmdb_id": 1714672,
-    "poster_path": "/6cObUwomw9sZefIGszccQcpgOKP.jpg",
-    "original_title": "Vulvitis",
-    "cinema_date": "9 mars 2026",
-    "vote_average": 10,
-    "vote_count": 1,
-    "genres": [
-      "Drame",
-      "Crime",
-      "Romance"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
   },
   {
     "title": "Les K d'Or",
@@ -284,7 +258,7 @@
     "original_title": "Scary Movie",
     "cinema_date": "3 juin 2026",
     "vote_average": 5.4,
-    "vote_count": 392,
+    "vote_count": 393,
     "genres": [
       "Comédie"
     ],
@@ -308,7 +282,7 @@
     "original_title": "Masters of the Universe",
     "cinema_date": "3 juin 2026",
     "vote_average": 7,
-    "vote_count": 349,
+    "vote_count": 350,
     "genres": [
       "Action",
       "Fantastique",
@@ -408,7 +382,7 @@
     "plex_release": "30 juillet 2026",
     "tmdb_id": 1315657,
     "poster_path": "/39XGBgqfBCTCWNiUD1TQDkxGRtk.jpg",
-    "original_title": "Gelbe Briefe",
+    "original_title": "Yellow Letters",
     "cinema_date": "1 avril 2026",
     "vote_average": 7.4,
     "vote_count": 37,
