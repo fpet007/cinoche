@@ -589,6 +589,33 @@ async function fetchMovieDetails(movieId, cache) {
   return data;
 }
 
+// ─── 🔧 FIX : nettoyage des titres MaxBlizz ────────────────────────────────────
+// Le regex d'extraction du slug capture TOUT ce qui précède "-vod-release-date-
+// revealed" dans l'URL. Or MaxBlizz insère parfois des mots marketing dans ses
+// URLs (ex: ".../masters-of-the-universe-coming-to-vod-release-date-revealed/"),
+// ce qui pollue le titre reconstruit ("masters of the universe coming to") et
+// fait échouer la recherche TMDB. On coupe ces suffixes connus avant de chercher.
+const TITLE_JUNK_SUFFIXES = [
+  /\bcoming to\b.*$/i,
+  /\bis (?:here|out|coming)\b.*$/i,
+  /\bhits? (?:digital|vod|streaming|theaters?)\b.*$/i,
+  /\bheads? to\b.*$/i,
+  /\barrives? (?:on|to|in)?\b.*$/i,
+  /\bgets? an?\b.*$/i,
+  /\bout now\b.*$/i,
+  /\bavailable now\b.*$/i,
+  /\bset for\b.*$/i,
+];
+
+function cleanScrapedTitle(rawTitle) {
+  let t = rawTitle.trim();
+  for (const pattern of TITLE_JUNK_SUFFIXES) {
+    const cleaned = t.replace(pattern, '').trim();
+    if (cleaned) t = cleaned; // ne jamais vider complètement le titre
+  }
+  return t;
+}
+
 async function tmdbSearchByTitle(title, year = null) {
   const tokens = title.split(/\s+/).filter(Boolean);
   const candidates = [title];
@@ -704,7 +731,7 @@ async function fetchMaxblizzReleases() {
       if (!articleData.date) { skipped++; continue; }
       const date = new Date(articleData.date);
       if (isNaN(date)) { skipped++; continue; }
-      const title = slug.replace(/-/g, ' ');
+      const title = cleanScrapedTitle(slug.replace(/-/g, ' ')); // 🔧 FIX : anti-pollution marketing
       releases.push({ slug, title, date, url });
     }
 
@@ -937,10 +964,13 @@ async function enrichWithAllocine({ finalResults, monthStart, monthEnd, cache, t
     if (isSpectacle(details))           { skipped++; continue; }
     if (isQuebecLocalProduction(details)){ skipped++; continue; }
 
-    // Tier filter : on ne veut pas de niche non-français en ajout AlloCiné non plus
+    // 🔧 FIX v8.4 : idem MaxBlizz/BingeBase — AlloCiné triangule une vraie sortie
+    // FR officielle, ce n'est pas du bruit TMDB brut. On ne jette plus sur le tier.
     const isFrench = isFrenchProduction(details);
     const tierInfo = classifyTier(details);
-    if (!isFrench && tierInfo.tier === 'niche') { skipped++; continue; }
+    if (!isFrench && tierInfo.tier === 'niche') {
+      vlog(`     ⚠️  "${tmdbHit.title}" tier=niche (score=${tierInfo.score}) mais conservé (source AlloCiné confirmée)`);
+    }
 
     const cinemaDateFR = getTheatricalDateFR(details.release_dates);
     const cinemaDate   = cinemaDateFR ?? (details.release_date ? new Date(details.release_date) : null);
@@ -1236,9 +1266,13 @@ async function enrichWithBingebase({ finalResults, monthStart, monthEnd, cache }
     if (isSpectacle(details))            { skipped++;  continue; }
     if (isQuebecLocalProduction(details)){ dropQc++;   continue; }
 
+    // 🔧 FIX v8.4 : idem MaxBlizz — BingeBase est une source déjà curatée
+    // (calendrier officiel des sorties digitales), on ne jette plus sur le tier.
     const isFrench = isFrenchProduction(details);
     const tierInfo = classifyTier(details);
-    if (!isFrench && tierInfo.tier === 'niche') { dropNiche++; continue; }
+    if (!isFrench && tierInfo.tier === 'niche') {
+      vlog(`     ⚠️  "${tmdbHit.title}" tier=niche (score=${tierInfo.score}) mais conservé (source BingeBase confirmée)`);
+    }
 
     const cinemaDateFR = getTheatricalDateFR(details.release_dates);
     const cinemaDate   = cinemaDateFR ?? (details.release_date ? new Date(details.release_date) : null);
@@ -1358,12 +1392,18 @@ async function enrichWithMaxblizz({ finalResults, monthStart, monthEnd, cache, o
       dropQc++; continue;
     }
 
-    // 🆕 v8 : filtre tier pour non-FR (on ne veut PAS de niche international)
+    // 🔧 FIX v8.4 : le filtre "niche non-FR" reste utile pour le bruit de la
+    // découverte TMDB brute (Phase 2), mais ici le film vient d'une source déjà
+    // curatée : MaxBlizz n'annonce que de vraies sorties VOD confirmées pour de
+    // vrais films de cinéma (ex: "The Death of Robin Hood", petit budget A24 mais
+    // bien sorti en salle). Le score composite (budget/popularité/votes) peut être
+    // artificiellement bas juste après une sortie salle récente ou pour un film
+    // indé — ce n'est pas un signe de "faux film" comme dans le scan TMDB brut.
+    // On garde donc le tier à titre indicatif mais on ne jette plus l'entrée.
     const isFrench = isFrenchProduction(details);
     const tierInfo = classifyTier(details);
     if (!isFrench && tierInfo.tier === 'niche') {
-      vlog(`     🚫 "${tmdbHit.title}" filtré (niche non-FR, score=${tierInfo.score})`);
-      dropNiche++; continue;
+      vlog(`     ⚠️  "${tmdbHit.title}" tier=niche (score=${tierInfo.score}) mais conservé (source MaxBlizz confirmée)`);
     }
 
     const cinemaDate = details.release_date ? new Date(details.release_date) : null;
