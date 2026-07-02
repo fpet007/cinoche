@@ -55,7 +55,7 @@
     "original_title": "The Mandalorian and Grogu",
     "cinema_date": "20 mai 2026",
     "vote_average": 6.7,
-    "vote_count": 540,
+    "vote_count": 543,
     "genres": [
       "Action",
       "Aventure",
@@ -72,6 +72,32 @@
     },
     "tier": "blockbuster",
     "lead_studio": null
+  },
+  {
+    "title": "Backrooms",
+    "plex_release": "7 juillet 2026",
+    "tmdb_id": 1083381,
+    "poster_path": "/thQQ3BBBhGDtWm3UTtabhyDJd8U.jpg",
+    "original_title": "Backrooms",
+    "cinema_date": "17 juin 2026",
+    "vote_average": 6.8,
+    "vote_count": 803,
+    "genres": [
+      "Horreur",
+      "Mystère",
+      "Science-Fiction"
+    ],
+    "is_french": false,
+    "source": "officielle-us",
+    "confidence": {
+      "level": "high",
+      "score": 0.82,
+      "sources": [
+        "officielle-us"
+      ]
+    },
+    "tier": "blockbuster",
+    "lead_studio": "A24"
   },
   {
     "title": "Vulvitis",
@@ -175,16 +201,18 @@
     "lead_studio": null
   },
   {
-    "title": "La Danse des renards",
+    "title": "Les rayons et les ombres",
     "plex_release": "16 juillet 2026",
-    "tmdb_id": 1020829,
-    "poster_path": "/wXBOd6QQE4fLBF0zWlARBMMkh3T.jpg",
-    "original_title": "La Danse des renards",
+    "tmdb_id": 1318335,
+    "poster_path": "/kZL29CVH0cYxN8IMtsj2jMpFJTj.jpg",
+    "original_title": "Les rayons et les ombres",
     "cinema_date": "18 mars 2026",
-    "vote_average": 6.3,
-    "vote_count": 8,
+    "vote_average": 7.5,
+    "vote_count": 84,
     "genres": [
-      "Drame"
+      "Drame",
+      "Histoire",
+      "Familial"
     ],
     "is_french": true,
     "source": "prédite",
@@ -199,18 +227,16 @@
     "lead_studio": null
   },
   {
-    "title": "Les rayons et les ombres",
+    "title": "La Danse des renards",
     "plex_release": "16 juillet 2026",
-    "tmdb_id": 1318335,
-    "poster_path": "/kZL29CVH0cYxN8IMtsj2jMpFJTj.jpg",
-    "original_title": "Les rayons et les ombres",
+    "tmdb_id": 1020829,
+    "poster_path": "/wXBOd6QQE4fLBF0zWlARBMMkh3T.jpg",
+    "original_title": "La Danse des renards",
     "cinema_date": "18 mars 2026",
-    "vote_average": 7.5,
-    "vote_count": 84,
+    "vote_average": 6.3,
+    "vote_count": 8,
     "genres": [
-      "Drame",
-      "Histoire",
-      "Familial"
+      "Drame"
     ],
     "is_french": true,
     "source": "prédite",
@@ -281,11 +307,10 @@
     "poster_path": "/gIComZ1TfZdWmuD4L4mJ8sEv0km.jpg",
     "original_title": "Scary Movie",
     "cinema_date": "3 juin 2026",
-    "vote_average": 5.5,
-    "vote_count": 381,
+    "vote_average": 5.4,
+    "vote_count": 390,
     "genres": [
-      "Comédie",
-      "Horreur"
+      "Comédie"
     ],
     "is_french": false,
     "source": "maxblizz",
@@ -297,6 +322,59 @@
       ]
     },
     "tier": "blockbuster",
+    "lead_studio": null
+  },
+  {
+    "title": "Les Maîtres de l'Univers",
+    "plex_release": "21 juillet 2026",
+    "tmdb_id": 454639,
+    "poster_path": "/lYoc8kbgu8BKQQjN2fPsmRBJ8qB.jpg",
+    "original_title": "Masters of the Universe",
+    "cinema_date": "3 juin 2026",
+    "vote_average": 7,
+    "vote_count": 349,
+    "genres": [
+      "Action",
+      "Fantastique",
+      "Science-Fiction"
+    ],
+    "is_french": false,
+    "source": "maxblizz",
+    "confidence": {
+      "level": "medium",
+      "score": 0.7,
+      "sources": [
+        "maxblizz"
+      ]
+    },
+    "tier": "blockbuster",
+    "lead_studio": null
+  },
+  {
+    "title": "On l'appelait Robin des Bois",
+    "plex_release": "21 juillet 2026",
+    "tmdb_id": 1284465,
+    "poster_path": "/bYaznBVPlQ4C0uTu6wXn68NZFoB.jpg",
+    "original_title": "The Death of Robin Hood",
+    "cinema_date": "18 juin 2026",
+    "vote_average": 6.7,
+    "vote_count": 40,
+    "genres": [
+      "Aventure",
+      "Drame",
+      "Thriller",
+      "Action"
+    ],
+    "is_french": false,
+    "source": "maxblizz",
+    "confidence": {
+      "level": "medium",
+      "score": 0.7,
+      "sources": [
+        "maxblizz"
+      ]
+    },
+    "tier": "niche",
     "lead_studio": null
   },
   {
@@ -325,16 +403,17 @@
     "lead_studio": null
   },
   {
-    "title": "Yellow Letters",
+    "title": "Compostelle",
     "plex_release": "30 juillet 2026",
-    "tmdb_id": 1315657,
-    "poster_path": "/39XGBgqfBCTCWNiUD1TQDkxGRtk.jpg",
-    "original_title": "Gelbe Briefe",
+    "tmdb_id": 1404604,
+    "poster_path": "/4FaoBpDtzhZk9R907epSN5WCelq.jpg",
+    "original_title": "Compostelle",
     "cinema_date": "1 avril 2026",
-    "vote_average": 7.4,
-    "vote_count": 37,
+    "vote_average": 7.1,
+    "vote_count": 28,
     "genres": [
-      "Drame"
+      "Drame",
+      "Comédie"
     ],
     "is_french": true,
     "source": "prédite",
@@ -349,17 +428,16 @@
     "lead_studio": null
   },
   {
-    "title": "Compostelle",
+    "title": "Yellow Letters",
     "plex_release": "30 juillet 2026",
-    "tmdb_id": 1404604,
-    "poster_path": "/4FaoBpDtzhZk9R907epSN5WCelq.jpg",
-    "original_title": "Compostelle",
+    "tmdb_id": 1315657,
+    "poster_path": "/39XGBgqfBCTCWNiUD1TQDkxGRtk.jpg",
+    "original_title": "Gelbe Briefe",
     "cinema_date": "1 avril 2026",
-    "vote_average": 7.1,
-    "vote_count": 27,
+    "vote_average": 7.4,
+    "vote_count": 37,
     "genres": [
-      "Drame",
-      "Comédie"
+      "Drame"
     ],
     "is_french": true,
     "source": "prédite",
