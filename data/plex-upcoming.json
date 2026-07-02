@@ -227,30 +227,6 @@
     "lead_studio": null
   },
   {
-    "title": "La Danse des renards",
-    "plex_release": "16 juillet 2026",
-    "tmdb_id": 1020829,
-    "poster_path": "/wXBOd6QQE4fLBF0zWlARBMMkh3T.jpg",
-    "original_title": "La Danse des renards",
-    "cinema_date": "18 mars 2026",
-    "vote_average": 6.3,
-    "vote_count": 8,
-    "genres": [
-      "Drame"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
     "title": "Police Flash 80",
     "plex_release": "16 juillet 2026",
     "tmdb_id": 1002109,
@@ -358,7 +334,7 @@
     "original_title": "The Death of Robin Hood",
     "cinema_date": "18 juin 2026",
     "vote_average": 6.7,
-    "vote_count": 40,
+    "vote_count": 41,
     "genres": [
       "Aventure",
       "Drame",
