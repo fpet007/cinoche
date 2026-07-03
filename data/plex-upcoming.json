@@ -55,7 +55,7 @@
     "original_title": "The Mandalorian and Grogu",
     "cinema_date": "20 mai 2026",
     "vote_average": 6.7,
-    "vote_count": 543,
+    "vote_count": 549,
     "genres": [
       "Action",
       "Aventure",
@@ -81,7 +81,7 @@
     "original_title": "Backrooms",
     "cinema_date": "17 juin 2026",
     "vote_average": 6.8,
-    "vote_count": 815,
+    "vote_count": 831,
     "genres": [
       "Horreur",
       "Mystère",
@@ -100,16 +100,18 @@
     "lead_studio": "A24"
   },
   {
-    "title": "Les K d'Or",
+    "title": "Le Crime du 3e étage",
     "plex_release": "9 juillet 2026",
-    "tmdb_id": 1295722,
-    "poster_path": "/xZODXZeys9ARnXe2DekYFoUx385.jpg",
-    "original_title": "Les K d'Or",
+    "tmdb_id": 1471224,
+    "poster_path": "/5FHAlQPHFyJEIN1UOxsADog1KUy.jpg",
+    "original_title": "Le Crime du 3e étage",
     "cinema_date": "11 mars 2026",
-    "vote_average": 4.8,
-    "vote_count": 14,
+    "vote_average": 6.8,
+    "vote_count": 38,
     "genres": [
-      "Comédie"
+      "Comédie",
+      "Drame",
+      "Crime"
     ],
     "is_french": true,
     "source": "prédite",
@@ -124,18 +126,16 @@
     "lead_studio": null
   },
   {
-    "title": "Le Crime du 3e étage",
+    "title": "Les K d'Or",
     "plex_release": "9 juillet 2026",
-    "tmdb_id": 1471224,
-    "poster_path": "/5FHAlQPHFyJEIN1UOxsADog1KUy.jpg",
-    "original_title": "Le Crime du 3e étage",
+    "tmdb_id": 1295722,
+    "poster_path": "/xZODXZeys9ARnXe2DekYFoUx385.jpg",
+    "original_title": "Les K d'Or",
     "cinema_date": "11 mars 2026",
-    "vote_average": 6.8,
-    "vote_count": 38,
+    "vote_average": 4.8,
+    "vote_count": 14,
     "genres": [
-      "Comédie",
-      "Drame",
-      "Crime"
+      "Comédie"
     ],
     "is_french": true,
     "source": "prédite",
@@ -258,9 +258,10 @@
     "original_title": "Scary Movie",
     "cinema_date": "3 juin 2026",
     "vote_average": 5.4,
-    "vote_count": 393,
+    "vote_count": 396,
     "genres": [
-      "Comédie"
+      "Comédie",
+      "Horreur"
     ],
     "is_french": false,
     "source": "maxblizz",
@@ -282,7 +283,7 @@
     "original_title": "Masters of the Universe",
     "cinema_date": "3 juin 2026",
     "vote_average": 7,
-    "vote_count": 350,
+    "vote_count": 354,
     "genres": [
       "Action",
       "Fantastique",
@@ -308,7 +309,7 @@
     "original_title": "The Death of Robin Hood",
     "cinema_date": "18 juin 2026",
     "vote_average": 6.7,
-    "vote_count": 41,
+    "vote_count": 42,
     "genres": [
       "Aventure",
       "Drame",
@@ -353,17 +354,16 @@
     "lead_studio": null
   },
   {
-    "title": "Compostelle",
+    "title": "Yellow Letters",
     "plex_release": "30 juillet 2026",
-    "tmdb_id": 1404604,
-    "poster_path": "/4FaoBpDtzhZk9R907epSN5WCelq.jpg",
-    "original_title": "Compostelle",
+    "tmdb_id": 1315657,
+    "poster_path": "/39XGBgqfBCTCWNiUD1TQDkxGRtk.jpg",
+    "original_title": "Yellow Letters",
     "cinema_date": "1 avril 2026",
-    "vote_average": 7.1,
-    "vote_count": 28,
+    "vote_average": 7.4,
+    "vote_count": 38,
     "genres": [
-      "Drame",
-      "Comédie"
+      "Drame"
     ],
     "is_french": true,
     "source": "prédite",
@@ -378,16 +378,17 @@
     "lead_studio": null
   },
   {
-    "title": "Yellow Letters",
+    "title": "Compostelle",
     "plex_release": "30 juillet 2026",
-    "tmdb_id": 1315657,
-    "poster_path": "/39XGBgqfBCTCWNiUD1TQDkxGRtk.jpg",
-    "original_title": "Yellow Letters",
+    "tmdb_id": 1404604,
+    "poster_path": "/4FaoBpDtzhZk9R907epSN5WCelq.jpg",
+    "original_title": "Compostelle",
     "cinema_date": "1 avril 2026",
-    "vote_average": 7.4,
-    "vote_count": 37,
+    "vote_average": 7.1,
+    "vote_count": 28,
     "genres": [
-      "Drame"
+      "Drame",
+      "Comédie"
     ],
     "is_french": true,
     "source": "prédite",
