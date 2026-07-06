@@ -1,29 +1,5 @@
 [
   {
-    "title": "Alter ego",
-    "plex_release": "2 juillet 2026",
-    "tmdb_id": 1266791,
-    "poster_path": "/kpS1FLAA0Jg16oTueSZiEdxQ37A.jpg",
-    "original_title": "Alter ego",
-    "cinema_date": "4 mars 2026",
-    "vote_average": 6.6,
-    "vote_count": 61,
-    "genres": [
-      "Comédie"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
     "title": "La Maison des Femmes",
     "plex_release": "2 juillet 2026",
     "tmdb_id": 1318417,
@@ -55,7 +31,7 @@
     "original_title": "Backrooms",
     "cinema_date": "17 juin 2026",
     "vote_average": 6.8,
-    "vote_count": 872,
+    "vote_count": 888,
     "genres": [
       "Horreur",
       "Mystère",
@@ -74,26 +50,24 @@
     "lead_studio": "A24"
   },
   {
-    "title": "Le Crime du 3e étage",
-    "plex_release": "9 juillet 2026",
-    "tmdb_id": 1471224,
-    "poster_path": "/5FHAlQPHFyJEIN1UOxsADog1KUy.jpg",
-    "original_title": "Le Crime du 3e étage",
-    "cinema_date": "11 mars 2026",
-    "vote_average": 6.8,
-    "vote_count": 38,
+    "title": "Alter ego",
+    "plex_release": "7 juillet 2026",
+    "tmdb_id": 1266791,
+    "poster_path": "/kpS1FLAA0Jg16oTueSZiEdxQ37A.jpg",
+    "original_title": "Alter ego",
+    "cinema_date": "4 mars 2026",
+    "vote_average": 6.6,
+    "vote_count": 61,
     "genres": [
-      "Comédie",
-      "Drame",
-      "Crime"
+      "Comédie"
     ],
     "is_french": true,
-    "source": "prédite",
+    "source": "override-manuel",
     "confidence": {
-      "level": "low",
-      "score": 0.45,
+      "level": "override",
+      "score": 1,
       "sources": [
-        "prédite"
+        "override-manuel"
       ]
     },
     "tier": "niche",
@@ -110,6 +84,32 @@
     "vote_count": 15,
     "genres": [
       "Comédie"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Le Crime du 3e étage",
+    "plex_release": "9 juillet 2026",
+    "tmdb_id": 1471224,
+    "poster_path": "/5FHAlQPHFyJEIN1UOxsADog1KUy.jpg",
+    "original_title": "Le Crime du 3e étage",
+    "cinema_date": "11 mars 2026",
+    "vote_average": 6.8,
+    "vote_count": 38,
+    "genres": [
+      "Comédie",
+      "Drame",
+      "Crime"
     ],
     "is_french": true,
     "source": "prédite",
@@ -232,7 +232,7 @@
     "original_title": "Scary Movie",
     "cinema_date": "3 juin 2026",
     "vote_average": 5.4,
-    "vote_count": 410,
+    "vote_count": 418,
     "genres": [
       "Comédie"
     ],
@@ -256,7 +256,7 @@
     "original_title": "Masters of the Universe",
     "cinema_date": "3 juin 2026",
     "vote_average": 7,
-    "vote_count": 367,
+    "vote_count": 373,
     "genres": [
       "Action",
       "Fantastique",
@@ -282,7 +282,7 @@
     "original_title": "The Death of Robin Hood",
     "cinema_date": "18 juin 2026",
     "vote_average": 6.5,
-    "vote_count": 49,
+    "vote_count": 50,
     "genres": [
       "Aventure",
       "Drame",
