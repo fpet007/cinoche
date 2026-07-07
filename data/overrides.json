@@ -18,5 +18,9 @@
   "Alter ego": {
     "date": "2026-07-07",
     "reason": "changement de date au 7 Juillet 2026"
+  },
+  "Passenger": {
+    "date": "2026-07-06",
+    "reason": "changement de date au 6 Juillet 2026"
   }
 }
