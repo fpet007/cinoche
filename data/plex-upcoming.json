@@ -31,7 +31,7 @@
     "original_title": "Backrooms",
     "cinema_date": "17 juin 2026",
     "vote_average": 6.8,
-    "vote_count": 894,
+    "vote_count": 913,
     "genres": [
       "Horreur",
       "Mystère",
@@ -74,28 +74,30 @@
     "lead_studio": null
   },
   {
-    "title": "Les K d'Or",
+    "title": "Passenger",
     "plex_release": "9 juillet 2026",
-    "tmdb_id": 1295722,
-    "poster_path": "/xZODXZeys9ARnXe2DekYFoUx385.jpg",
-    "original_title": "Les K d'Or",
-    "cinema_date": "11 mars 2026",
-    "vote_average": 5,
-    "vote_count": 15,
+    "tmdb_id": 1368314,
+    "poster_path": "/8MNddEYoreFL2S3n257uwsYiKf6.jpg",
+    "original_title": "Passenger",
+    "cinema_date": "20 mai 2026",
+    "vote_average": 5.8,
+    "vote_count": 103,
     "genres": [
-      "Comédie"
+      "Horreur",
+      "Thriller",
+      "Aventure"
     ],
-    "is_french": true,
-    "source": "prédite",
+    "is_french": false,
+    "source": "studio-mapped",
     "confidence": {
-      "level": "low",
-      "score": 0.45,
+      "level": "medium",
+      "score": 0.62,
       "sources": [
-        "prédite"
+        "studio-mapped"
       ]
     },
-    "tier": "niche",
-    "lead_studio": null
+    "tier": "mid",
+    "lead_studio": "Paramount Pictures"
   },
   {
     "title": "Le Crime du 3e étage",
@@ -110,6 +112,30 @@
       "Comédie",
       "Drame",
       "Crime"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Les K d'Or",
+    "plex_release": "9 juillet 2026",
+    "tmdb_id": 1295722,
+    "poster_path": "/xZODXZeys9ARnXe2DekYFoUx385.jpg",
+    "original_title": "Les K d'Or",
+    "cinema_date": "11 mars 2026",
+    "vote_average": 5,
+    "vote_count": 15,
+    "genres": [
+      "Comédie"
     ],
     "is_french": true,
     "source": "prédite",
@@ -232,7 +258,7 @@
     "original_title": "Scary Movie",
     "cinema_date": "3 juin 2026",
     "vote_average": 5.4,
-    "vote_count": 418,
+    "vote_count": 420,
     "genres": [
       "Comédie"
     ],
@@ -256,7 +282,7 @@
     "original_title": "Masters of the Universe",
     "cinema_date": "3 juin 2026",
     "vote_average": 7,
-    "vote_count": 373,
+    "vote_count": 376,
     "genres": [
       "Action",
       "Fantastique",
@@ -281,8 +307,8 @@
     "poster_path": "/bYaznBVPlQ4C0uTu6wXn68NZFoB.jpg",
     "original_title": "The Death of Robin Hood",
     "cinema_date": "18 juin 2026",
-    "vote_average": 6.5,
-    "vote_count": 50,
+    "vote_average": 6.6,
+    "vote_count": 53,
     "genres": [
       "Aventure",
       "Drame",
