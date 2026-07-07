@@ -24,6 +24,32 @@
     "lead_studio": null
   },
   {
+    "title": "Passenger",
+    "plex_release": "6 juillet 2026",
+    "tmdb_id": 1368314,
+    "poster_path": "/8MNddEYoreFL2S3n257uwsYiKf6.jpg",
+    "original_title": "Passenger",
+    "cinema_date": "20 mai 2026",
+    "vote_average": 5.8,
+    "vote_count": 103,
+    "genres": [
+      "Horreur",
+      "Thriller",
+      "Aventure"
+    ],
+    "is_french": false,
+    "source": "override-manuel",
+    "confidence": {
+      "level": "override",
+      "score": 1,
+      "sources": [
+        "override-manuel"
+      ]
+    },
+    "tier": "mid",
+    "lead_studio": "Paramount Pictures"
+  },
+  {
     "title": "Backrooms",
     "plex_release": "7 juillet 2026",
     "tmdb_id": 1083381,
@@ -72,32 +98,6 @@
     },
     "tier": "niche",
     "lead_studio": null
-  },
-  {
-    "title": "Passenger",
-    "plex_release": "9 juillet 2026",
-    "tmdb_id": 1368314,
-    "poster_path": "/8MNddEYoreFL2S3n257uwsYiKf6.jpg",
-    "original_title": "Passenger",
-    "cinema_date": "20 mai 2026",
-    "vote_average": 5.8,
-    "vote_count": 103,
-    "genres": [
-      "Horreur",
-      "Thriller",
-      "Aventure"
-    ],
-    "is_french": false,
-    "source": "studio-mapped",
-    "confidence": {
-      "level": "medium",
-      "score": 0.62,
-      "sources": [
-        "studio-mapped"
-      ]
-    },
-    "tier": "mid",
-    "lead_studio": "Paramount Pictures"
   },
   {
     "title": "Le Crime du 3e étage",
