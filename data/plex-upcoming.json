@@ -258,9 +258,10 @@
     "original_title": "Scary Movie",
     "cinema_date": "3 juin 2026",
     "vote_average": 5.4,
-    "vote_count": 420,
+    "vote_count": 421,
     "genres": [
-      "Comédie"
+      "Comédie",
+      "Horreur"
     ],
     "is_french": false,
     "source": "maxblizz",
@@ -375,6 +376,32 @@
       ]
     },
     "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Supergirl",
+    "plex_release": "28 juillet 2026",
+    "tmdb_id": 1081003,
+    "poster_path": "/1QV4GubAlUvGX3FjqWWWfQiYkN4.jpg",
+    "original_title": "Supergirl",
+    "cinema_date": "24 juin 2026",
+    "vote_average": 6.3,
+    "vote_count": 376,
+    "genres": [
+      "Action",
+      "Aventure",
+      "Science-Fiction"
+    ],
+    "is_french": false,
+    "source": "maxblizz",
+    "confidence": {
+      "level": "medium",
+      "score": 0.7,
+      "sources": [
+        "maxblizz"
+      ]
+    },
+    "tier": "blockbuster",
     "lead_studio": null
   },
   {
