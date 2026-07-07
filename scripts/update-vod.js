@@ -1,11 +1,27 @@
 /**
- * updateVOD.js — v8.3 (+ BingeBase digital calendar)
+ * updateVOD.js — v8.5 (fix préfixes marketing MaxBlizz)
  * =====================================================
  * Génère la liste des FILMS DE CINÉMA en VOD pour le mois en cours STRICT.
  * Plex FR — uniquement de vrais longs-métrages sortis en salle, avec un focus
  * blockbusters internationaux + films français + blockbusters VFQ.
  *
- * 🆕 NOUVEAUTÉS v8.3 (vs v8.2) :
+ * 🆕 NOUVEAUTÉS v8.5 (vs v8.4) :
+ * ─────────────────────────────────────────────────────────────────────────────
+ * ✅ Fix TITLE_JUNK_PREFIXES : nettoyage des préfixes possessifs franchise
+ *    ("dcs-supergirl" → "supergirl" pour "DC's Supergirl", idem "marvels-",
+ *    "disneys-", etc.). Symétrique du fix suffixe de la v8.4 : ces mots
+ *    polluaient la requête TMDB et empêchaient tout match (ex: "DC's Supergirl"
+ *    manquant du run de juillet 2026 malgré une date MaxBlizz confirmée).
+ * ✅ tmdbSearchByTitle : seuils de fallback abaissés (3→2 et 4→3 tokens) pour
+ *    tenter une requête sans le 1er mot même sur un titre à 2 tokens —
+ *    défense en profondeur si un nouveau préfixe inconnu apparaît.
+ *
+ * NOUVEAUTÉS v8.4 (rappel) :
+ * ─────────────────────────────────────────────────────────────────────────────
+ * ✅ Fix parsing slug MaxBlizz (suffixes marketing) + relâchement du filtre
+ *    "niche non-FR" pour les sources déjà curatées (MaxBlizz/BingeBase/AlloCiné).
+ *
+ * NOUVEAUTÉS v8.3 (vs v8.2) :
  * ─────────────────────────────────────────────────────────────────────────────
  * ✅ Module BingeBase : scrape https://bingebase.com/releases/digital/<month>-<year>
  *    (calendrier officiel des sorties digitales du mois en cours).
@@ -607,11 +623,33 @@ const TITLE_JUNK_SUFFIXES = [
   /\bset for\b.*$/i,
 ];
 
+// 🔧 FIX v8.5 : nettoyage des PRÉFIXES marketing/franchise MaxBlizz.
+// MaxBlizz encode parfois un possessif franchise en tête de slug
+// (ex: "dcs-supergirl-vod-release-date-revealed" pour "DC's Supergirl",
+// "marvels-x-vod-release-date-revealed" pour "Marvel's X"). Le remplacement
+// des tirets par des espaces donne alors "dcs supergirl", ce qui pollue la
+// requête TMDB (recherche sans match) exactement comme le faisaient les
+// suffixes marketing corrigés en v8.4. On applique donc le même traitement,
+// mais côté préfixe.
+const TITLE_JUNK_PREFIXES = [
+  /^dcs\s+/i,
+  /^marvels\s+/i,
+  /^disneys\s+/i,
+  /^pixars\s+/i,
+  /^illuminations\s+/i,
+  /^a24s\s+/i,
+];
+
 function cleanScrapedTitle(rawTitle) {
   let t = rawTitle.trim();
   for (const pattern of TITLE_JUNK_SUFFIXES) {
     const cleaned = t.replace(pattern, '').trim();
     if (cleaned) t = cleaned; // ne jamais vider complètement le titre
+  }
+  // 🔧 FIX v8.5 : passe préfixes (après les suffixes, ordre sans importance ici)
+  for (const pattern of TITLE_JUNK_PREFIXES) {
+    const cleaned = t.replace(pattern, '').trim();
+    if (cleaned) t = cleaned;
   }
   return t;
 }
@@ -619,8 +657,12 @@ function cleanScrapedTitle(rawTitle) {
 async function tmdbSearchByTitle(title, year = null) {
   const tokens = title.split(/\s+/).filter(Boolean);
   const candidates = [title];
-  if (tokens.length >= 3 && tokens[0].length >= 3) candidates.push(tokens.slice(1).join(' '));
-  if (tokens.length >= 4 && tokens[1].length >= 3) candidates.push(tokens.slice(2).join(' '));
+  // 🔧 FIX v8.5 : seuils abaissés (3→2 et 4→3) — défense en profondeur.
+  // Si un préfixe franchise inconnu (non listé dans TITLE_JUNK_PREFIXES)
+  // passe entre les mailles, on tente quand même la requête sans le
+  // premier mot dès 2 tokens au lieu d'exiger 3+ tokens.
+  if (tokens.length >= 2 && tokens[0].length >= 3) candidates.push(tokens.slice(1).join(' '));
+  if (tokens.length >= 3 && tokens[1].length >= 3) candidates.push(tokens.slice(2).join(' '));
 
   for (const query of candidates) {
     let url = `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&language=fr-FR&include_adult=false&query=${encodeURIComponent(query)}`;
