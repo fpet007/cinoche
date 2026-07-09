@@ -124,7 +124,7 @@
   },
   {
     "title": "Victor comme tout le monde",
-    "plex_release": "9 juillet 2026",
+    "plex_release": "11 juillet 2026",
     "tmdb_id": 1454680,
     "poster_path": "/sYRssxFzHMr3Rz0VTEF21m6iVDU.jpg",
     "original_title": "Victor comme tout le monde",
@@ -136,12 +136,12 @@
       "Comédie"
     ],
     "is_french": true,
-    "source": "prédite",
+    "source": "override-manuel",
     "confidence": {
-      "level": "low",
-      "score": 0.45,
+      "level": "override",
+      "score": 1,
       "sources": [
-        "prédite"
+        "override-manuel"
       ]
     },
     "tier": "niche",
