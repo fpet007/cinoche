@@ -31,7 +31,7 @@
     "original_title": "Passenger",
     "cinema_date": "20 mai 2026",
     "vote_average": 5.7,
-    "vote_count": 121,
+    "vote_count": 139,
     "genres": [
       "Horreur",
       "Thriller"
@@ -55,8 +55,8 @@
     "poster_path": "/kpS1FLAA0Jg16oTueSZiEdxQ37A.jpg",
     "original_title": "Alter ego",
     "cinema_date": "4 mars 2026",
-    "vote_average": 6.6,
-    "vote_count": 65,
+    "vote_average": 6.5,
+    "vote_count": 67,
     "genres": [
       "Comédie"
     ],
@@ -231,7 +231,7 @@
     "original_title": "Scary Movie",
     "cinema_date": "3 juin 2026",
     "vote_average": 5.4,
-    "vote_count": 422,
+    "vote_count": 428,
     "genres": [
       "Comédie",
       "Horreur"
@@ -255,8 +255,8 @@
     "poster_path": "/lYoc8kbgu8BKQQjN2fPsmRBJ8qB.jpg",
     "original_title": "Masters of the Universe",
     "cinema_date": "3 juin 2026",
-    "vote_average": 7,
-    "vote_count": 378,
+    "vote_average": 6.9,
+    "vote_count": 380,
     "genres": [
       "Action",
       "Fantastique",
@@ -281,8 +281,8 @@
     "poster_path": "/bYaznBVPlQ4C0uTu6wXn68NZFoB.jpg",
     "original_title": "The Death of Robin Hood",
     "cinema_date": "18 juin 2026",
-    "vote_average": 6.6,
-    "vote_count": 58,
+    "vote_average": 6.7,
+    "vote_count": 60,
     "genres": [
       "Aventure",
       "Drame",
@@ -296,31 +296,6 @@
       "score": 0.7,
       "sources": [
         "maxblizz"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "L'île de la demoiselle",
-    "plex_release": "23 juillet 2026",
-    "tmdb_id": 1002053,
-    "poster_path": "/tu1kBGHvsNgKUSuNay8cKeVA8MA.jpg",
-    "original_title": "L'île de la demoiselle",
-    "cinema_date": "25 mars 2026",
-    "vote_average": 5,
-    "vote_count": 3,
-    "genres": [
-      "Drame",
-      "Histoire"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
       ]
     },
     "tier": "niche",
@@ -359,7 +334,7 @@
     "original_title": "Supergirl",
     "cinema_date": "24 juin 2026",
     "vote_average": 6.2,
-    "vote_count": 395,
+    "vote_count": 407,
     "genres": [
       "Action",
       "Aventure",
