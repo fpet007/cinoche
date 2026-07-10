@@ -30,8 +30,8 @@
     "poster_path": "/8MNddEYoreFL2S3n257uwsYiKf6.jpg",
     "original_title": "Passenger",
     "cinema_date": "20 mai 2026",
-    "vote_average": 5.7,
-    "vote_count": 139,
+    "vote_average": 6.1,
+    "vote_count": 168,
     "genres": [
       "Horreur",
       "Thriller"
@@ -55,8 +55,8 @@
     "poster_path": "/kpS1FLAA0Jg16oTueSZiEdxQ37A.jpg",
     "original_title": "Alter ego",
     "cinema_date": "4 mars 2026",
-    "vote_average": 6.5,
-    "vote_count": 67,
+    "vote_average": 6.4,
+    "vote_count": 68,
     "genres": [
       "Comédie"
     ],
@@ -73,16 +73,18 @@
     "lead_studio": null
   },
   {
-    "title": "Les K d'Or",
+    "title": "Le Crime du 3e étage",
     "plex_release": "9 juillet 2026",
-    "tmdb_id": 1295722,
-    "poster_path": "/xZODXZeys9ARnXe2DekYFoUx385.jpg",
-    "original_title": "Les K d'Or",
+    "tmdb_id": 1471224,
+    "poster_path": "/5FHAlQPHFyJEIN1UOxsADog1KUy.jpg",
+    "original_title": "Le Crime du 3e étage",
     "cinema_date": "11 mars 2026",
-    "vote_average": 5,
-    "vote_count": 15,
+    "vote_average": 6.8,
+    "vote_count": 40,
     "genres": [
-      "Comédie"
+      "Comédie",
+      "Drame",
+      "Crime"
     ],
     "is_french": true,
     "source": "prédite",
@@ -97,18 +99,16 @@
     "lead_studio": null
   },
   {
-    "title": "Le Crime du 3e étage",
+    "title": "Les K d'Or",
     "plex_release": "9 juillet 2026",
-    "tmdb_id": 1471224,
-    "poster_path": "/5FHAlQPHFyJEIN1UOxsADog1KUy.jpg",
-    "original_title": "Le Crime du 3e étage",
+    "tmdb_id": 1295722,
+    "poster_path": "/xZODXZeys9ARnXe2DekYFoUx385.jpg",
+    "original_title": "Les K d'Or",
     "cinema_date": "11 mars 2026",
-    "vote_average": 6.8,
-    "vote_count": 38,
+    "vote_average": 5.2,
+    "vote_count": 17,
     "genres": [
-      "Comédie",
-      "Drame",
-      "Crime"
+      "Comédie"
     ],
     "is_french": true,
     "source": "prédite",
@@ -231,7 +231,7 @@
     "original_title": "Scary Movie",
     "cinema_date": "3 juin 2026",
     "vote_average": 5.4,
-    "vote_count": 428,
+    "vote_count": 432,
     "genres": [
       "Comédie",
       "Horreur"
@@ -246,7 +246,7 @@
       ]
     },
     "tier": "blockbuster",
-    "lead_studio": null
+    "lead_studio": "Paramount Pictures"
   },
   {
     "title": "Les Maîtres de l'Univers",
@@ -256,7 +256,7 @@
     "original_title": "Masters of the Universe",
     "cinema_date": "3 juin 2026",
     "vote_average": 6.9,
-    "vote_count": 380,
+    "vote_count": 386,
     "genres": [
       "Action",
       "Fantastique",
@@ -282,7 +282,7 @@
     "original_title": "The Death of Robin Hood",
     "cinema_date": "18 juin 2026",
     "vote_average": 6.7,
-    "vote_count": 60,
+    "vote_count": 62,
     "genres": [
       "Aventure",
       "Drame",
@@ -334,7 +334,7 @@
     "original_title": "Supergirl",
     "cinema_date": "24 juin 2026",
     "vote_average": 6.2,
-    "vote_count": 407,
+    "vote_count": 415,
     "genres": [
       "Action",
       "Aventure",
@@ -360,7 +360,7 @@
     "original_title": "Yellow Letters",
     "cinema_date": "1 avril 2026",
     "vote_average": 7.4,
-    "vote_count": 38,
+    "vote_count": 39,
     "genres": [
       "Drame"
     ],
