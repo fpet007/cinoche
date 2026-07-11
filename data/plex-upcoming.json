@@ -7,7 +7,7 @@
     "original_title": "La Maison des Femmes",
     "cinema_date": "4 mars 2026",
     "vote_average": 8.3,
-    "vote_count": 41,
+    "vote_count": 42,
     "genres": [
       "Drame"
     ],
@@ -30,8 +30,8 @@
     "poster_path": "/8MNddEYoreFL2S3n257uwsYiKf6.jpg",
     "original_title": "Passenger",
     "cinema_date": "20 mai 2026",
-    "vote_average": 6.1,
-    "vote_count": 168,
+    "vote_average": 6.4,
+    "vote_count": 195,
     "genres": [
       "Horreur",
       "Thriller"
@@ -73,18 +73,16 @@
     "lead_studio": null
   },
   {
-    "title": "Le Crime du 3e étage",
+    "title": "Les K d'Or",
     "plex_release": "9 juillet 2026",
-    "tmdb_id": 1471224,
-    "poster_path": "/5FHAlQPHFyJEIN1UOxsADog1KUy.jpg",
-    "original_title": "Le Crime du 3e étage",
+    "tmdb_id": 1295722,
+    "poster_path": "/xZODXZeys9ARnXe2DekYFoUx385.jpg",
+    "original_title": "Les K d'Or",
     "cinema_date": "11 mars 2026",
-    "vote_average": 6.8,
-    "vote_count": 40,
+    "vote_average": 4.6,
+    "vote_count": 21,
     "genres": [
-      "Comédie",
-      "Drame",
-      "Crime"
+      "Comédie"
     ],
     "is_french": true,
     "source": "prédite",
@@ -99,16 +97,18 @@
     "lead_studio": null
   },
   {
-    "title": "Les K d'Or",
+    "title": "Le Crime du 3e étage",
     "plex_release": "9 juillet 2026",
-    "tmdb_id": 1295722,
-    "poster_path": "/xZODXZeys9ARnXe2DekYFoUx385.jpg",
-    "original_title": "Les K d'Or",
+    "tmdb_id": 1471224,
+    "poster_path": "/5FHAlQPHFyJEIN1UOxsADog1KUy.jpg",
+    "original_title": "Le Crime du 3e étage",
     "cinema_date": "11 mars 2026",
-    "vote_average": 5.2,
-    "vote_count": 17,
+    "vote_average": 6.8,
+    "vote_count": 41,
     "genres": [
-      "Comédie"
+      "Comédie",
+      "Drame",
+      "Crime"
     ],
     "is_french": true,
     "source": "prédite",
@@ -224,6 +224,32 @@
     "lead_studio": null
   },
   {
+    "title": "Backrooms",
+    "plex_release": "21 juillet 2026",
+    "tmdb_id": 1083381,
+    "poster_path": "/thQQ3BBBhGDtWm3UTtabhyDJd8U.jpg",
+    "original_title": "Backrooms",
+    "cinema_date": "17 juin 2026",
+    "vote_average": 6.8,
+    "vote_count": 981,
+    "genres": [
+      "Horreur",
+      "Mystère",
+      "Science-Fiction"
+    ],
+    "is_french": false,
+    "source": "override-manuel",
+    "confidence": {
+      "level": "override",
+      "score": 1,
+      "sources": [
+        "override-manuel"
+      ]
+    },
+    "tier": "blockbuster",
+    "lead_studio": "A24"
+  },
+  {
     "title": "Scary Movie",
     "plex_release": "21 juillet 2026",
     "tmdb_id": 1273221,
@@ -231,7 +257,7 @@
     "original_title": "Scary Movie",
     "cinema_date": "3 juin 2026",
     "vote_average": 5.4,
-    "vote_count": 432,
+    "vote_count": 436,
     "genres": [
       "Comédie",
       "Horreur"
@@ -246,7 +272,7 @@
       ]
     },
     "tier": "blockbuster",
-    "lead_studio": "Paramount Pictures"
+    "lead_studio": null
   },
   {
     "title": "Les Maîtres de l'Univers",
@@ -256,7 +282,7 @@
     "original_title": "Masters of the Universe",
     "cinema_date": "3 juin 2026",
     "vote_average": 6.9,
-    "vote_count": 386,
+    "vote_count": 388,
     "genres": [
       "Action",
       "Fantastique",
@@ -282,7 +308,7 @@
     "original_title": "The Death of Robin Hood",
     "cinema_date": "18 juin 2026",
     "vote_average": 6.7,
-    "vote_count": 62,
+    "vote_count": 63,
     "genres": [
       "Aventure",
       "Drame",
@@ -334,7 +360,7 @@
     "original_title": "Supergirl",
     "cinema_date": "24 juin 2026",
     "vote_average": 6.2,
-    "vote_count": 415,
+    "vote_count": 422,
     "genres": [
       "Action",
       "Aventure",
