@@ -30,8 +30,8 @@
     "poster_path": "/8MNddEYoreFL2S3n257uwsYiKf6.jpg",
     "original_title": "Passenger",
     "cinema_date": "20 mai 2026",
-    "vote_average": 6.4,
-    "vote_count": 195,
+    "vote_average": 6.8,
+    "vote_count": 264,
     "genres": [
       "Horreur",
       "Thriller"
@@ -79,8 +79,8 @@
     "poster_path": "/xZODXZeys9ARnXe2DekYFoUx385.jpg",
     "original_title": "Les K d'Or",
     "cinema_date": "11 mars 2026",
-    "vote_average": 4.6,
-    "vote_count": 21,
+    "vote_average": 4.4,
+    "vote_count": 26,
     "genres": [
       "Comédie"
     ],
@@ -104,11 +104,36 @@
     "original_title": "Le Crime du 3e étage",
     "cinema_date": "11 mars 2026",
     "vote_average": 6.8,
-    "vote_count": 41,
+    "vote_count": 42,
     "genres": [
       "Comédie",
       "Drame",
       "Crime"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Planètes",
+    "plex_release": "9 juillet 2026",
+    "tmdb_id": 999140,
+    "poster_path": "/4EbiJTqpKCM4Cmj7Xpsji38mW9A.jpg",
+    "original_title": "Planètes",
+    "cinema_date": "11 mars 2026",
+    "vote_average": 7.2,
+    "vote_count": 3,
+    "genres": [
+      "Animation",
+      "Science-Fiction"
     ],
     "is_french": true,
     "source": "prédite",
@@ -231,7 +256,7 @@
     "original_title": "Backrooms",
     "cinema_date": "17 juin 2026",
     "vote_average": 6.8,
-    "vote_count": 981,
+    "vote_count": 991,
     "genres": [
       "Horreur",
       "Mystère",
@@ -257,7 +282,7 @@
     "original_title": "Scary Movie",
     "cinema_date": "3 juin 2026",
     "vote_average": 5.4,
-    "vote_count": 436,
+    "vote_count": 440,
     "genres": [
       "Comédie",
       "Horreur"
@@ -308,7 +333,7 @@
     "original_title": "The Death of Robin Hood",
     "cinema_date": "18 juin 2026",
     "vote_average": 6.7,
-    "vote_count": 63,
+    "vote_count": 66,
     "genres": [
       "Aventure",
       "Drame",
@@ -322,6 +347,30 @@
       "score": 0.7,
       "sources": [
         "maxblizz"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "In Persona",
+    "plex_release": "22 juillet 2026",
+    "tmdb_id": 1606893,
+    "poster_path": "/rJ7KUA2JYndQkxZR2ljTXGEBvzx.jpg",
+    "original_title": "In Persona",
+    "cinema_date": "24 mars 2026",
+    "vote_average": 0,
+    "vote_count": 0,
+    "genres": [
+      "Horreur"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
       ]
     },
     "tier": "niche",
@@ -360,7 +409,7 @@
     "original_title": "Supergirl",
     "cinema_date": "24 juin 2026",
     "vote_average": 6.2,
-    "vote_count": 422,
+    "vote_count": 431,
     "genres": [
       "Action",
       "Aventure",
