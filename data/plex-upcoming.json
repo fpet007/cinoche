@@ -30,8 +30,8 @@
     "poster_path": "/8MNddEYoreFL2S3n257uwsYiKf6.jpg",
     "original_title": "Passenger",
     "cinema_date": "20 mai 2026",
-    "vote_average": 6.8,
-    "vote_count": 264,
+    "vote_average": 7,
+    "vote_count": 323,
     "genres": [
       "Horreur",
       "Thriller"
@@ -52,7 +52,7 @@
     "title": "Alter ego",
     "plex_release": "7 juillet 2026",
     "tmdb_id": 1266791,
-    "poster_path": "/kpS1FLAA0Jg16oTueSZiEdxQ37A.jpg",
+    "poster_path": "/kiTTKUXoX7uHQYUoNBYqOjEY8KD.jpg",
     "original_title": "Alter ego",
     "cinema_date": "4 mars 2026",
     "vote_average": 6.4,
@@ -79,8 +79,8 @@
     "poster_path": "/xZODXZeys9ARnXe2DekYFoUx385.jpg",
     "original_title": "Les K d'Or",
     "cinema_date": "11 mars 2026",
-    "vote_average": 4.4,
-    "vote_count": 26,
+    "vote_average": 4.3,
+    "vote_count": 29,
     "genres": [
       "Comédie"
     ],
@@ -256,7 +256,7 @@
     "original_title": "Backrooms",
     "cinema_date": "17 juin 2026",
     "vote_average": 6.8,
-    "vote_count": 991,
+    "vote_count": 995,
     "genres": [
       "Horreur",
       "Mystère",
@@ -275,6 +275,31 @@
     "lead_studio": "A24"
   },
   {
+    "title": "Disclosure Day",
+    "plex_release": "21 juillet 2026",
+    "tmdb_id": 1275779,
+    "poster_path": "/8GRMeKaDFnuzXBzqGiDMzCFDnwQ.jpg",
+    "original_title": "Disclosure Day",
+    "cinema_date": "10 juin 2026",
+    "vote_average": 6.7,
+    "vote_count": 860,
+    "genres": [
+      "Science-Fiction",
+      "Thriller"
+    ],
+    "is_french": false,
+    "source": "maxblizz",
+    "confidence": {
+      "level": "medium",
+      "score": 0.7,
+      "sources": [
+        "maxblizz"
+      ]
+    },
+    "tier": "blockbuster",
+    "lead_studio": "Universal Pictures"
+  },
+  {
     "title": "Scary Movie",
     "plex_release": "21 juillet 2026",
     "tmdb_id": 1273221,
@@ -282,7 +307,7 @@
     "original_title": "Scary Movie",
     "cinema_date": "3 juin 2026",
     "vote_average": 5.4,
-    "vote_count": 440,
+    "vote_count": 442,
     "genres": [
       "Comédie",
       "Horreur"
@@ -307,7 +332,7 @@
     "original_title": "Masters of the Universe",
     "cinema_date": "3 juin 2026",
     "vote_average": 6.9,
-    "vote_count": 388,
+    "vote_count": 391,
     "genres": [
       "Action",
       "Fantastique",
@@ -333,7 +358,7 @@
     "original_title": "The Death of Robin Hood",
     "cinema_date": "18 juin 2026",
     "vote_average": 6.7,
-    "vote_count": 66,
+    "vote_count": 71,
     "genres": [
       "Aventure",
       "Drame",
@@ -409,7 +434,7 @@
     "original_title": "Supergirl",
     "cinema_date": "24 juin 2026",
     "vote_average": 6.2,
-    "vote_count": 431,
+    "vote_count": 435,
     "genres": [
       "Action",
       "Aventure",
