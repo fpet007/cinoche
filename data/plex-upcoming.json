@@ -56,7 +56,7 @@
     "original_title": "Alter ego",
     "cinema_date": "4 mars 2026",
     "vote_average": 6.4,
-    "vote_count": 68,
+    "vote_count": 69,
     "genres": [
       "Comédie"
     ],
@@ -80,7 +80,7 @@
     "original_title": "Les K d'Or",
     "cinema_date": "11 mars 2026",
     "vote_average": 4.3,
-    "vote_count": 29,
+    "vote_count": 30,
     "genres": [
       "Comédie"
     ],
@@ -109,31 +109,6 @@
       "Comédie",
       "Drame",
       "Crime"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "Planètes",
-    "plex_release": "9 juillet 2026",
-    "tmdb_id": 999140,
-    "poster_path": "/4EbiJTqpKCM4Cmj7Xpsji38mW9A.jpg",
-    "original_title": "Planètes",
-    "cinema_date": "11 mars 2026",
-    "vote_average": 7.2,
-    "vote_count": 3,
-    "genres": [
-      "Animation",
-      "Science-Fiction"
     ],
     "is_french": true,
     "source": "prédite",
@@ -256,7 +231,7 @@
     "original_title": "Backrooms",
     "cinema_date": "17 juin 2026",
     "vote_average": 6.8,
-    "vote_count": 995,
+    "vote_count": 997,
     "genres": [
       "Horreur",
       "Mystère",
@@ -307,7 +282,7 @@
     "original_title": "Scary Movie",
     "cinema_date": "3 juin 2026",
     "vote_average": 5.4,
-    "vote_count": 442,
+    "vote_count": 445,
     "genres": [
       "Comédie",
       "Horreur"
@@ -332,7 +307,7 @@
     "original_title": "Masters of the Universe",
     "cinema_date": "3 juin 2026",
     "vote_average": 6.9,
-    "vote_count": 391,
+    "vote_count": 392,
     "genres": [
       "Action",
       "Fantastique",
@@ -358,7 +333,7 @@
     "original_title": "The Death of Robin Hood",
     "cinema_date": "18 juin 2026",
     "vote_average": 6.7,
-    "vote_count": 71,
+    "vote_count": 72,
     "genres": [
       "Aventure",
       "Drame",
@@ -434,7 +409,7 @@
     "original_title": "Supergirl",
     "cinema_date": "24 juin 2026",
     "vote_average": 6.2,
-    "vote_count": 435,
+    "vote_count": 442,
     "genres": [
       "Action",
       "Aventure",
