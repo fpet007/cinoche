@@ -123,6 +123,32 @@
     "lead_studio": null
   },
   {
+    "title": "Backrooms",
+    "plex_release": "14 juillet 2026",
+    "tmdb_id": 1083381,
+    "poster_path": "/thQQ3BBBhGDtWm3UTtabhyDJd8U.jpg",
+    "original_title": "Backrooms",
+    "cinema_date": "17 juin 2026",
+    "vote_average": 6.8,
+    "vote_count": 1011,
+    "genres": [
+      "Horreur",
+      "Mystère",
+      "Science-Fiction"
+    ],
+    "is_french": false,
+    "source": "override-manuel",
+    "confidence": {
+      "level": "override",
+      "score": 1,
+      "sources": [
+        "override-manuel"
+      ]
+    },
+    "tier": "blockbuster",
+    "lead_studio": "A24"
+  },
+  {
     "title": "Les rayons et les ombres",
     "plex_release": "16 juillet 2026",
     "tmdb_id": 1318335,
@@ -222,32 +248,6 @@
     },
     "tier": "niche",
     "lead_studio": null
-  },
-  {
-    "title": "Backrooms",
-    "plex_release": "21 juillet 2026",
-    "tmdb_id": 1083381,
-    "poster_path": "/thQQ3BBBhGDtWm3UTtabhyDJd8U.jpg",
-    "original_title": "Backrooms",
-    "cinema_date": "17 juin 2026",
-    "vote_average": 6.8,
-    "vote_count": 1011,
-    "genres": [
-      "Horreur",
-      "Mystère",
-      "Science-Fiction"
-    ],
-    "is_french": false,
-    "source": "override-manuel",
-    "confidence": {
-      "level": "override",
-      "score": 1,
-      "sources": [
-        "override-manuel"
-      ]
-    },
-    "tier": "blockbuster",
-    "lead_studio": "A24"
   },
   {
     "title": "Disclosure Day",
