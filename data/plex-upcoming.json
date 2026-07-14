@@ -30,8 +30,8 @@
     "poster_path": "/8MNddEYoreFL2S3n257uwsYiKf6.jpg",
     "original_title": "Passenger",
     "cinema_date": "20 mai 2026",
-    "vote_average": 7,
-    "vote_count": 323,
+    "vote_average": 7.1,
+    "vote_count": 366,
     "genres": [
       "Horreur",
       "Thriller"
@@ -56,7 +56,7 @@
     "original_title": "Alter ego",
     "cinema_date": "4 mars 2026",
     "vote_average": 6.4,
-    "vote_count": 69,
+    "vote_count": 70,
     "genres": [
       "Comédie"
     ],
@@ -80,7 +80,7 @@
     "original_title": "Les K d'Or",
     "cinema_date": "11 mars 2026",
     "vote_average": 4.3,
-    "vote_count": 30,
+    "vote_count": 33,
     "genres": [
       "Comédie"
     ],
@@ -103,8 +103,8 @@
     "poster_path": "/5FHAlQPHFyJEIN1UOxsADog1KUy.jpg",
     "original_title": "Le Crime du 3e étage",
     "cinema_date": "11 mars 2026",
-    "vote_average": 6.8,
-    "vote_count": 42,
+    "vote_average": 6.7,
+    "vote_count": 45,
     "genres": [
       "Comédie",
       "Drame",
@@ -155,8 +155,8 @@
     "poster_path": "/2HD9MuSt5Fk6i7uAgI3m75VATjk.jpg",
     "original_title": "Police Flash 80",
     "cinema_date": "18 mars 2026",
-    "vote_average": 6.9,
-    "vote_count": 22,
+    "vote_average": 6.7,
+    "vote_count": 24,
     "genres": [
       "Comédie",
       "Crime"
@@ -231,7 +231,7 @@
     "original_title": "Backrooms",
     "cinema_date": "17 juin 2026",
     "vote_average": 6.8,
-    "vote_count": 997,
+    "vote_count": 1011,
     "genres": [
       "Horreur",
       "Mystère",
@@ -257,7 +257,7 @@
     "original_title": "Disclosure Day",
     "cinema_date": "10 juin 2026",
     "vote_average": 6.7,
-    "vote_count": 864,
+    "vote_count": 870,
     "genres": [
       "Science-Fiction",
       "Thriller"
@@ -282,7 +282,7 @@
     "original_title": "Scary Movie",
     "cinema_date": "3 juin 2026",
     "vote_average": 5.4,
-    "vote_count": 445,
+    "vote_count": 448,
     "genres": [
       "Comédie",
       "Horreur"
@@ -409,7 +409,7 @@
     "original_title": "Supergirl",
     "cinema_date": "24 juin 2026",
     "vote_average": 6.2,
-    "vote_count": 442,
+    "vote_count": 453,
     "genres": [
       "Action",
       "Aventure",
