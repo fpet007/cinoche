@@ -30,8 +30,8 @@
     "poster_path": "/8MNddEYoreFL2S3n257uwsYiKf6.jpg",
     "original_title": "Passenger",
     "cinema_date": "20 mai 2026",
-    "vote_average": 7.1,
-    "vote_count": 366,
+    "vote_average": 7.2,
+    "vote_count": 398,
     "genres": [
       "Horreur",
       "Thriller"
@@ -56,7 +56,7 @@
     "original_title": "Alter ego",
     "cinema_date": "4 mars 2026",
     "vote_average": 6.4,
-    "vote_count": 70,
+    "vote_count": 71,
     "genres": [
       "Comédie"
     ],
@@ -80,7 +80,7 @@
     "original_title": "Les K d'Or",
     "cinema_date": "11 mars 2026",
     "vote_average": 4.3,
-    "vote_count": 33,
+    "vote_count": 35,
     "genres": [
       "Comédie"
     ],
@@ -104,11 +104,36 @@
     "original_title": "Le Crime du 3e étage",
     "cinema_date": "11 mars 2026",
     "vote_average": 6.7,
-    "vote_count": 45,
+    "vote_count": 47,
     "genres": [
       "Comédie",
       "Drame",
       "Crime"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Planètes",
+    "plex_release": "9 juillet 2026",
+    "tmdb_id": 999140,
+    "poster_path": "/4EbiJTqpKCM4Cmj7Xpsji38mW9A.jpg",
+    "original_title": "Planètes",
+    "cinema_date": "11 mars 2026",
+    "vote_average": 7.2,
+    "vote_count": 3,
+    "genres": [
+      "Animation",
+      "Science-Fiction"
     ],
     "is_french": true,
     "source": "prédite",
@@ -129,8 +154,8 @@
     "poster_path": "/thQQ3BBBhGDtWm3UTtabhyDJd8U.jpg",
     "original_title": "Backrooms",
     "cinema_date": "17 juin 2026",
-    "vote_average": 6.8,
-    "vote_count": 1011,
+    "vote_average": 6.9,
+    "vote_count": 1133,
     "genres": [
       "Horreur",
       "Mystère",
@@ -257,7 +282,7 @@
     "original_title": "Disclosure Day",
     "cinema_date": "10 juin 2026",
     "vote_average": 6.7,
-    "vote_count": 870,
+    "vote_count": 879,
     "genres": [
       "Science-Fiction",
       "Thriller"
@@ -282,7 +307,7 @@
     "original_title": "Scary Movie",
     "cinema_date": "3 juin 2026",
     "vote_average": 5.4,
-    "vote_count": 448,
+    "vote_count": 456,
     "genres": [
       "Comédie",
       "Horreur"
@@ -307,7 +332,7 @@
     "original_title": "Masters of the Universe",
     "cinema_date": "3 juin 2026",
     "vote_average": 6.9,
-    "vote_count": 392,
+    "vote_count": 395,
     "genres": [
       "Action",
       "Fantastique",
@@ -333,7 +358,7 @@
     "original_title": "The Death of Robin Hood",
     "cinema_date": "18 juin 2026",
     "vote_average": 6.7,
-    "vote_count": 72,
+    "vote_count": 73,
     "genres": [
       "Aventure",
       "Drame",
@@ -363,6 +388,30 @@
     "vote_count": 0,
     "genres": [
       "Horreur"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Les filles du ciel",
+    "plex_release": "23 juillet 2026",
+    "tmdb_id": 1126694,
+    "poster_path": "/7WXSD6i2jMzPuVpnqvu8zOeurqI.jpg",
+    "original_title": "Les filles du ciel",
+    "cinema_date": "25 mars 2026",
+    "vote_average": 7,
+    "vote_count": 2,
+    "genres": [
+      "Drame"
     ],
     "is_french": true,
     "source": "prédite",
@@ -409,7 +458,7 @@
     "original_title": "Supergirl",
     "cinema_date": "24 juin 2026",
     "vote_average": 6.2,
-    "vote_count": 453,
+    "vote_count": 461,
     "genres": [
       "Action",
       "Aventure",
