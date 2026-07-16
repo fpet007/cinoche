@@ -1,5 +1,29 @@
 [
   {
+    "title": "Nino dans la nuit",
+    "plex_release": "2 juillet 2026",
+    "tmdb_id": 1012591,
+    "poster_path": "/muVmDDFdON1wBpIj1EJwvsMa0ax.jpg",
+    "original_title": "Nino dans la nuit",
+    "cinema_date": "4 mars 2026",
+    "vote_average": 5,
+    "vote_count": 1,
+    "genres": [
+      "Drame"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
     "title": "La Maison des Femmes",
     "plex_release": "2 juillet 2026",
     "tmdb_id": 1318417,
@@ -31,7 +55,7 @@
     "original_title": "Passenger",
     "cinema_date": "20 mai 2026",
     "vote_average": 7.2,
-    "vote_count": 398,
+    "vote_count": 411,
     "genres": [
       "Horreur",
       "Thriller"
@@ -79,8 +103,8 @@
     "poster_path": "/xZODXZeys9ARnXe2DekYFoUx385.jpg",
     "original_title": "Les K d'Or",
     "cinema_date": "11 mars 2026",
-    "vote_average": 4.3,
-    "vote_count": 35,
+    "vote_average": 4.2,
+    "vote_count": 37,
     "genres": [
       "Comédie"
     ],
@@ -103,8 +127,8 @@
     "poster_path": "/5FHAlQPHFyJEIN1UOxsADog1KUy.jpg",
     "original_title": "Le Crime du 3e étage",
     "cinema_date": "11 mars 2026",
-    "vote_average": 6.7,
-    "vote_count": 47,
+    "vote_average": 6.6,
+    "vote_count": 48,
     "genres": [
       "Comédie",
       "Drame",
@@ -155,7 +179,7 @@
     "original_title": "Backrooms",
     "cinema_date": "17 juin 2026",
     "vote_average": 6.9,
-    "vote_count": 1133,
+    "vote_count": 1220,
     "genres": [
       "Horreur",
       "Mystère",
@@ -282,7 +306,7 @@
     "original_title": "Disclosure Day",
     "cinema_date": "10 juin 2026",
     "vote_average": 6.7,
-    "vote_count": 879,
+    "vote_count": 882,
     "genres": [
       "Science-Fiction",
       "Thriller"
@@ -307,7 +331,7 @@
     "original_title": "Scary Movie",
     "cinema_date": "3 juin 2026",
     "vote_average": 5.4,
-    "vote_count": 456,
+    "vote_count": 461,
     "genres": [
       "Comédie",
       "Horreur"
@@ -332,7 +356,7 @@
     "original_title": "Masters of the Universe",
     "cinema_date": "3 juin 2026",
     "vote_average": 6.9,
-    "vote_count": 395,
+    "vote_count": 396,
     "genres": [
       "Action",
       "Fantastique",
@@ -357,8 +381,8 @@
     "poster_path": "/bYaznBVPlQ4C0uTu6wXn68NZFoB.jpg",
     "original_title": "The Death of Robin Hood",
     "cinema_date": "18 juin 2026",
-    "vote_average": 6.7,
-    "vote_count": 73,
+    "vote_average": 6.8,
+    "vote_count": 76,
     "genres": [
       "Aventure",
       "Drame",
@@ -458,7 +482,7 @@
     "original_title": "Supergirl",
     "cinema_date": "24 juin 2026",
     "vote_average": 6.2,
-    "vote_count": 461,
+    "vote_count": 466,
     "genres": [
       "Action",
       "Aventure",
