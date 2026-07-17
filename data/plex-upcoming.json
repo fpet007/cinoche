@@ -104,7 +104,7 @@
     "original_title": "Le Crime du 3e étage",
     "cinema_date": "11 mars 2026",
     "vote_average": 6.6,
-    "vote_count": 49,
+    "vote_count": 50,
     "genres": [
       "Comédie",
       "Drame",
@@ -274,31 +274,6 @@
     "lead_studio": null
   },
   {
-    "title": "Victor comme tout le monde",
-    "plex_release": "17 juillet 2026",
-    "tmdb_id": 1454680,
-    "poster_path": "/sYRssxFzHMr3Rz0VTEF21m6iVDU.jpg",
-    "original_title": "Victor comme tout le monde",
-    "cinema_date": "11 mars 2026",
-    "vote_average": 6.9,
-    "vote_count": 17,
-    "genres": [
-      "Drame",
-      "Comédie"
-    ],
-    "is_french": true,
-    "source": "override-manuel",
-    "confidence": {
-      "level": "override",
-      "score": 1,
-      "sources": [
-        "override-manuel"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
     "title": "Disclosure Day",
     "plex_release": "21 juillet 2026",
     "tmdb_id": 1275779,
@@ -306,7 +281,7 @@
     "original_title": "Disclosure Day",
     "cinema_date": "10 juin 2026",
     "vote_average": 6.7,
-    "vote_count": 883,
+    "vote_count": 886,
     "genres": [
       "Science-Fiction",
       "Thriller"
@@ -421,6 +396,31 @@
       "score": 0.45,
       "sources": [
         "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Victor comme tout le monde",
+    "plex_release": "24 juillet 2026",
+    "tmdb_id": 1454680,
+    "poster_path": "/sYRssxFzHMr3Rz0VTEF21m6iVDU.jpg",
+    "original_title": "Victor comme tout le monde",
+    "cinema_date": "11 mars 2026",
+    "vote_average": 6.9,
+    "vote_count": 17,
+    "genres": [
+      "Drame",
+      "Comédie"
+    ],
+    "is_french": true,
+    "source": "override-manuel",
+    "confidence": {
+      "level": "override",
+      "score": 1,
+      "sources": [
+        "override-manuel"
       ]
     },
     "tier": "niche",
