@@ -1,29 +1,5 @@
 [
   {
-    "title": "Nino dans la nuit",
-    "plex_release": "2 juillet 2026",
-    "tmdb_id": 1012591,
-    "poster_path": "/muVmDDFdON1wBpIj1EJwvsMa0ax.jpg",
-    "original_title": "Nino dans la nuit",
-    "cinema_date": "4 mars 2026",
-    "vote_average": 5,
-    "vote_count": 1,
-    "genres": [
-      "Drame"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
     "title": "La Maison des Femmes",
     "plex_release": "2 juillet 2026",
     "tmdb_id": 1318417,
@@ -55,7 +31,7 @@
     "original_title": "Passenger",
     "cinema_date": "20 mai 2026",
     "vote_average": 7.2,
-    "vote_count": 426,
+    "vote_count": 447,
     "genres": [
       "Horreur",
       "Thriller"
@@ -80,7 +56,7 @@
     "original_title": "Alter ego",
     "cinema_date": "4 mars 2026",
     "vote_average": 6.3,
-    "vote_count": 73,
+    "vote_count": 76,
     "genres": [
       "Comédie"
     ],
@@ -97,18 +73,16 @@
     "lead_studio": null
   },
   {
-    "title": "Le Crime du 3e étage",
+    "title": "Les K d'Or",
     "plex_release": "9 juillet 2026",
-    "tmdb_id": 1471224,
-    "poster_path": "/5FHAlQPHFyJEIN1UOxsADog1KUy.jpg",
-    "original_title": "Le Crime du 3e étage",
+    "tmdb_id": 1295722,
+    "poster_path": "/xZODXZeys9ARnXe2DekYFoUx385.jpg",
+    "original_title": "Les K d'Or",
     "cinema_date": "11 mars 2026",
-    "vote_average": 6.6,
-    "vote_count": 50,
+    "vote_average": 4.2,
+    "vote_count": 40,
     "genres": [
-      "Comédie",
-      "Drame",
-      "Crime"
+      "Comédie"
     ],
     "is_french": true,
     "source": "prédite",
@@ -123,16 +97,18 @@
     "lead_studio": null
   },
   {
-    "title": "Les K d'Or",
+    "title": "Le Crime du 3e étage",
     "plex_release": "9 juillet 2026",
-    "tmdb_id": 1295722,
-    "poster_path": "/xZODXZeys9ARnXe2DekYFoUx385.jpg",
-    "original_title": "Les K d'Or",
+    "tmdb_id": 1471224,
+    "poster_path": "/5FHAlQPHFyJEIN1UOxsADog1KUy.jpg",
+    "original_title": "Le Crime du 3e étage",
     "cinema_date": "11 mars 2026",
-    "vote_average": 4.2,
-    "vote_count": 40,
+    "vote_average": 6.6,
+    "vote_count": 51,
     "genres": [
-      "Comédie"
+      "Comédie",
+      "Drame",
+      "Crime"
     ],
     "is_french": true,
     "source": "prédite",
@@ -179,7 +155,7 @@
     "original_title": "Backrooms",
     "cinema_date": "17 juin 2026",
     "vote_average": 7,
-    "vote_count": 1346,
+    "vote_count": 1465,
     "genres": [
       "Horreur",
       "Mystère",
@@ -201,40 +177,15 @@
     "title": "Les rayons et les ombres",
     "plex_release": "16 juillet 2026",
     "tmdb_id": 1318335,
-    "poster_path": "/kZL29CVH0cYxN8IMtsj2jMpFJTj.jpg",
+    "poster_path": "/TPo1gsNCswrgyxrqdGN44OmPuH.jpg",
     "original_title": "Les rayons et les ombres",
     "cinema_date": "18 mars 2026",
     "vote_average": 7.5,
-    "vote_count": 84,
+    "vote_count": 85,
     "genres": [
       "Drame",
       "Histoire",
       "Familial"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "Police Flash 80",
-    "plex_release": "16 juillet 2026",
-    "tmdb_id": 1002109,
-    "poster_path": "/2HD9MuSt5Fk6i7uAgI3m75VATjk.jpg",
-    "original_title": "Police Flash 80",
-    "cinema_date": "18 mars 2026",
-    "vote_average": 6.6,
-    "vote_count": 28,
-    "genres": [
-      "Comédie",
-      "Crime"
     ],
     "is_french": true,
     "source": "prédite",
@@ -274,6 +225,31 @@
     "lead_studio": null
   },
   {
+    "title": "Police Flash 80",
+    "plex_release": "17 juillet 2026",
+    "tmdb_id": 1002109,
+    "poster_path": "/2HD9MuSt5Fk6i7uAgI3m75VATjk.jpg",
+    "original_title": "Police Flash 80",
+    "cinema_date": "18 mars 2026",
+    "vote_average": 6.7,
+    "vote_count": 29,
+    "genres": [
+      "Comédie",
+      "Crime"
+    ],
+    "is_french": true,
+    "source": "officielle-fr",
+    "confidence": {
+      "level": "high",
+      "score": 0.95,
+      "sources": [
+        "officielle-fr"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
     "title": "Disclosure Day",
     "plex_release": "21 juillet 2026",
     "tmdb_id": 1275779,
@@ -281,7 +257,7 @@
     "original_title": "Disclosure Day",
     "cinema_date": "10 juin 2026",
     "vote_average": 6.7,
-    "vote_count": 886,
+    "vote_count": 890,
     "genres": [
       "Science-Fiction",
       "Thriller"
@@ -306,7 +282,7 @@
     "original_title": "Scary Movie",
     "cinema_date": "3 juin 2026",
     "vote_average": 5.4,
-    "vote_count": 463,
+    "vote_count": 465,
     "genres": [
       "Comédie",
       "Horreur"
@@ -331,7 +307,7 @@
     "original_title": "Masters of the Universe",
     "cinema_date": "3 juin 2026",
     "vote_average": 6.9,
-    "vote_count": 399,
+    "vote_count": 401,
     "genres": [
       "Action",
       "Fantastique",
@@ -357,7 +333,7 @@
     "original_title": "The Death of Robin Hood",
     "cinema_date": "18 juin 2026",
     "vote_average": 6.8,
-    "vote_count": 76,
+    "vote_count": 77,
     "genres": [
       "Aventure",
       "Drame",
@@ -371,6 +347,30 @@
       "score": 0.7,
       "sources": [
         "maxblizz"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Les filles du ciel",
+    "plex_release": "23 juillet 2026",
+    "tmdb_id": 1126694,
+    "poster_path": "/7WXSD6i2jMzPuVpnqvu8zOeurqI.jpg",
+    "original_title": "Les filles du ciel",
+    "cinema_date": "25 mars 2026",
+    "vote_average": 7,
+    "vote_count": 2,
+    "genres": [
+      "Drame"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
       ]
     },
     "tier": "niche",
@@ -434,7 +434,7 @@
     "original_title": "Supergirl",
     "cinema_date": "24 juin 2026",
     "vote_average": 6.2,
-    "vote_count": 473,
+    "vote_count": 484,
     "genres": [
       "Action",
       "Aventure",
@@ -460,9 +460,33 @@
     "original_title": "Yellow Letters",
     "cinema_date": "1 avril 2026",
     "vote_average": 7.4,
-    "vote_count": 39,
+    "vote_count": 40,
     "genres": [
       "Drame"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Mauvaise Pioche",
+    "plex_release": "30 juillet 2026",
+    "tmdb_id": 1440304,
+    "poster_path": "/bLKDM4BEowhzck0Bdhy2hbMDecp.jpg",
+    "original_title": "Mauvaise Pioche",
+    "cinema_date": "1 avril 2026",
+    "vote_average": 6.9,
+    "vote_count": 11,
+    "genres": [
+      "Comédie"
     ],
     "is_french": true,
     "source": "prédite",
@@ -488,30 +512,6 @@
     "genres": [
       "Drame",
       "Romance"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "Mauvaise Pioche",
-    "plex_release": "30 juillet 2026",
-    "tmdb_id": 1440304,
-    "poster_path": "/bLKDM4BEowhzck0Bdhy2hbMDecp.jpg",
-    "original_title": "Mauvaise Pioche",
-    "cinema_date": "1 avril 2026",
-    "vote_average": 6.9,
-    "vote_count": 11,
-    "genres": [
-      "Comédie"
     ],
     "is_french": true,
     "source": "prédite",
