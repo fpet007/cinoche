@@ -250,6 +250,32 @@
     "lead_studio": null
   },
   {
+    "title": "The Mandalorian and Grogu",
+    "plex_release": "21 juillet 2026",
+    "tmdb_id": 1228710,
+    "poster_path": "/qkH4ntQtO5qnL17RFOvmkNHKpGt.jpg",
+    "original_title": "The Mandalorian and Grogu",
+    "cinema_date": "20 mai 2026",
+    "vote_average": 6.7,
+    "vote_count": 606,
+    "genres": [
+      "Action",
+      "Aventure",
+      "Science-Fiction"
+    ],
+    "is_french": false,
+    "source": "override-manuel",
+    "confidence": {
+      "level": "override",
+      "score": 1,
+      "sources": [
+        "override-manuel"
+      ]
+    },
+    "tier": "blockbuster",
+    "lead_studio": null
+  },
+  {
     "title": "Disclosure Day",
     "plex_release": "21 juillet 2026",
     "tmdb_id": 1275779,
