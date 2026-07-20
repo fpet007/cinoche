@@ -31,7 +31,7 @@
     "original_title": "Passenger",
     "cinema_date": "20 mai 2026",
     "vote_average": 7.2,
-    "vote_count": 472,
+    "vote_count": 489,
     "genres": [
       "Horreur",
       "Thriller"
@@ -80,7 +80,7 @@
     "original_title": "Le Crime du 3e étage",
     "cinema_date": "11 mars 2026",
     "vote_average": 6.6,
-    "vote_count": 53,
+    "vote_count": 55,
     "genres": [
       "Comédie",
       "Drame",
@@ -105,10 +105,35 @@
     "poster_path": "/xZODXZeys9ARnXe2DekYFoUx385.jpg",
     "original_title": "Les K d'Or",
     "cinema_date": "11 mars 2026",
-    "vote_average": 4.2,
-    "vote_count": 40,
+    "vote_average": 4.3,
+    "vote_count": 41,
     "genres": [
       "Comédie"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Planètes",
+    "plex_release": "9 juillet 2026",
+    "tmdb_id": 999140,
+    "poster_path": "/4EbiJTqpKCM4Cmj7Xpsji38mW9A.jpg",
+    "original_title": "Planètes",
+    "cinema_date": "11 mars 2026",
+    "vote_average": 7.2,
+    "vote_count": 3,
+    "genres": [
+      "Animation",
+      "Science-Fiction"
     ],
     "is_french": true,
     "source": "prédite",
@@ -129,8 +154,8 @@
     "poster_path": "/thQQ3BBBhGDtWm3UTtabhyDJd8U.jpg",
     "original_title": "Backrooms",
     "cinema_date": "17 juin 2026",
-    "vote_average": 7,
-    "vote_count": 1611,
+    "vote_average": 7.1,
+    "vote_count": 1737,
     "genres": [
       "Horreur",
       "Mystère",
@@ -206,8 +231,8 @@
     "poster_path": "/2HD9MuSt5Fk6i7uAgI3m75VATjk.jpg",
     "original_title": "Police Flash 80",
     "cinema_date": "18 mars 2026",
-    "vote_average": 6.4,
-    "vote_count": 31,
+    "vote_average": 6.2,
+    "vote_count": 35,
     "genres": [
       "Comédie",
       "Crime"
@@ -232,7 +257,7 @@
     "original_title": "Disclosure Day",
     "cinema_date": "10 juin 2026",
     "vote_average": 6.7,
-    "vote_count": 895,
+    "vote_count": 898,
     "genres": [
       "Science-Fiction",
       "Thriller"
@@ -257,7 +282,7 @@
     "original_title": "Scary Movie",
     "cinema_date": "3 juin 2026",
     "vote_average": 5.4,
-    "vote_count": 469,
+    "vote_count": 474,
     "genres": [
       "Comédie",
       "Horreur"
@@ -282,7 +307,7 @@
     "original_title": "Masters of the Universe",
     "cinema_date": "3 juin 2026",
     "vote_average": 6.9,
-    "vote_count": 403,
+    "vote_count": 406,
     "genres": [
       "Action",
       "Fantastique",
@@ -308,7 +333,7 @@
     "original_title": "The Death of Robin Hood",
     "cinema_date": "18 juin 2026",
     "vote_average": 6.7,
-    "vote_count": 78,
+    "vote_count": 79,
     "genres": [
       "Aventure",
       "Drame",
@@ -385,7 +410,7 @@
     "original_title": "Supergirl",
     "cinema_date": "24 juin 2026",
     "vote_average": 6.2,
-    "vote_count": 491,
+    "vote_count": 496,
     "genres": [
       "Action",
       "Aventure",
@@ -452,17 +477,17 @@
     "lead_studio": null
   },
   {
-    "title": "Derrière les palmiers",
+    "title": "Compostelle",
     "plex_release": "30 juillet 2026",
-    "tmdb_id": 1046699,
-    "poster_path": "/1pccPSZiuytLXVc0l0RRv3dOhSn.jpg",
-    "original_title": "Derrière les palmiers",
+    "tmdb_id": 1404604,
+    "poster_path": "/4FaoBpDtzhZk9R907epSN5WCelq.jpg",
+    "original_title": "Compostelle",
     "cinema_date": "1 avril 2026",
-    "vote_average": 5.8,
-    "vote_count": 5,
+    "vote_average": 7.1,
+    "vote_count": 28,
     "genres": [
       "Drame",
-      "Romance"
+      "Comédie"
     ],
     "is_french": true,
     "source": "prédite",
@@ -477,17 +502,17 @@
     "lead_studio": null
   },
   {
-    "title": "Compostelle",
+    "title": "Derrière les palmiers",
     "plex_release": "30 juillet 2026",
-    "tmdb_id": 1404604,
-    "poster_path": "/4FaoBpDtzhZk9R907epSN5WCelq.jpg",
-    "original_title": "Compostelle",
+    "tmdb_id": 1046699,
+    "poster_path": "/47k5xBtbReL4lZKBNDUbT0hHWJa.jpg",
+    "original_title": "Behind the Palm Trees",
     "cinema_date": "1 avril 2026",
-    "vote_average": 7.1,
-    "vote_count": 28,
+    "vote_average": 5.8,
+    "vote_count": 5,
     "genres": [
       "Drame",
-      "Comédie"
+      "Romance"
     ],
     "is_french": true,
     "source": "prédite",
