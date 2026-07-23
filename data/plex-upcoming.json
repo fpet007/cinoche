@@ -55,7 +55,7 @@
     "original_title": "Passenger",
     "cinema_date": "20 mai 2026",
     "vote_average": 7.3,
-    "vote_count": 517,
+    "vote_count": 530,
     "genres": [
       "Horreur",
       "Thriller"
@@ -80,7 +80,7 @@
     "original_title": "Alter ego",
     "cinema_date": "4 mars 2026",
     "vote_average": 6.3,
-    "vote_count": 80,
+    "vote_count": 81,
     "genres": [
       "Comédie"
     ],
@@ -97,18 +97,16 @@
     "lead_studio": null
   },
   {
-    "title": "Le Crime du 3e étage",
+    "title": "Les K d'Or",
     "plex_release": "9 juillet 2026",
-    "tmdb_id": 1471224,
-    "poster_path": "/5FHAlQPHFyJEIN1UOxsADog1KUy.jpg",
-    "original_title": "Le Crime du 3e étage",
+    "tmdb_id": 1295722,
+    "poster_path": "/xZODXZeys9ARnXe2DekYFoUx385.jpg",
+    "original_title": "Les K d'Or",
     "cinema_date": "11 mars 2026",
-    "vote_average": 6.4,
-    "vote_count": 57,
+    "vote_average": 4.1,
+    "vote_count": 47,
     "genres": [
-      "Comédie",
-      "Drame",
-      "Crime"
+      "Comédie"
     ],
     "is_french": true,
     "source": "prédite",
@@ -123,16 +121,18 @@
     "lead_studio": null
   },
   {
-    "title": "Les K d'Or",
+    "title": "Le Crime du 3e étage",
     "plex_release": "9 juillet 2026",
-    "tmdb_id": 1295722,
-    "poster_path": "/xZODXZeys9ARnXe2DekYFoUx385.jpg",
-    "original_title": "Les K d'Or",
+    "tmdb_id": 1471224,
+    "poster_path": "/5FHAlQPHFyJEIN1UOxsADog1KUy.jpg",
+    "original_title": "Le Crime du 3e étage",
     "cinema_date": "11 mars 2026",
-    "vote_average": 4.1,
-    "vote_count": 44,
+    "vote_average": 6.4,
+    "vote_count": 59,
     "genres": [
-      "Comédie"
+      "Comédie",
+      "Drame",
+      "Crime"
     ],
     "is_french": true,
     "source": "prédite",
@@ -179,7 +179,7 @@
     "original_title": "Backrooms",
     "cinema_date": "17 juin 2026",
     "vote_average": 7.1,
-    "vote_count": 1893,
+    "vote_count": 1936,
     "genres": [
       "Horreur",
       "Mystère",
@@ -256,7 +256,7 @@
     "original_title": "Police Flash 80",
     "cinema_date": "18 mars 2026",
     "vote_average": 6.3,
-    "vote_count": 37,
+    "vote_count": 39,
     "genres": [
       "Comédie",
       "Crime"
@@ -280,12 +280,12 @@
     "poster_path": "/eUOVyCSZrUH6aPfhsfd7j0bxGOl.jpg",
     "original_title": "The Mandalorian and Grogu",
     "cinema_date": "20 mai 2026",
-    "vote_average": 6.8,
-    "vote_count": 673,
+    "vote_average": 7,
+    "vote_count": 755,
     "genres": [
-      "Fantastique",
       "Action",
-      "Aventure"
+      "Aventure",
+      "Science-Fiction"
     ],
     "is_french": false,
     "source": "override-manuel",
@@ -306,8 +306,8 @@
     "poster_path": "/8GRMeKaDFnuzXBzqGiDMzCFDnwQ.jpg",
     "original_title": "Disclosure Day",
     "cinema_date": "10 juin 2026",
-    "vote_average": 6.8,
-    "vote_count": 993,
+    "vote_average": 7.1,
+    "vote_count": 1245,
     "genres": [
       "Science-Fiction",
       "Thriller"
@@ -332,7 +332,7 @@
     "original_title": "Scary Movie",
     "cinema_date": "3 juin 2026",
     "vote_average": 6.4,
-    "vote_count": 855,
+    "vote_count": 911,
     "genres": [
       "Comédie",
       "Horreur"
@@ -356,8 +356,8 @@
     "poster_path": "/tJxeLnt5K3LHfJdaAZY6bttM0Sv.jpg",
     "original_title": "Masters of the Universe",
     "cinema_date": "3 juin 2026",
-    "vote_average": 6.9,
-    "vote_count": 413,
+    "vote_average": 7.1,
+    "vote_count": 533,
     "genres": [
       "Action",
       "Fantastique",
@@ -383,7 +383,7 @@
     "original_title": "The Death of Robin Hood",
     "cinema_date": "18 juin 2026",
     "vote_average": 6.8,
-    "vote_count": 83,
+    "vote_count": 88,
     "genres": [
       "Aventure",
       "Drame",
@@ -460,7 +460,7 @@
     "original_title": "Supergirl",
     "cinema_date": "24 juin 2026",
     "vote_average": 6.1,
-    "vote_count": 510,
+    "vote_count": 512,
     "genres": [
       "Action",
       "Aventure",
