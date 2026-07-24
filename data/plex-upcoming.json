@@ -55,7 +55,7 @@
     "original_title": "Passenger",
     "cinema_date": "20 mai 2026",
     "vote_average": 7.3,
-    "vote_count": 530,
+    "vote_count": 540,
     "genres": [
       "Horreur",
       "Thriller"
@@ -128,7 +128,7 @@
     "original_title": "Le Crime du 3e étage",
     "cinema_date": "11 mars 2026",
     "vote_average": 6.4,
-    "vote_count": 59,
+    "vote_count": 60,
     "genres": [
       "Comédie",
       "Drame",
@@ -157,7 +157,10 @@
     "vote_count": 3,
     "genres": [
       "Animation",
-      "Science-Fiction"
+      "Science-Fiction",
+      "Familial",
+      "Fantastique",
+      "Aventure"
     ],
     "is_french": true,
     "source": "prédite",
@@ -179,7 +182,7 @@
     "original_title": "Backrooms",
     "cinema_date": "17 juin 2026",
     "vote_average": 7.1,
-    "vote_count": 1953,
+    "vote_count": 1991,
     "genres": [
       "Horreur",
       "Mystère",
@@ -204,8 +207,8 @@
     "poster_path": "/TPo1gsNCswrgyxrqdGN44OmPuH.jpg",
     "original_title": "Les Rayons et les Ombres",
     "cinema_date": "18 mars 2026",
-    "vote_average": 7.5,
-    "vote_count": 89,
+    "vote_average": 7.6,
+    "vote_count": 90,
     "genres": [
       "Drame",
       "Histoire",
@@ -256,7 +259,7 @@
     "original_title": "Police Flash 80",
     "cinema_date": "18 mars 2026",
     "vote_average": 6.3,
-    "vote_count": 39,
+    "vote_count": 40,
     "genres": [
       "Comédie",
       "Crime"
@@ -280,8 +283,8 @@
     "poster_path": "/eUOVyCSZrUH6aPfhsfd7j0bxGOl.jpg",
     "original_title": "The Mandalorian and Grogu",
     "cinema_date": "20 mai 2026",
-    "vote_average": 7,
-    "vote_count": 755,
+    "vote_average": 7.1,
+    "vote_count": 797,
     "genres": [
       "Action",
       "Aventure",
@@ -306,8 +309,8 @@
     "poster_path": "/8GRMeKaDFnuzXBzqGiDMzCFDnwQ.jpg",
     "original_title": "Disclosure Day",
     "cinema_date": "10 juin 2026",
-    "vote_average": 7.1,
-    "vote_count": 1245,
+    "vote_average": 7.2,
+    "vote_count": 1394,
     "genres": [
       "Science-Fiction",
       "Thriller"
@@ -331,8 +334,8 @@
     "poster_path": "/gIComZ1TfZdWmuD4L4mJ8sEv0km.jpg",
     "original_title": "Scary Movie",
     "cinema_date": "3 juin 2026",
-    "vote_average": 6.4,
-    "vote_count": 911,
+    "vote_average": 6.5,
+    "vote_count": 960,
     "genres": [
       "Comédie",
       "Horreur"
@@ -350,14 +353,14 @@
     "lead_studio": null
   },
   {
-    "title": "Les Maîtres de l'Univers",
+    "title": "Les Maîtres de l'univers",
     "plex_release": "21 juillet 2026",
     "tmdb_id": 454639,
     "poster_path": "/tJxeLnt5K3LHfJdaAZY6bttM0Sv.jpg",
     "original_title": "Masters of the Universe",
     "cinema_date": "3 juin 2026",
-    "vote_average": 7.1,
-    "vote_count": 533,
+    "vote_average": 7.3,
+    "vote_count": 706,
     "genres": [
       "Action",
       "Fantastique",
@@ -379,11 +382,11 @@
     "title": "On l'appelait Robin des Bois",
     "plex_release": "21 juillet 2026",
     "tmdb_id": 1284465,
-    "poster_path": "/bYaznBVPlQ4C0uTu6wXn68NZFoB.jpg",
+    "poster_path": "/ndDY118G0Xn6W8aKP3sLz0ESkGq.jpg",
     "original_title": "The Death of Robin Hood",
     "cinema_date": "18 juin 2026",
     "vote_average": 6.8,
-    "vote_count": 88,
+    "vote_count": 94,
     "genres": [
       "Aventure",
       "Drame",
@@ -399,14 +402,14 @@
         "maxblizz"
       ]
     },
-    "tier": "niche",
+    "tier": "mid",
     "lead_studio": null
   },
   {
     "title": "Victor comme tout le monde",
     "plex_release": "22 juillet 2026",
     "tmdb_id": 1454680,
-    "poster_path": "/sYRssxFzHMr3Rz0VTEF21m6iVDU.jpg",
+    "poster_path": "/eQnsG3eFupvzgn6BWuCNAFqlgMT.jpg",
     "original_title": "Victor comme tout le monde",
     "cinema_date": "11 mars 2026",
     "vote_average": 6.9,
@@ -460,7 +463,7 @@
     "original_title": "Supergirl",
     "cinema_date": "24 juin 2026",
     "vote_average": 6.1,
-    "vote_count": 512,
+    "vote_count": 513,
     "genres": [
       "Action",
       "Aventure",
@@ -571,6 +574,35 @@
       "score": 0.45,
       "sources": [
         "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Les Légendaires",
+    "plex_release": "31 juillet 2026",
+    "tmdb_id": 677561,
+    "poster_path": "/AlfndBQucnWC7igEIG2L0sk6tiF.jpg",
+    "original_title": "Les Légendaires",
+    "cinema_date": "28 janvier 2026",
+    "vote_average": 6,
+    "vote_count": 24,
+    "genres": [
+      "Animation",
+      "Action",
+      "Aventure",
+      "Comédie",
+      "Familial",
+      "Fantastique"
+    ],
+    "is_french": true,
+    "source": "officielle-fr",
+    "confidence": {
+      "level": "high",
+      "score": 0.95,
+      "sources": [
+        "officielle-fr"
       ]
     },
     "tier": "niche",
