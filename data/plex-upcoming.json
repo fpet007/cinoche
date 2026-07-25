@@ -55,7 +55,7 @@
     "original_title": "Passenger",
     "cinema_date": "20 mai 2026",
     "vote_average": 7.3,
-    "vote_count": 540,
+    "vote_count": 550,
     "genres": [
       "Horreur",
       "Thriller"
@@ -104,7 +104,7 @@
     "original_title": "Les K d'Or",
     "cinema_date": "11 mars 2026",
     "vote_average": 4.1,
-    "vote_count": 47,
+    "vote_count": 48,
     "genres": [
       "Comédie"
     ],
@@ -182,7 +182,7 @@
     "original_title": "Backrooms",
     "cinema_date": "17 juin 2026",
     "vote_average": 7.1,
-    "vote_count": 1991,
+    "vote_count": 2024,
     "genres": [
       "Horreur",
       "Mystère",
@@ -259,7 +259,7 @@
     "original_title": "Police Flash 80",
     "cinema_date": "18 mars 2026",
     "vote_average": 6.3,
-    "vote_count": 40,
+    "vote_count": 41,
     "genres": [
       "Comédie",
       "Crime"
@@ -277,14 +277,14 @@
     "lead_studio": null
   },
   {
-    "title": "The Mandalorian and Grogu",
+    "title": "Star Wars : The Mandalorian and Grogu",
     "plex_release": "21 juillet 2026",
     "tmdb_id": 1228710,
     "poster_path": "/eUOVyCSZrUH6aPfhsfd7j0bxGOl.jpg",
     "original_title": "The Mandalorian and Grogu",
     "cinema_date": "20 mai 2026",
     "vote_average": 7.1,
-    "vote_count": 797,
+    "vote_count": 835,
     "genres": [
       "Action",
       "Aventure",
@@ -310,7 +310,7 @@
     "original_title": "Disclosure Day",
     "cinema_date": "10 juin 2026",
     "vote_average": 7.2,
-    "vote_count": 1394,
+    "vote_count": 1491,
     "genres": [
       "Science-Fiction",
       "Thriller"
@@ -328,31 +328,6 @@
     "lead_studio": "Universal Pictures"
   },
   {
-    "title": "Scary Movie",
-    "plex_release": "21 juillet 2026",
-    "tmdb_id": 1273221,
-    "poster_path": "/gIComZ1TfZdWmuD4L4mJ8sEv0km.jpg",
-    "original_title": "Scary Movie",
-    "cinema_date": "3 juin 2026",
-    "vote_average": 6.5,
-    "vote_count": 960,
-    "genres": [
-      "Comédie",
-      "Horreur"
-    ],
-    "is_french": false,
-    "source": "maxblizz",
-    "confidence": {
-      "level": "medium",
-      "score": 0.7,
-      "sources": [
-        "maxblizz"
-      ]
-    },
-    "tier": "blockbuster",
-    "lead_studio": null
-  },
-  {
     "title": "Les Maîtres de l'univers",
     "plex_release": "21 juillet 2026",
     "tmdb_id": 454639,
@@ -360,7 +335,7 @@
     "original_title": "Masters of the Universe",
     "cinema_date": "3 juin 2026",
     "vote_average": 7.3,
-    "vote_count": 706,
+    "vote_count": 784,
     "genres": [
       "Action",
       "Fantastique",
@@ -379,19 +354,17 @@
     "lead_studio": null
   },
   {
-    "title": "On l'appelait Robin des Bois",
+    "title": "Scary Movie",
     "plex_release": "21 juillet 2026",
-    "tmdb_id": 1284465,
-    "poster_path": "/ndDY118G0Xn6W8aKP3sLz0ESkGq.jpg",
-    "original_title": "The Death of Robin Hood",
-    "cinema_date": "18 juin 2026",
-    "vote_average": 6.8,
-    "vote_count": 94,
+    "tmdb_id": 1273221,
+    "poster_path": "/gIComZ1TfZdWmuD4L4mJ8sEv0km.jpg",
+    "original_title": "Scary Movie",
+    "cinema_date": "3 juin 2026",
+    "vote_average": 6.5,
+    "vote_count": 1014,
     "genres": [
-      "Aventure",
-      "Drame",
-      "Thriller",
-      "Action"
+      "Comédie",
+      "Horreur"
     ],
     "is_french": false,
     "source": "maxblizz",
@@ -402,7 +375,7 @@
         "maxblizz"
       ]
     },
-    "tier": "mid",
+    "tier": "blockbuster",
     "lead_studio": null
   },
   {
@@ -462,8 +435,8 @@
     "poster_path": "/1QV4GubAlUvGX3FjqWWWfQiYkN4.jpg",
     "original_title": "Supergirl",
     "cinema_date": "24 juin 2026",
-    "vote_average": 6.1,
-    "vote_count": 513,
+    "vote_average": 6.2,
+    "vote_count": 517,
     "genres": [
       "Action",
       "Aventure",
@@ -479,6 +452,33 @@
       ]
     },
     "tier": "blockbuster",
+    "lead_studio": null
+  },
+  {
+    "title": "On l'appelait Robin des Bois",
+    "plex_release": "28 juillet 2026",
+    "tmdb_id": 1284465,
+    "poster_path": "/ndDY118G0Xn6W8aKP3sLz0ESkGq.jpg",
+    "original_title": "The Death of Robin Hood",
+    "cinema_date": "18 juin 2026",
+    "vote_average": 6.8,
+    "vote_count": 96,
+    "genres": [
+      "Aventure",
+      "Drame",
+      "Thriller",
+      "Action"
+    ],
+    "is_french": false,
+    "source": "maxblizz",
+    "confidence": {
+      "level": "medium",
+      "score": 0.7,
+      "sources": [
+        "maxblizz"
+      ]
+    },
+    "tier": "mid",
     "lead_studio": null
   },
   {
