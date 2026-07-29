@@ -31,7 +31,7 @@
     "original_title": "Passenger",
     "cinema_date": "20 mai 2026",
     "vote_average": 7.3,
-    "vote_count": 602,
+    "vote_count": 613,
     "genres": [
       "Horreur",
       "Thriller"
@@ -73,16 +73,18 @@
     "lead_studio": null
   },
   {
-    "title": "Les K d'Or",
+    "title": "Le Crime du 3e étage",
     "plex_release": "9 juillet 2026",
-    "tmdb_id": 1295722,
-    "poster_path": "/xZODXZeys9ARnXe2DekYFoUx385.jpg",
-    "original_title": "Les K d'Or",
+    "tmdb_id": 1471224,
+    "poster_path": "/5FHAlQPHFyJEIN1UOxsADog1KUy.jpg",
+    "original_title": "Le Crime du 3e étage",
     "cinema_date": "11 mars 2026",
-    "vote_average": 4.2,
-    "vote_count": 52,
+    "vote_average": 6.4,
+    "vote_count": 62,
     "genres": [
-      "Comédie"
+      "Comédie",
+      "Drame",
+      "Crime"
     ],
     "is_french": true,
     "source": "prédite",
@@ -97,18 +99,16 @@
     "lead_studio": null
   },
   {
-    "title": "Le Crime du 3e étage",
+    "title": "Les K d'Or",
     "plex_release": "9 juillet 2026",
-    "tmdb_id": 1471224,
-    "poster_path": "/5FHAlQPHFyJEIN1UOxsADog1KUy.jpg",
-    "original_title": "Le Crime du 3e étage",
+    "tmdb_id": 1295722,
+    "poster_path": "/xZODXZeys9ARnXe2DekYFoUx385.jpg",
+    "original_title": "Les K d'Or",
     "cinema_date": "11 mars 2026",
-    "vote_average": 6.4,
-    "vote_count": 61,
+    "vote_average": 4.2,
+    "vote_count": 52,
     "genres": [
-      "Comédie",
-      "Drame",
-      "Crime"
+      "Comédie"
     ],
     "is_french": true,
     "source": "prédite",
@@ -157,8 +157,8 @@
     "poster_path": "/1CuYfdSqpIjsWIaCftQKBCjNlG.jpg",
     "original_title": "군체",
     "cinema_date": "27 mai 2026",
-    "vote_average": 7.9,
-    "vote_count": 219,
+    "vote_average": 8,
+    "vote_count": 258,
     "genres": [
       "Action",
       "Horreur",
@@ -184,7 +184,7 @@
     "original_title": "Backrooms",
     "cinema_date": "17 juin 2026",
     "vote_average": 7.1,
-    "vote_count": 2170,
+    "vote_count": 2208,
     "genres": [
       "Horreur",
       "Mystère",
@@ -261,7 +261,7 @@
     "original_title": "Police Flash 80",
     "cinema_date": "18 mars 2026",
     "vote_average": 6.2,
-    "vote_count": 44,
+    "vote_count": 45,
     "genres": [
       "Comédie",
       "Crime"
@@ -286,7 +286,7 @@
     "original_title": "The Mandalorian and Grogu",
     "cinema_date": "20 mai 2026",
     "vote_average": 7.3,
-    "vote_count": 960,
+    "vote_count": 975,
     "genres": [
       "Action",
       "Aventure",
@@ -305,31 +305,6 @@
     "lead_studio": null
   },
   {
-    "title": "Disclosure Day",
-    "plex_release": "21 juillet 2026",
-    "tmdb_id": 1275779,
-    "poster_path": "/8GRMeKaDFnuzXBzqGiDMzCFDnwQ.jpg",
-    "original_title": "Disclosure Day",
-    "cinema_date": "10 juin 2026",
-    "vote_average": 7.4,
-    "vote_count": 1858,
-    "genres": [
-      "Science-Fiction",
-      "Thriller"
-    ],
-    "is_french": false,
-    "source": "maxblizz",
-    "confidence": {
-      "level": "medium",
-      "score": 0.7,
-      "sources": [
-        "maxblizz"
-      ]
-    },
-    "tier": "blockbuster",
-    "lead_studio": "Universal Pictures"
-  },
-  {
     "title": "Les Maîtres de l'univers",
     "plex_release": "21 juillet 2026",
     "tmdb_id": 454639,
@@ -337,7 +312,7 @@
     "original_title": "Masters of the Universe",
     "cinema_date": "3 juin 2026",
     "vote_average": 7.3,
-    "vote_count": 1181,
+    "vote_count": 1239,
     "genres": [
       "Action",
       "Fantastique",
@@ -356,6 +331,31 @@
     "lead_studio": null
   },
   {
+    "title": "Disclosure Day",
+    "plex_release": "21 juillet 2026",
+    "tmdb_id": 1275779,
+    "poster_path": "/8GRMeKaDFnuzXBzqGiDMzCFDnwQ.jpg",
+    "original_title": "Disclosure Day",
+    "cinema_date": "10 juin 2026",
+    "vote_average": 7.4,
+    "vote_count": 1950,
+    "genres": [
+      "Science-Fiction",
+      "Thriller"
+    ],
+    "is_french": false,
+    "source": "maxblizz",
+    "confidence": {
+      "level": "medium",
+      "score": 0.7,
+      "sources": [
+        "maxblizz"
+      ]
+    },
+    "tier": "blockbuster",
+    "lead_studio": "Universal Pictures"
+  },
+  {
     "title": "Scary Movie",
     "plex_release": "21 juillet 2026",
     "tmdb_id": 1273221,
@@ -363,7 +363,7 @@
     "original_title": "Scary Movie",
     "cinema_date": "3 juin 2026",
     "vote_average": 6.5,
-    "vote_count": 1192,
+    "vote_count": 1213,
     "genres": [
       "Comédie"
     ],
@@ -412,7 +412,7 @@
     "original_title": "Ceux qui comptent",
     "cinema_date": "25 mars 2026",
     "vote_average": 6.7,
-    "vote_count": 28,
+    "vote_count": 29,
     "genres": [
       "Comédie",
       "Drame"
@@ -436,8 +436,8 @@
     "poster_path": "/1QV4GubAlUvGX3FjqWWWfQiYkN4.jpg",
     "original_title": "Supergirl",
     "cinema_date": "24 juin 2026",
-    "vote_average": 6.4,
-    "vote_count": 669,
+    "vote_average": 6.6,
+    "vote_count": 915,
     "genres": [
       "Action",
       "Aventure",
@@ -463,7 +463,7 @@
     "original_title": "The Death of Robin Hood",
     "cinema_date": "18 juin 2026",
     "vote_average": 6.7,
-    "vote_count": 115,
+    "vote_count": 121,
     "genres": [
       "Aventure",
       "Drame",
@@ -531,17 +531,17 @@
     "lead_studio": null
   },
   {
-    "title": "Compostelle",
+    "title": "Derrière les palmiers",
     "plex_release": "30 juillet 2026",
-    "tmdb_id": 1404604,
-    "poster_path": "/4FaoBpDtzhZk9R907epSN5WCelq.jpg",
-    "original_title": "Compostelle",
+    "tmdb_id": 1046699,
+    "poster_path": "/47k5xBtbReL4lZKBNDUbT0hHWJa.jpg",
+    "original_title": "Behind the Palm Trees",
     "cinema_date": "1 avril 2026",
-    "vote_average": 7.1,
-    "vote_count": 28,
+    "vote_average": 5.8,
+    "vote_count": 5,
     "genres": [
       "Drame",
-      "Comédie"
+      "Romance"
     ],
     "is_french": true,
     "source": "prédite",
@@ -556,17 +556,17 @@
     "lead_studio": null
   },
   {
-    "title": "Derrière les palmiers",
+    "title": "Compostelle",
     "plex_release": "30 juillet 2026",
-    "tmdb_id": 1046699,
-    "poster_path": "/47k5xBtbReL4lZKBNDUbT0hHWJa.jpg",
-    "original_title": "Behind the Palm Trees",
+    "tmdb_id": 1404604,
+    "poster_path": "/4FaoBpDtzhZk9R907epSN5WCelq.jpg",
+    "original_title": "Compostelle",
     "cinema_date": "1 avril 2026",
-    "vote_average": 5.8,
-    "vote_count": 5,
+    "vote_average": 7.1,
+    "vote_count": 28,
     "genres": [
       "Drame",
-      "Romance"
+      "Comédie"
     ],
     "is_french": true,
     "source": "prédite",
