@@ -31,7 +31,7 @@
     "original_title": "Passenger",
     "cinema_date": "20 mai 2026",
     "vote_average": 7.3,
-    "vote_count": 613,
+    "vote_count": 621,
     "genres": [
       "Horreur",
       "Thriller"
@@ -73,18 +73,16 @@
     "lead_studio": null
   },
   {
-    "title": "Le Crime du 3e étage",
+    "title": "Les K d'Or",
     "plex_release": "9 juillet 2026",
-    "tmdb_id": 1471224,
-    "poster_path": "/5FHAlQPHFyJEIN1UOxsADog1KUy.jpg",
-    "original_title": "Le Crime du 3e étage",
+    "tmdb_id": 1295722,
+    "poster_path": "/xZODXZeys9ARnXe2DekYFoUx385.jpg",
+    "original_title": "Les K d'Or",
     "cinema_date": "11 mars 2026",
-    "vote_average": 6.4,
-    "vote_count": 62,
+    "vote_average": 4.3,
+    "vote_count": 53,
     "genres": [
-      "Comédie",
-      "Drame",
-      "Crime"
+      "Comédie"
     ],
     "is_french": true,
     "source": "prédite",
@@ -99,16 +97,18 @@
     "lead_studio": null
   },
   {
-    "title": "Les K d'Or",
+    "title": "Le Crime du 3e étage",
     "plex_release": "9 juillet 2026",
-    "tmdb_id": 1295722,
-    "poster_path": "/xZODXZeys9ARnXe2DekYFoUx385.jpg",
-    "original_title": "Les K d'Or",
+    "tmdb_id": 1471224,
+    "poster_path": "/5FHAlQPHFyJEIN1UOxsADog1KUy.jpg",
+    "original_title": "Le Crime du 3e étage",
     "cinema_date": "11 mars 2026",
-    "vote_average": 4.2,
-    "vote_count": 52,
+    "vote_average": 6.4,
+    "vote_count": 62,
     "genres": [
-      "Comédie"
+      "Comédie",
+      "Drame",
+      "Crime"
     ],
     "is_french": true,
     "source": "prédite",
@@ -158,7 +158,7 @@
     "original_title": "군체",
     "cinema_date": "27 mai 2026",
     "vote_average": 8,
-    "vote_count": 258,
+    "vote_count": 287,
     "genres": [
       "Action",
       "Horreur",
@@ -184,7 +184,7 @@
     "original_title": "Backrooms",
     "cinema_date": "17 juin 2026",
     "vote_average": 7.1,
-    "vote_count": 2208,
+    "vote_count": 2252,
     "genres": [
       "Horreur",
       "Mystère",
@@ -285,8 +285,8 @@
     "poster_path": "/eUOVyCSZrUH6aPfhsfd7j0bxGOl.jpg",
     "original_title": "The Mandalorian and Grogu",
     "cinema_date": "20 mai 2026",
-    "vote_average": 7.3,
-    "vote_count": 975,
+    "vote_average": 7.4,
+    "vote_count": 998,
     "genres": [
       "Action",
       "Aventure",
@@ -312,7 +312,7 @@
     "original_title": "Masters of the Universe",
     "cinema_date": "3 juin 2026",
     "vote_average": 7.3,
-    "vote_count": 1239,
+    "vote_count": 1292,
     "genres": [
       "Action",
       "Fantastique",
@@ -338,7 +338,7 @@
     "original_title": "Disclosure Day",
     "cinema_date": "10 juin 2026",
     "vote_average": 7.4,
-    "vote_count": 1950,
+    "vote_count": 1993,
     "genres": [
       "Science-Fiction",
       "Thriller"
@@ -363,7 +363,7 @@
     "original_title": "Scary Movie",
     "cinema_date": "3 juin 2026",
     "vote_average": 6.5,
-    "vote_count": 1213,
+    "vote_count": 1254,
     "genres": [
       "Comédie"
     ],
@@ -436,8 +436,8 @@
     "poster_path": "/1QV4GubAlUvGX3FjqWWWfQiYkN4.jpg",
     "original_title": "Supergirl",
     "cinema_date": "24 juin 2026",
-    "vote_average": 6.6,
-    "vote_count": 915,
+    "vote_average": 6.7,
+    "vote_count": 996,
     "genres": [
       "Action",
       "Aventure",
@@ -462,12 +462,11 @@
     "poster_path": "/ndDY118G0Xn6W8aKP3sLz0ESkGq.jpg",
     "original_title": "The Death of Robin Hood",
     "cinema_date": "18 juin 2026",
-    "vote_average": 6.7,
-    "vote_count": 121,
+    "vote_average": 6.6,
+    "vote_count": 124,
     "genres": [
       "Aventure",
       "Drame",
-      "Thriller",
       "Action"
     ],
     "is_french": false,
@@ -510,12 +509,37 @@
     "title": "Mauvaise Pioche",
     "plex_release": "30 juillet 2026",
     "tmdb_id": 1440304,
-    "poster_path": "/bLKDM4BEowhzck0Bdhy2hbMDecp.jpg",
+    "poster_path": "/wRPxSccJw6wckkBUOzM5CHd871w.jpg",
     "original_title": "Mauvaise Pioche",
     "cinema_date": "1 avril 2026",
     "vote_average": 6.9,
     "vote_count": 11,
     "genres": [
+      "Comédie"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Compostelle",
+    "plex_release": "30 juillet 2026",
+    "tmdb_id": 1404604,
+    "poster_path": "/4FaoBpDtzhZk9R907epSN5WCelq.jpg",
+    "original_title": "Compostelle",
+    "cinema_date": "1 avril 2026",
+    "vote_average": 7.1,
+    "vote_count": 29,
+    "genres": [
+      "Drame",
       "Comédie"
     ],
     "is_french": true,
@@ -542,31 +566,6 @@
     "genres": [
       "Drame",
       "Romance"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "Compostelle",
-    "plex_release": "30 juillet 2026",
-    "tmdb_id": 1404604,
-    "poster_path": "/4FaoBpDtzhZk9R907epSN5WCelq.jpg",
-    "original_title": "Compostelle",
-    "cinema_date": "1 avril 2026",
-    "vote_average": 7.1,
-    "vote_count": 28,
-    "genres": [
-      "Drame",
-      "Comédie"
     ],
     "is_french": true,
     "source": "prédite",
