@@ -31,7 +31,7 @@
     "original_title": "Passenger",
     "cinema_date": "20 mai 2026",
     "vote_average": 7.3,
-    "vote_count": 621,
+    "vote_count": 630,
     "genres": [
       "Horreur",
       "Thriller"
@@ -56,7 +56,7 @@
     "original_title": "Alter ego",
     "cinema_date": "4 mars 2026",
     "vote_average": 6.3,
-    "vote_count": 83,
+    "vote_count": 84,
     "genres": [
       "Comédie"
     ],
@@ -67,30 +67,6 @@
       "score": 1,
       "sources": [
         "override-manuel"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "Les K d'Or",
-    "plex_release": "9 juillet 2026",
-    "tmdb_id": 1295722,
-    "poster_path": "/xZODXZeys9ARnXe2DekYFoUx385.jpg",
-    "original_title": "Les K d'Or",
-    "cinema_date": "11 mars 2026",
-    "vote_average": 4.3,
-    "vote_count": 53,
-    "genres": [
-      "Comédie"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
       ]
     },
     "tier": "niche",
@@ -123,14 +99,38 @@
     "lead_studio": null
   },
   {
+    "title": "Les K d'Or",
+    "plex_release": "9 juillet 2026",
+    "tmdb_id": 1295722,
+    "poster_path": "/xZODXZeys9ARnXe2DekYFoUx385.jpg",
+    "original_title": "Les K d'Or",
+    "cinema_date": "11 mars 2026",
+    "vote_average": 4.3,
+    "vote_count": 53,
+    "genres": [
+      "Comédie"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
     "title": "Planètes",
     "plex_release": "9 juillet 2026",
     "tmdb_id": 999140,
     "poster_path": "/4EbiJTqpKCM4Cmj7Xpsji38mW9A.jpg",
     "original_title": "Planètes",
     "cinema_date": "11 mars 2026",
-    "vote_average": 7.2,
-    "vote_count": 3,
+    "vote_average": 7.4,
+    "vote_count": 4,
     "genres": [
       "Animation",
       "Science-Fiction",
@@ -158,7 +158,7 @@
     "original_title": "군체",
     "cinema_date": "27 mai 2026",
     "vote_average": 8,
-    "vote_count": 287,
+    "vote_count": 303,
     "genres": [
       "Action",
       "Horreur",
@@ -184,7 +184,7 @@
     "original_title": "Backrooms",
     "cinema_date": "17 juin 2026",
     "vote_average": 7.1,
-    "vote_count": 2252,
+    "vote_count": 2288,
     "genres": [
       "Horreur",
       "Mystère",
@@ -209,8 +209,8 @@
     "poster_path": "/TPo1gsNCswrgyxrqdGN44OmPuH.jpg",
     "original_title": "Les Rayons et les Ombres",
     "cinema_date": "18 mars 2026",
-    "vote_average": 7.6,
-    "vote_count": 94,
+    "vote_average": 7.5,
+    "vote_count": 96,
     "genres": [
       "Drame",
       "Histoire",
@@ -286,7 +286,7 @@
     "original_title": "The Mandalorian and Grogu",
     "cinema_date": "20 mai 2026",
     "vote_average": 7.4,
-    "vote_count": 998,
+    "vote_count": 1013,
     "genres": [
       "Action",
       "Aventure",
@@ -312,7 +312,7 @@
     "original_title": "Masters of the Universe",
     "cinema_date": "3 juin 2026",
     "vote_average": 7.3,
-    "vote_count": 1292,
+    "vote_count": 1335,
     "genres": [
       "Action",
       "Fantastique",
@@ -338,7 +338,7 @@
     "original_title": "Disclosure Day",
     "cinema_date": "10 juin 2026",
     "vote_average": 7.4,
-    "vote_count": 1993,
+    "vote_count": 2032,
     "genres": [
       "Science-Fiction",
       "Thriller"
@@ -363,7 +363,7 @@
     "original_title": "Scary Movie",
     "cinema_date": "3 juin 2026",
     "vote_average": 6.5,
-    "vote_count": 1254,
+    "vote_count": 1285,
     "genres": [
       "Comédie"
     ],
@@ -412,7 +412,7 @@
     "original_title": "Ceux qui comptent",
     "cinema_date": "25 mars 2026",
     "vote_average": 6.7,
-    "vote_count": 29,
+    "vote_count": 30,
     "genres": [
       "Comédie",
       "Drame"
@@ -437,7 +437,7 @@
     "original_title": "Supergirl",
     "cinema_date": "24 juin 2026",
     "vote_average": 6.7,
-    "vote_count": 996,
+    "vote_count": 1118,
     "genres": [
       "Action",
       "Aventure",
@@ -463,7 +463,7 @@
     "original_title": "The Death of Robin Hood",
     "cinema_date": "18 juin 2026",
     "vote_average": 6.6,
-    "vote_count": 124,
+    "vote_count": 134,
     "genres": [
       "Aventure",
       "Drame",
@@ -479,30 +479,6 @@
       ]
     },
     "tier": "mid",
-    "lead_studio": null
-  },
-  {
-    "title": "Yellow Letters",
-    "plex_release": "30 juillet 2026",
-    "tmdb_id": 1315657,
-    "poster_path": "/39XGBgqfBCTCWNiUD1TQDkxGRtk.jpg",
-    "original_title": "Yellow Letters",
-    "cinema_date": "1 avril 2026",
-    "vote_average": 7.4,
-    "vote_count": 40,
-    "genres": [
-      "Drame"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
     "lead_studio": null
   },
   {
@@ -536,11 +512,35 @@
     "poster_path": "/4FaoBpDtzhZk9R907epSN5WCelq.jpg",
     "original_title": "Compostelle",
     "cinema_date": "1 avril 2026",
-    "vote_average": 7.1,
-    "vote_count": 29,
+    "vote_average": 7,
+    "vote_count": 31,
     "genres": [
       "Drame",
       "Comédie"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Yellow Letters",
+    "plex_release": "30 juillet 2026",
+    "tmdb_id": 1315657,
+    "poster_path": "/39XGBgqfBCTCWNiUD1TQDkxGRtk.jpg",
+    "original_title": "Yellow Letters",
+    "cinema_date": "1 avril 2026",
+    "vote_average": 7.4,
+    "vote_count": 40,
+    "genres": [
+      "Drame"
     ],
     "is_french": true,
     "source": "prédite",
