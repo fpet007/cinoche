@@ -146,31 +146,6 @@
     "lead_studio": null
   },
   {
-    "title": "Une fille en or",
-    "plex_release": "13 août 2026",
-    "tmdb_id": 1255779,
-    "poster_path": "/4uMXPmz4pSZ2lHkorxspEcdddqM.jpg",
-    "original_title": "Une fille en or",
-    "cinema_date": "15 avril 2026",
-    "vote_average": 4.8,
-    "vote_count": 7,
-    "genres": [
-      "Comédie",
-      "Romance"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
     "title": "Affection Affection",
     "plex_release": "13 août 2026",
     "tmdb_id": 1510321,
