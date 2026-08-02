@@ -97,17 +97,17 @@
     "lead_studio": null
   },
   {
-    "title": "Une fille en or",
+    "title": "Juste une illusion",
     "plex_release": "13 août 2026",
-    "tmdb_id": 1255779,
-    "poster_path": "/4uMXPmz4pSZ2lHkorxspEcdddqM.jpg",
-    "original_title": "Une fille en or",
+    "tmdb_id": 1404684,
+    "poster_path": "/eWPq3wSvJEMakESTXzaBECUNBYr.jpg",
+    "original_title": "Juste une illusion",
     "cinema_date": "15 avril 2026",
-    "vote_average": 4.9,
-    "vote_count": 6,
+    "vote_average": 7.4,
+    "vote_count": 163,
     "genres": [
       "Comédie",
-      "Romance"
+      "Drame"
     ],
     "is_french": true,
     "source": "prédite",
@@ -146,17 +146,17 @@
     "lead_studio": null
   },
   {
-    "title": "Juste une illusion",
+    "title": "Une fille en or",
     "plex_release": "13 août 2026",
-    "tmdb_id": 1404684,
-    "poster_path": "/eWPq3wSvJEMakESTXzaBECUNBYr.jpg",
-    "original_title": "Juste une illusion",
+    "tmdb_id": 1255779,
+    "poster_path": "/4uMXPmz4pSZ2lHkorxspEcdddqM.jpg",
+    "original_title": "Une fille en or",
     "cinema_date": "15 avril 2026",
-    "vote_average": 7.4,
-    "vote_count": 163,
+    "vote_average": 4.8,
+    "vote_count": 7,
     "genres": [
       "Comédie",
-      "Drame"
+      "Romance"
     ],
     "is_french": true,
     "source": "prédite",
@@ -203,7 +203,7 @@
     "original_title": "Toy Story 5",
     "cinema_date": "17 juin 2026",
     "vote_average": 7.4,
-    "vote_count": 732,
+    "vote_count": 736,
     "genres": [
       "Animation",
       "Familial",
