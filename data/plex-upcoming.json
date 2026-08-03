@@ -97,16 +97,15 @@
     "lead_studio": null
   },
   {
-    "title": "Juste une illusion",
+    "title": "Truly Naked",
     "plex_release": "13 août 2026",
-    "tmdb_id": 1404684,
-    "poster_path": "/eWPq3wSvJEMakESTXzaBECUNBYr.jpg",
-    "original_title": "Juste une illusion",
+    "tmdb_id": 1281195,
+    "poster_path": "/lnjgp5XBgXn3esVBcAT4s7XMFW3.jpg",
+    "original_title": "Truly Naked",
     "cinema_date": "15 avril 2026",
-    "vote_average": 7.4,
-    "vote_count": 163,
+    "vote_average": 7,
+    "vote_count": 5,
     "genres": [
-      "Comédie",
       "Drame"
     ],
     "is_french": true,
@@ -122,15 +121,16 @@
     "lead_studio": null
   },
   {
-    "title": "Truly Naked",
+    "title": "Juste une illusion",
     "plex_release": "13 août 2026",
-    "tmdb_id": 1281195,
-    "poster_path": "/lnjgp5XBgXn3esVBcAT4s7XMFW3.jpg",
-    "original_title": "Truly Naked",
+    "tmdb_id": 1404684,
+    "poster_path": "/eWPq3wSvJEMakESTXzaBECUNBYr.jpg",
+    "original_title": "Juste une illusion",
     "cinema_date": "15 avril 2026",
-    "vote_average": 7,
-    "vote_count": 5,
+    "vote_average": 7.4,
+    "vote_count": 163,
     "genres": [
+      "Comédie",
       "Drame"
     ],
     "is_french": true,
@@ -174,11 +174,11 @@
     "title": "Toy Story 5",
     "plex_release": "18 août 2026",
     "tmdb_id": 1084244,
-    "poster_path": "/b2bt3UomRX41rHHZmIsSNmXzidU.jpg",
+    "poster_path": "/bxFstXYF4wf6brpm9oZsarxI6AT.jpg",
     "original_title": "Toy Story 5",
     "cinema_date": "17 juin 2026",
     "vote_average": 7.4,
-    "vote_count": 737,
+    "vote_count": 743,
     "genres": [
       "Animation",
       "Familial",
@@ -230,30 +230,6 @@
     "cinema_date": "22 avril 2026",
     "vote_average": 7.5,
     "vote_count": 5,
-    "genres": [
-      "Drame"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "Soumsoum, la nuit des astres",
-    "plex_release": "20 août 2026",
-    "tmdb_id": 1376457,
-    "poster_path": "/dsVB83xtAhdQ0DIjmomXwfH68Ro.jpg",
-    "original_title": "Soumsoum, la nuit des astres",
-    "cinema_date": "22 avril 2026",
-    "vote_average": 6,
-    "vote_count": 1,
     "genres": [
       "Drame"
     ],
@@ -326,7 +302,7 @@
     "original_title": "The Odyssey",
     "cinema_date": "15 juillet 2026",
     "vote_average": 8,
-    "vote_count": 2036,
+    "vote_count": 2073,
     "genres": [
       "Aventure",
       "Action",
