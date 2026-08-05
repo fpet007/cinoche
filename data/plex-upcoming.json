@@ -6,8 +6,8 @@
     "poster_path": "/3eZwrYd90t5kHLHfS0zxPWH1tWl.jpg",
     "original_title": "Cocorico 2",
     "cinema_date": "8 avril 2026",
-    "vote_average": 5.6,
-    "vote_count": 15,
+    "vote_average": 5.4,
+    "vote_count": 16,
     "genres": [
       "Comédie"
     ],
@@ -49,28 +49,32 @@
     "lead_studio": null
   },
   {
-    "title": "L'Eden",
-    "plex_release": "13 août 2026",
-    "tmdb_id": 1551988,
-    "poster_path": "/vLMRdxxIxK0DCfNEvZ8GGLk91El.jpg",
-    "original_title": "L'Eden",
-    "cinema_date": "15 avril 2026",
-    "vote_average": 0,
-    "vote_count": 0,
+    "title": "Des Minions et des monstres",
+    "plex_release": "11 août 2026",
+    "tmdb_id": 1315772,
+    "poster_path": "/jMOf0SSthlNp5uXhEXz4e3tqDX5.jpg",
+    "original_title": "Minions & Monsters",
+    "cinema_date": "24 juin 2026",
+    "vote_average": 6.4,
+    "vote_count": 259,
     "genres": [
-      "Drame"
+      "Aventure",
+      "Animation",
+      "Comédie",
+      "Familial",
+      "Fantastique"
     ],
-    "is_french": true,
-    "source": "prédite",
+    "is_french": false,
+    "source": "officielle-us",
     "confidence": {
-      "level": "low",
-      "score": 0.45,
+      "level": "high",
+      "score": 0.82,
       "sources": [
-        "prédite"
+        "officielle-us"
       ]
     },
-    "tier": "niche",
-    "lead_studio": null
+    "tier": "blockbuster",
+    "lead_studio": "Universal Pictures"
   },
   {
     "title": "Truly Naked",
@@ -107,6 +111,30 @@
     "vote_count": 12,
     "genres": [
       "Comédie"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "L'Eden",
+    "plex_release": "13 août 2026",
+    "tmdb_id": 1551988,
+    "poster_path": "/vLMRdxxIxK0DCfNEvZ8GGLk91El.jpg",
+    "original_title": "L'Eden",
+    "cinema_date": "15 avril 2026",
+    "vote_average": 0,
+    "vote_count": 0,
+    "genres": [
+      "Drame"
     ],
     "is_french": true,
     "source": "prédite",
@@ -178,7 +206,7 @@
     "original_title": "Toy Story 5",
     "cinema_date": "17 juin 2026",
     "vote_average": 7.4,
-    "vote_count": 750,
+    "vote_count": 758,
     "genres": [
       "Animation",
       "Familial",
@@ -196,6 +224,30 @@
     },
     "tier": "blockbuster",
     "lead_studio": "Pixar"
+  },
+  {
+    "title": "À voix basse",
+    "plex_release": "20 août 2026",
+    "tmdb_id": 1119547,
+    "poster_path": "/fyNRLWlDZWWAxmvdo6WL2bsD0U0.jpg",
+    "original_title": "À voix basse",
+    "cinema_date": "22 avril 2026",
+    "vote_average": 6.9,
+    "vote_count": 6,
+    "genres": [
+      "Drame"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
   },
   {
     "title": "L’Arnaqueuse",
@@ -222,14 +274,14 @@
     "lead_studio": null
   },
   {
-    "title": "À voix basse",
+    "title": "Soumsoum, la nuit des astres",
     "plex_release": "20 août 2026",
-    "tmdb_id": 1119547,
-    "poster_path": "/fyNRLWlDZWWAxmvdo6WL2bsD0U0.jpg",
-    "original_title": "À voix basse",
+    "tmdb_id": 1376457,
+    "poster_path": "/dsVB83xtAhdQ0DIjmomXwfH68Ro.jpg",
+    "original_title": "Soumsoum, la nuit des astres",
     "cinema_date": "22 avril 2026",
-    "vote_average": 6.9,
-    "vote_count": 6,
+    "vote_average": 6,
+    "vote_count": 1,
     "genres": [
       "Drame"
     ],
@@ -326,7 +378,7 @@
     "original_title": "The Odyssey",
     "cinema_date": "15 juillet 2026",
     "vote_average": 8,
-    "vote_count": 2143,
+    "vote_count": 2200,
     "genres": [
       "Aventure",
       "Action",
