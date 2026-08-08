@@ -24,17 +24,17 @@
     "lead_studio": null
   },
   {
-    "title": "L’Enfant du Désert",
+    "title": "L'Enfant Du Désert",
     "plex_release": "6 août 2026",
     "tmdb_id": 1266800,
     "poster_path": "/PODwO3sxLAMU9NyffIdYOzxYVW.jpg",
-    "original_title": "L’Enfant du Désert",
+    "original_title": "L'Enfant Du Désert",
     "cinema_date": "8 avril 2026",
     "vote_average": 7.6,
     "vote_count": 16,
     "genres": [
-      "Familial",
-      "Aventure"
+      "Aventure",
+      "Familial"
     ],
     "is_french": true,
     "source": "prédite",
@@ -80,7 +80,7 @@
     "original_title": "Minions & Monsters",
     "cinema_date": "24 juin 2026",
     "vote_average": 6.4,
-    "vote_count": 263,
+    "vote_count": 264,
     "genres": [
       "Aventure",
       "Animation",
@@ -99,31 +99,6 @@
     },
     "tier": "blockbuster",
     "lead_studio": "Universal Pictures"
-  },
-  {
-    "title": "Juste une illusion",
-    "plex_release": "13 août 2026",
-    "tmdb_id": 1404684,
-    "poster_path": "/eWPq3wSvJEMakESTXzaBECUNBYr.jpg",
-    "original_title": "Juste une illusion",
-    "cinema_date": "15 avril 2026",
-    "vote_average": 7.4,
-    "vote_count": 164,
-    "genres": [
-      "Comédie",
-      "Drame"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
   },
   {
     "title": "Truly Naked",
@@ -150,15 +125,16 @@
     "lead_studio": null
   },
   {
-    "title": "L'Eden",
+    "title": "Juste une illusion",
     "plex_release": "13 août 2026",
-    "tmdb_id": 1551988,
-    "poster_path": "/vLMRdxxIxK0DCfNEvZ8GGLk91El.jpg",
-    "original_title": "L'Eden",
+    "tmdb_id": 1404684,
+    "poster_path": "/eWPq3wSvJEMakESTXzaBECUNBYr.jpg",
+    "original_title": "Juste une illusion",
     "cinema_date": "15 avril 2026",
-    "vote_average": 0,
-    "vote_count": 0,
+    "vote_average": 7.4,
+    "vote_count": 164,
     "genres": [
+      "Comédie",
       "Drame"
     ],
     "is_french": true,
@@ -198,6 +174,54 @@
     "lead_studio": null
   },
   {
+    "title": "L'Eden",
+    "plex_release": "13 août 2026",
+    "tmdb_id": 1551988,
+    "poster_path": "/vLMRdxxIxK0DCfNEvZ8GGLk91El.jpg",
+    "original_title": "L'Eden",
+    "cinema_date": "15 avril 2026",
+    "vote_average": 0,
+    "vote_count": 0,
+    "genres": [
+      "Drame"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Pulsation",
+    "plex_release": "13 août 2026",
+    "tmdb_id": 1635648,
+    "poster_path": "/tb9KrtdMlcEAcajfxo5Qrj3cmEt.jpg",
+    "original_title": "Pulsation",
+    "cinema_date": "15 avril 2026",
+    "vote_average": 0,
+    "vote_count": 0,
+    "genres": [
+      "Drame"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
     "title": "Toy Story 5",
     "plex_release": "18 août 2026",
     "tmdb_id": 1084244,
@@ -205,7 +229,7 @@
     "original_title": "Toy Story 5",
     "cinema_date": "17 juin 2026",
     "vote_average": 7.4,
-    "vote_count": 769,
+    "vote_count": 781,
     "genres": [
       "Animation",
       "Familial",
@@ -346,6 +370,30 @@
     "lead_studio": null
   },
   {
+    "title": "Le Cid",
+    "plex_release": "24 août 2026",
+    "tmdb_id": 1681418,
+    "poster_path": "/sdXvrT0fiRweS76abfP4J9taGop.jpg",
+    "original_title": "Le Cid",
+    "cinema_date": "26 avril 2026",
+    "vote_average": 9,
+    "vote_count": 1,
+    "genres": [
+      "Drame"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
     "title": "L'Odyssée",
     "plex_release": "26 août 2026",
     "tmdb_id": 1368337,
@@ -353,7 +401,7 @@
     "original_title": "The Odyssey",
     "cinema_date": "15 juillet 2026",
     "vote_average": 8,
-    "vote_count": 2311,
+    "vote_count": 2369,
     "genres": [
       "Aventure",
       "Action",
