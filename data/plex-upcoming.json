@@ -6,8 +6,8 @@
     "poster_path": "/3eZwrYd90t5kHLHfS0zxPWH1tWl.jpg",
     "original_title": "Cocorico 2",
     "cinema_date": "8 avril 2026",
-    "vote_average": 5.2,
-    "vote_count": 19,
+    "vote_average": 5.5,
+    "vote_count": 23,
     "genres": [
       "Comédie"
     ],
@@ -79,8 +79,8 @@
     "poster_path": "/jMOf0SSthlNp5uXhEXz4e3tqDX5.jpg",
     "original_title": "Minions & Monsters",
     "cinema_date": "24 juin 2026",
-    "vote_average": 6.4,
-    "vote_count": 264,
+    "vote_average": 6.3,
+    "vote_count": 269,
     "genres": [
       "Aventure",
       "Animation",
@@ -132,9 +132,33 @@
     "original_title": "Juste une illusion",
     "cinema_date": "15 avril 2026",
     "vote_average": 7.4,
-    "vote_count": 164,
+    "vote_count": 165,
     "genres": [
       "Comédie",
+      "Drame"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "L'Eden",
+    "plex_release": "13 août 2026",
+    "tmdb_id": 1551988,
+    "poster_path": "/vLMRdxxIxK0DCfNEvZ8GGLk91El.jpg",
+    "original_title": "L'Eden",
+    "cinema_date": "15 avril 2026",
+    "vote_average": 0,
+    "vote_count": 0,
+    "genres": [
       "Drame"
     ],
     "is_french": true,
@@ -174,16 +198,17 @@
     "lead_studio": null
   },
   {
-    "title": "L'Eden",
+    "title": "Affection Affection",
     "plex_release": "13 août 2026",
-    "tmdb_id": 1551988,
-    "poster_path": "/vLMRdxxIxK0DCfNEvZ8GGLk91El.jpg",
-    "original_title": "L'Eden",
+    "tmdb_id": 1510321,
+    "poster_path": "/1mPvGNgMKxa7ULhYXyQZXY2Waf0.jpg",
+    "original_title": "Affection Affection",
     "cinema_date": "15 avril 2026",
-    "vote_average": 0,
-    "vote_count": 0,
+    "vote_average": 6.5,
+    "vote_count": 2,
     "genres": [
-      "Drame"
+      "Drame",
+      "Comédie"
     ],
     "is_french": true,
     "source": "prédite",
@@ -229,7 +254,7 @@
     "original_title": "Toy Story 5",
     "cinema_date": "17 juin 2026",
     "vote_average": 7.4,
-    "vote_count": 781,
+    "vote_count": 789,
     "genres": [
       "Animation",
       "Familial",
@@ -255,8 +280,8 @@
     "poster_path": "/fyNRLWlDZWWAxmvdo6WL2bsD0U0.jpg",
     "original_title": "À voix basse",
     "cinema_date": "22 avril 2026",
-    "vote_average": 6.9,
-    "vote_count": 6,
+    "vote_average": 6.6,
+    "vote_count": 7,
     "genres": [
       "Drame"
     ],
@@ -401,7 +426,7 @@
     "original_title": "The Odyssey",
     "cinema_date": "15 juillet 2026",
     "vote_average": 8,
-    "vote_count": 2369,
+    "vote_count": 2435,
     "genres": [
       "Aventure",
       "Action",
