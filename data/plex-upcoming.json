@@ -6,8 +6,8 @@
     "poster_path": "/3eZwrYd90t5kHLHfS0zxPWH1tWl.jpg",
     "original_title": "Cocorico 2",
     "cinema_date": "8 avril 2026",
-    "vote_average": 5.5,
-    "vote_count": 23,
+    "vote_average": 5.3,
+    "vote_count": 26,
     "genres": [
       "Comédie"
     ],
@@ -79,8 +79,8 @@
     "poster_path": "/jMOf0SSthlNp5uXhEXz4e3tqDX5.jpg",
     "original_title": "Minions & Monsters",
     "cinema_date": "24 juin 2026",
-    "vote_average": 6.3,
-    "vote_count": 269,
+    "vote_average": 6.4,
+    "vote_count": 271,
     "genres": [
       "Aventure",
       "Animation",
@@ -107,8 +107,8 @@
     "poster_path": "/lnjgp5XBgXn3esVBcAT4s7XMFW3.jpg",
     "original_title": "Truly Naked",
     "cinema_date": "15 avril 2026",
-    "vote_average": 7,
-    "vote_count": 5,
+    "vote_average": 6.7,
+    "vote_count": 6,
     "genres": [
       "Drame"
     ],
@@ -150,16 +150,16 @@
     "lead_studio": null
   },
   {
-    "title": "L'Eden",
+    "title": "Bagarre",
     "plex_release": "13 août 2026",
-    "tmdb_id": 1551988,
-    "poster_path": "/vLMRdxxIxK0DCfNEvZ8GGLk91El.jpg",
-    "original_title": "L'Eden",
+    "tmdb_id": 1418709,
+    "poster_path": "/lQRKadGZSBUjkFfjF7kDV047MUN.jpg",
+    "original_title": "Bagarre",
     "cinema_date": "15 avril 2026",
-    "vote_average": 0,
-    "vote_count": 0,
+    "vote_average": 4.8,
+    "vote_count": 12,
     "genres": [
-      "Drame"
+      "Comédie"
     ],
     "is_french": true,
     "source": "prédite",
@@ -174,16 +174,16 @@
     "lead_studio": null
   },
   {
-    "title": "Bagarre",
+    "title": "L'Eden",
     "plex_release": "13 août 2026",
-    "tmdb_id": 1418709,
-    "poster_path": "/lQRKadGZSBUjkFfjF7kDV047MUN.jpg",
-    "original_title": "Bagarre",
+    "tmdb_id": 1551988,
+    "poster_path": "/vLMRdxxIxK0DCfNEvZ8GGLk91El.jpg",
+    "original_title": "L'Eden",
     "cinema_date": "15 avril 2026",
-    "vote_average": 4.8,
-    "vote_count": 12,
+    "vote_average": 0,
+    "vote_count": 0,
     "genres": [
-      "Comédie"
+      "Drame"
     ],
     "is_french": true,
     "source": "prédite",
@@ -223,30 +223,6 @@
     "lead_studio": null
   },
   {
-    "title": "Pulsation",
-    "plex_release": "13 août 2026",
-    "tmdb_id": 1635648,
-    "poster_path": "/tb9KrtdMlcEAcajfxo5Qrj3cmEt.jpg",
-    "original_title": "Pulsation",
-    "cinema_date": "15 avril 2026",
-    "vote_average": 0,
-    "vote_count": 0,
-    "genres": [
-      "Drame"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
     "title": "Toy Story 5",
     "plex_release": "18 août 2026",
     "tmdb_id": 1084244,
@@ -254,7 +230,7 @@
     "original_title": "Toy Story 5",
     "cinema_date": "17 juin 2026",
     "vote_average": 7.4,
-    "vote_count": 789,
+    "vote_count": 795,
     "genres": [
       "Animation",
       "Familial",
@@ -322,30 +298,6 @@
     "lead_studio": null
   },
   {
-    "title": "Soumsoum, la nuit des astres",
-    "plex_release": "20 août 2026",
-    "tmdb_id": 1376457,
-    "poster_path": "/dsVB83xtAhdQ0DIjmomXwfH68Ro.jpg",
-    "original_title": "Soumsoum, la nuit des astres",
-    "cinema_date": "22 avril 2026",
-    "vote_average": 6,
-    "vote_count": 1,
-    "genres": [
-      "Drame"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
     "title": "La Poupée",
     "plex_release": "20 août 2026",
     "tmdb_id": 1309396,
@@ -377,8 +329,8 @@
     "poster_path": "/8yKhroZcepZ8qNzYHJIEWRuXFW4.jpg",
     "original_title": "Le Cri des gardes",
     "cinema_date": "8 avril 2026",
-    "vote_average": 5.5,
-    "vote_count": 6,
+    "vote_average": 6,
+    "vote_count": 7,
     "genres": [
       "Drame"
     ],
@@ -426,7 +378,7 @@
     "original_title": "The Odyssey",
     "cinema_date": "15 juillet 2026",
     "vote_average": 8,
-    "vote_count": 2435,
+    "vote_count": 2525,
     "genres": [
       "Aventure",
       "Action",
