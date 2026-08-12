@@ -6,8 +6,8 @@
     "poster_path": "/3eZwrYd90t5kHLHfS0zxPWH1tWl.jpg",
     "original_title": "Cocorico 2",
     "cinema_date": "8 avril 2026",
-    "vote_average": 5.3,
-    "vote_count": 28,
+    "vote_average": 5.4,
+    "vote_count": 30,
     "genres": [
       "Comédie"
     ],
@@ -30,8 +30,8 @@
     "poster_path": "/PODwO3sxLAMU9NyffIdYOzxYVW.jpg",
     "original_title": "L'Enfant Du Désert",
     "cinema_date": "8 avril 2026",
-    "vote_average": 7.7,
-    "vote_count": 17,
+    "vote_average": 7.6,
+    "vote_count": 19,
     "genres": [
       "Aventure",
       "Familial"
@@ -55,8 +55,8 @@
     "poster_path": "/9rEDOg3YkUpzyQclJycL9yrPsSF.jpg",
     "original_title": "Sauvage",
     "cinema_date": "8 avril 2026",
-    "vote_average": 6,
-    "vote_count": 4,
+    "vote_average": 5.6,
+    "vote_count": 5,
     "genres": [
       "Drame"
     ],
@@ -73,14 +73,14 @@
     "lead_studio": null
   },
   {
-    "title": "Des Minions et des monstres",
+    "title": "‎Des Minions et des Monstres",
     "plex_release": "11 août 2026",
     "tmdb_id": 1315772,
     "poster_path": "/vuxZITXEqsBHBUhc1TKEU8mxvc.jpg",
     "original_title": "Minions & Monsters",
     "cinema_date": "24 juin 2026",
-    "vote_average": 6.3,
-    "vote_count": 275,
+    "vote_average": 6.8,
+    "vote_count": 349,
     "genres": [
       "Aventure",
       "Animation",
@@ -125,31 +125,6 @@
     "lead_studio": null
   },
   {
-    "title": "Juste une illusion",
-    "plex_release": "13 août 2026",
-    "tmdb_id": 1404684,
-    "poster_path": "/eWPq3wSvJEMakESTXzaBECUNBYr.jpg",
-    "original_title": "Juste une illusion",
-    "cinema_date": "15 avril 2026",
-    "vote_average": 7.4,
-    "vote_count": 165,
-    "genres": [
-      "Comédie",
-      "Drame"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
     "title": "Bagarre",
     "plex_release": "13 août 2026",
     "tmdb_id": 1418709,
@@ -174,15 +149,16 @@
     "lead_studio": null
   },
   {
-    "title": "L'Eden",
+    "title": "Juste une illusion",
     "plex_release": "13 août 2026",
-    "tmdb_id": 1551988,
-    "poster_path": "/vLMRdxxIxK0DCfNEvZ8GGLk91El.jpg",
-    "original_title": "L'Eden",
+    "tmdb_id": 1404684,
+    "poster_path": "/eWPq3wSvJEMakESTXzaBECUNBYr.jpg",
+    "original_title": "Juste une illusion",
     "cinema_date": "15 avril 2026",
-    "vote_average": 0,
-    "vote_count": 0,
+    "vote_average": 7.4,
+    "vote_count": 165,
     "genres": [
+      "Comédie",
       "Drame"
     ],
     "is_french": true,
@@ -223,6 +199,30 @@
     "lead_studio": null
   },
   {
+    "title": "L'Eden",
+    "plex_release": "13 août 2026",
+    "tmdb_id": 1551988,
+    "poster_path": "/vLMRdxxIxK0DCfNEvZ8GGLk91El.jpg",
+    "original_title": "L'Eden",
+    "cinema_date": "15 avril 2026",
+    "vote_average": 0,
+    "vote_count": 0,
+    "genres": [
+      "Drame"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
     "title": "Toy Story 5",
     "plex_release": "18 août 2026",
     "tmdb_id": 1084244,
@@ -230,7 +230,7 @@
     "original_title": "Toy Story 5",
     "cinema_date": "17 juin 2026",
     "vote_average": 7.4,
-    "vote_count": 799,
+    "vote_count": 806,
     "genres": [
       "Animation",
       "Familial",
@@ -238,11 +238,12 @@
       "Aventure"
     ],
     "is_french": false,
-    "source": "maxblizz",
+    "source": "officielle-us",
     "confidence": {
-      "level": "medium",
-      "score": 0.7,
+      "level": "high",
+      "score": 0.88,
       "sources": [
+        "officielle-us",
         "maxblizz"
       ]
     },
@@ -256,10 +257,35 @@
     "poster_path": "/fyNRLWlDZWWAxmvdo6WL2bsD0U0.jpg",
     "original_title": "À voix basse",
     "cinema_date": "22 avril 2026",
-    "vote_average": 6.6,
-    "vote_count": 7,
+    "vote_average": 6.8,
+    "vote_count": 8,
     "genres": [
       "Drame"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "La Poupée",
+    "plex_release": "20 août 2026",
+    "tmdb_id": 1309396,
+    "poster_path": "/vBAeiPmam86lgALArnDt4oY7NDD.jpg",
+    "original_title": "La Poupée",
+    "cinema_date": "22 avril 2026",
+    "vote_average": 6,
+    "vote_count": 26,
+    "genres": [
+      "Comédie",
+      "Romance"
     ],
     "is_french": true,
     "source": "prédite",
@@ -284,55 +310,6 @@
     "vote_count": 4,
     "genres": [
       "Comédie"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "Soumsoum, la nuit des astres",
-    "plex_release": "20 août 2026",
-    "tmdb_id": 1376457,
-    "poster_path": "/dsVB83xtAhdQ0DIjmomXwfH68Ro.jpg",
-    "original_title": "Soumsoum, la nuit des astres",
-    "cinema_date": "22 avril 2026",
-    "vote_average": 6,
-    "vote_count": 1,
-    "genres": [
-      "Drame"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "La Poupée",
-    "plex_release": "20 août 2026",
-    "tmdb_id": 1309396,
-    "poster_path": "/vBAeiPmam86lgALArnDt4oY7NDD.jpg",
-    "original_title": "La Poupée",
-    "cinema_date": "22 avril 2026",
-    "vote_average": 6.1,
-    "vote_count": 24,
-    "genres": [
-      "Comédie",
-      "Romance"
     ],
     "is_french": true,
     "source": "prédite",
@@ -402,7 +379,7 @@
     "original_title": "The Odyssey",
     "cinema_date": "15 juillet 2026",
     "vote_average": 8,
-    "vote_count": 2570,
+    "vote_count": 2617,
     "genres": [
       "Aventure",
       "Action",
