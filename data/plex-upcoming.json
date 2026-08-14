@@ -6,8 +6,8 @@
     "poster_path": "/3eZwrYd90t5kHLHfS0zxPWH1tWl.jpg",
     "original_title": "Cocorico 2",
     "cinema_date": "8 avril 2026",
-    "vote_average": 5.2,
-    "vote_count": 31,
+    "vote_average": 5.3,
+    "vote_count": 32,
     "genres": [
       "Comédie"
     ],
@@ -79,8 +79,8 @@
     "poster_path": "/vuxZITXEqsBHBUhc1TKEU8mxvc.jpg",
     "original_title": "Minions & Monsters",
     "cinema_date": "24 juin 2026",
-    "vote_average": 7.1,
-    "vote_count": 442,
+    "vote_average": 7.3,
+    "vote_count": 502,
     "genres": [
       "Aventure",
       "Animation",
@@ -107,8 +107,8 @@
     "poster_path": "/vpMsWT25ITYeYLiUb2HFU9rfzy4.jpg",
     "original_title": "The Invite",
     "cinema_date": "16 septembre 2026",
-    "vote_average": 7.5,
-    "vote_count": 168,
+    "vote_average": 7.4,
+    "vote_count": 179,
     "genres": [
       "Comédie",
       "Drame",
@@ -208,7 +208,7 @@
     "original_title": "Juste une illusion",
     "cinema_date": "15 avril 2026",
     "vote_average": 7.4,
-    "vote_count": 165,
+    "vote_count": 166,
     "genres": [
       "Comédie",
       "Drame"
@@ -233,7 +233,7 @@
     "original_title": "Toy Story 5",
     "cinema_date": "17 juin 2026",
     "vote_average": 7.4,
-    "vote_count": 813,
+    "vote_count": 817,
     "genres": [
       "Animation",
       "Familial",
@@ -351,14 +351,14 @@
     "lead_studio": null
   },
   {
-    "title": "Soumsoum, la nuit des astres",
+    "title": "Les Fleurs du manguier",
     "plex_release": "20 août 2026",
-    "tmdb_id": 1376457,
-    "poster_path": "/dsVB83xtAhdQ0DIjmomXwfH68Ro.jpg",
-    "original_title": "Soumsoum, la nuit des astres",
+    "tmdb_id": 1517120,
+    "poster_path": "/1NQGGVk6on1FEnKegeJigLYSuOc.jpg",
+    "original_title": "Harà Watan",
     "cinema_date": "22 avril 2026",
-    "vote_average": 6,
-    "vote_count": 1,
+    "vote_average": 7,
+    "vote_count": 6,
     "genres": [
       "Drame"
     ],
@@ -430,7 +430,7 @@
     "original_title": "The Odyssey",
     "cinema_date": "15 juillet 2026",
     "vote_average": 8,
-    "vote_count": 2657,
+    "vote_count": 2707,
     "genres": [
       "Aventure",
       "Action",
