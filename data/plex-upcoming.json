@@ -6,8 +6,8 @@
     "poster_path": "/3eZwrYd90t5kHLHfS0zxPWH1tWl.jpg",
     "original_title": "Cocorico 2",
     "cinema_date": "8 avril 2026",
-    "vote_average": 5.3,
-    "vote_count": 32,
+    "vote_average": 5,
+    "vote_count": 38,
     "genres": [
       "Comédie"
     ],
@@ -35,6 +35,30 @@
     "genres": [
       "Aventure",
       "Familial"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "La femme de",
+    "plex_release": "6 août 2026",
+    "tmdb_id": 1000990,
+    "poster_path": "/2jWVQPOHvMfnOokoougM4blUlYk.jpg",
+    "original_title": "La femme de",
+    "cinema_date": "8 avril 2026",
+    "vote_average": 6.8,
+    "vote_count": 8,
+    "genres": [
+      "Drame"
     ],
     "is_french": true,
     "source": "prédite",
@@ -80,7 +104,7 @@
     "original_title": "Minions & Monsters",
     "cinema_date": "24 juin 2026",
     "vote_average": 7.3,
-    "vote_count": 502,
+    "vote_count": 558,
     "genres": [
       "Aventure",
       "Animation",
@@ -104,11 +128,11 @@
     "title": "L'Invitation",
     "plex_release": "11 août 2026",
     "tmdb_id": 950028,
-    "poster_path": "/vpMsWT25ITYeYLiUb2HFU9rfzy4.jpg",
+    "poster_path": "/4DDWugXO577GrmtBaZMKqYQI8EU.jpg",
     "original_title": "The Invite",
     "cinema_date": "16 septembre 2026",
-    "vote_average": 7.4,
-    "vote_count": 179,
+    "vote_average": 7.5,
+    "vote_count": 192,
     "genres": [
       "Comédie",
       "Drame",
@@ -177,30 +201,6 @@
     "lead_studio": null
   },
   {
-    "title": "L'Eden",
-    "plex_release": "13 août 2026",
-    "tmdb_id": 1551988,
-    "poster_path": "/vLMRdxxIxK0DCfNEvZ8GGLk91El.jpg",
-    "original_title": "L'Eden",
-    "cinema_date": "15 avril 2026",
-    "vote_average": 0,
-    "vote_count": 0,
-    "genres": [
-      "Drame"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
     "title": "Juste une illusion",
     "plex_release": "15 août 2026",
     "tmdb_id": 1404684,
@@ -233,7 +233,7 @@
     "original_title": "Toy Story 5",
     "cinema_date": "17 juin 2026",
     "vote_average": 7.4,
-    "vote_count": 817,
+    "vote_count": 821,
     "genres": [
       "Animation",
       "Familial",
@@ -252,30 +252,6 @@
     },
     "tier": "blockbuster",
     "lead_studio": "Pixar"
-  },
-  {
-    "title": "À voix basse",
-    "plex_release": "20 août 2026",
-    "tmdb_id": 1119547,
-    "poster_path": "/fyNRLWlDZWWAxmvdo6WL2bsD0U0.jpg",
-    "original_title": "À voix basse",
-    "cinema_date": "22 avril 2026",
-    "vote_average": 6.8,
-    "vote_count": 8,
-    "genres": [
-      "Drame"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
   },
   {
     "title": "Bagarre",
@@ -302,14 +278,38 @@
     "lead_studio": null
   },
   {
+    "title": "À voix basse",
+    "plex_release": "20 août 2026",
+    "tmdb_id": 1119547,
+    "poster_path": "/fyNRLWlDZWWAxmvdo6WL2bsD0U0.jpg",
+    "original_title": "À voix basse",
+    "cinema_date": "22 avril 2026",
+    "vote_average": 6.8,
+    "vote_count": 8,
+    "genres": [
+      "Drame"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
     "title": "La Poupée",
     "plex_release": "20 août 2026",
     "tmdb_id": 1309396,
     "poster_path": "/vBAeiPmam86lgALArnDt4oY7NDD.jpg",
     "original_title": "La Poupée",
     "cinema_date": "22 avril 2026",
-    "vote_average": 6,
-    "vote_count": 26,
+    "vote_average": 6.2,
+    "vote_count": 27,
     "genres": [
       "Comédie",
       "Romance"
@@ -337,30 +337,6 @@
     "vote_count": 4,
     "genres": [
       "Comédie"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "Les Fleurs du manguier",
-    "plex_release": "20 août 2026",
-    "tmdb_id": 1517120,
-    "poster_path": "/1NQGGVk6on1FEnKegeJigLYSuOc.jpg",
-    "original_title": "Harà Watan",
-    "cinema_date": "22 avril 2026",
-    "vote_average": 7,
-    "vote_count": 6,
-    "genres": [
-      "Drame"
     ],
     "is_french": true,
     "source": "prédite",
@@ -430,7 +406,7 @@
     "original_title": "The Odyssey",
     "cinema_date": "15 juillet 2026",
     "vote_average": 8,
-    "vote_count": 2707,
+    "vote_count": 2740,
     "genres": [
       "Aventure",
       "Action",
