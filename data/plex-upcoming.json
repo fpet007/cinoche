@@ -31,7 +31,7 @@
     "original_title": "L'Enfant Du Désert",
     "cinema_date": "8 avril 2026",
     "vote_average": 7.6,
-    "vote_count": 19,
+    "vote_count": 20,
     "genres": [
       "Aventure",
       "Familial"
@@ -49,14 +49,14 @@
     "lead_studio": null
   },
   {
-    "title": "La femme de",
+    "title": "La Femme de",
     "plex_release": "6 août 2026",
     "tmdb_id": 1000990,
     "poster_path": "/2jWVQPOHvMfnOokoougM4blUlYk.jpg",
-    "original_title": "La femme de",
+    "original_title": "La Femme de",
     "cinema_date": "8 avril 2026",
-    "vote_average": 6.8,
-    "vote_count": 8,
+    "vote_average": 6.2,
+    "vote_count": 9,
     "genres": [
       "Drame"
     ],
@@ -103,8 +103,8 @@
     "poster_path": "/vuxZITXEqsBHBUhc1TKEU8mxvc.jpg",
     "original_title": "Minions & Monsters",
     "cinema_date": "24 juin 2026",
-    "vote_average": 7.3,
-    "vote_count": 558,
+    "vote_average": 7.4,
+    "vote_count": 621,
     "genres": [
       "Aventure",
       "Animation",
@@ -131,8 +131,8 @@
     "poster_path": "/4DDWugXO577GrmtBaZMKqYQI8EU.jpg",
     "original_title": "The Invite",
     "cinema_date": "16 septembre 2026",
-    "vote_average": 7.5,
-    "vote_count": 192,
+    "vote_average": 7.4,
+    "vote_count": 224,
     "genres": [
       "Comédie",
       "Drame",
@@ -157,8 +157,8 @@
     "poster_path": "/lnjgp5XBgXn3esVBcAT4s7XMFW3.jpg",
     "original_title": "Truly Naked",
     "cinema_date": "15 avril 2026",
-    "vote_average": 6.7,
-    "vote_count": 6,
+    "vote_average": 6.8,
+    "vote_count": 8,
     "genres": [
       "Drame",
       "Romance"
@@ -208,7 +208,7 @@
     "original_title": "Juste une illusion",
     "cinema_date": "15 avril 2026",
     "vote_average": 7.4,
-    "vote_count": 166,
+    "vote_count": 170,
     "genres": [
       "Comédie",
       "Drame"
@@ -233,7 +233,7 @@
     "original_title": "Toy Story 5",
     "cinema_date": "17 juin 2026",
     "vote_average": 7.4,
-    "vote_count": 821,
+    "vote_count": 825,
     "genres": [
       "Animation",
       "Familial",
@@ -351,6 +351,30 @@
     "lead_studio": null
   },
   {
+    "title": "Soumsoum, la nuit des astres",
+    "plex_release": "20 août 2026",
+    "tmdb_id": 1376457,
+    "poster_path": "/dsVB83xtAhdQ0DIjmomXwfH68Ro.jpg",
+    "original_title": "Soumsoum, la nuit des astres",
+    "cinema_date": "22 avril 2026",
+    "vote_average": 7.5,
+    "vote_count": 2,
+    "genres": [
+      "Drame"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
     "title": "Le Cri des gardes",
     "plex_release": "21 août 2026",
     "tmdb_id": 1254800,
@@ -406,7 +430,7 @@
     "original_title": "The Odyssey",
     "cinema_date": "15 juillet 2026",
     "vote_average": 8,
-    "vote_count": 2740,
+    "vote_count": 2783,
     "genres": [
       "Aventure",
       "Action",
