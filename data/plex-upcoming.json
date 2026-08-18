@@ -6,8 +6,8 @@
     "poster_path": "/3eZwrYd90t5kHLHfS0zxPWH1tWl.jpg",
     "original_title": "Cocorico 2",
     "cinema_date": "8 avril 2026",
-    "vote_average": 5,
-    "vote_count": 38,
+    "vote_average": 5.1,
+    "vote_count": 40,
     "genres": [
       "Comédie"
     ],
@@ -73,14 +73,38 @@
     "lead_studio": null
   },
   {
+    "title": "Sauvage",
+    "plex_release": "6 août 2026",
+    "tmdb_id": 1318043,
+    "poster_path": "/9rEDOg3YkUpzyQclJycL9yrPsSF.jpg",
+    "original_title": "Sauvage",
+    "cinema_date": "8 avril 2026",
+    "vote_average": 5.6,
+    "vote_count": 5,
+    "genres": [
+      "Drame"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
     "title": "‎Des Minions et des Monstres",
     "plex_release": "11 août 2026",
     "tmdb_id": 1315772,
     "poster_path": "/vuxZITXEqsBHBUhc1TKEU8mxvc.jpg",
     "original_title": "Minions & Monsters",
     "cinema_date": "24 juin 2026",
-    "vote_average": 7.4,
-    "vote_count": 669,
+    "vote_average": 7.5,
+    "vote_count": 703,
     "genres": [
       "Aventure",
       "Animation",
@@ -104,11 +128,11 @@
     "title": "L'Invitation",
     "plex_release": "11 août 2026",
     "tmdb_id": 950028,
-    "poster_path": "/4DDWugXO577GrmtBaZMKqYQI8EU.jpg",
+    "poster_path": "/vpMsWT25ITYeYLiUb2HFU9rfzy4.jpg",
     "original_title": "The Invite",
     "cinema_date": "16 septembre 2026",
     "vote_average": 7.4,
-    "vote_count": 244,
+    "vote_count": 258,
     "genres": [
       "Comédie",
       "Drame",
@@ -184,7 +208,7 @@
     "original_title": "Juste une illusion",
     "cinema_date": "15 avril 2026",
     "vote_average": 7.4,
-    "vote_count": 170,
+    "vote_count": 175,
     "genres": [
       "Comédie",
       "Drame"
@@ -209,7 +233,7 @@
     "original_title": "Toy Story 5",
     "cinema_date": "17 juin 2026",
     "vote_average": 7.4,
-    "vote_count": 832,
+    "vote_count": 837,
     "genres": [
       "Animation",
       "Familial",
@@ -228,30 +252,6 @@
     },
     "tier": "blockbuster",
     "lead_studio": "Pixar"
-  },
-  {
-    "title": "Bagarre",
-    "plex_release": "20 août 2026",
-    "tmdb_id": 1418709,
-    "poster_path": "/lQRKadGZSBUjkFfjF7kDV047MUN.jpg",
-    "original_title": "Bagarre",
-    "cinema_date": "15 avril 2026",
-    "vote_average": 4.8,
-    "vote_count": 12,
-    "genres": [
-      "Comédie"
-    ],
-    "is_french": true,
-    "source": "override-manuel",
-    "confidence": {
-      "level": "override",
-      "score": 1,
-      "sources": [
-        "override-manuel"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
   },
   {
     "title": "À voix basse",
@@ -278,6 +278,30 @@
     "lead_studio": null
   },
   {
+    "title": "Bagarre",
+    "plex_release": "20 août 2026",
+    "tmdb_id": 1418709,
+    "poster_path": "/lQRKadGZSBUjkFfjF7kDV047MUN.jpg",
+    "original_title": "Bagarre",
+    "cinema_date": "15 avril 2026",
+    "vote_average": 4.8,
+    "vote_count": 12,
+    "genres": [
+      "Comédie"
+    ],
+    "is_french": true,
+    "source": "override-manuel",
+    "confidence": {
+      "level": "override",
+      "score": 1,
+      "sources": [
+        "override-manuel"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
     "title": "La Poupée",
     "plex_release": "20 août 2026",
     "tmdb_id": 1309396,
@@ -289,54 +313,6 @@
     "genres": [
       "Comédie",
       "Romance"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "L’Arnaqueuse",
-    "plex_release": "20 août 2026",
-    "tmdb_id": 1501523,
-    "poster_path": "/4DERbIpkG3xFeyEmdQcqOhdhhl5.jpg",
-    "original_title": "L’Arnaqueuse",
-    "cinema_date": "22 avril 2026",
-    "vote_average": 5,
-    "vote_count": 4,
-    "genres": [
-      "Comédie"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "Soumsoum, la nuit des astres",
-    "plex_release": "20 août 2026",
-    "tmdb_id": 1376457,
-    "poster_path": "/dsVB83xtAhdQ0DIjmomXwfH68Ro.jpg",
-    "original_title": "Soumsoum, la nuit des astres",
-    "cinema_date": "22 avril 2026",
-    "vote_average": 7.5,
-    "vote_count": 2,
-    "genres": [
-      "Drame"
     ],
     "is_french": true,
     "source": "prédite",
@@ -406,7 +382,7 @@
     "original_title": "The Odyssey",
     "cinema_date": "15 juillet 2026",
     "vote_average": 8,
-    "vote_count": 2824,
+    "vote_count": 2869,
     "genres": [
       "Aventure",
       "Action",
