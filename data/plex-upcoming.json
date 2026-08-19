@@ -30,8 +30,8 @@
     "poster_path": "/PODwO3sxLAMU9NyffIdYOzxYVW.jpg",
     "original_title": "L'Enfant Du Désert",
     "cinema_date": "8 avril 2026",
-    "vote_average": 7.6,
-    "vote_count": 21,
+    "vote_average": 7.7,
+    "vote_count": 23,
     "genres": [
       "Aventure",
       "Familial"
@@ -80,7 +80,7 @@
     "original_title": "Minions & Monsters",
     "cinema_date": "24 juin 2026",
     "vote_average": 7.5,
-    "vote_count": 729,
+    "vote_count": 742,
     "genres": [
       "Aventure",
       "Animation",
@@ -108,7 +108,7 @@
     "original_title": "The Invite",
     "cinema_date": "16 septembre 2026",
     "vote_average": 7.4,
-    "vote_count": 267,
+    "vote_count": 270,
     "genres": [
       "Comédie",
       "Drame",
@@ -133,8 +133,8 @@
     "poster_path": "/lnjgp5XBgXn3esVBcAT4s7XMFW3.jpg",
     "original_title": "Truly Naked",
     "cinema_date": "15 avril 2026",
-    "vote_average": 6.9,
-    "vote_count": 9,
+    "vote_average": 6.8,
+    "vote_count": 10,
     "genres": [
       "Drame",
       "Romance"
@@ -177,6 +177,30 @@
     "lead_studio": null
   },
   {
+    "title": "L'Eden",
+    "plex_release": "13 août 2026",
+    "tmdb_id": 1551988,
+    "poster_path": "/vLMRdxxIxK0DCfNEvZ8GGLk91El.jpg",
+    "original_title": "L'Eden",
+    "cinema_date": "15 avril 2026",
+    "vote_average": 0,
+    "vote_count": 0,
+    "genres": [
+      "Drame"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
     "title": "Juste une illusion",
     "plex_release": "15 août 2026",
     "tmdb_id": 1404684,
@@ -184,7 +208,7 @@
     "original_title": "Juste une illusion",
     "cinema_date": "15 avril 2026",
     "vote_average": 7.4,
-    "vote_count": 176,
+    "vote_count": 178,
     "genres": [
       "Comédie",
       "Drame"
@@ -208,8 +232,8 @@
     "poster_path": "/b2bt3UomRX41rHHZmIsSNmXzidU.jpg",
     "original_title": "Toy Story 5",
     "cinema_date": "17 juin 2026",
-    "vote_average": 7.6,
-    "vote_count": 948,
+    "vote_average": 7.8,
+    "vote_count": 1056,
     "genres": [
       "Animation",
       "Familial",
@@ -228,30 +252,6 @@
     },
     "tier": "blockbuster",
     "lead_studio": "Pixar"
-  },
-  {
-    "title": "Bagarre",
-    "plex_release": "20 août 2026",
-    "tmdb_id": 1418709,
-    "poster_path": "/lQRKadGZSBUjkFfjF7kDV047MUN.jpg",
-    "original_title": "Bagarre",
-    "cinema_date": "15 avril 2026",
-    "vote_average": 4.8,
-    "vote_count": 12,
-    "genres": [
-      "Comédie"
-    ],
-    "is_french": true,
-    "source": "override-manuel",
-    "confidence": {
-      "level": "override",
-      "score": 1,
-      "sources": [
-        "override-manuel"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
   },
   {
     "title": "À voix basse",
@@ -399,6 +399,30 @@
     "lead_studio": null
   },
   {
+    "title": "Bagarre",
+    "plex_release": "25 août 2026",
+    "tmdb_id": 1418709,
+    "poster_path": "/lQRKadGZSBUjkFfjF7kDV047MUN.jpg",
+    "original_title": "Bagarre",
+    "cinema_date": "15 avril 2026",
+    "vote_average": 4.8,
+    "vote_count": 12,
+    "genres": [
+      "Comédie"
+    ],
+    "is_french": true,
+    "source": "override-manuel",
+    "confidence": {
+      "level": "override",
+      "score": 1,
+      "sources": [
+        "override-manuel"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
     "title": "L'Odyssée",
     "plex_release": "26 août 2026",
     "tmdb_id": 1368337,
@@ -406,7 +430,7 @@
     "original_title": "The Odyssey",
     "cinema_date": "15 juillet 2026",
     "vote_average": 8,
-    "vote_count": 2907,
+    "vote_count": 2933,
     "genres": [
       "Aventure",
       "Action",
