@@ -32,7 +32,7 @@
     "original_title": "Cocorico 2",
     "cinema_date": "8 avril 2026",
     "vote_average": 5.1,
-    "vote_count": 42,
+    "vote_count": 43,
     "genres": [
       "Comédie"
     ],
@@ -80,7 +80,7 @@
     "original_title": "Minions & Monsters",
     "cinema_date": "24 juin 2026",
     "vote_average": 7.5,
-    "vote_count": 770,
+    "vote_count": 778,
     "genres": [
       "Aventure",
       "Animation",
@@ -107,8 +107,8 @@
     "poster_path": "/lnjgp5XBgXn3esVBcAT4s7XMFW3.jpg",
     "original_title": "Truly Naked",
     "cinema_date": "15 avril 2026",
-    "vote_average": 6.9,
-    "vote_count": 11,
+    "vote_average": 7,
+    "vote_count": 13,
     "genres": [
       "Drame",
       "Romance"
@@ -182,7 +182,7 @@
     "original_title": "Juste une illusion",
     "cinema_date": "15 avril 2026",
     "vote_average": 7.4,
-    "vote_count": 180,
+    "vote_count": 182,
     "genres": [
       "Comédie",
       "Drame"
@@ -203,11 +203,11 @@
     "title": "Toy Story 5",
     "plex_release": "18 août 2026",
     "tmdb_id": 1084244,
-    "poster_path": "/b2bt3UomRX41rHHZmIsSNmXzidU.jpg",
+    "poster_path": "/9VWplgfRcYkUao9QGQXUP3rWQK7.jpg",
     "original_title": "Toy Story 5",
     "cinema_date": "17 juin 2026",
     "vote_average": 8,
-    "vote_count": 1214,
+    "vote_count": 1293,
     "genres": [
       "Animation",
       "Familial",
@@ -234,8 +234,8 @@
     "poster_path": "/lQRKadGZSBUjkFfjF7kDV047MUN.jpg",
     "original_title": "Bagarre",
     "cinema_date": "15 avril 2026",
-    "vote_average": 5,
-    "vote_count": 13,
+    "vote_average": 5.1,
+    "vote_count": 18,
     "genres": [
       "Comédie"
     ],
@@ -246,6 +246,32 @@
       "score": 1,
       "sources": [
         "override-manuel"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Pour le meilleur",
+    "plex_release": "20 août 2026",
+    "tmdb_id": 1427472,
+    "poster_path": "/idXsnt9nkmeVo32Zoa9IuE4V0wV.jpg",
+    "original_title": "Pour le meilleur",
+    "cinema_date": "22 avril 2026",
+    "vote_average": 7,
+    "vote_count": 4,
+    "genres": [
+      "Drame",
+      "Histoire",
+      "Comédie"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
       ]
     },
     "tier": "niche",
@@ -276,16 +302,16 @@
     "lead_studio": null
   },
   {
-    "title": "L’Arnaqueuse",
+    "title": "À voix basse",
     "plex_release": "20 août 2026",
-    "tmdb_id": 1501523,
-    "poster_path": "/4DERbIpkG3xFeyEmdQcqOhdhhl5.jpg",
-    "original_title": "L’Arnaqueuse",
+    "tmdb_id": 1119547,
+    "poster_path": "/fyNRLWlDZWWAxmvdo6WL2bsD0U0.jpg",
+    "original_title": "À voix basse",
     "cinema_date": "22 avril 2026",
-    "vote_average": 5,
-    "vote_count": 4,
+    "vote_average": 6.8,
+    "vote_count": 8,
     "genres": [
-      "Comédie"
+      "Drame"
     ],
     "is_french": true,
     "source": "prédite",
@@ -300,16 +326,16 @@
     "lead_studio": null
   },
   {
-    "title": "À voix basse",
+    "title": "L’Arnaqueuse",
     "plex_release": "20 août 2026",
-    "tmdb_id": 1119547,
-    "poster_path": "/fyNRLWlDZWWAxmvdo6WL2bsD0U0.jpg",
-    "original_title": "À voix basse",
+    "tmdb_id": 1501523,
+    "poster_path": "/4DERbIpkG3xFeyEmdQcqOhdhhl5.jpg",
+    "original_title": "L’Arnaqueuse",
     "cinema_date": "22 avril 2026",
-    "vote_average": 6.8,
-    "vote_count": 8,
+    "vote_average": 5,
+    "vote_count": 4,
     "genres": [
-      "Drame"
+      "Comédie"
     ],
     "is_french": true,
     "source": "prédite",
@@ -404,7 +430,7 @@
     "original_title": "The Odyssey",
     "cinema_date": "15 juillet 2026",
     "vote_average": 8,
-    "vote_count": 2994,
+    "vote_count": 3038,
     "genres": [
       "Aventure",
       "Action",
