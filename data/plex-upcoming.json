@@ -32,7 +32,7 @@
     "original_title": "Cocorico 2",
     "cinema_date": "8 avril 2026",
     "vote_average": 5.1,
-    "vote_count": 43,
+    "vote_count": 44,
     "genres": [
       "Comédie"
     ],
@@ -80,7 +80,7 @@
     "original_title": "Minions & Monsters",
     "cinema_date": "24 juin 2026",
     "vote_average": 7.5,
-    "vote_count": 793,
+    "vote_count": 820,
     "genres": [
       "Aventure",
       "Animation",
@@ -108,7 +108,7 @@
     "original_title": "Truly Naked",
     "cinema_date": "15 avril 2026",
     "vote_average": 7,
-    "vote_count": 13,
+    "vote_count": 14,
     "genres": [
       "Drame",
       "Romance"
@@ -175,6 +175,30 @@
     "lead_studio": null
   },
   {
+    "title": "Pulsation",
+    "plex_release": "13 août 2026",
+    "tmdb_id": 1635648,
+    "poster_path": "/tb9KrtdMlcEAcajfxo5Qrj3cmEt.jpg",
+    "original_title": "Pulsation",
+    "cinema_date": "15 avril 2026",
+    "vote_average": 0,
+    "vote_count": 0,
+    "genres": [
+      "Drame"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
     "title": "Juste une illusion",
     "plex_release": "15 août 2026",
     "tmdb_id": 1404684,
@@ -206,8 +230,8 @@
     "poster_path": "/b2bt3UomRX41rHHZmIsSNmXzidU.jpg",
     "original_title": "Toy Story 5",
     "cinema_date": "17 juin 2026",
-    "vote_average": 8.1,
-    "vote_count": 1388,
+    "vote_average": 8.2,
+    "vote_count": 1517,
     "genres": [
       "Animation",
       "Familial",
@@ -234,8 +258,8 @@
     "poster_path": "/lQRKadGZSBUjkFfjF7kDV047MUN.jpg",
     "original_title": "Bagarre",
     "cinema_date": "15 avril 2026",
-    "vote_average": 5.4,
-    "vote_count": 21,
+    "vote_average": 5.2,
+    "vote_count": 22,
     "genres": [
       "Comédie"
     ],
@@ -252,18 +276,16 @@
     "lead_studio": null
   },
   {
-    "title": "Pour le meilleur",
+    "title": "Soumsoum, la nuit des astres",
     "plex_release": "20 août 2026",
-    "tmdb_id": 1427472,
-    "poster_path": "/idXsnt9nkmeVo32Zoa9IuE4V0wV.jpg",
-    "original_title": "Pour le meilleur",
+    "tmdb_id": 1376457,
+    "poster_path": "/vHSXd1UZIRoTV3OKMb4XObcgymU.jpg",
+    "original_title": "Soumsoum, la nuit des astres",
     "cinema_date": "22 avril 2026",
-    "vote_average": 7,
-    "vote_count": 4,
+    "vote_average": 7.5,
+    "vote_count": 2,
     "genres": [
-      "Drame",
-      "Histoire",
-      "Comédie"
+      "Drame"
     ],
     "is_french": true,
     "source": "prédite",
@@ -278,16 +300,18 @@
     "lead_studio": null
   },
   {
-    "title": "Soumsoum, la nuit des astres",
+    "title": "Pour le meilleur",
     "plex_release": "20 août 2026",
-    "tmdb_id": 1376457,
-    "poster_path": "/dsVB83xtAhdQ0DIjmomXwfH68Ro.jpg",
-    "original_title": "Soumsoum, la nuit des astres",
+    "tmdb_id": 1427472,
+    "poster_path": "/zA41CDRXu3mUa04i6Y18dVDhP8g.jpg",
+    "original_title": "Pour le meilleur",
     "cinema_date": "22 avril 2026",
-    "vote_average": 7.5,
-    "vote_count": 2,
+    "vote_average": 7,
+    "vote_count": 4,
     "genres": [
-      "Drame"
+      "Drame",
+      "Histoire",
+      "Comédie"
     ],
     "is_french": true,
     "source": "prédite",
