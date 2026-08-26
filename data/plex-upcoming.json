@@ -80,7 +80,7 @@
     "original_title": "Minions & Monsters",
     "cinema_date": "24 juin 2026",
     "vote_average": 7.6,
-    "vote_count": 843,
+    "vote_count": 859,
     "genres": [
       "Aventure",
       "Animation",
@@ -108,10 +108,34 @@
     "original_title": "Truly Naked",
     "cinema_date": "15 avril 2026",
     "vote_average": 7.1,
-    "vote_count": 15,
+    "vote_count": 16,
     "genres": [
       "Drame",
       "Romance"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Pulsation",
+    "plex_release": "13 août 2026",
+    "tmdb_id": 1635648,
+    "poster_path": "/tb9KrtdMlcEAcajfxo5Qrj3cmEt.jpg",
+    "original_title": "Pulsation",
+    "cinema_date": "15 avril 2026",
+    "vote_average": 0,
+    "vote_count": 0,
+    "genres": [
+      "Drame"
     ],
     "is_french": true,
     "source": "prédite",
@@ -137,30 +161,6 @@
     "genres": [
       "Drame",
       "Comédie"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "Pulsation",
-    "plex_release": "13 août 2026",
-    "tmdb_id": 1635648,
-    "poster_path": "/tb9KrtdMlcEAcajfxo5Qrj3cmEt.jpg",
-    "original_title": "Pulsation",
-    "cinema_date": "15 avril 2026",
-    "vote_average": 0,
-    "vote_count": 0,
-    "genres": [
-      "Drame"
     ],
     "is_french": true,
     "source": "prédite",
@@ -206,7 +206,7 @@
     "original_title": "Juste une illusion",
     "cinema_date": "15 avril 2026",
     "vote_average": 7.4,
-    "vote_count": 186,
+    "vote_count": 189,
     "genres": [
       "Comédie",
       "Drame"
@@ -231,7 +231,7 @@
     "original_title": "Toy Story 5",
     "cinema_date": "17 juin 2026",
     "vote_average": 8.2,
-    "vote_count": 1567,
+    "vote_count": 1628,
     "genres": [
       "Animation",
       "Familial",
@@ -337,6 +337,30 @@
     "genres": [
       "Comédie",
       "Romance"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "À voix basse",
+    "plex_release": "20 août 2026",
+    "tmdb_id": 1119547,
+    "poster_path": "/fyNRLWlDZWWAxmvdo6WL2bsD0U0.jpg",
+    "original_title": "À voix basse",
+    "cinema_date": "22 avril 2026",
+    "vote_average": 6.8,
+    "vote_count": 8,
+    "genres": [
+      "Drame"
     ],
     "is_french": true,
     "source": "prédite",
