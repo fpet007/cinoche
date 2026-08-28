@@ -80,7 +80,7 @@
     "original_title": "Minions & Monsters",
     "cinema_date": "24 juin 2026",
     "vote_average": 7.6,
-    "vote_count": 889,
+    "vote_count": 908,
     "genres": [
       "Aventure",
       "Animation",
@@ -107,8 +107,8 @@
     "poster_path": "/lnjgp5XBgXn3esVBcAT4s7XMFW3.jpg",
     "original_title": "Truly Naked",
     "cinema_date": "15 avril 2026",
-    "vote_average": 7.3,
-    "vote_count": 17,
+    "vote_average": 7.1,
+    "vote_count": 18,
     "genres": [
       "Drame",
       "Romance"
@@ -151,11 +151,11 @@
     "lead_studio": null
   },
   {
-    "title": "Pulsation",
+    "title": "L'Eden",
     "plex_release": "13 août 2026",
-    "tmdb_id": 1635648,
-    "poster_path": "/tb9KrtdMlcEAcajfxo5Qrj3cmEt.jpg",
-    "original_title": "Pulsation",
+    "tmdb_id": 1551988,
+    "poster_path": "/vLMRdxxIxK0DCfNEvZ8GGLk91El.jpg",
+    "original_title": "L'Eden",
     "cinema_date": "15 avril 2026",
     "vote_average": 0,
     "vote_count": 0,
@@ -175,11 +175,11 @@
     "lead_studio": null
   },
   {
-    "title": "L'Eden",
+    "title": "Pulsation",
     "plex_release": "13 août 2026",
-    "tmdb_id": 1551988,
-    "poster_path": "/vLMRdxxIxK0DCfNEvZ8GGLk91El.jpg",
-    "original_title": "L'Eden",
+    "tmdb_id": 1635648,
+    "poster_path": "/tb9KrtdMlcEAcajfxo5Qrj3cmEt.jpg",
+    "original_title": "Pulsation",
     "cinema_date": "15 avril 2026",
     "vote_average": 0,
     "vote_count": 0,
@@ -230,8 +230,8 @@
     "poster_path": "/b2bt3UomRX41rHHZmIsSNmXzidU.jpg",
     "original_title": "Toy Story 5",
     "cinema_date": "17 juin 2026",
-    "vote_average": 8.2,
-    "vote_count": 1672,
+    "vote_average": 8.3,
+    "vote_count": 1712,
     "genres": [
       "Animation",
       "Familial",
@@ -276,16 +276,16 @@
     "lead_studio": null
   },
   {
-    "title": "Soumsoum, la nuit des astres",
+    "title": "L’Arnaqueuse",
     "plex_release": "20 août 2026",
-    "tmdb_id": 1376457,
-    "poster_path": "/vHSXd1UZIRoTV3OKMb4XObcgymU.jpg",
-    "original_title": "Soumsoum, la nuit des astres",
+    "tmdb_id": 1501523,
+    "poster_path": "/4DERbIpkG3xFeyEmdQcqOhdhhl5.jpg",
+    "original_title": "L’Arnaqueuse",
     "cinema_date": "22 avril 2026",
-    "vote_average": 6.3,
-    "vote_count": 3,
+    "vote_average": 5,
+    "vote_count": 7,
     "genres": [
-      "Drame"
+      "Comédie"
     ],
     "is_french": true,
     "source": "prédite",
@@ -300,18 +300,16 @@
     "lead_studio": null
   },
   {
-    "title": "Pour le meilleur",
+    "title": "Soumsoum, la nuit des astres",
     "plex_release": "20 août 2026",
-    "tmdb_id": 1427472,
-    "poster_path": "/zA41CDRXu3mUa04i6Y18dVDhP8g.jpg",
-    "original_title": "Pour le meilleur",
+    "tmdb_id": 1376457,
+    "poster_path": "/vHSXd1UZIRoTV3OKMb4XObcgymU.jpg",
+    "original_title": "Soumsoum, la nuit des astres",
     "cinema_date": "22 avril 2026",
-    "vote_average": 7,
-    "vote_count": 4,
+    "vote_average": 6.3,
+    "vote_count": 3,
     "genres": [
-      "Drame",
-      "Histoire",
-      "Comédie"
+      "Drame"
     ],
     "is_french": true,
     "source": "prédite",
@@ -351,15 +349,17 @@
     "lead_studio": null
   },
   {
-    "title": "L’Arnaqueuse",
+    "title": "Pour le meilleur",
     "plex_release": "20 août 2026",
-    "tmdb_id": 1501523,
-    "poster_path": "/4DERbIpkG3xFeyEmdQcqOhdhhl5.jpg",
-    "original_title": "L’Arnaqueuse",
+    "tmdb_id": 1427472,
+    "poster_path": "/zA41CDRXu3mUa04i6Y18dVDhP8g.jpg",
+    "original_title": "Pour le meilleur",
     "cinema_date": "22 avril 2026",
-    "vote_average": 5,
+    "vote_average": 7,
     "vote_count": 4,
     "genres": [
+      "Drame",
+      "Histoire",
       "Comédie"
     ],
     "is_french": true,
