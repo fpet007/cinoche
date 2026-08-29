@@ -7,7 +7,7 @@
     "original_title": "L'enfant du désert",
     "cinema_date": "8 avril 2026",
     "vote_average": 7.7,
-    "vote_count": 23,
+    "vote_count": 24,
     "genres": [
       "Aventure",
       "Familial"
@@ -79,8 +79,8 @@
     "poster_path": "/vuxZITXEqsBHBUhc1TKEU8mxvc.jpg",
     "original_title": "Minions & Monsters",
     "cinema_date": "24 juin 2026",
-    "vote_average": 7.6,
-    "vote_count": 908,
+    "vote_average": 7.5,
+    "vote_count": 917,
     "genres": [
       "Aventure",
       "Animation",
@@ -206,7 +206,7 @@
     "original_title": "Juste une illusion",
     "cinema_date": "15 avril 2026",
     "vote_average": 7.3,
-    "vote_count": 192,
+    "vote_count": 194,
     "genres": [
       "Comédie",
       "Drame"
@@ -231,7 +231,7 @@
     "original_title": "Toy Story 5",
     "cinema_date": "17 juin 2026",
     "vote_average": 8.3,
-    "vote_count": 1712,
+    "vote_count": 1738,
     "genres": [
       "Animation",
       "Familial",
@@ -300,16 +300,17 @@
     "lead_studio": null
   },
   {
-    "title": "Soumsoum, la nuit des astres",
+    "title": "La Poupée",
     "plex_release": "20 août 2026",
-    "tmdb_id": 1376457,
-    "poster_path": "/vHSXd1UZIRoTV3OKMb4XObcgymU.jpg",
-    "original_title": "Soumsoum, la nuit des astres",
+    "tmdb_id": 1309396,
+    "poster_path": "/vBAeiPmam86lgALArnDt4oY7NDD.jpg",
+    "original_title": "La Poupée",
     "cinema_date": "22 avril 2026",
-    "vote_average": 6.3,
-    "vote_count": 3,
+    "vote_average": 6.1,
+    "vote_count": 29,
     "genres": [
-      "Drame"
+      "Comédie",
+      "Romance"
     ],
     "is_french": true,
     "source": "prédite",
@@ -324,17 +325,16 @@
     "lead_studio": null
   },
   {
-    "title": "La Poupée",
+    "title": "Soumsoum, la nuit des astres",
     "plex_release": "20 août 2026",
-    "tmdb_id": 1309396,
-    "poster_path": "/vBAeiPmam86lgALArnDt4oY7NDD.jpg",
-    "original_title": "La Poupée",
+    "tmdb_id": 1376457,
+    "poster_path": "/vHSXd1UZIRoTV3OKMb4XObcgymU.jpg",
+    "original_title": "Soumsoum, la nuit des astres",
     "cinema_date": "22 avril 2026",
-    "vote_average": 6.1,
-    "vote_count": 29,
+    "vote_average": 6.3,
+    "vote_count": 3,
     "genres": [
-      "Comédie",
-      "Romance"
+      "Drame"
     ],
     "is_french": true,
     "source": "prédite",
