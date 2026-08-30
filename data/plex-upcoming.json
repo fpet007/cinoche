@@ -6,8 +6,8 @@
     "poster_path": "/PODwO3sxLAMU9NyffIdYOzxYVW.jpg",
     "original_title": "L'enfant du désert",
     "cinema_date": "8 avril 2026",
-    "vote_average": 7.7,
-    "vote_count": 24,
+    "vote_average": 7.6,
+    "vote_count": 25,
     "genres": [
       "Aventure",
       "Familial"
@@ -79,8 +79,8 @@
     "poster_path": "/vuxZITXEqsBHBUhc1TKEU8mxvc.jpg",
     "original_title": "Minions & Monsters",
     "cinema_date": "24 juin 2026",
-    "vote_average": 7.5,
-    "vote_count": 917,
+    "vote_average": 7.6,
+    "vote_count": 933,
     "genres": [
       "Aventure",
       "Animation",
@@ -175,30 +175,6 @@
     "lead_studio": null
   },
   {
-    "title": "Pulsation",
-    "plex_release": "13 août 2026",
-    "tmdb_id": 1635648,
-    "poster_path": "/tb9KrtdMlcEAcajfxo5Qrj3cmEt.jpg",
-    "original_title": "Pulsation",
-    "cinema_date": "15 avril 2026",
-    "vote_average": 0,
-    "vote_count": 0,
-    "genres": [
-      "Drame"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
     "title": "Juste une illusion",
     "plex_release": "15 août 2026",
     "tmdb_id": 1404684,
@@ -206,7 +182,7 @@
     "original_title": "Juste une illusion",
     "cinema_date": "15 avril 2026",
     "vote_average": 7.3,
-    "vote_count": 194,
+    "vote_count": 196,
     "genres": [
       "Comédie",
       "Drame"
@@ -227,11 +203,11 @@
     "title": "Toy Story 5",
     "plex_release": "18 août 2026",
     "tmdb_id": 1084244,
-    "poster_path": "/b2bt3UomRX41rHHZmIsSNmXzidU.jpg",
+    "poster_path": "/2aO88YVCxKjFB9PirmbnlUSI42j.jpg",
     "original_title": "Toy Story 5",
     "cinema_date": "17 juin 2026",
     "vote_average": 8.3,
-    "vote_count": 1738,
+    "vote_count": 1781,
     "genres": [
       "Animation",
       "Familial",
