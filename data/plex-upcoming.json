@@ -31,8 +31,8 @@
     "poster_path": "/3eZwrYd90t5kHLHfS0zxPWH1tWl.jpg",
     "original_title": "Cocorico 2",
     "cinema_date": "8 avril 2026",
-    "vote_average": 5.1,
-    "vote_count": 45,
+    "vote_average": 5.2,
+    "vote_count": 46,
     "genres": [
       "Comédie"
     ],
@@ -80,7 +80,7 @@
     "original_title": "Minions & Monsters",
     "cinema_date": "24 juin 2026",
     "vote_average": 7.6,
-    "vote_count": 933,
+    "vote_count": 953,
     "genres": [
       "Aventure",
       "Animation",
@@ -182,7 +182,7 @@
     "original_title": "Juste une illusion",
     "cinema_date": "15 avril 2026",
     "vote_average": 7.3,
-    "vote_count": 196,
+    "vote_count": 200,
     "genres": [
       "Comédie",
       "Drame"
@@ -207,7 +207,7 @@
     "original_title": "Toy Story 5",
     "cinema_date": "17 juin 2026",
     "vote_average": 8.3,
-    "vote_count": 1781,
+    "vote_count": 1825,
     "genres": [
       "Animation",
       "Familial",
@@ -228,6 +228,30 @@
     "lead_studio": "Pixar"
   },
   {
+    "title": "L’Arnaqueuse",
+    "plex_release": "20 août 2026",
+    "tmdb_id": 1501523,
+    "poster_path": "/4DERbIpkG3xFeyEmdQcqOhdhhl5.jpg",
+    "original_title": "L’Arnaqueuse",
+    "cinema_date": "22 avril 2026",
+    "vote_average": 5,
+    "vote_count": 9,
+    "genres": [
+      "Comédie"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
     "title": "Bagarre",
     "plex_release": "20 août 2026",
     "tmdb_id": 1418709,
@@ -246,30 +270,6 @@
       "score": 1,
       "sources": [
         "override-manuel"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "L’Arnaqueuse",
-    "plex_release": "20 août 2026",
-    "tmdb_id": 1501523,
-    "poster_path": "/4DERbIpkG3xFeyEmdQcqOhdhhl5.jpg",
-    "original_title": "L’Arnaqueuse",
-    "cinema_date": "22 avril 2026",
-    "vote_average": 5,
-    "vote_count": 7,
-    "genres": [
-      "Comédie"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
       ]
     },
     "tier": "niche",
@@ -331,8 +331,8 @@
     "poster_path": "/zA41CDRXu3mUa04i6Y18dVDhP8g.jpg",
     "original_title": "Pour le meilleur",
     "cinema_date": "22 avril 2026",
-    "vote_average": 7,
-    "vote_count": 4,
+    "vote_average": 6.8,
+    "vote_count": 5,
     "genres": [
       "Drame",
       "Histoire",
@@ -431,6 +431,30 @@
     "cinema_date": "29 avril 2026",
     "vote_average": 5.3,
     "vote_count": 3,
+    "genres": [
+      "Drame"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Le Maure de Karatas",
+    "plex_release": "27 août 2026",
+    "tmdb_id": 1374717,
+    "poster_path": "/vq5RcSHsN1jcuyk4BSB895IOkWU.jpg",
+    "original_title": "Мавр",
+    "cinema_date": "29 avril 2026",
+    "vote_average": 0,
+    "vote_count": 0,
     "genres": [
       "Drame"
     ],
