@@ -227,31 +227,6 @@
     "lead_studio": null
   },
   {
-    "title": "Mata",
-    "plex_release": "24 septembre 2026",
-    "tmdb_id": 1376043,
-    "poster_path": "/aiFnVjZFZ9WCz97oBHZ5ps13PiM.jpg",
-    "original_title": "Mata",
-    "cinema_date": "27 mai 2026",
-    "vote_average": 6.2,
-    "vote_count": 19,
-    "genres": [
-      "Thriller",
-      "Drame"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
     "title": "Tout va super",
     "plex_release": "24 septembre 2026",
     "tmdb_id": 1417127,
