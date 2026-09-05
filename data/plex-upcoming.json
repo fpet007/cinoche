@@ -24,30 +24,6 @@
     "lead_studio": null
   },
   {
-    "title": "Mi Amor",
-    "plex_release": "3 septembre 2026",
-    "tmdb_id": 1432817,
-    "poster_path": "/ukOLfGfUileYmo2RArqyofwkpWS.jpg",
-    "original_title": "Mi Amor",
-    "cinema_date": "6 mai 2026",
-    "vote_average": 5.9,
-    "vote_count": 10,
-    "genres": [
-      "Thriller"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
     "title": "C’est quoi l’amour ?",
     "plex_release": "3 septembre 2026",
     "tmdb_id": 1369286,
@@ -73,6 +49,30 @@
     "lead_studio": null
   },
   {
+    "title": "Mi Amor",
+    "plex_release": "3 septembre 2026",
+    "tmdb_id": 1432817,
+    "poster_path": "/ukOLfGfUileYmo2RArqyofwkpWS.jpg",
+    "original_title": "Mi Amor",
+    "cinema_date": "6 mai 2026",
+    "vote_average": 5.9,
+    "vote_count": 10,
+    "genres": [
+      "Thriller"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
     "title": "The Criminals",
     "plex_release": "4 septembre 2026",
     "tmdb_id": 1242265,
@@ -80,7 +80,7 @@
     "original_title": "Fuze",
     "cinema_date": "6 mai 2026",
     "vote_average": 7.3,
-    "vote_count": 348,
+    "vote_count": 353,
     "genres": [
       "Action",
       "Crime",
@@ -105,8 +105,8 @@
     "poster_path": "/fN4YJFr6d1Zx2fNBlzGLyShO6sc.jpg",
     "original_title": "Moana",
     "cinema_date": "8 juillet 2026",
-    "vote_average": 6.1,
-    "vote_count": 253,
+    "vote_average": 6.2,
+    "vote_count": 257,
     "genres": [
       "Familial",
       "Fantastique",
@@ -176,30 +176,6 @@
     "lead_studio": null
   },
   {
-    "title": "Élise sous emprise",
-    "plex_release": "10 septembre 2026",
-    "tmdb_id": 1001111,
-    "poster_path": "/jUqVCXGWjSOTsY0WSXxlzNOobqS.jpg",
-    "original_title": "Élise sous emprise",
-    "cinema_date": "13 mai 2026",
-    "vote_average": 6,
-    "vote_count": 3,
-    "genres": [
-      "Comédie"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
     "title": "Histoires parallèles",
     "plex_release": "11 septembre 2026",
     "tmdb_id": 1157869,
@@ -207,7 +183,7 @@
     "original_title": "Histoires parallèles",
     "cinema_date": "14 mai 2026",
     "vote_average": 5.7,
-    "vote_count": 50,
+    "vote_count": 51,
     "genres": [
       "Drame",
       "Mystère",
@@ -312,7 +288,7 @@
     "original_title": "Spider-Man: Brand New Day",
     "cinema_date": "29 juillet 2026",
     "vote_average": 7.9,
-    "vote_count": 2399,
+    "vote_count": 2423,
     "genres": [
       "Science-Fiction",
       "Action",
