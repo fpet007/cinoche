@@ -202,19 +202,22 @@
     "lead_studio": null
   },
   {
-    "title": "Mata",
-    "plex_release": "24 septembre 2026",
-    "tmdb_id": 1376043,
-    "poster_path": "/aiFnVjZFZ9WCz97oBHZ5ps13PiM.jpg",
-    "original_title": "Mata",
-    "cinema_date": "27 mai 2026",
-    "vote_average": 6.1,
-    "vote_count": 21,
+    "title": "La Pat’ Patrouille : Le film mission Dino",
+    "plex_release": "19 septembre 2026",
+    "tmdb_id": 1185806,
+    "poster_path": "/tincY2hhSGkpGncWMDUfrwku6Q2.jpg",
+    "original_title": "PAW Patrol: The Dino Movie",
+    "cinema_date": "5 août 2026",
+    "vote_average": 7,
+    "vote_count": 49,
     "genres": [
-      "Thriller",
-      "Drame"
+      "Animation",
+      "Aventure",
+      "Familial",
+      "Fantastique",
+      "Comédie"
     ],
-    "is_french": true,
+    "is_french": false,
     "source": "prédite",
     "confidence": {
       "level": "low",
@@ -223,7 +226,7 @@
         "prédite"
       ]
     },
-    "tier": "niche",
+    "tier": "mid",
     "lead_studio": null
   },
   {
