@@ -106,7 +106,7 @@
     "original_title": "Moana",
     "cinema_date": "8 juillet 2026",
     "vote_average": 6.9,
-    "vote_count": 432,
+    "vote_count": 438,
     "genres": [
       "Familial",
       "Fantastique",
@@ -188,6 +188,31 @@
       "Drame",
       "Mystère",
       "Thriller"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Mata",
+    "plex_release": "24 septembre 2026",
+    "tmdb_id": 1376043,
+    "poster_path": "/aiFnVjZFZ9WCz97oBHZ5ps13PiM.jpg",
+    "original_title": "Mata",
+    "cinema_date": "27 mai 2026",
+    "vote_average": 6.1,
+    "vote_count": 21,
+    "genres": [
+      "Thriller",
+      "Drame"
     ],
     "is_french": true,
     "source": "prédite",
