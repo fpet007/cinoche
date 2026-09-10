@@ -80,7 +80,7 @@
     "original_title": "Fuze",
     "cinema_date": "6 mai 2026",
     "vote_average": 7.2,
-    "vote_count": 377,
+    "vote_count": 378,
     "genres": [
       "Action",
       "Crime",
@@ -199,34 +199,6 @@
       ]
     },
     "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "La Pat’ Patrouille : Le film mission Dino",
-    "plex_release": "19 septembre 2026",
-    "tmdb_id": 1185806,
-    "poster_path": "/tincY2hhSGkpGncWMDUfrwku6Q2.jpg",
-    "original_title": "PAW Patrol: The Dino Movie",
-    "cinema_date": "5 août 2026",
-    "vote_average": 7,
-    "vote_count": 49,
-    "genres": [
-      "Animation",
-      "Aventure",
-      "Familial",
-      "Fantastique",
-      "Comédie"
-    ],
-    "is_french": false,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "mid",
     "lead_studio": null
   },
   {
