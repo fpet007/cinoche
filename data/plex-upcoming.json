@@ -7,7 +7,7 @@
     "original_title": "Pour le plaisir",
     "cinema_date": "6 mai 2026",
     "vote_average": 6.2,
-    "vote_count": 43,
+    "vote_count": 44,
     "genres": [
       "Comédie"
     ],
@@ -80,7 +80,7 @@
     "original_title": "Fuze",
     "cinema_date": "6 mai 2026",
     "vote_average": 7.2,
-    "vote_count": 375,
+    "vote_count": 377,
     "genres": [
       "Action",
       "Crime",
@@ -105,8 +105,8 @@
     "poster_path": "/fN4YJFr6d1Zx2fNBlzGLyShO6sc.jpg",
     "original_title": "Moana",
     "cinema_date": "8 juillet 2026",
-    "vote_average": 6.8,
-    "vote_count": 381,
+    "vote_average": 6.9,
+    "vote_count": 432,
     "genres": [
       "Familial",
       "Fantastique",
@@ -158,8 +158,8 @@
     "poster_path": "/kfUKP5IgzgLQyQD1MDt99yq9Af0.jpg",
     "original_title": "L'abandon",
     "cinema_date": "13 mai 2026",
-    "vote_average": 7.7,
-    "vote_count": 51,
+    "vote_average": 7.6,
+    "vote_count": 52,
     "genres": [
       "Drame"
     ],
@@ -205,7 +205,7 @@
     "title": "La Pat’ Patrouille : Le film mission Dino",
     "plex_release": "19 septembre 2026",
     "tmdb_id": 1185806,
-    "poster_path": "/iprKhXVhUuGo3LbPurtB7Zcq6ph.jpg",
+    "poster_path": "/tincY2hhSGkpGncWMDUfrwku6Q2.jpg",
     "original_title": "PAW Patrol: The Dino Movie",
     "cinema_date": "5 août 2026",
     "vote_average": 7,
@@ -227,31 +227,6 @@
       ]
     },
     "tier": "mid",
-    "lead_studio": null
-  },
-  {
-    "title": "Tout va super",
-    "plex_release": "24 septembre 2026",
-    "tmdb_id": 1417127,
-    "poster_path": "/8266ff99uVGeKvtIGmksdbZh0hx.jpg",
-    "original_title": "Tout va super",
-    "cinema_date": "27 mai 2026",
-    "vote_average": 6.9,
-    "vote_count": 9,
-    "genres": [
-      "Comédie",
-      "Romance"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
     "lead_studio": null
   },
   {
@@ -288,7 +263,7 @@
     "original_title": "Spider-Man: Brand New Day",
     "cinema_date": "29 juillet 2026",
     "vote_average": 7.9,
-    "vote_count": 2525,
+    "vote_count": 2546,
     "genres": [
       "Science-Fiction",
       "Action",
