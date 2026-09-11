@@ -7,7 +7,7 @@
     "original_title": "Pour le plaisir",
     "cinema_date": "6 mai 2026",
     "vote_average": 6.2,
-    "vote_count": 44,
+    "vote_count": 45,
     "genres": [
       "Comédie"
     ],
@@ -27,11 +27,11 @@
     "title": "C’est quoi l’amour ?",
     "plex_release": "3 septembre 2026",
     "tmdb_id": 1369286,
-    "poster_path": "/m5afVTwwWKclUCjSABwdd5EVatV.jpg",
+    "poster_path": "/rCESGHvM0XCPoTUMkqG7E9pDYPq.jpg",
     "original_title": "C’est quoi l’amour ?",
     "cinema_date": "6 mai 2026",
-    "vote_average": 6.2,
-    "vote_count": 43,
+    "vote_average": 6.1,
+    "vote_count": 44,
     "genres": [
       "Comédie",
       "Drame"
@@ -80,7 +80,7 @@
     "original_title": "Fuze",
     "cinema_date": "6 mai 2026",
     "vote_average": 7.2,
-    "vote_count": 378,
+    "vote_count": 379,
     "genres": [
       "Action",
       "Crime",
@@ -106,7 +106,7 @@
     "original_title": "Moana",
     "cinema_date": "8 juillet 2026",
     "vote_average": 6.9,
-    "vote_count": 438,
+    "vote_count": 462,
     "genres": [
       "Familial",
       "Fantastique",
@@ -230,6 +230,31 @@
     "lead_studio": null
   },
   {
+    "title": "Tout va super",
+    "plex_release": "24 septembre 2026",
+    "tmdb_id": 1417127,
+    "poster_path": "/8266ff99uVGeKvtIGmksdbZh0hx.jpg",
+    "original_title": "Tout va super",
+    "cinema_date": "27 mai 2026",
+    "vote_average": 6.9,
+    "vote_count": 9,
+    "genres": [
+      "Comédie",
+      "Romance"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
     "title": "L'Objet du délit",
     "plex_release": "24 septembre 2026",
     "tmdb_id": 1466123,
@@ -263,7 +288,7 @@
     "original_title": "Spider-Man: Brand New Day",
     "cinema_date": "29 juillet 2026",
     "vote_average": 7.9,
-    "vote_count": 2546,
+    "vote_count": 2567,
     "genres": [
       "Science-Fiction",
       "Action",
