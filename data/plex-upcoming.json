@@ -80,7 +80,7 @@
     "original_title": "Fuze",
     "cinema_date": "6 mai 2026",
     "vote_average": 7.2,
-    "vote_count": 390,
+    "vote_count": 396,
     "genres": [
       "Action",
       "Crime",
@@ -105,8 +105,8 @@
     "poster_path": "/fN4YJFr6d1Zx2fNBlzGLyShO6sc.jpg",
     "original_title": "Moana",
     "cinema_date": "8 juillet 2026",
-    "vote_average": 7.1,
-    "vote_count": 556,
+    "vote_average": 7.2,
+    "vote_count": 588,
     "genres": [
       "Familial",
       "Fantastique",
@@ -133,7 +133,7 @@
     "original_title": "La Vénus électrique",
     "cinema_date": "12 mai 2026",
     "vote_average": 7.3,
-    "vote_count": 88,
+    "vote_count": 89,
     "genres": [
       "Comédie",
       "Drame",
@@ -233,7 +233,7 @@
     "original_title": "PAW Patrol: The Dino Movie",
     "cinema_date": "5 août 2026",
     "vote_average": 7.3,
-    "vote_count": 82,
+    "vote_count": 88,
     "genres": [
       "Animation",
       "Aventure",
@@ -251,31 +251,6 @@
       ]
     },
     "tier": "mid",
-    "lead_studio": null
-  },
-  {
-    "title": "Tout va super",
-    "plex_release": "24 septembre 2026",
-    "tmdb_id": 1417127,
-    "poster_path": "/8266ff99uVGeKvtIGmksdbZh0hx.jpg",
-    "original_title": "Tout va super",
-    "cinema_date": "27 mai 2026",
-    "vote_average": 6.9,
-    "vote_count": 9,
-    "genres": [
-      "Comédie",
-      "Romance"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
     "lead_studio": null
   },
   {
@@ -312,7 +287,7 @@
     "original_title": "Spider-Man: Brand New Day",
     "cinema_date": "29 juillet 2026",
     "vote_average": 7.8,
-    "vote_count": 2625,
+    "vote_count": 2657,
     "genres": [
       "Science-Fiction",
       "Action",
