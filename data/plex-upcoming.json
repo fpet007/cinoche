@@ -31,7 +31,7 @@
     "original_title": "C’est quoi l’amour ?",
     "cinema_date": "6 mai 2026",
     "vote_average": 6.1,
-    "vote_count": 45,
+    "vote_count": 46,
     "genres": [
       "Comédie",
       "Drame"
@@ -105,8 +105,8 @@
     "poster_path": "/fN4YJFr6d1Zx2fNBlzGLyShO6sc.jpg",
     "original_title": "Moana",
     "cinema_date": "8 juillet 2026",
-    "vote_average": 7.2,
-    "vote_count": 624,
+    "vote_average": 7.3,
+    "vote_count": 642,
     "genres": [
       "Familial",
       "Fantastique",
@@ -132,8 +132,8 @@
     "poster_path": "/AggflwFPVo6RL7HDLUVnDmJZxCC.jpg",
     "original_title": "La Vénus électrique",
     "cinema_date": "12 mai 2026",
-    "vote_average": 7.3,
-    "vote_count": 90,
+    "vote_average": 7.2,
+    "vote_count": 91,
     "genres": [
       "Comédie",
       "Drame",
@@ -159,7 +159,7 @@
     "original_title": "L'abandon",
     "cinema_date": "13 mai 2026",
     "vote_average": 7.6,
-    "vote_count": 60,
+    "vote_count": 61,
     "genres": [
       "Drame"
     ],
@@ -207,7 +207,7 @@
     "original_title": "Histoires parallèles",
     "cinema_date": "14 mai 2026",
     "vote_average": 5.7,
-    "vote_count": 52,
+    "vote_count": 53,
     "genres": [
       "Drame",
       "Mystère",
@@ -229,11 +229,11 @@
     "title": "La Pat’ Patrouille : Le film mission Dino",
     "plex_release": "19 septembre 2026",
     "tmdb_id": 1185806,
-    "poster_path": "/tincY2hhSGkpGncWMDUfrwku6Q2.jpg",
+    "poster_path": "/iprKhXVhUuGo3LbPurtB7Zcq6ph.jpg",
     "original_title": "PAW Patrol: The Dino Movie",
     "cinema_date": "5 août 2026",
-    "vote_average": 7.5,
-    "vote_count": 97,
+    "vote_average": 7.6,
+    "vote_count": 105,
     "genres": [
       "Animation",
       "Aventure",
@@ -286,8 +286,8 @@
     "poster_path": "/pEEI5mMoyZrbapzWC6vB6UmesDW.jpg",
     "original_title": "Spider-Man: Brand New Day",
     "cinema_date": "29 juillet 2026",
-    "vote_average": 7.9,
-    "vote_count": 2679,
+    "vote_average": 7.8,
+    "vote_count": 2701,
     "genres": [
       "Science-Fiction",
       "Action",
