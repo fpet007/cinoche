@@ -73,32 +73,6 @@
     "lead_studio": null
   },
   {
-    "title": "The Criminals",
-    "plex_release": "4 septembre 2026",
-    "tmdb_id": 1242265,
-    "poster_path": "/vUvZuBWRsjO2tnUo2yesrdbhKal.jpg",
-    "original_title": "Fuze",
-    "cinema_date": "6 mai 2026",
-    "vote_average": 7.1,
-    "vote_count": 403,
-    "genres": [
-      "Action",
-      "Crime",
-      "Thriller"
-    ],
-    "is_french": false,
-    "source": "officielle-us",
-    "confidence": {
-      "level": "high",
-      "score": 0.82,
-      "sources": [
-        "officielle-us"
-      ]
-    },
-    "tier": "mid",
-    "lead_studio": null
-  },
-  {
     "title": "Vaiana, la légende du bout du monde",
     "plex_release": "8 septembre 2026",
     "tmdb_id": 1108427,
@@ -106,7 +80,7 @@
     "original_title": "Moana",
     "cinema_date": "8 juillet 2026",
     "vote_average": 7.3,
-    "vote_count": 662,
+    "vote_count": 670,
     "genres": [
       "Familial",
       "Fantastique",
@@ -232,8 +206,8 @@
     "poster_path": "/iprKhXVhUuGo3LbPurtB7Zcq6ph.jpg",
     "original_title": "PAW Patrol: The Dino Movie",
     "cinema_date": "5 août 2026",
-    "vote_average": 7.7,
-    "vote_count": 110,
+    "vote_average": 7.8,
+    "vote_count": 113,
     "genres": [
       "Animation",
       "Aventure",
@@ -287,7 +261,7 @@
     "original_title": "Spider-Man: Brand New Day",
     "cinema_date": "29 juillet 2026",
     "vote_average": 7.8,
-    "vote_count": 2721,
+    "vote_count": 2741,
     "genres": [
       "Science-Fiction",
       "Action",
