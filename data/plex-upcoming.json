@@ -79,8 +79,8 @@
     "poster_path": "/fN4YJFr6d1Zx2fNBlzGLyShO6sc.jpg",
     "original_title": "Moana",
     "cinema_date": "8 juillet 2026",
-    "vote_average": 7.3,
-    "vote_count": 691,
+    "vote_average": 7.4,
+    "vote_count": 702,
     "genres": [
       "Familial",
       "Fantastique",
@@ -107,7 +107,7 @@
     "original_title": "La Vénus électrique",
     "cinema_date": "12 mai 2026",
     "vote_average": 7.2,
-    "vote_count": 92,
+    "vote_count": 93,
     "genres": [
       "Comédie",
       "Drame",
@@ -133,7 +133,7 @@
     "original_title": "L'abandon",
     "cinema_date": "13 mai 2026",
     "vote_average": 7.6,
-    "vote_count": 61,
+    "vote_count": 62,
     "genres": [
       "Drame"
     ],
@@ -200,34 +200,6 @@
     "lead_studio": null
   },
   {
-    "title": "La Pat’ Patrouille : Le film mission Dino",
-    "plex_release": "19 septembre 2026",
-    "tmdb_id": 1185806,
-    "poster_path": "/iprKhXVhUuGo3LbPurtB7Zcq6ph.jpg",
-    "original_title": "PAW Patrol: The Dino Movie",
-    "cinema_date": "5 août 2026",
-    "vote_average": 7.8,
-    "vote_count": 117,
-    "genres": [
-      "Animation",
-      "Aventure",
-      "Familial",
-      "Fantastique",
-      "Comédie"
-    ],
-    "is_french": false,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "mid",
-    "lead_studio": null
-  },
-  {
     "title": "Tout va super",
     "plex_release": "24 septembre 2026",
     "tmdb_id": 1417127,
@@ -235,7 +207,7 @@
     "original_title": "Tout va super",
     "cinema_date": "27 mai 2026",
     "vote_average": 6.9,
-    "vote_count": 9,
+    "vote_count": 10,
     "genres": [
       "Comédie",
       "Romance"
@@ -286,7 +258,7 @@
     "original_title": "Spider-Man: Brand New Day",
     "cinema_date": "29 juillet 2026",
     "vote_average": 7.9,
-    "vote_count": 2761,
+    "vote_count": 2776,
     "genres": [
       "Science-Fiction",
       "Action",
@@ -304,5 +276,33 @@
     },
     "tier": "blockbuster",
     "lead_studio": "Marvel Studios"
+  },
+  {
+    "title": "La Pat’ Patrouille : Le film mission Dino",
+    "plex_release": "29 septembre 2026",
+    "tmdb_id": 1185806,
+    "poster_path": "/iprKhXVhUuGo3LbPurtB7Zcq6ph.jpg",
+    "original_title": "PAW Patrol: The Dino Movie",
+    "cinema_date": "5 août 2026",
+    "vote_average": 7.9,
+    "vote_count": 121,
+    "genres": [
+      "Animation",
+      "Aventure",
+      "Familial",
+      "Fantastique",
+      "Comédie"
+    ],
+    "is_french": false,
+    "source": "officielle-us",
+    "confidence": {
+      "level": "high",
+      "score": 0.82,
+      "sources": [
+        "officielle-us"
+      ]
+    },
+    "tier": "blockbuster",
+    "lead_studio": null
   }
 ]
