@@ -80,7 +80,7 @@
     "original_title": "Moana",
     "cinema_date": "8 juillet 2026",
     "vote_average": 7.4,
-    "vote_count": 754,
+    "vote_count": 762,
     "genres": [
       "Familial",
       "Fantastique",
@@ -200,31 +200,6 @@
     "lead_studio": null
   },
   {
-    "title": "Tout va super",
-    "plex_release": "24 septembre 2026",
-    "tmdb_id": 1417127,
-    "poster_path": "/autMmaSXfL71IXCUv0eN83oiml0.jpg",
-    "original_title": "Tout va super",
-    "cinema_date": "27 mai 2026",
-    "vote_average": 7.2,
-    "vote_count": 12,
-    "genres": [
-      "Comédie",
-      "Romance"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
     "title": "L'Objet du délit",
     "plex_release": "24 septembre 2026",
     "tmdb_id": 1466123,
@@ -251,14 +226,39 @@
     "lead_studio": null
   },
   {
+    "title": "Tout va super",
+    "plex_release": "24 septembre 2026",
+    "tmdb_id": 1417127,
+    "poster_path": "/autMmaSXfL71IXCUv0eN83oiml0.jpg",
+    "original_title": "Tout va super",
+    "cinema_date": "27 mai 2026",
+    "vote_average": 6.7,
+    "vote_count": 13,
+    "genres": [
+      "Comédie",
+      "Romance"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
     "title": "Spider-Man : Brand New Day",
     "plex_release": "29 septembre 2026",
     "tmdb_id": 969681,
-    "poster_path": "/sB7wauO5DAoSZlY5Z5cCz3URtn0.jpg",
+    "poster_path": "/jjCCZcCtggGjKik2gXjyux1VEdZ.jpg",
     "original_title": "Spider-Man: Brand New Day",
     "cinema_date": "29 juillet 2026",
     "vote_average": 7.9,
-    "vote_count": 2852,
+    "vote_count": 2863,
     "genres": [
       "Science-Fiction",
       "Action",
@@ -285,7 +285,7 @@
     "original_title": "PAW Patrol: The Dino Movie",
     "cinema_date": "5 août 2026",
     "vote_average": 8,
-    "vote_count": 133,
+    "vote_count": 134,
     "genres": [
       "Animation",
       "Aventure",
