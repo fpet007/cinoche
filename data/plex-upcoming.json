@@ -80,7 +80,7 @@
     "original_title": "Fuze",
     "cinema_date": "6 mai 2026",
     "vote_average": 7.2,
-    "vote_count": 420,
+    "vote_count": 421,
     "genres": [
       "Action",
       "Crime",
@@ -106,7 +106,7 @@
     "original_title": "Moana",
     "cinema_date": "8 juillet 2026",
     "vote_average": 7.4,
-    "vote_count": 804,
+    "vote_count": 814,
     "genres": [
       "Familial",
       "Fantastique",
@@ -133,7 +133,7 @@
     "original_title": "La Vénus électrique",
     "cinema_date": "12 mai 2026",
     "vote_average": 7.2,
-    "vote_count": 94,
+    "vote_count": 95,
     "genres": [
       "Comédie",
       "Drame",
@@ -159,7 +159,7 @@
     "original_title": "L'abandon",
     "cinema_date": "13 mai 2026",
     "vote_average": 7.6,
-    "vote_count": 66,
+    "vote_count": 67,
     "genres": [
       "Drame"
     ],
@@ -207,7 +207,7 @@
     "original_title": "Histoires parallèles",
     "cinema_date": "14 mai 2026",
     "vote_average": 5.7,
-    "vote_count": 58,
+    "vote_count": 59,
     "genres": [
       "Drame",
       "Mystère",
@@ -308,8 +308,8 @@
     "poster_path": "/iprKhXVhUuGo3LbPurtB7Zcq6ph.jpg",
     "original_title": "PAW Patrol: The Dino Movie",
     "cinema_date": "5 août 2026",
-    "vote_average": 8.1,
-    "vote_count": 146,
+    "vote_average": 8.2,
+    "vote_count": 150,
     "genres": [
       "Animation",
       "Aventure",
