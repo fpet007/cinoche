@@ -50,33 +50,6 @@
     "lead_studio": null
   },
   {
-    "title": "Spider-Man : Brand New Day",
-    "plex_release": "6 octobre 2026",
-    "tmdb_id": 969681,
-    "poster_path": "/jjCCZcCtggGjKik2gXjyux1VEdZ.jpg",
-    "original_title": "Spider-Man: Brand New Day",
-    "cinema_date": "29 juillet 2026",
-    "vote_average": 7.9,
-    "vote_count": 2957,
-    "genres": [
-      "Science-Fiction",
-      "Action",
-      "Aventure"
-    ],
-    "is_french": false,
-    "source": "override-manuel",
-    "confidence": {
-      "level": "override",
-      "score": 1,
-      "sources": [
-        "override-manuel",
-        "maxblizz"
-      ]
-    },
-    "tier": "blockbuster",
-    "lead_studio": "Marvel Studios"
-  },
-  {
     "title": "Insidious : L'Invasion du Lointain",
     "plex_release": "6 octobre 2026",
     "tmdb_id": 1291595,
@@ -100,6 +73,32 @@
     },
     "tier": "mid",
     "lead_studio": null
+  },
+  {
+    "title": "Spider-Man : Brand New Day",
+    "plex_release": "6 octobre 2026",
+    "tmdb_id": 969681,
+    "poster_path": "/jjCCZcCtggGjKik2gXjyux1VEdZ.jpg",
+    "original_title": "Spider-Man: Brand New Day",
+    "cinema_date": "29 juillet 2026",
+    "vote_average": 7.9,
+    "vote_count": 2962,
+    "genres": [
+      "Science-Fiction",
+      "Action",
+      "Aventure"
+    ],
+    "is_french": false,
+    "source": "maxblizz",
+    "confidence": {
+      "level": "medium",
+      "score": 0.7,
+      "sources": [
+        "maxblizz"
+      ]
+    },
+    "tier": "blockbuster",
+    "lead_studio": "Marvel Studios"
   },
   {
     "title": "Fils de personne",
