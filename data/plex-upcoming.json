@@ -26,7 +26,7 @@
   },
   {
     "title": "Anna et les Enfants",
-    "plex_release": "1 octobre 2026",
+    "plex_release": "2 octobre 2026",
     "tmdb_id": 1483325,
     "poster_path": "/5EdivY4D1dnI3POKym4GsLnlEAR.jpg",
     "original_title": "Anna et les Enfants",
@@ -38,12 +38,12 @@
       "Drame"
     ],
     "is_french": true,
-    "source": "prédite",
+    "source": "override-manuel",
     "confidence": {
-      "level": "low",
-      "score": 0.45,
+      "level": "override",
+      "score": 1,
       "sources": [
-        "prédite"
+        "override-manuel"
       ]
     },
     "tier": "niche",
@@ -99,30 +99,6 @@
     },
     "tier": "blockbuster",
     "lead_studio": "Marvel Studios"
-  },
-  {
-    "title": "Fils de personne",
-    "plex_release": "8 octobre 2026",
-    "tmdb_id": 1309406,
-    "poster_path": "/AlN6NGHgdyn1ZOIkESOMSm2NCWh.jpg",
-    "original_title": "Fils de personne",
-    "cinema_date": "10 juin 2026",
-    "vote_average": 6.7,
-    "vote_count": 9,
-    "genres": [
-      "Drame"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
   },
   {
     "title": "Le Vertige",
@@ -260,30 +236,6 @@
     "vote_count": 20,
     "genres": [
       "Drame",
-      "Comédie"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "The Giaccomo",
-    "plex_release": "15 octobre 2026",
-    "tmdb_id": 1422612,
-    "poster_path": "/jDrgAMnqr4KO9AGKHZmLOOYcLzn.jpg",
-    "original_title": "The Giaccomo",
-    "cinema_date": "17 juin 2026",
-    "vote_average": 5.9,
-    "vote_count": 4,
-    "genres": [
       "Comédie"
     ],
     "is_french": true,
