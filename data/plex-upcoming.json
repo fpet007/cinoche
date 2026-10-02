@@ -50,32 +50,6 @@
     "lead_studio": null
   },
   {
-    "title": "Tableaux d'une explosion",
-    "plex_release": "6 octobre 2026",
-    "tmdb_id": 1639740,
-    "poster_path": "/3ANCNjxXxm4XC6WvZKklHcxtJav.jpg",
-    "original_title": "Tableaux d'une explosion",
-    "cinema_date": "8 juin 2026",
-    "vote_average": 0,
-    "vote_count": 0,
-    "genres": [
-      "Musique",
-      "Drame",
-      "Fantastique"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
     "title": "Spider-Man : Brand New Day",
     "plex_release": "6 octobre 2026",
     "tmdb_id": 969681,
@@ -213,6 +187,31 @@
     "vote_count": 87,
     "genres": [
       "Animation",
+      "Comédie"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Shana",
+    "plex_release": "15 octobre 2026",
+    "tmdb_id": 1483319,
+    "poster_path": "/pXgr7YW8TKKOCigWM7VY7MB7bm3.jpg",
+    "original_title": "Shana",
+    "cinema_date": "17 juin 2026",
+    "vote_average": 5.8,
+    "vote_count": 21,
+    "genres": [
+      "Drame",
       "Comédie"
     ],
     "is_french": true,
