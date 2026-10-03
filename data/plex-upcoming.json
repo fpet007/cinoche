@@ -7,7 +7,7 @@
     "original_title": "La Bataille de Gaulle - partie 1 : L'Âge de Fer",
     "cinema_date": "3 juin 2026",
     "vote_average": 7.8,
-    "vote_count": 204,
+    "vote_count": 208,
     "genres": [
       "Histoire",
       "Drame"
@@ -32,7 +32,7 @@
     "original_title": "Insidious: Out of the Further",
     "cinema_date": "19 août 2026",
     "vote_average": 6.5,
-    "vote_count": 170,
+    "vote_count": 171,
     "genres": [
       "Horreur",
       "Thriller"
@@ -57,7 +57,7 @@
     "original_title": "Spider-Man: Brand New Day",
     "cinema_date": "29 juillet 2026",
     "vote_average": 7.9,
-    "vote_count": 2977,
+    "vote_count": 2996,
     "genres": [
       "Science-Fiction",
       "Action",
@@ -76,18 +76,16 @@
     "lead_studio": "Marvel Studios"
   },
   {
-    "title": "Le Vertige",
+    "title": "A Second Life",
     "plex_release": "8 octobre 2026",
-    "tmdb_id": 1668499,
-    "poster_path": "/qO8nc3cSjzGduaC0deh8gBRKK9Z.jpg",
-    "original_title": "Le Vertige",
+    "tmdb_id": 1398460,
+    "poster_path": "/fGa0CrA8h83KGyJKDk1EZj3aPgu.jpg",
+    "original_title": "A Second Life",
     "cinema_date": "10 juin 2026",
     "vote_average": 6,
-    "vote_count": 47,
+    "vote_count": 3,
     "genres": [
-      "Animation",
-      "Comédie",
-      "Science-Fiction"
+      "Drame"
     ],
     "is_french": true,
     "source": "prédite",
@@ -102,16 +100,18 @@
     "lead_studio": null
   },
   {
-    "title": "A Second Life",
+    "title": "Le Vertige",
     "plex_release": "8 octobre 2026",
-    "tmdb_id": 1398460,
-    "poster_path": "/fGa0CrA8h83KGyJKDk1EZj3aPgu.jpg",
-    "original_title": "A Second Life",
+    "tmdb_id": 1668499,
+    "poster_path": "/qO8nc3cSjzGduaC0deh8gBRKK9Z.jpg",
+    "original_title": "Le Vertige",
     "cinema_date": "10 juin 2026",
     "vote_average": 6,
-    "vote_count": 3,
+    "vote_count": 47,
     "genres": [
-      "Drame"
+      "Animation",
+      "Comédie",
+      "Science-Fiction"
     ],
     "is_french": true,
     "source": "prédite",
