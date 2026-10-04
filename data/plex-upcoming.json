@@ -7,7 +7,7 @@
     "original_title": "La Bataille de Gaulle - partie 1 : L'Âge de Fer",
     "cinema_date": "3 juin 2026",
     "vote_average": 7.8,
-    "vote_count": 214,
+    "vote_count": 217,
     "genres": [
       "Histoire",
       "Drame"
@@ -57,7 +57,7 @@
     "original_title": "Spider-Man: Brand New Day",
     "cinema_date": "29 juillet 2026",
     "vote_average": 7.9,
-    "vote_count": 3009,
+    "vote_count": 3016,
     "genres": [
       "Science-Fiction",
       "Action",
@@ -132,8 +132,8 @@
     "poster_path": "/tZ8eSBXbza96vzCYeVTG9RBJ78E.jpg",
     "original_title": "ಟಾಕ್ಸಿಕ್",
     "cinema_date": "26 août 2026",
-    "vote_average": 8,
-    "vote_count": 77,
+    "vote_average": 7.9,
+    "vote_count": 78,
     "genres": [
       "Action",
       "Crime",
@@ -149,31 +149,6 @@
       ]
     },
     "tier": "mid",
-    "lead_studio": null
-  },
-  {
-    "title": "Anna et les Enfants",
-    "plex_release": "10 octobre 2026",
-    "tmdb_id": 1483325,
-    "poster_path": "/5EdivY4D1dnI3POKym4GsLnlEAR.jpg",
-    "original_title": "Anna et les Enfants",
-    "cinema_date": "3 juin 2026",
-    "vote_average": 6,
-    "vote_count": 1,
-    "genres": [
-      "Comédie",
-      "Drame"
-    ],
-    "is_french": true,
-    "source": "override-manuel",
-    "confidence": {
-      "level": "override",
-      "score": 1,
-      "sources": [
-        "override-manuel"
-      ]
-    },
-    "tier": "niche",
     "lead_studio": null
   },
   {
