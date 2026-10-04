@@ -7,7 +7,7 @@
     "original_title": "La Bataille de Gaulle - partie 1 : L'Âge de Fer",
     "cinema_date": "3 juin 2026",
     "vote_average": 7.8,
-    "vote_count": 208,
+    "vote_count": 214,
     "genres": [
       "Histoire",
       "Drame"
@@ -57,7 +57,7 @@
     "original_title": "Spider-Man: Brand New Day",
     "cinema_date": "29 juillet 2026",
     "vote_average": 7.9,
-    "vote_count": 2996,
+    "vote_count": 3009,
     "genres": [
       "Science-Fiction",
       "Action",
@@ -126,6 +126,32 @@
     "lead_studio": null
   },
   {
+    "title": "Toxic",
+    "plex_release": "10 octobre 2026",
+    "tmdb_id": 1213243,
+    "poster_path": "/tZ8eSBXbza96vzCYeVTG9RBJ78E.jpg",
+    "original_title": "ಟಾಕ್ಸಿಕ್",
+    "cinema_date": "26 août 2026",
+    "vote_average": 8,
+    "vote_count": 77,
+    "genres": [
+      "Action",
+      "Crime",
+      "Drame"
+    ],
+    "is_french": false,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "mid",
+    "lead_studio": null
+  },
+  {
     "title": "Anna et les Enfants",
     "plex_release": "10 octobre 2026",
     "tmdb_id": 1483325,
@@ -184,7 +210,7 @@
     "original_title": "Jim Queen",
     "cinema_date": "17 juin 2026",
     "vote_average": 7.9,
-    "vote_count": 87,
+    "vote_count": 88,
     "genres": [
       "Animation",
       "Comédie"
@@ -326,6 +352,30 @@
     "lead_studio": null
   },
   {
+    "title": "Seuls les rebelles",
+    "plex_release": "22 octobre 2026",
+    "tmdb_id": 1000155,
+    "poster_path": "/aIFnyK50YwOfRpV3GvM6VTfW4zo.jpg",
+    "original_title": "Seuls les rebelles",
+    "cinema_date": "24 juin 2026",
+    "vote_average": 7,
+    "vote_count": 1,
+    "genres": [
+      "Drame"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
     "title": "La Bataille de Gaulle - Partie 2 : J’écris ton nom",
     "plex_release": "24 octobre 2026",
     "tmdb_id": 1165369,
@@ -333,7 +383,7 @@
     "original_title": "La Bataille de Gaulle - Partie 2 : J’écris ton nom",
     "cinema_date": "26 juin 2026",
     "vote_average": 7.8,
-    "vote_count": 191,
+    "vote_count": 192,
     "genres": [
       "Histoire",
       "Drame"
@@ -361,6 +411,30 @@
     "vote_count": 12,
     "genres": [
       "Thriller"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Permis de détruire",
+    "plex_release": "29 octobre 2026",
+    "tmdb_id": 1538731,
+    "poster_path": "/gZQmPbQ9jo44jj9h4OSb61j14RD.jpg",
+    "original_title": "Permis de détruire",
+    "cinema_date": "1 juillet 2026",
+    "vote_average": 5.9,
+    "vote_count": 5,
+    "genres": [
+      "Comédie"
     ],
     "is_french": true,
     "source": "prédite",
@@ -408,30 +482,6 @@
     "cinema_date": "1 juillet 2026",
     "vote_average": 7.2,
     "vote_count": 3,
-    "genres": [
-      "Comédie"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "Permis de détruire",
-    "plex_release": "29 octobre 2026",
-    "tmdb_id": 1538731,
-    "poster_path": "/gZQmPbQ9jo44jj9h4OSb61j14RD.jpg",
-    "original_title": "Permis de détruire",
-    "cinema_date": "1 juillet 2026",
-    "vote_average": 5.9,
-    "vote_count": 5,
     "genres": [
       "Comédie"
     ],
