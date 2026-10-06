@@ -7,7 +7,7 @@
     "original_title": "La Bataille de Gaulle - partie 1 : L'Âge de Fer",
     "cinema_date": "3 juin 2026",
     "vote_average": 7.8,
-    "vote_count": 221,
+    "vote_count": 223,
     "genres": [
       "Histoire",
       "Drame"
@@ -28,11 +28,11 @@
     "title": "Insidious : L'Invasion du Lointain",
     "plex_release": "6 octobre 2026",
     "tmdb_id": 1291595,
-    "poster_path": "/bW8uJOLrtdBnQcQbG9BUQjDgUaT.jpg",
+    "poster_path": "/rX3Ihgw3AGQIsxpis1YqEGVPWZQ.jpg",
     "original_title": "Insidious: Out of the Further",
     "cinema_date": "19 août 2026",
     "vote_average": 6.5,
-    "vote_count": 172,
+    "vote_count": 189,
     "genres": [
       "Horreur",
       "Thriller"
@@ -56,8 +56,8 @@
     "poster_path": "/jjCCZcCtggGjKik2gXjyux1VEdZ.jpg",
     "original_title": "Spider-Man: Brand New Day",
     "cinema_date": "29 juillet 2026",
-    "vote_average": 7.9,
-    "vote_count": 3019,
+    "vote_average": 8.1,
+    "vote_count": 3515,
     "genres": [
       "Science-Fiction",
       "Action",
@@ -83,7 +83,7 @@
     "original_title": "Le Vertige",
     "cinema_date": "10 juin 2026",
     "vote_average": 6,
-    "vote_count": 47,
+    "vote_count": 48,
     "genres": [
       "Animation",
       "Comédie",
@@ -126,6 +126,57 @@
     "lead_studio": null
   },
   {
+    "title": "Toxic",
+    "plex_release": "10 octobre 2026",
+    "tmdb_id": 1213243,
+    "poster_path": "/tZ8eSBXbza96vzCYeVTG9RBJ78E.jpg",
+    "original_title": "ಟಾಕ್ಸಿಕ್",
+    "cinema_date": "26 août 2026",
+    "vote_average": 7.9,
+    "vote_count": 78,
+    "genres": [
+      "Action",
+      "Crime",
+      "Drame"
+    ],
+    "is_french": false,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "mid",
+    "lead_studio": null
+  },
+  {
+    "title": "Anna et les Enfants",
+    "plex_release": "10 octobre 2026",
+    "tmdb_id": 1483325,
+    "poster_path": "/5EdivY4D1dnI3POKym4GsLnlEAR.jpg",
+    "original_title": "Anna et les Enfants",
+    "cinema_date": "3 juin 2026",
+    "vote_average": 6,
+    "vote_count": 1,
+    "genres": [
+      "Comédie",
+      "Drame"
+    ],
+    "is_french": true,
+    "source": "override-manuel",
+    "confidence": {
+      "level": "override",
+      "score": 1,
+      "sources": [
+        "override-manuel"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
     "title": "Hope",
     "plex_release": "13 octobre 2026",
     "tmdb_id": 1058424,
@@ -159,7 +210,7 @@
     "original_title": "Jim Queen",
     "cinema_date": "17 juin 2026",
     "vote_average": 7.9,
-    "vote_count": 88,
+    "vote_count": 89,
     "genres": [
       "Animation",
       "Comédie"
@@ -325,31 +376,6 @@
     "lead_studio": null
   },
   {
-    "title": "La Bataille de Gaulle - Partie 2 : J’écris ton nom",
-    "plex_release": "24 octobre 2026",
-    "tmdb_id": 1165369,
-    "poster_path": "/9qc5CzjnxGpjpuwVlIziVr7ODcL.jpg",
-    "original_title": "La Bataille de Gaulle - Partie 2 : J’écris ton nom",
-    "cinema_date": "26 juin 2026",
-    "vote_average": 7.8,
-    "vote_count": 193,
-    "genres": [
-      "Histoire",
-      "Drame"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
     "title": "Une affaire turque",
     "plex_release": "27 octobre 2026",
     "tmdb_id": 1488613,
@@ -374,24 +400,25 @@
     "lead_studio": null
   },
   {
-    "title": "Un champ de fraises pour l’éternité",
+    "title": "La Bataille de Gaulle - Partie 2 : J’écris ton nom",
     "plex_release": "29 octobre 2026",
-    "tmdb_id": 962772,
-    "poster_path": "/mbGLiN85NAhNwFkiafaWbglhixb.jpg",
-    "original_title": "Un champ de fraises pour l’éternité",
-    "cinema_date": "1 juillet 2026",
-    "vote_average": 7.2,
-    "vote_count": 3,
+    "tmdb_id": 1165369,
+    "poster_path": "/9qc5CzjnxGpjpuwVlIziVr7ODcL.jpg",
+    "original_title": "La Bataille de Gaulle - Partie 2 : J’écris ton nom",
+    "cinema_date": "26 juin 2026",
+    "vote_average": 7.8,
+    "vote_count": 194,
     "genres": [
-      "Comédie"
+      "Histoire",
+      "Drame"
     ],
     "is_french": true,
-    "source": "prédite",
+    "source": "officielle-fr",
     "confidence": {
-      "level": "low",
-      "score": 0.45,
+      "level": "high",
+      "score": 0.95,
       "sources": [
-        "prédite"
+        "officielle-fr"
       ]
     },
     "tier": "niche",
@@ -431,6 +458,30 @@
     "cinema_date": "1 juillet 2026",
     "vote_average": 5.9,
     "vote_count": 5,
+    "genres": [
+      "Comédie"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Un champ de fraises pour l’éternité",
+    "plex_release": "29 octobre 2026",
+    "tmdb_id": 962772,
+    "poster_path": "/mbGLiN85NAhNwFkiafaWbglhixb.jpg",
+    "original_title": "Un champ de fraises pour l’éternité",
+    "cinema_date": "1 juillet 2026",
+    "vote_average": 7.2,
+    "vote_count": 3,
     "genres": [
       "Comédie"
     ],
