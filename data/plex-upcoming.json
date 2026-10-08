@@ -1,13 +1,13 @@
 [
   {
-    "title": "La Bataille de Gaulle - partie 1 : L'Âge de Fer",
+    "title": "La bataille de Gaulle - partie 1 : L'âge de fer",
     "plex_release": "1 octobre 2026",
     "tmdb_id": 1165366,
     "poster_path": "/zWuZWFKyga6GF3agrhJn8UtdMSu.jpg",
-    "original_title": "La Bataille de Gaulle - partie 1 : L'Âge de Fer",
+    "original_title": "La bataille de Gaulle - partie 1 : L'âge de fer",
     "cinema_date": "3 juin 2026",
     "vote_average": 7.8,
-    "vote_count": 224,
+    "vote_count": 226,
     "genres": [
       "Histoire",
       "Drame"
@@ -31,8 +31,8 @@
     "poster_path": "/rX3Ihgw3AGQIsxpis1YqEGVPWZQ.jpg",
     "original_title": "Insidious: Out of the Further",
     "cinema_date": "19 août 2026",
-    "vote_average": 7.1,
-    "vote_count": 263,
+    "vote_average": 7.5,
+    "vote_count": 375,
     "genres": [
       "Horreur",
       "Thriller"
@@ -56,8 +56,8 @@
     "poster_path": "/6OEtkkzoyusZDm2uMJojlWZSLR9.jpg",
     "original_title": "Spider-Man: Brand New Day",
     "cinema_date": "29 juillet 2026",
-    "vote_average": 8.2,
-    "vote_count": 3920,
+    "vote_average": 8.3,
+    "vote_count": 4249,
     "genres": [
       "Science-Fiction",
       "Action",
@@ -76,18 +76,16 @@
     "lead_studio": "Marvel Studios"
   },
   {
-    "title": "Le Vertige",
+    "title": "A Second Life",
     "plex_release": "8 octobre 2026",
-    "tmdb_id": 1668499,
-    "poster_path": "/qO8nc3cSjzGduaC0deh8gBRKK9Z.jpg",
-    "original_title": "Le Vertige",
+    "tmdb_id": 1398460,
+    "poster_path": "/fGa0CrA8h83KGyJKDk1EZj3aPgu.jpg",
+    "original_title": "A Second Life",
     "cinema_date": "10 juin 2026",
     "vote_average": 6,
-    "vote_count": 48,
+    "vote_count": 3,
     "genres": [
-      "Animation",
-      "Comédie",
-      "Science-Fiction"
+      "Drame"
     ],
     "is_french": true,
     "source": "prédite",
@@ -102,16 +100,18 @@
     "lead_studio": null
   },
   {
-    "title": "A Second Life",
+    "title": "Le Vertige",
     "plex_release": "8 octobre 2026",
-    "tmdb_id": 1398460,
-    "poster_path": "/fGa0CrA8h83KGyJKDk1EZj3aPgu.jpg",
-    "original_title": "A Second Life",
+    "tmdb_id": 1668499,
+    "poster_path": "/qO8nc3cSjzGduaC0deh8gBRKK9Z.jpg",
+    "original_title": "Le Vertige",
     "cinema_date": "10 juin 2026",
     "vote_average": 6,
-    "vote_count": 3,
+    "vote_count": 48,
     "genres": [
-      "Drame"
+      "Animation",
+      "Comédie",
+      "Science-Fiction"
     ],
     "is_french": true,
     "source": "prédite",
@@ -149,31 +149,6 @@
       ]
     },
     "tier": "mid",
-    "lead_studio": null
-  },
-  {
-    "title": "Anna et les Enfants",
-    "plex_release": "10 octobre 2026",
-    "tmdb_id": 1483325,
-    "poster_path": "/5EdivY4D1dnI3POKym4GsLnlEAR.jpg",
-    "original_title": "Anna et les Enfants",
-    "cinema_date": "3 juin 2026",
-    "vote_average": 6,
-    "vote_count": 1,
-    "genres": [
-      "Comédie",
-      "Drame"
-    ],
-    "is_french": true,
-    "source": "override-manuel",
-    "confidence": {
-      "level": "override",
-      "score": 1,
-      "sources": [
-        "override-manuel"
-      ]
-    },
-    "tier": "niche",
     "lead_studio": null
   },
   {
@@ -400,11 +375,11 @@
     "lead_studio": null
   },
   {
-    "title": "La Bataille de Gaulle - Partie 2 : J’écris ton nom",
+    "title": "La bataille de Gaulle - partie 2 : J'écris ton nom",
     "plex_release": "29 octobre 2026",
     "tmdb_id": 1165369,
     "poster_path": "/9qc5CzjnxGpjpuwVlIziVr7ODcL.jpg",
-    "original_title": "La Bataille de Gaulle - Partie 2 : J’écris ton nom",
+    "original_title": "La bataille de Gaulle - partie 2 : J'écris ton nom",
     "cinema_date": "26 juin 2026",
     "vote_average": 7.8,
     "vote_count": 195,
@@ -425,16 +400,17 @@
     "lead_studio": null
   },
   {
-    "title": "Permis de détruire",
+    "title": "Miss Mermaid",
     "plex_release": "29 octobre 2026",
-    "tmdb_id": 1538731,
-    "poster_path": "/gZQmPbQ9jo44jj9h4OSb61j14RD.jpg",
-    "original_title": "Permis de détruire",
+    "tmdb_id": 1351705,
+    "poster_path": "/38tZQKwoJwnqPDCL1Z1Mafv3Lkk.jpg",
+    "original_title": "Miss Mermaid",
     "cinema_date": "1 juillet 2026",
-    "vote_average": 5.9,
-    "vote_count": 5,
+    "vote_average": 6.4,
+    "vote_count": 4,
     "genres": [
-      "Comédie"
+      "Comédie",
+      "Drame"
     ],
     "is_french": true,
     "source": "prédite",
@@ -449,17 +425,16 @@
     "lead_studio": null
   },
   {
-    "title": "Miss Mermaid",
+    "title": "Permis de détruire",
     "plex_release": "29 octobre 2026",
-    "tmdb_id": 1351705,
-    "poster_path": "/38tZQKwoJwnqPDCL1Z1Mafv3Lkk.jpg",
-    "original_title": "Miss Mermaid",
+    "tmdb_id": 1538731,
+    "poster_path": "/gZQmPbQ9jo44jj9h4OSb61j14RD.jpg",
+    "original_title": "Permis de détruire",
     "cinema_date": "1 juillet 2026",
-    "vote_average": 6.4,
-    "vote_count": 4,
+    "vote_average": 5.9,
+    "vote_count": 5,
     "genres": [
-      "Comédie",
-      "Drame"
+      "Comédie"
     ],
     "is_french": true,
     "source": "prédite",
