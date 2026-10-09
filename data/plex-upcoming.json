@@ -31,8 +31,8 @@
     "poster_path": "/rX3Ihgw3AGQIsxpis1YqEGVPWZQ.jpg",
     "original_title": "Insidious: Out of the Further",
     "cinema_date": "19 août 2026",
-    "vote_average": 7.5,
-    "vote_count": 375,
+    "vote_average": 7.6,
+    "vote_count": 433,
     "genres": [
       "Horreur",
       "Thriller"
@@ -57,7 +57,7 @@
     "original_title": "Spider-Man: Brand New Day",
     "cinema_date": "29 juillet 2026",
     "vote_average": 8.3,
-    "vote_count": 4249,
+    "vote_count": 4474,
     "genres": [
       "Science-Fiction",
       "Action",
@@ -126,40 +126,14 @@
     "lead_studio": null
   },
   {
-    "title": "Toxic",
-    "plex_release": "10 octobre 2026",
-    "tmdb_id": 1213243,
-    "poster_path": "/tZ8eSBXbza96vzCYeVTG9RBJ78E.jpg",
-    "original_title": "ಟಾಕ್ಸಿಕ್",
-    "cinema_date": "26 août 2026",
-    "vote_average": 7.9,
-    "vote_count": 78,
-    "genres": [
-      "Action",
-      "Crime",
-      "Drame"
-    ],
-    "is_french": false,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "mid",
-    "lead_studio": null
-  },
-  {
     "title": "Hope",
     "plex_release": "13 octobre 2026",
     "tmdb_id": 1058424,
     "poster_path": "/tGdFDoA9qyt0t6Qr9MFnOl8Z2Jz.jpg",
     "original_title": "호프",
     "cinema_date": "28 octobre 2026",
-    "vote_average": 7.2,
-    "vote_count": 111,
+    "vote_average": 7.3,
+    "vote_count": 114,
     "genres": [
       "Science-Fiction",
       "Mystère",
@@ -331,8 +305,8 @@
     "poster_path": "/yQ5ZTigq3buO4qe1cx2VHsrEaT1.jpg",
     "original_title": "Les caprices de l’enfant Roi",
     "cinema_date": "24 juin 2026",
-    "vote_average": 5.5,
-    "vote_count": 13,
+    "vote_average": 5.2,
+    "vote_count": 14,
     "genres": [
       "Comédie",
       "Drame",
