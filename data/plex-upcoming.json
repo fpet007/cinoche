@@ -7,7 +7,7 @@
     "original_title": "La bataille de Gaulle - partie 1 : L'âge de fer",
     "cinema_date": "3 juin 2026",
     "vote_average": 7.8,
-    "vote_count": 226,
+    "vote_count": 232,
     "genres": [
       "Histoire",
       "Drame"
@@ -32,7 +32,7 @@
     "original_title": "Insidious: Out of the Further",
     "cinema_date": "19 août 2026",
     "vote_average": 7.6,
-    "vote_count": 433,
+    "vote_count": 474,
     "genres": [
       "Horreur",
       "Thriller"
@@ -56,8 +56,8 @@
     "poster_path": "/6OEtkkzoyusZDm2uMJojlWZSLR9.jpg",
     "original_title": "Spider-Man: Brand New Day",
     "cinema_date": "29 juillet 2026",
-    "vote_average": 8.3,
-    "vote_count": 4474,
+    "vote_average": 8.4,
+    "vote_count": 4625,
     "genres": [
       "Science-Fiction",
       "Action",
@@ -74,30 +74,6 @@
     },
     "tier": "blockbuster",
     "lead_studio": "Marvel Studios"
-  },
-  {
-    "title": "A Second Life",
-    "plex_release": "8 octobre 2026",
-    "tmdb_id": 1398460,
-    "poster_path": "/fGa0CrA8h83KGyJKDk1EZj3aPgu.jpg",
-    "original_title": "A Second Life",
-    "cinema_date": "10 juin 2026",
-    "vote_average": 6,
-    "vote_count": 3,
-    "genres": [
-      "Drame"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
   },
   {
     "title": "Le Vertige",
@@ -126,6 +102,55 @@
     "lead_studio": null
   },
   {
+    "title": "A Second Life",
+    "plex_release": "8 octobre 2026",
+    "tmdb_id": 1398460,
+    "poster_path": "/fGa0CrA8h83KGyJKDk1EZj3aPgu.jpg",
+    "original_title": "A Second Life",
+    "cinema_date": "10 juin 2026",
+    "vote_average": 6,
+    "vote_count": 3,
+    "genres": [
+      "Drame"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Anna et les Enfants",
+    "plex_release": "10 octobre 2026",
+    "tmdb_id": 1483325,
+    "poster_path": "/5EdivY4D1dnI3POKym4GsLnlEAR.jpg",
+    "original_title": "Anna et les Enfants",
+    "cinema_date": "3 juin 2026",
+    "vote_average": 6,
+    "vote_count": 1,
+    "genres": [
+      "Comédie",
+      "Drame"
+    ],
+    "is_french": true,
+    "source": "override-manuel",
+    "confidence": {
+      "level": "override",
+      "score": 1,
+      "sources": [
+        "override-manuel"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
     "title": "Hope",
     "plex_release": "13 octobre 2026",
     "tmdb_id": 1058424,
@@ -133,7 +158,7 @@
     "original_title": "호프",
     "cinema_date": "28 octobre 2026",
     "vote_average": 7.3,
-    "vote_count": 114,
+    "vote_count": 116,
     "genres": [
       "Science-Fiction",
       "Mystère",
@@ -356,7 +381,7 @@
     "original_title": "La bataille de Gaulle - partie 2 : J'écris ton nom",
     "cinema_date": "26 juin 2026",
     "vote_average": 7.8,
-    "vote_count": 195,
+    "vote_count": 196,
     "genres": [
       "Histoire",
       "Drame"
@@ -368,31 +393,6 @@
       "score": 0.95,
       "sources": [
         "officielle-fr"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "Miss Mermaid",
-    "plex_release": "29 octobre 2026",
-    "tmdb_id": 1351705,
-    "poster_path": "/38tZQKwoJwnqPDCL1Z1Mafv3Lkk.jpg",
-    "original_title": "Miss Mermaid",
-    "cinema_date": "1 juillet 2026",
-    "vote_average": 6.4,
-    "vote_count": 4,
-    "genres": [
-      "Comédie",
-      "Drame"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
       ]
     },
     "tier": "niche",
@@ -423,16 +423,17 @@
     "lead_studio": null
   },
   {
-    "title": "Un champ de fraises pour l’éternité",
+    "title": "Miss Mermaid",
     "plex_release": "29 octobre 2026",
-    "tmdb_id": 962772,
-    "poster_path": "/mbGLiN85NAhNwFkiafaWbglhixb.jpg",
-    "original_title": "Un champ de fraises pour l’éternité",
+    "tmdb_id": 1351705,
+    "poster_path": "/38tZQKwoJwnqPDCL1Z1Mafv3Lkk.jpg",
+    "original_title": "Miss Mermaid",
     "cinema_date": "1 juillet 2026",
-    "vote_average": 7.2,
-    "vote_count": 3,
+    "vote_average": 6.4,
+    "vote_count": 4,
     "genres": [
-      "Comédie"
+      "Comédie",
+      "Drame"
     ],
     "is_french": true,
     "source": "prédite",
