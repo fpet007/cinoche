@@ -32,7 +32,7 @@
     "original_title": "Insidious: Out of the Further",
     "cinema_date": "19 août 2026",
     "vote_average": 7.7,
-    "vote_count": 598,
+    "vote_count": 676,
     "genres": [
       "Horreur",
       "Thriller"
@@ -56,8 +56,8 @@
     "poster_path": "/6OEtkkzoyusZDm2uMJojlWZSLR9.jpg",
     "original_title": "Spider-Man: Brand New Day",
     "cinema_date": "29 juillet 2026",
-    "vote_average": 8.4,
-    "vote_count": 5145,
+    "vote_average": 8.5,
+    "vote_count": 5268,
     "genres": [
       "Science-Fiction",
       "Action",
@@ -158,7 +158,7 @@
     "original_title": "호프",
     "cinema_date": "28 octobre 2026",
     "vote_average": 7.2,
-    "vote_count": 121,
+    "vote_count": 122,
     "genres": [
       "Science-Fiction",
       "Mystère",
@@ -300,16 +300,18 @@
     "lead_studio": null
   },
   {
-    "title": "Seuls les rebelles",
+    "title": "Les caprices de l’enfant Roi",
     "plex_release": "22 octobre 2026",
-    "tmdb_id": 1000155,
-    "poster_path": "/aIFnyK50YwOfRpV3GvM6VTfW4zo.jpg",
-    "original_title": "Seuls les rebelles",
+    "tmdb_id": 1472829,
+    "poster_path": "/yQ5ZTigq3buO4qe1cx2VHsrEaT1.jpg",
+    "original_title": "Les caprices de l’enfant Roi",
     "cinema_date": "24 juin 2026",
-    "vote_average": 7,
-    "vote_count": 1,
+    "vote_average": 5.2,
+    "vote_count": 14,
     "genres": [
-      "Drame"
+      "Comédie",
+      "Drame",
+      "Histoire"
     ],
     "is_french": true,
     "source": "prédite",
@@ -324,18 +326,16 @@
     "lead_studio": null
   },
   {
-    "title": "Les caprices de l’enfant Roi",
+    "title": "Seuls les rebelles",
     "plex_release": "22 octobre 2026",
-    "tmdb_id": 1472829,
-    "poster_path": "/yQ5ZTigq3buO4qe1cx2VHsrEaT1.jpg",
-    "original_title": "Les caprices de l’enfant Roi",
+    "tmdb_id": 1000155,
+    "poster_path": "/aIFnyK50YwOfRpV3GvM6VTfW4zo.jpg",
+    "original_title": "Seuls les rebelles",
     "cinema_date": "24 juin 2026",
-    "vote_average": 5.2,
-    "vote_count": 14,
+    "vote_average": 7,
+    "vote_count": 1,
     "genres": [
-      "Comédie",
-      "Drame",
-      "Histoire"
+      "Drame"
     ],
     "is_french": true,
     "source": "prédite",
@@ -381,7 +381,7 @@
     "original_title": "La bataille de Gaulle - partie 2 : J'écris ton nom",
     "cinema_date": "26 juin 2026",
     "vote_average": 7.8,
-    "vote_count": 196,
+    "vote_count": 198,
     "genres": [
       "Histoire",
       "Drame"
@@ -393,6 +393,30 @@
       "score": 0.95,
       "sources": [
         "officielle-fr"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Permis de détruire",
+    "plex_release": "29 octobre 2026",
+    "tmdb_id": 1538731,
+    "poster_path": "/gZQmPbQ9jo44jj9h4OSb61j14RD.jpg",
+    "original_title": "Permis de détruire",
+    "cinema_date": "1 juillet 2026",
+    "vote_average": 5.9,
+    "vote_count": 5,
+    "genres": [
+      "Comédie"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
       ]
     },
     "tier": "niche",
@@ -424,14 +448,14 @@
     "lead_studio": null
   },
   {
-    "title": "Permis de détruire",
+    "title": "Un champ de fraises pour l’éternité",
     "plex_release": "29 octobre 2026",
-    "tmdb_id": 1538731,
-    "poster_path": "/gZQmPbQ9jo44jj9h4OSb61j14RD.jpg",
-    "original_title": "Permis de détruire",
+    "tmdb_id": 962772,
+    "poster_path": "/mbGLiN85NAhNwFkiafaWbglhixb.jpg",
+    "original_title": "Un champ de fraises pour l’éternité",
     "cinema_date": "1 juillet 2026",
-    "vote_average": 5.9,
-    "vote_count": 5,
+    "vote_average": 7.2,
+    "vote_count": 3,
     "genres": [
       "Comédie"
     ],
