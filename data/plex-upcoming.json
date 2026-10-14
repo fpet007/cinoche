@@ -7,7 +7,7 @@
     "original_title": "La bataille de Gaulle - partie 1 : L'âge de fer",
     "cinema_date": "3 juin 2026",
     "vote_average": 7.8,
-    "vote_count": 233,
+    "vote_count": 234,
     "genres": [
       "Histoire",
       "Drame"
@@ -32,7 +32,7 @@
     "original_title": "Insidious: Out of the Further",
     "cinema_date": "19 août 2026",
     "vote_average": 7.7,
-    "vote_count": 676,
+    "vote_count": 709,
     "genres": [
       "Horreur",
       "Thriller"
@@ -57,7 +57,7 @@
     "original_title": "Spider-Man: Brand New Day",
     "cinema_date": "29 juillet 2026",
     "vote_average": 8.5,
-    "vote_count": 5268,
+    "vote_count": 5379,
     "genres": [
       "Science-Fiction",
       "Action",
@@ -126,31 +126,6 @@
     "lead_studio": null
   },
   {
-    "title": "Anna et les Enfants",
-    "plex_release": "10 octobre 2026",
-    "tmdb_id": 1483325,
-    "poster_path": "/5EdivY4D1dnI3POKym4GsLnlEAR.jpg",
-    "original_title": "Anna et les Enfants",
-    "cinema_date": "3 juin 2026",
-    "vote_average": 6,
-    "vote_count": 1,
-    "genres": [
-      "Comédie",
-      "Drame"
-    ],
-    "is_french": true,
-    "source": "override-manuel",
-    "confidence": {
-      "level": "override",
-      "score": 1,
-      "sources": [
-        "override-manuel"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
     "title": "Hope",
     "plex_release": "13 octobre 2026",
     "tmdb_id": 1058424,
@@ -158,7 +133,7 @@
     "original_title": "호프",
     "cinema_date": "28 octobre 2026",
     "vote_average": 7.2,
-    "vote_count": 122,
+    "vote_count": 138,
     "genres": [
       "Science-Fiction",
       "Mystère",
@@ -184,7 +159,7 @@
     "original_title": "Jim Queen",
     "cinema_date": "17 juin 2026",
     "vote_average": 7.9,
-    "vote_count": 89,
+    "vote_count": 90,
     "genres": [
       "Animation",
       "Comédie"
@@ -276,6 +251,30 @@
     "lead_studio": null
   },
   {
+    "title": "Seuls les rebelles",
+    "plex_release": "22 octobre 2026",
+    "tmdb_id": 1000155,
+    "poster_path": "/aIFnyK50YwOfRpV3GvM6VTfW4zo.jpg",
+    "original_title": "Seuls les rebelles",
+    "cinema_date": "24 juin 2026",
+    "vote_average": 7,
+    "vote_count": 1,
+    "genres": [
+      "Drame"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
     "title": "Les Parfait(s) : Arnaques en Famille",
     "plex_release": "22 octobre 2026",
     "tmdb_id": 1421401,
@@ -312,30 +311,6 @@
       "Comédie",
       "Drame",
       "Histoire"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "Seuls les rebelles",
-    "plex_release": "22 octobre 2026",
-    "tmdb_id": 1000155,
-    "poster_path": "/aIFnyK50YwOfRpV3GvM6VTfW4zo.jpg",
-    "original_title": "Seuls les rebelles",
-    "cinema_date": "24 juin 2026",
-    "vote_average": 7,
-    "vote_count": 1,
-    "genres": [
-      "Drame"
     ],
     "is_french": true,
     "source": "prédite",
@@ -399,30 +374,6 @@
     "lead_studio": null
   },
   {
-    "title": "Permis de détruire",
-    "plex_release": "29 octobre 2026",
-    "tmdb_id": 1538731,
-    "poster_path": "/gZQmPbQ9jo44jj9h4OSb61j14RD.jpg",
-    "original_title": "Permis de détruire",
-    "cinema_date": "1 juillet 2026",
-    "vote_average": 5.9,
-    "vote_count": 5,
-    "genres": [
-      "Comédie"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
     "title": "Miss Mermaid",
     "plex_release": "29 octobre 2026",
     "tmdb_id": 1351705,
@@ -448,14 +399,14 @@
     "lead_studio": null
   },
   {
-    "title": "Un champ de fraises pour l’éternité",
+    "title": "Permis de détruire",
     "plex_release": "29 octobre 2026",
-    "tmdb_id": 962772,
-    "poster_path": "/mbGLiN85NAhNwFkiafaWbglhixb.jpg",
-    "original_title": "Un champ de fraises pour l’éternité",
+    "tmdb_id": 1538731,
+    "poster_path": "/gZQmPbQ9jo44jj9h4OSb61j14RD.jpg",
+    "original_title": "Permis de détruire",
     "cinema_date": "1 juillet 2026",
-    "vote_average": 7.2,
-    "vote_count": 3,
+    "vote_average": 5.9,
+    "vote_count": 5,
     "genres": [
       "Comédie"
     ],
