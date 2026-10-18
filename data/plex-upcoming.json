@@ -7,7 +7,7 @@
     "original_title": "La bataille de Gaulle - partie 1 : L'âge de fer",
     "cinema_date": "3 juin 2026",
     "vote_average": 7.8,
-    "vote_count": 235,
+    "vote_count": 236,
     "genres": [
       "Histoire",
       "Drame"
@@ -32,7 +32,7 @@
     "original_title": "Insidious: Out of the Further",
     "cinema_date": "19 août 2026",
     "vote_average": 7.7,
-    "vote_count": 761,
+    "vote_count": 786,
     "genres": [
       "Horreur",
       "Thriller"
@@ -57,7 +57,7 @@
     "original_title": "Spider-Man: Brand New Day",
     "cinema_date": "29 juillet 2026",
     "vote_average": 8.5,
-    "vote_count": 5561,
+    "vote_count": 5629,
     "genres": [
       "Science-Fiction",
       "Action",
@@ -102,6 +102,30 @@
     "lead_studio": null
   },
   {
+    "title": "A Second Life",
+    "plex_release": "8 octobre 2026",
+    "tmdb_id": 1398460,
+    "poster_path": "/fGa0CrA8h83KGyJKDk1EZj3aPgu.jpg",
+    "original_title": "A Second Life",
+    "cinema_date": "10 juin 2026",
+    "vote_average": 6,
+    "vote_count": 3,
+    "genres": [
+      "Drame"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
     "title": "Hope",
     "plex_release": "13 octobre 2026",
     "tmdb_id": 1058424,
@@ -109,7 +133,7 @@
     "original_title": "호프",
     "cinema_date": "28 octobre 2026",
     "vote_average": 6.9,
-    "vote_count": 215,
+    "vote_count": 236,
     "genres": [
       "Science-Fiction",
       "Mystère",
@@ -301,30 +325,6 @@
     "lead_studio": null
   },
   {
-    "title": "L’Étrangère",
-    "plex_release": "22 octobre 2026",
-    "tmdb_id": 1376450,
-    "poster_path": "/joEFUQTF4ZDdacGrDQmZqrgl948.jpg",
-    "original_title": "L’Étrangère",
-    "cinema_date": "24 juin 2026",
-    "vote_average": 7.3,
-    "vote_count": 5,
-    "genres": [
-      "Drame"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
     "title": "Une affaire turque",
     "plex_release": "27 octobre 2026",
     "tmdb_id": 1488613,
@@ -374,17 +374,16 @@
     "lead_studio": null
   },
   {
-    "title": "Miss Mermaid",
+    "title": "Permis de détruire",
     "plex_release": "29 octobre 2026",
-    "tmdb_id": 1351705,
-    "poster_path": "/38tZQKwoJwnqPDCL1Z1Mafv3Lkk.jpg",
-    "original_title": "Miss Mermaid",
+    "tmdb_id": 1538731,
+    "poster_path": "/gZQmPbQ9jo44jj9h4OSb61j14RD.jpg",
+    "original_title": "Permis de détruire",
     "cinema_date": "1 juillet 2026",
-    "vote_average": 6.4,
-    "vote_count": 4,
+    "vote_average": 5.9,
+    "vote_count": 5,
     "genres": [
-      "Comédie",
-      "Drame"
+      "Comédie"
     ],
     "is_french": true,
     "source": "prédite",
@@ -407,30 +406,6 @@
     "cinema_date": "1 juillet 2026",
     "vote_average": 7.2,
     "vote_count": 3,
-    "genres": [
-      "Comédie"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "Permis de détruire",
-    "plex_release": "29 octobre 2026",
-    "tmdb_id": 1538731,
-    "poster_path": "/gZQmPbQ9jo44jj9h4OSb61j14RD.jpg",
-    "original_title": "Permis de détruire",
-    "cinema_date": "1 juillet 2026",
-    "vote_average": 5.9,
-    "vote_count": 5,
     "genres": [
       "Comédie"
     ],
