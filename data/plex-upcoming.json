@@ -7,7 +7,7 @@
     "original_title": "La bataille de Gaulle - partie 1 : L'âge de fer",
     "cinema_date": "3 juin 2026",
     "vote_average": 7.8,
-    "vote_count": 236,
+    "vote_count": 238,
     "genres": [
       "Histoire",
       "Drame"
@@ -32,7 +32,7 @@
     "original_title": "Insidious: Out of the Further",
     "cinema_date": "19 août 2026",
     "vote_average": 7.7,
-    "vote_count": 786,
+    "vote_count": 825,
     "genres": [
       "Horreur",
       "Thriller"
@@ -57,7 +57,7 @@
     "original_title": "Spider-Man: Brand New Day",
     "cinema_date": "29 juillet 2026",
     "vote_average": 8.5,
-    "vote_count": 5629,
+    "vote_count": 5734,
     "genres": [
       "Science-Fiction",
       "Action",
@@ -83,7 +83,7 @@
     "original_title": "Le Vertige",
     "cinema_date": "10 juin 2026",
     "vote_average": 6,
-    "vote_count": 48,
+    "vote_count": 49,
     "genres": [
       "Animation",
       "Comédie",
@@ -133,7 +133,7 @@
     "original_title": "호프",
     "cinema_date": "28 octobre 2026",
     "vote_average": 6.9,
-    "vote_count": 236,
+    "vote_count": 257,
     "genres": [
       "Science-Fiction",
       "Mystère",
@@ -356,7 +356,7 @@
     "original_title": "La bataille de Gaulle - partie 2 : J'écris ton nom",
     "cinema_date": "26 juin 2026",
     "vote_average": 7.8,
-    "vote_count": 198,
+    "vote_count": 199,
     "genres": [
       "Histoire",
       "Drame"
@@ -374,16 +374,17 @@
     "lead_studio": null
   },
   {
-    "title": "Permis de détruire",
+    "title": "Miss Mermaid",
     "plex_release": "29 octobre 2026",
-    "tmdb_id": 1538731,
-    "poster_path": "/gZQmPbQ9jo44jj9h4OSb61j14RD.jpg",
-    "original_title": "Permis de détruire",
+    "tmdb_id": 1351705,
+    "poster_path": "/38tZQKwoJwnqPDCL1Z1Mafv3Lkk.jpg",
+    "original_title": "Miss Mermaid",
     "cinema_date": "1 juillet 2026",
-    "vote_average": 5.9,
-    "vote_count": 5,
+    "vote_average": 6.4,
+    "vote_count": 4,
     "genres": [
-      "Comédie"
+      "Comédie",
+      "Drame"
     ],
     "is_french": true,
     "source": "prédite",
@@ -406,6 +407,30 @@
     "cinema_date": "1 juillet 2026",
     "vote_average": 7.2,
     "vote_count": 3,
+    "genres": [
+      "Comédie"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Permis de détruire",
+    "plex_release": "29 octobre 2026",
+    "tmdb_id": 1538731,
+    "poster_path": "/gZQmPbQ9jo44jj9h4OSb61j14RD.jpg",
+    "original_title": "Permis de détruire",
+    "cinema_date": "1 juillet 2026",
+    "vote_average": 5.9,
+    "vote_count": 5,
     "genres": [
       "Comédie"
     ],
