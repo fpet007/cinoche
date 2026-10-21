@@ -7,7 +7,7 @@
     "original_title": "La bataille de Gaulle - partie 1 : L'âge de fer",
     "cinema_date": "3 juin 2026",
     "vote_average": 7.8,
-    "vote_count": 239,
+    "vote_count": 241,
     "genres": [
       "Histoire",
       "Drame"
@@ -32,7 +32,7 @@
     "original_title": "Insidious: Out of the Further",
     "cinema_date": "19 août 2026",
     "vote_average": 7.7,
-    "vote_count": 834,
+    "vote_count": 845,
     "genres": [
       "Horreur",
       "Thriller"
@@ -57,7 +57,7 @@
     "original_title": "Spider-Man: Brand New Day",
     "cinema_date": "29 juillet 2026",
     "vote_average": 8.5,
-    "vote_count": 5815,
+    "vote_count": 5862,
     "genres": [
       "Science-Fiction",
       "Action",
@@ -83,7 +83,7 @@
     "original_title": "Le Vertige",
     "cinema_date": "10 juin 2026",
     "vote_average": 6,
-    "vote_count": 49,
+    "vote_count": 50,
     "genres": [
       "Animation",
       "Comédie",
@@ -134,7 +134,7 @@
     "original_title": "호프",
     "cinema_date": "28 octobre 2026",
     "vote_average": 6.9,
-    "vote_count": 277,
+    "vote_count": 286,
     "genres": [
       "Science-Fiction",
       "Mystère",
@@ -160,7 +160,7 @@
     "original_title": "Jim Queen",
     "cinema_date": "17 juin 2026",
     "vote_average": 7.9,
-    "vote_count": 92,
+    "vote_count": 94,
     "genres": [
       "Animation",
       "Comédie"
@@ -326,6 +326,32 @@
     "lead_studio": null
   },
   {
+    "title": "The Dog Stars",
+    "plex_release": "27 octobre 2026",
+    "tmdb_id": 1384216,
+    "poster_path": "/w7c49Qgp3TAUC4hlo0mtgRpLOGG.jpg",
+    "original_title": "The Dog Stars",
+    "cinema_date": "26 août 2026",
+    "vote_average": 6.6,
+    "vote_count": 311,
+    "genres": [
+      "Drame",
+      "Thriller",
+      "Aventure"
+    ],
+    "is_french": false,
+    "source": "officielle-us",
+    "confidence": {
+      "level": "high",
+      "score": 0.82,
+      "sources": [
+        "officielle-us"
+      ]
+    },
+    "tier": "mid",
+    "lead_studio": "20th Century Studios"
+  },
+  {
     "title": "Une affaire turque",
     "plex_release": "27 octobre 2026",
     "tmdb_id": 1488613,
@@ -357,7 +383,7 @@
     "original_title": "La bataille de Gaulle - partie 2 : J'écris ton nom",
     "cinema_date": "26 juin 2026",
     "vote_average": 7.8,
-    "vote_count": 201,
+    "vote_count": 202,
     "genres": [
       "Histoire",
       "Drame"
@@ -369,6 +395,30 @@
       "score": 0.95,
       "sources": [
         "officielle-fr"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Un champ de fraises pour l’éternité",
+    "plex_release": "29 octobre 2026",
+    "tmdb_id": 962772,
+    "poster_path": "/mbGLiN85NAhNwFkiafaWbglhixb.jpg",
+    "original_title": "Un champ de fraises pour l’éternité",
+    "cinema_date": "1 juillet 2026",
+    "vote_average": 7.2,
+    "vote_count": 3,
+    "genres": [
+      "Comédie"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
       ]
     },
     "tier": "niche",
@@ -410,30 +460,6 @@
     "genres": [
       "Comédie",
       "Drame"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "Un champ de fraises pour l’éternité",
-    "plex_release": "29 octobre 2026",
-    "tmdb_id": 962772,
-    "poster_path": "/mbGLiN85NAhNwFkiafaWbglhixb.jpg",
-    "original_title": "Un champ de fraises pour l’éternité",
-    "cinema_date": "1 juillet 2026",
-    "vote_average": 7.2,
-    "vote_count": 3,
-    "genres": [
-      "Comédie"
     ],
     "is_french": true,
     "source": "prédite",
