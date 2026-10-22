@@ -7,7 +7,7 @@
     "original_title": "La bataille de Gaulle - partie 1 : L'âge de fer",
     "cinema_date": "3 juin 2026",
     "vote_average": 7.8,
-    "vote_count": 241,
+    "vote_count": 243,
     "genres": [
       "Histoire",
       "Drame"
@@ -32,7 +32,7 @@
     "original_title": "Insidious: Out of the Further",
     "cinema_date": "19 août 2026",
     "vote_average": 7.7,
-    "vote_count": 845,
+    "vote_count": 859,
     "genres": [
       "Horreur",
       "Thriller"
@@ -57,7 +57,7 @@
     "original_title": "Spider-Man: Brand New Day",
     "cinema_date": "29 juillet 2026",
     "vote_average": 8.5,
-    "vote_count": 5862,
+    "vote_count": 5923,
     "genres": [
       "Science-Fiction",
       "Action",
@@ -134,7 +134,7 @@
     "original_title": "호프",
     "cinema_date": "28 octobre 2026",
     "vote_average": 6.9,
-    "vote_count": 286,
+    "vote_count": 295,
     "genres": [
       "Science-Fiction",
       "Mystère",
@@ -156,11 +156,11 @@
     "title": "Jim Queen",
     "plex_release": "15 octobre 2026",
     "tmdb_id": 1061798,
-    "poster_path": "/jw8vwfyKOf509Zj1cu27waGFZLB.jpg",
+    "poster_path": "/nvmGrOzolKlW1z90rLudSjPm9cG.jpg",
     "original_title": "Jim Queen",
     "cinema_date": "17 juin 2026",
     "vote_average": 7.9,
-    "vote_count": 94,
+    "vote_count": 95,
     "genres": [
       "Animation",
       "Comédie"
@@ -185,7 +185,7 @@
     "original_title": "Deviens génial",
     "cinema_date": "17 juin 2026",
     "vote_average": 6,
-    "vote_count": 11,
+    "vote_count": 12,
     "genres": [
       "Comédie"
     ],
@@ -401,14 +401,14 @@
     "lead_studio": null
   },
   {
-    "title": "Un champ de fraises pour l’éternité",
+    "title": "Permis de détruire",
     "plex_release": "29 octobre 2026",
-    "tmdb_id": 962772,
-    "poster_path": "/mbGLiN85NAhNwFkiafaWbglhixb.jpg",
-    "original_title": "Un champ de fraises pour l’éternité",
+    "tmdb_id": 1538731,
+    "poster_path": "/gZQmPbQ9jo44jj9h4OSb61j14RD.jpg",
+    "original_title": "Permis de détruire",
     "cinema_date": "1 juillet 2026",
-    "vote_average": 7.2,
-    "vote_count": 3,
+    "vote_average": 5.9,
+    "vote_count": 5,
     "genres": [
       "Comédie"
     ],
@@ -425,14 +425,14 @@
     "lead_studio": null
   },
   {
-    "title": "Permis de détruire",
+    "title": "Un champ de fraises pour l’éternité",
     "plex_release": "29 octobre 2026",
-    "tmdb_id": 1538731,
-    "poster_path": "/gZQmPbQ9jo44jj9h4OSb61j14RD.jpg",
-    "original_title": "Permis de détruire",
+    "tmdb_id": 962772,
+    "poster_path": "/mbGLiN85NAhNwFkiafaWbglhixb.jpg",
+    "original_title": "Un champ de fraises pour l’éternité",
     "cinema_date": "1 juillet 2026",
-    "vote_average": 5.9,
-    "vote_count": 5,
+    "vote_average": 7.2,
+    "vote_count": 3,
     "genres": [
       "Comédie"
     ],
