@@ -1,13 +1,13 @@
 [
   {
-    "title": "La bataille de Gaulle - partie 1 : L'âge de fer",
+    "title": "La bataille de Gaulle : L’âge de fer",
     "plex_release": "1 octobre 2026",
     "tmdb_id": 1165366,
     "poster_path": "/zWuZWFKyga6GF3agrhJn8UtdMSu.jpg",
-    "original_title": "La bataille de Gaulle - partie 1 : L'âge de fer",
+    "original_title": "La bataille de Gaulle : L’âge de fer",
     "cinema_date": "3 juin 2026",
     "vote_average": 7.8,
-    "vote_count": 244,
+    "vote_count": 250,
     "genres": [
       "Histoire",
       "Drame"
@@ -56,7 +56,7 @@
     "original_title": "Insidious: Out of the Further",
     "cinema_date": "19 août 2026",
     "vote_average": 7.7,
-    "vote_count": 872,
+    "vote_count": 893,
     "genres": [
       "Horreur",
       "Thriller"
@@ -81,7 +81,7 @@
     "original_title": "Spider-Man: Brand New Day",
     "cinema_date": "29 juillet 2026",
     "vote_average": 8.5,
-    "vote_count": 5969,
+    "vote_count": 6018,
     "genres": [
       "Science-Fiction",
       "Action",
@@ -107,7 +107,7 @@
     "original_title": "Le Vertige",
     "cinema_date": "10 juin 2026",
     "vote_average": 6,
-    "vote_count": 50,
+    "vote_count": 51,
     "genres": [
       "Animation",
       "Comédie",
@@ -126,24 +126,25 @@
     "lead_studio": null
   },
   {
-    "title": "A Second Life",
-    "plex_release": "8 octobre 2026",
-    "tmdb_id": 1398460,
-    "poster_path": "/fGa0CrA8h83KGyJKDk1EZj3aPgu.jpg",
-    "original_title": "A Second Life",
-    "cinema_date": "10 juin 2026",
+    "title": "Anna et les Enfants",
+    "plex_release": "10 octobre 2026",
+    "tmdb_id": 1483325,
+    "poster_path": "/5EdivY4D1dnI3POKym4GsLnlEAR.jpg",
+    "original_title": "Anna et les Enfants",
+    "cinema_date": "3 juin 2026",
     "vote_average": 6,
-    "vote_count": 3,
+    "vote_count": 1,
     "genres": [
+      "Comédie",
       "Drame"
     ],
     "is_french": true,
-    "source": "prédite",
+    "source": "override-manuel",
     "confidence": {
-      "level": "low",
-      "score": 0.45,
+      "level": "override",
+      "score": 1,
       "sources": [
-        "prédite"
+        "override-manuel"
       ]
     },
     "tier": "niche",
@@ -156,8 +157,8 @@
     "poster_path": "/tGdFDoA9qyt0t6Qr9MFnOl8Z2Jz.jpg",
     "original_title": "호프",
     "cinema_date": "28 octobre 2026",
-    "vote_average": 6.9,
-    "vote_count": 298,
+    "vote_average": 6.8,
+    "vote_count": 312,
     "genres": [
       "Science-Fiction",
       "Mystère",
@@ -208,7 +209,7 @@
     "original_title": "Deviens génial",
     "cinema_date": "17 juin 2026",
     "vote_average": 6,
-    "vote_count": 12,
+    "vote_count": 13,
     "genres": [
       "Comédie"
     ],
@@ -281,8 +282,8 @@
     "poster_path": "/yQ5ZTigq3buO4qe1cx2VHsrEaT1.jpg",
     "original_title": "Les Caprices de l’Enfant Roi",
     "cinema_date": "24 juin 2026",
-    "vote_average": 5.4,
-    "vote_count": 15,
+    "vote_average": 5.7,
+    "vote_count": 16,
     "genres": [
       "Comédie",
       "Drame",
@@ -325,30 +326,6 @@
     "lead_studio": null
   },
   {
-    "title": "Seuls les rebelles",
-    "plex_release": "22 octobre 2026",
-    "tmdb_id": 1000155,
-    "poster_path": "/aIFnyK50YwOfRpV3GvM6VTfW4zo.jpg",
-    "original_title": "Seuls les rebelles",
-    "cinema_date": "24 juin 2026",
-    "vote_average": 7,
-    "vote_count": 1,
-    "genres": [
-      "Drame"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
     "title": "The Dog Stars",
     "plex_release": "27 octobre 2026",
     "tmdb_id": 1384216,
@@ -356,7 +333,7 @@
     "original_title": "The Dog Stars",
     "cinema_date": "26 août 2026",
     "vote_average": 6.6,
-    "vote_count": 311,
+    "vote_count": 310,
     "genres": [
       "Drame",
       "Thriller",
@@ -399,11 +376,11 @@
     "lead_studio": null
   },
   {
-    "title": "La bataille de Gaulle - partie 2 : J'écris ton nom",
+    "title": "La bataille de Gaulle : J’écris ton nom",
     "plex_release": "29 octobre 2026",
     "tmdb_id": 1165369,
     "poster_path": "/9qc5CzjnxGpjpuwVlIziVr7ODcL.jpg",
-    "original_title": "La bataille de Gaulle - partie 2 : J'écris ton nom",
+    "original_title": "La bataille de Gaulle : J’écris ton nom",
     "cinema_date": "26 juin 2026",
     "vote_average": 7.8,
     "vote_count": 202,
@@ -457,6 +434,30 @@
     "cinema_date": "1 juillet 2026",
     "vote_average": 5.9,
     "vote_count": 5,
+    "genres": [
+      "Comédie"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Un champ de fraises pour l’éternité",
+    "plex_release": "29 octobre 2026",
+    "tmdb_id": 962772,
+    "poster_path": "/mbGLiN85NAhNwFkiafaWbglhixb.jpg",
+    "original_title": "Un champ de fraises pour l’éternité",
+    "cinema_date": "1 juillet 2026",
+    "vote_average": 7.2,
+    "vote_count": 3,
     "genres": [
       "Comédie"
     ],
