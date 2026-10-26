@@ -7,7 +7,7 @@
     "original_title": "La Bataille de Gaulle : L’Âge de fer",
     "cinema_date": "3 juin 2026",
     "vote_average": 7.8,
-    "vote_count": 252,
+    "vote_count": 255,
     "genres": [
       "Histoire",
       "Drame"
@@ -25,6 +25,30 @@
     "lead_studio": null
   },
   {
+    "title": "Hamlet",
+    "plex_release": "5 octobre 2026",
+    "tmdb_id": 1709002,
+    "poster_path": "/asgIZZwPMA0Hj2DDXLZHFe8N9vS.jpg",
+    "original_title": "Hamlet (Comédie-Française)",
+    "cinema_date": "7 juin 2026",
+    "vote_average": 0,
+    "vote_count": 0,
+    "genres": [
+      "Drame"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
     "title": "Insidious : L'Invasion du Lointain",
     "plex_release": "6 octobre 2026",
     "tmdb_id": 1291595,
@@ -32,7 +56,7 @@
     "original_title": "Insidious: Out of the Further",
     "cinema_date": "19 août 2026",
     "vote_average": 7.7,
-    "vote_count": 902,
+    "vote_count": 918,
     "genres": [
       "Horreur",
       "Thriller"
@@ -57,7 +81,7 @@
     "original_title": "Spider-Man: Brand New Day",
     "cinema_date": "29 juillet 2026",
     "vote_average": 8.5,
-    "vote_count": 6087,
+    "vote_count": 6162,
     "genres": [
       "Science-Fiction",
       "Action",
@@ -88,6 +112,30 @@
       "Animation",
       "Comédie",
       "Science-Fiction"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "A Second Life",
+    "plex_release": "8 octobre 2026",
+    "tmdb_id": 1398460,
+    "poster_path": "/fGa0CrA8h83KGyJKDk1EZj3aPgu.jpg",
+    "original_title": "A Second Life",
+    "cinema_date": "10 juin 2026",
+    "vote_average": 6,
+    "vote_count": 3,
+    "genres": [
+      "Drame"
     ],
     "is_french": true,
     "source": "prédite",
@@ -134,7 +182,7 @@
     "original_title": "호프",
     "cinema_date": "28 octobre 2026",
     "vote_average": 6.8,
-    "vote_count": 326,
+    "vote_count": 339,
     "genres": [
       "Science-Fiction",
       "Mystère",
@@ -258,8 +306,8 @@
     "poster_path": "/kP1Zl9IpGp28P2x0ogzKcQKkALv.jpg",
     "original_title": "Les Caprices de l’Enfant Roi",
     "cinema_date": "24 juin 2026",
-    "vote_average": 5.7,
-    "vote_count": 16,
+    "vote_average": 5.6,
+    "vote_count": 17,
     "genres": [
       "Comédie",
       "Drame",
@@ -333,7 +381,7 @@
     "original_title": "The Dog Stars",
     "cinema_date": "26 août 2026",
     "vote_average": 6.6,
-    "vote_count": 311,
+    "vote_count": 314,
     "genres": [
       "Drame",
       "Thriller",
@@ -434,6 +482,30 @@
     "cinema_date": "1 juillet 2026",
     "vote_average": 5.9,
     "vote_count": 5,
+    "genres": [
+      "Comédie"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Un champ de fraises pour l’éternité",
+    "plex_release": "29 octobre 2026",
+    "tmdb_id": 962772,
+    "poster_path": "/mbGLiN85NAhNwFkiafaWbglhixb.jpg",
+    "original_title": "Un champ de fraises pour l’éternité",
+    "cinema_date": "1 juillet 2026",
+    "vote_average": 7.2,
+    "vote_count": 3,
     "genres": [
       "Comédie"
     ],
