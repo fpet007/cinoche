@@ -56,7 +56,7 @@
     "original_title": "Insidious: Out of the Further",
     "cinema_date": "19 août 2026",
     "vote_average": 7.7,
-    "vote_count": 918,
+    "vote_count": 924,
     "genres": [
       "Horreur",
       "Thriller"
@@ -81,7 +81,7 @@
     "original_title": "Spider-Man: Brand New Day",
     "cinema_date": "29 juillet 2026",
     "vote_average": 8.5,
-    "vote_count": 6162,
+    "vote_count": 6207,
     "genres": [
       "Science-Fiction",
       "Action",
@@ -132,8 +132,8 @@
     "poster_path": "/fGa0CrA8h83KGyJKDk1EZj3aPgu.jpg",
     "original_title": "A Second Life",
     "cinema_date": "10 juin 2026",
-    "vote_average": 6,
-    "vote_count": 3,
+    "vote_average": 6.5,
+    "vote_count": 4,
     "genres": [
       "Drame"
     ],
@@ -182,7 +182,7 @@
     "original_title": "호프",
     "cinema_date": "28 octobre 2026",
     "vote_average": 6.8,
-    "vote_count": 339,
+    "vote_count": 351,
     "genres": [
       "Science-Fiction",
       "Mystère",
@@ -300,18 +300,16 @@
     "lead_studio": null
   },
   {
-    "title": "Les Caprices de l’Enfant Roi",
+    "title": "Les Parfait(s) : Arnaques en Famille",
     "plex_release": "22 octobre 2026",
-    "tmdb_id": 1472829,
-    "poster_path": "/kP1Zl9IpGp28P2x0ogzKcQKkALv.jpg",
-    "original_title": "Les Caprices de l’Enfant Roi",
+    "tmdb_id": 1421401,
+    "poster_path": "/wrVQlyShWb9KUhifSuf4MXWCGQV.jpg",
+    "original_title": "Les Parfait(s) : Arnaques en Famille",
     "cinema_date": "24 juin 2026",
-    "vote_average": 5.6,
-    "vote_count": 17,
+    "vote_average": 6.7,
+    "vote_count": 5,
     "genres": [
-      "Comédie",
-      "Drame",
-      "Histoire"
+      "Comédie"
     ],
     "is_french": true,
     "source": "prédite",
@@ -326,16 +324,18 @@
     "lead_studio": null
   },
   {
-    "title": "Les Parfait(s) : Arnaques en Famille",
+    "title": "Les Caprices de l’Enfant Roi",
     "plex_release": "22 octobre 2026",
-    "tmdb_id": 1421401,
-    "poster_path": "/wrVQlyShWb9KUhifSuf4MXWCGQV.jpg",
-    "original_title": "Les Parfait(s) : Arnaques en Famille",
+    "tmdb_id": 1472829,
+    "poster_path": "/kP1Zl9IpGp28P2x0ogzKcQKkALv.jpg",
+    "original_title": "Les Caprices de l’Enfant Roi",
     "cinema_date": "24 juin 2026",
-    "vote_average": 6.7,
-    "vote_count": 5,
+    "vote_average": 5.6,
+    "vote_count": 18,
     "genres": [
-      "Comédie"
+      "Comédie",
+      "Drame",
+      "Histoire"
     ],
     "is_french": true,
     "source": "prédite",
@@ -381,11 +381,11 @@
     "original_title": "The Dog Stars",
     "cinema_date": "26 août 2026",
     "vote_average": 6.6,
-    "vote_count": 314,
+    "vote_count": 327,
     "genres": [
-      "Drame",
       "Thriller",
-      "Aventure"
+      "Aventure",
+      "Science-Fiction"
     ],
     "is_french": false,
     "source": "officielle-us",
@@ -482,30 +482,6 @@
     "cinema_date": "1 juillet 2026",
     "vote_average": 5.9,
     "vote_count": 5,
-    "genres": [
-      "Comédie"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "Un champ de fraises pour l’éternité",
-    "plex_release": "29 octobre 2026",
-    "tmdb_id": 962772,
-    "poster_path": "/mbGLiN85NAhNwFkiafaWbglhixb.jpg",
-    "original_title": "Un champ de fraises pour l’éternité",
-    "cinema_date": "1 juillet 2026",
-    "vote_average": 7.2,
-    "vote_count": 3,
     "genres": [
       "Comédie"
     ],
