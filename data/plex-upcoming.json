@@ -7,7 +7,7 @@
     "original_title": "La Bataille de Gaulle : L’Âge de fer",
     "cinema_date": "3 juin 2026",
     "vote_average": 7.8,
-    "vote_count": 255,
+    "vote_count": 259,
     "genres": [
       "Histoire",
       "Drame"
@@ -56,7 +56,7 @@
     "original_title": "Insidious: Out of the Further",
     "cinema_date": "19 août 2026",
     "vote_average": 7.7,
-    "vote_count": 924,
+    "vote_count": 934,
     "genres": [
       "Horreur",
       "Thriller"
@@ -81,7 +81,7 @@
     "original_title": "Spider-Man: Brand New Day",
     "cinema_date": "29 juillet 2026",
     "vote_average": 8.5,
-    "vote_count": 6207,
+    "vote_count": 6252,
     "genres": [
       "Science-Fiction",
       "Action",
@@ -156,8 +156,8 @@
     "poster_path": "/3s1RxHqVG5CKKnwi9KXQs1EMllW.jpg",
     "original_title": "Anna et les Enfants",
     "cinema_date": "3 juin 2026",
-    "vote_average": 6,
-    "vote_count": 1,
+    "vote_average": 5.3,
+    "vote_count": 3,
     "genres": [
       "Comédie",
       "Drame"
@@ -182,7 +182,7 @@
     "original_title": "호프",
     "cinema_date": "28 octobre 2026",
     "vote_average": 6.8,
-    "vote_count": 351,
+    "vote_count": 363,
     "genres": [
       "Science-Fiction",
       "Mystère",
@@ -306,8 +306,8 @@
     "poster_path": "/wrVQlyShWb9KUhifSuf4MXWCGQV.jpg",
     "original_title": "Les Parfait(s) : Arnaques en Famille",
     "cinema_date": "24 juin 2026",
-    "vote_average": 6.7,
-    "vote_count": 5,
+    "vote_average": 6.6,
+    "vote_count": 9,
     "genres": [
       "Comédie"
     ],
@@ -331,7 +331,7 @@
     "original_title": "Les Caprices de l’Enfant Roi",
     "cinema_date": "24 juin 2026",
     "vote_average": 5.6,
-    "vote_count": 18,
+    "vote_count": 19,
     "genres": [
       "Comédie",
       "Drame",
@@ -380,12 +380,13 @@
     "poster_path": "/w7c49Qgp3TAUC4hlo0mtgRpLOGG.jpg",
     "original_title": "The Dog Stars",
     "cinema_date": "26 août 2026",
-    "vote_average": 6.6,
-    "vote_count": 327,
+    "vote_average": 6.7,
+    "vote_count": 402,
     "genres": [
+      "Action",
       "Thriller",
-      "Aventure",
-      "Science-Fiction"
+      "Science-Fiction",
+      "Familial"
     ],
     "is_french": false,
     "source": "officielle-us",
@@ -396,7 +397,7 @@
         "officielle-us"
       ]
     },
-    "tier": "mid",
+    "tier": "blockbuster",
     "lead_studio": "20th Century Studios"
   },
   {
@@ -431,10 +432,11 @@
     "original_title": "La Bataille de Gaulle : J’écris ton nom",
     "cinema_date": "26 juin 2026",
     "vote_average": 7.8,
-    "vote_count": 202,
+    "vote_count": 203,
     "genres": [
       "Histoire",
-      "Drame"
+      "Drame",
+      "Guerre"
     ],
     "is_french": true,
     "source": "officielle-fr",
