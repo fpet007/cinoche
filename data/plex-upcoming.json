@@ -10,7 +10,8 @@
     "vote_count": 259,
     "genres": [
       "Histoire",
-      "Drame"
+      "Drame",
+      "Guerre"
     ],
     "is_french": true,
     "source": "officielle-fr",
@@ -56,7 +57,7 @@
     "original_title": "Insidious: Out of the Further",
     "cinema_date": "19 août 2026",
     "vote_average": 7.7,
-    "vote_count": 934,
+    "vote_count": 943,
     "genres": [
       "Horreur",
       "Thriller"
@@ -81,7 +82,7 @@
     "original_title": "Spider-Man: Brand New Day",
     "cinema_date": "29 juillet 2026",
     "vote_average": 8.5,
-    "vote_count": 6252,
+    "vote_count": 6293,
     "genres": [
       "Science-Fiction",
       "Action",
@@ -182,7 +183,7 @@
     "original_title": "호프",
     "cinema_date": "28 octobre 2026",
     "vote_average": 6.8,
-    "vote_count": 363,
+    "vote_count": 380,
     "genres": [
       "Science-Fiction",
       "Mystère",
@@ -208,33 +209,9 @@
     "original_title": "Jim Queen",
     "cinema_date": "17 juin 2026",
     "vote_average": 7.9,
-    "vote_count": 95,
+    "vote_count": 96,
     "genres": [
       "Animation",
-      "Comédie"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "Deviens génial",
-    "plex_release": "15 octobre 2026",
-    "tmdb_id": 1443774,
-    "poster_path": "/ibWODXJ3a3rrx7asLa3gY5Xxjgn.jpg",
-    "original_title": "Deviens génial",
-    "cinema_date": "17 juin 2026",
-    "vote_average": 5.7,
-    "vote_count": 14,
-    "genres": [
       "Comédie"
     ],
     "is_french": true,
@@ -260,6 +237,30 @@
     "vote_count": 22,
     "genres": [
       "Drame",
+      "Comédie"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Deviens génial",
+    "plex_release": "15 octobre 2026",
+    "tmdb_id": 1443774,
+    "poster_path": "/ibWODXJ3a3rrx7asLa3gY5Xxjgn.jpg",
+    "original_title": "Deviens génial",
+    "cinema_date": "17 juin 2026",
+    "vote_average": 5.7,
+    "vote_count": 14,
+    "genres": [
       "Comédie"
     ],
     "is_french": true,
@@ -350,38 +351,14 @@
     "lead_studio": null
   },
   {
-    "title": "Seuls les rebelles",
-    "plex_release": "22 octobre 2026",
-    "tmdb_id": 1000155,
-    "poster_path": "/aIFnyK50YwOfRpV3GvM6VTfW4zo.jpg",
-    "original_title": "Seuls les rebelles",
-    "cinema_date": "24 juin 2026",
-    "vote_average": 7,
-    "vote_count": 1,
-    "genres": [
-      "Drame"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
     "title": "The Dog Stars",
     "plex_release": "27 octobre 2026",
     "tmdb_id": 1384216,
     "poster_path": "/w7c49Qgp3TAUC4hlo0mtgRpLOGG.jpg",
     "original_title": "The Dog Stars",
     "cinema_date": "26 août 2026",
-    "vote_average": 6.7,
-    "vote_count": 402,
+    "vote_average": 6.8,
+    "vote_count": 477,
     "genres": [
       "Action",
       "Thriller",
@@ -425,11 +402,11 @@
     "lead_studio": null
   },
   {
-    "title": "La Bataille de Gaulle : J’écris ton nom",
+    "title": "‎La Bataille de Gaulle: J'écris ton nom",
     "plex_release": "29 octobre 2026",
     "tmdb_id": 1165369,
     "poster_path": "/9qc5CzjnxGpjpuwVlIziVr7ODcL.jpg",
-    "original_title": "La Bataille de Gaulle : J’écris ton nom",
+    "original_title": "‎La Bataille de Gaulle: J'écris ton nom",
     "cinema_date": "26 juin 2026",
     "vote_average": 7.8,
     "vote_count": 203,
