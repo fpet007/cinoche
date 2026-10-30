@@ -7,7 +7,7 @@
     "original_title": "La Bataille de Gaulle : L’Âge de fer",
     "cinema_date": "3 juin 2026",
     "vote_average": 7.8,
-    "vote_count": 259,
+    "vote_count": 260,
     "genres": [
       "Histoire",
       "Drame",
@@ -57,7 +57,7 @@
     "original_title": "Insidious: Out of the Further",
     "cinema_date": "19 août 2026",
     "vote_average": 7.7,
-    "vote_count": 943,
+    "vote_count": 953,
     "genres": [
       "Horreur",
       "Thriller"
@@ -82,7 +82,7 @@
     "original_title": "Spider-Man: Brand New Day",
     "cinema_date": "29 juillet 2026",
     "vote_average": 8.5,
-    "vote_count": 6293,
+    "vote_count": 6326,
     "genres": [
       "Science-Fiction",
       "Action",
@@ -183,7 +183,7 @@
     "original_title": "호프",
     "cinema_date": "28 octobre 2026",
     "vote_average": 6.8,
-    "vote_count": 380,
+    "vote_count": 391,
     "genres": [
       "Science-Fiction",
       "Mystère",
@@ -331,8 +331,8 @@
     "poster_path": "/kP1Zl9IpGp28P2x0ogzKcQKkALv.jpg",
     "original_title": "Les Caprices de l’Enfant Roi",
     "cinema_date": "24 juin 2026",
-    "vote_average": 5.6,
-    "vote_count": 19,
+    "vote_average": 6,
+    "vote_count": 22,
     "genres": [
       "Comédie",
       "Drame",
@@ -357,13 +357,12 @@
     "poster_path": "/w7c49Qgp3TAUC4hlo0mtgRpLOGG.jpg",
     "original_title": "The Dog Stars",
     "cinema_date": "26 août 2026",
-    "vote_average": 6.8,
-    "vote_count": 477,
+    "vote_average": 6.9,
+    "vote_count": 523,
     "genres": [
       "Action",
       "Thriller",
-      "Science-Fiction",
-      "Familial"
+      "Science-Fiction"
     ],
     "is_french": false,
     "source": "officielle-us",
@@ -402,14 +401,14 @@
     "lead_studio": null
   },
   {
-    "title": "‎La Bataille de Gaulle: J'écris ton nom",
+    "title": "‎La Bataille de Gaulle : J'écris ton nom",
     "plex_release": "29 octobre 2026",
     "tmdb_id": 1165369,
     "poster_path": "/9qc5CzjnxGpjpuwVlIziVr7ODcL.jpg",
-    "original_title": "‎La Bataille de Gaulle: J'écris ton nom",
+    "original_title": "‎La Bataille de Gaulle : J'écris ton nom",
     "cinema_date": "26 juin 2026",
     "vote_average": 7.8,
-    "vote_count": 203,
+    "vote_count": 204,
     "genres": [
       "Histoire",
       "Drame",
@@ -422,6 +421,30 @@
       "score": 0.95,
       "sources": [
         "officielle-fr"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Permis de détruire",
+    "plex_release": "29 octobre 2026",
+    "tmdb_id": 1538731,
+    "poster_path": "/gZQmPbQ9jo44jj9h4OSb61j14RD.jpg",
+    "original_title": "Permis de détruire",
+    "cinema_date": "1 juillet 2026",
+    "vote_average": 5.2,
+    "vote_count": 6,
+    "genres": [
+      "Comédie"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
       ]
     },
     "tier": "niche",
@@ -453,16 +476,40 @@
     "lead_studio": null
   },
   {
-    "title": "Permis de détruire",
+    "title": "Un champ de fraises pour l’éternité",
     "plex_release": "29 octobre 2026",
-    "tmdb_id": 1538731,
-    "poster_path": "/gZQmPbQ9jo44jj9h4OSb61j14RD.jpg",
-    "original_title": "Permis de détruire",
+    "tmdb_id": 962772,
+    "poster_path": "/mbGLiN85NAhNwFkiafaWbglhixb.jpg",
+    "original_title": "Un champ de fraises pour l’éternité",
     "cinema_date": "1 juillet 2026",
-    "vote_average": 5.9,
-    "vote_count": 5,
+    "vote_average": 7.2,
+    "vote_count": 3,
     "genres": [
       "Comédie"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Julien Doré - Le Dernier Pestacle",
+    "plex_release": "30 octobre 2026",
+    "tmdb_id": 1695405,
+    "poster_path": "/tHdKcObNWhX3qOWfNbjYQ3wDf1Q.jpg",
+    "original_title": "Julien Doré - Le Dernier Pestacle",
+    "cinema_date": "2 juillet 2026",
+    "vote_average": 6,
+    "vote_count": 1,
+    "genres": [
+      "Musique"
     ],
     "is_french": true,
     "source": "prédite",
