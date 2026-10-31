@@ -7,7 +7,7 @@
     "original_title": "La Bataille de Gaulle : L’Âge de fer",
     "cinema_date": "3 juin 2026",
     "vote_average": 7.8,
-    "vote_count": 260,
+    "vote_count": 261,
     "genres": [
       "Histoire",
       "Drame",
@@ -26,30 +26,6 @@
     "lead_studio": null
   },
   {
-    "title": "Hamlet",
-    "plex_release": "5 octobre 2026",
-    "tmdb_id": 1709002,
-    "poster_path": "/asgIZZwPMA0Hj2DDXLZHFe8N9vS.jpg",
-    "original_title": "Hamlet (Comédie-Française)",
-    "cinema_date": "7 juin 2026",
-    "vote_average": 0,
-    "vote_count": 0,
-    "genres": [
-      "Drame"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
     "title": "Insidious : L'Invasion du Lointain",
     "plex_release": "6 octobre 2026",
     "tmdb_id": 1291595,
@@ -57,7 +33,7 @@
     "original_title": "Insidious: Out of the Further",
     "cinema_date": "19 août 2026",
     "vote_average": 7.7,
-    "vote_count": 953,
+    "vote_count": 964,
     "genres": [
       "Horreur",
       "Thriller"
@@ -82,7 +58,7 @@
     "original_title": "Spider-Man: Brand New Day",
     "cinema_date": "29 juillet 2026",
     "vote_average": 8.5,
-    "vote_count": 6326,
+    "vote_count": 6355,
     "genres": [
       "Science-Fiction",
       "Action",
@@ -108,7 +84,7 @@
     "original_title": "Le Vertige",
     "cinema_date": "10 juin 2026",
     "vote_average": 6,
-    "vote_count": 51,
+    "vote_count": 52,
     "genres": [
       "Animation",
       "Comédie",
@@ -183,7 +159,7 @@
     "original_title": "호프",
     "cinema_date": "28 octobre 2026",
     "vote_average": 6.8,
-    "vote_count": 391,
+    "vote_count": 408,
     "genres": [
       "Science-Fiction",
       "Mystère",
@@ -227,16 +203,15 @@
     "lead_studio": null
   },
   {
-    "title": "Shana",
+    "title": "Deviens génial",
     "plex_release": "15 octobre 2026",
-    "tmdb_id": 1483319,
-    "poster_path": "/pXgr7YW8TKKOCigWM7VY7MB7bm3.jpg",
-    "original_title": "Shana",
+    "tmdb_id": 1443774,
+    "poster_path": "/ibWODXJ3a3rrx7asLa3gY5Xxjgn.jpg",
+    "original_title": "Deviens génial",
     "cinema_date": "17 juin 2026",
-    "vote_average": 5.8,
-    "vote_count": 22,
+    "vote_average": 5.7,
+    "vote_count": 14,
     "genres": [
-      "Drame",
       "Comédie"
     ],
     "is_french": true,
@@ -252,15 +227,16 @@
     "lead_studio": null
   },
   {
-    "title": "Deviens génial",
+    "title": "Shana",
     "plex_release": "15 octobre 2026",
-    "tmdb_id": 1443774,
-    "poster_path": "/ibWODXJ3a3rrx7asLa3gY5Xxjgn.jpg",
-    "original_title": "Deviens génial",
+    "tmdb_id": 1483319,
+    "poster_path": "/pXgr7YW8TKKOCigWM7VY7MB7bm3.jpg",
+    "original_title": "Shana",
     "cinema_date": "17 juin 2026",
-    "vote_average": 5.7,
-    "vote_count": 14,
+    "vote_average": 5.8,
+    "vote_count": 22,
     "genres": [
+      "Drame",
       "Comédie"
     ],
     "is_french": true,
@@ -307,8 +283,8 @@
     "poster_path": "/wrVQlyShWb9KUhifSuf4MXWCGQV.jpg",
     "original_title": "Les Parfait(s) : Arnaques en Famille",
     "cinema_date": "24 juin 2026",
-    "vote_average": 6.6,
-    "vote_count": 9,
+    "vote_average": 6.5,
+    "vote_count": 10,
     "genres": [
       "Comédie"
     ],
@@ -351,14 +327,38 @@
     "lead_studio": null
   },
   {
+    "title": "Seuls les rebelles",
+    "plex_release": "22 octobre 2026",
+    "tmdb_id": 1000155,
+    "poster_path": "/aIFnyK50YwOfRpV3GvM6VTfW4zo.jpg",
+    "original_title": "Seuls les rebelles",
+    "cinema_date": "24 juin 2026",
+    "vote_average": 7,
+    "vote_count": 1,
+    "genres": [
+      "Drame"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
     "title": "The Dog Stars",
     "plex_release": "27 octobre 2026",
     "tmdb_id": 1384216,
     "poster_path": "/w7c49Qgp3TAUC4hlo0mtgRpLOGG.jpg",
     "original_title": "The Dog Stars",
     "cinema_date": "26 août 2026",
-    "vote_average": 6.9,
-    "vote_count": 523,
+    "vote_average": 7,
+    "vote_count": 603,
     "genres": [
       "Action",
       "Thriller",
@@ -404,11 +404,11 @@
     "title": "‎La Bataille de Gaulle : J'écris ton nom",
     "plex_release": "29 octobre 2026",
     "tmdb_id": 1165369,
-    "poster_path": "/9qc5CzjnxGpjpuwVlIziVr7ODcL.jpg",
+    "poster_path": "/sfnKVuXQq2wHuAlOqs60FrtJmiz.jpg",
     "original_title": "‎La Bataille de Gaulle : J'écris ton nom",
     "cinema_date": "26 juin 2026",
     "vote_average": 7.8,
-    "vote_count": 204,
+    "vote_count": 208,
     "genres": [
       "Histoire",
       "Drame",
@@ -451,31 +451,6 @@
     "lead_studio": null
   },
   {
-    "title": "Miss Mermaid",
-    "plex_release": "29 octobre 2026",
-    "tmdb_id": 1351705,
-    "poster_path": "/38tZQKwoJwnqPDCL1Z1Mafv3Lkk.jpg",
-    "original_title": "Miss Mermaid",
-    "cinema_date": "1 juillet 2026",
-    "vote_average": 6.4,
-    "vote_count": 4,
-    "genres": [
-      "Comédie",
-      "Drame"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
     "title": "Un champ de fraises pour l’éternité",
     "plex_release": "29 octobre 2026",
     "tmdb_id": 962772,
@@ -494,6 +469,31 @@
       "score": 0.45,
       "sources": [
         "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Miss Mermaid",
+    "plex_release": "30 octobre 2026",
+    "tmdb_id": 1351705,
+    "poster_path": "/38tZQKwoJwnqPDCL1Z1Mafv3Lkk.jpg",
+    "original_title": "Miss Mermaid",
+    "cinema_date": "1 juillet 2026",
+    "vote_average": 6.4,
+    "vote_count": 4,
+    "genres": [
+      "Comédie",
+      "Drame"
+    ],
+    "is_french": true,
+    "source": "officielle-fr",
+    "confidence": {
+      "level": "high",
+      "score": 0.95,
+      "sources": [
+        "officielle-fr"
       ]
     },
     "tier": "niche",
