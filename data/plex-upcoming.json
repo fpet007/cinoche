@@ -1,42 +1,17 @@
 [
   {
-    "title": "La Bataille de Gaulle : L’Âge de fer",
-    "plex_release": "1 octobre 2026",
-    "tmdb_id": 1165366,
-    "poster_path": "/zWuZWFKyga6GF3agrhJn8UtdMSu.jpg",
-    "original_title": "La Bataille de Gaulle : L’Âge de fer",
-    "cinema_date": "3 juin 2026",
-    "vote_average": 7.8,
-    "vote_count": 261,
-    "genres": [
-      "Histoire",
-      "Drame",
-      "Guerre"
-    ],
-    "is_french": true,
-    "source": "officielle-fr",
-    "confidence": {
-      "level": "high",
-      "score": 0.95,
-      "sources": [
-        "officielle-fr"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "Insidious : L'Invasion du Lointain",
-    "plex_release": "6 octobre 2026",
-    "tmdb_id": 1291595,
-    "poster_path": "/lGY2oK3D1xET2sDyKezYy6AYR32.jpg",
-    "original_title": "Insidious: Out of the Further",
-    "cinema_date": "19 août 2026",
-    "vote_average": 7.7,
-    "vote_count": 964,
+    "title": "Resident Evil",
+    "plex_release": "3 novembre 2026",
+    "tmdb_id": 1423191,
+    "poster_path": "/pICoWjcKSet6sA3yzxOkP8ChwYI.jpg",
+    "original_title": "Resident Evil",
+    "cinema_date": "16 septembre 2026",
+    "vote_average": 7.3,
+    "vote_count": 1113,
     "genres": [
       "Horreur",
-      "Thriller"
+      "Science-Fiction",
+      "Aventure"
     ],
     "is_french": false,
     "source": "officielle-us",
@@ -48,122 +23,20 @@
       ]
     },
     "tier": "blockbuster",
-    "lead_studio": null
+    "lead_studio": "Columbia Pictures"
   },
   {
-    "title": "Spider-Man : Brand New Day",
-    "plex_release": "6 octobre 2026",
-    "tmdb_id": 969681,
-    "poster_path": "/6OEtkkzoyusZDm2uMJojlWZSLR9.jpg",
-    "original_title": "Spider-Man: Brand New Day",
-    "cinema_date": "29 juillet 2026",
-    "vote_average": 8.5,
-    "vote_count": 6355,
-    "genres": [
-      "Science-Fiction",
-      "Action",
-      "Aventure"
-    ],
-    "is_french": false,
-    "source": "maxblizz",
-    "confidence": {
-      "level": "medium",
-      "score": 0.7,
-      "sources": [
-        "maxblizz"
-      ]
-    },
-    "tier": "blockbuster",
-    "lead_studio": "Marvel Studios"
-  },
-  {
-    "title": "Le Vertige",
-    "plex_release": "8 octobre 2026",
-    "tmdb_id": 1668499,
-    "poster_path": "/qO8nc3cSjzGduaC0deh8gBRKK9Z.jpg",
-    "original_title": "Le Vertige",
-    "cinema_date": "10 juin 2026",
-    "vote_average": 6,
-    "vote_count": 52,
-    "genres": [
-      "Animation",
-      "Comédie",
-      "Science-Fiction"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "A Second Life",
-    "plex_release": "8 octobre 2026",
-    "tmdb_id": 1398460,
-    "poster_path": "/fGa0CrA8h83KGyJKDk1EZj3aPgu.jpg",
-    "original_title": "A Second Life",
-    "cinema_date": "10 juin 2026",
-    "vote_average": 6.5,
-    "vote_count": 4,
-    "genres": [
-      "Drame"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "Anna et les Enfants",
-    "plex_release": "10 octobre 2026",
-    "tmdb_id": 1483325,
-    "poster_path": "/3s1RxHqVG5CKKnwi9KXQs1EMllW.jpg",
-    "original_title": "Anna et les Enfants",
-    "cinema_date": "3 juin 2026",
-    "vote_average": 5.3,
-    "vote_count": 3,
-    "genres": [
-      "Comédie",
-      "Drame"
-    ],
-    "is_french": true,
-    "source": "override-manuel",
-    "confidence": {
-      "level": "override",
-      "score": 1,
-      "sources": [
-        "override-manuel"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "Hope",
-    "plex_release": "13 octobre 2026",
-    "tmdb_id": 1058424,
-    "poster_path": "/tGdFDoA9qyt0t6Qr9MFnOl8Z2Jz.jpg",
-    "original_title": "호프",
-    "cinema_date": "28 octobre 2026",
+    "title": "Primetime",
+    "plex_release": "3 novembre 2026",
+    "tmdb_id": 1375441,
+    "poster_path": "/rhF8JALH8wrxKtXSCAB7a09tWsc.jpg",
+    "original_title": "Primetime",
+    "cinema_date": "23 septembre 2026",
     "vote_average": 6.8,
-    "vote_count": 408,
+    "vote_count": 252,
     "genres": [
-      "Science-Fiction",
-      "Mystère",
-      "Action"
+      "Drame",
+      "Thriller"
     ],
     "is_french": false,
     "source": "officielle-us",
@@ -175,217 +48,19 @@
       ]
     },
     "tier": "mid",
-    "lead_studio": null
+    "lead_studio": "A24"
   },
   {
-    "title": "Jim Queen",
-    "plex_release": "15 octobre 2026",
-    "tmdb_id": 1061798,
-    "poster_path": "/nvmGrOzolKlW1z90rLudSjPm9cG.jpg",
-    "original_title": "Jim Queen",
-    "cinema_date": "17 juin 2026",
-    "vote_average": 7.9,
-    "vote_count": 96,
-    "genres": [
-      "Animation",
-      "Comédie"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "Deviens génial",
-    "plex_release": "15 octobre 2026",
-    "tmdb_id": 1443774,
-    "poster_path": "/ibWODXJ3a3rrx7asLa3gY5Xxjgn.jpg",
-    "original_title": "Deviens génial",
-    "cinema_date": "17 juin 2026",
-    "vote_average": 5.7,
-    "vote_count": 14,
-    "genres": [
-      "Comédie"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "Shana",
-    "plex_release": "15 octobre 2026",
-    "tmdb_id": 1483319,
-    "poster_path": "/pXgr7YW8TKKOCigWM7VY7MB7bm3.jpg",
-    "original_title": "Shana",
-    "cinema_date": "17 juin 2026",
-    "vote_average": 5.8,
-    "vote_count": 22,
+    "title": "La Chaleur",
+    "plex_release": "5 novembre 2026",
+    "tmdb_id": 1492288,
+    "poster_path": "/42uouj30D7oPf8sPY6ids5QDf55.jpg",
+    "original_title": "La Chaleur",
+    "cinema_date": "8 juillet 2026",
+    "vote_average": 6.1,
+    "vote_count": 25,
     "genres": [
       "Drame",
-      "Comédie"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "Ulysse",
-    "plex_release": "15 octobre 2026",
-    "tmdb_id": 1383287,
-    "poster_path": "/tS0Xwa7Uqd8nlT41Y1KrumHtLeU.jpg",
-    "original_title": "Ulysse",
-    "cinema_date": "17 juin 2026",
-    "vote_average": 6.5,
-    "vote_count": 13,
-    "genres": [
-      "Drame",
-      "Comédie"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "Les Parfait(s) : Arnaques en Famille",
-    "plex_release": "22 octobre 2026",
-    "tmdb_id": 1421401,
-    "poster_path": "/wrVQlyShWb9KUhifSuf4MXWCGQV.jpg",
-    "original_title": "Les Parfait(s) : Arnaques en Famille",
-    "cinema_date": "24 juin 2026",
-    "vote_average": 6.5,
-    "vote_count": 10,
-    "genres": [
-      "Comédie"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "Les Caprices de l’Enfant Roi",
-    "plex_release": "22 octobre 2026",
-    "tmdb_id": 1472829,
-    "poster_path": "/kP1Zl9IpGp28P2x0ogzKcQKkALv.jpg",
-    "original_title": "Les Caprices de l’Enfant Roi",
-    "cinema_date": "24 juin 2026",
-    "vote_average": 6,
-    "vote_count": 22,
-    "genres": [
-      "Comédie",
-      "Drame",
-      "Histoire"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "Seuls les rebelles",
-    "plex_release": "22 octobre 2026",
-    "tmdb_id": 1000155,
-    "poster_path": "/aIFnyK50YwOfRpV3GvM6VTfW4zo.jpg",
-    "original_title": "Seuls les rebelles",
-    "cinema_date": "24 juin 2026",
-    "vote_average": 7,
-    "vote_count": 1,
-    "genres": [
-      "Drame"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
-    "title": "The Dog Stars",
-    "plex_release": "27 octobre 2026",
-    "tmdb_id": 1384216,
-    "poster_path": "/w7c49Qgp3TAUC4hlo0mtgRpLOGG.jpg",
-    "original_title": "The Dog Stars",
-    "cinema_date": "26 août 2026",
-    "vote_average": 7,
-    "vote_count": 603,
-    "genres": [
-      "Action",
-      "Thriller",
-      "Science-Fiction"
-    ],
-    "is_french": false,
-    "source": "officielle-us",
-    "confidence": {
-      "level": "high",
-      "score": 0.82,
-      "sources": [
-        "officielle-us"
-      ]
-    },
-    "tier": "blockbuster",
-    "lead_studio": "20th Century Studios"
-  },
-  {
-    "title": "Une affaire turque",
-    "plex_release": "27 octobre 2026",
-    "tmdb_id": 1488613,
-    "poster_path": "/9cW9EKM4QeXiGbsNyqzDFYf5UN2.jpg",
-    "original_title": "Une affaire turque",
-    "cinema_date": "29 juin 2026",
-    "vote_average": 7.3,
-    "vote_count": 12,
-    "genres": [
       "Thriller"
     ],
     "is_french": true,
@@ -401,40 +76,140 @@
     "lead_studio": null
   },
   {
-    "title": "‎La Bataille de Gaulle : J'écris ton nom",
-    "plex_release": "29 octobre 2026",
-    "tmdb_id": 1165369,
-    "poster_path": "/sfnKVuXQq2wHuAlOqs60FrtJmiz.jpg",
-    "original_title": "‎La Bataille de Gaulle : J'écris ton nom",
-    "cinema_date": "26 juin 2026",
-    "vote_average": 7.8,
-    "vote_count": 208,
+    "title": "Microstar",
+    "plex_release": "5 novembre 2026",
+    "tmdb_id": 1482377,
+    "poster_path": "/mgkVfPKIbsGA1xcBojVHAuOfaot.jpg",
+    "original_title": "Microstar",
+    "cinema_date": "8 juillet 2026",
+    "vote_average": 7,
+    "vote_count": 5,
     "genres": [
-      "Histoire",
-      "Drame",
-      "Guerre"
+      "Comédie"
     ],
     "is_french": true,
-    "source": "officielle-fr",
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "Heart of the Beast",
+    "plex_release": "10 novembre 2026",
+    "tmdb_id": 1263337,
+    "poster_path": "/qjH0jF5cLZiKS97eNn4S2AdpiHW.jpg",
+    "original_title": "Heart of the Beast",
+    "cinema_date": "23 septembre 2026",
+    "vote_average": 7.3,
+    "vote_count": 367,
+    "genres": [
+      "Aventure",
+      "Thriller"
+    ],
+    "is_french": false,
+    "source": "officielle-us",
     "confidence": {
       "level": "high",
-      "score": 0.95,
+      "score": 0.82,
       "sources": [
-        "officielle-fr"
+        "officielle-us"
+      ]
+    },
+    "tier": "blockbuster",
+    "lead_studio": "Paramount Pictures"
+  },
+  {
+    "title": "Comète",
+    "plex_release": "12 novembre 2026",
+    "tmdb_id": 1715709,
+    "poster_path": "/vIlV0GgQqa39aDG90hfOgdsAdLr.jpg",
+    "original_title": "Comète",
+    "cinema_date": "15 juillet 2026",
+    "vote_average": 5.4,
+    "vote_count": 5,
+    "genres": [
+      "Drame"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
       ]
     },
     "tier": "niche",
     "lead_studio": null
   },
   {
-    "title": "Permis de détruire",
-    "plex_release": "29 octobre 2026",
-    "tmdb_id": 1538731,
-    "poster_path": "/gZQmPbQ9jo44jj9h4OSb61j14RD.jpg",
-    "original_title": "Permis de détruire",
-    "cinema_date": "1 juillet 2026",
-    "vote_average": 5.2,
-    "vote_count": 6,
+    "title": "L'Odyssée",
+    "plex_release": "17 novembre 2026",
+    "tmdb_id": 1368337,
+    "poster_path": "/kP8jJIkmX0vWEYiqQ9c5zU0dvcn.jpg",
+    "original_title": "The Odyssey",
+    "cinema_date": "15 juillet 2026",
+    "vote_average": 8,
+    "vote_count": 4317,
+    "genres": [
+      "Aventure",
+      "Action",
+      "Fantastique"
+    ],
+    "is_french": false,
+    "source": "officielle-us",
+    "confidence": {
+      "level": "high",
+      "score": 0.88,
+      "sources": [
+        "officielle-us",
+        "maxblizz"
+      ]
+    },
+    "tier": "blockbuster",
+    "lead_studio": "Universal Pictures"
+  },
+  {
+    "title": "La Fille dans les nuages",
+    "plex_release": "19 novembre 2026",
+    "tmdb_id": 1151265,
+    "poster_path": "/o4V7Kq7KJhbjgPpzIYYBzfie77o.jpg",
+    "original_title": "La Fille dans les nuages",
+    "cinema_date": "22 juillet 2026",
+    "vote_average": 8,
+    "vote_count": 1,
+    "genres": [
+      "Animation",
+      "Aventure",
+      "Fantastique"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
+    "title": "De la Comédie-Française",
+    "plex_release": "19 novembre 2026",
+    "tmdb_id": 1496491,
+    "poster_path": "/3ykToOKrgIlKBOkxpRscXNAkzET.jpg",
+    "original_title": "De la Comédie-Française",
+    "cinema_date": "22 juillet 2026",
+    "vote_average": 6.8,
+    "vote_count": 110,
     "genres": [
       "Comédie"
     ],
@@ -451,43 +226,71 @@
     "lead_studio": null
   },
   {
-    "title": "Un champ de fraises pour l’éternité",
-    "plex_release": "29 octobre 2026",
-    "tmdb_id": 962772,
-    "poster_path": "/mbGLiN85NAhNwFkiafaWbglhixb.jpg",
-    "original_title": "Un champ de fraises pour l’éternité",
-    "cinema_date": "1 juillet 2026",
-    "vote_average": 7.2,
-    "vote_count": 3,
+    "title": "Raison et Sentiments",
+    "plex_release": "22 novembre 2026",
+    "tmdb_id": 1503762,
+    "poster_path": "/hpYHHl0P978F6AX5Xeew0fi2ryI.jpg",
+    "original_title": "Sense and Sensibility",
+    "cinema_date": "23 septembre 2026",
+    "vote_average": 7.3,
+    "vote_count": 111,
     "genres": [
-      "Comédie"
+      "Drame",
+      "Romance",
+      "Histoire"
     ],
-    "is_french": true,
-    "source": "prédite",
+    "is_french": false,
+    "source": "studio-mapped",
     "confidence": {
-      "level": "low",
-      "score": 0.45,
+      "level": "medium",
+      "score": 0.62,
       "sources": [
-        "prédite"
+        "studio-mapped"
       ]
     },
-    "tier": "niche",
-    "lead_studio": null
+    "tier": "mid",
+    "lead_studio": "Focus Features"
   },
   {
-    "title": "Miss Mermaid",
-    "plex_release": "30 octobre 2026",
-    "tmdb_id": 1351705,
-    "poster_path": "/38tZQKwoJwnqPDCL1Z1Mafv3Lkk.jpg",
-    "original_title": "Miss Mermaid",
-    "cinema_date": "1 juillet 2026",
-    "vote_average": 6.4,
-    "vote_count": 4,
+    "title": "Digger",
+    "plex_release": "22 novembre 2026",
+    "tmdb_id": 1248832,
+    "poster_path": "/gPCCGMQCrrMNM3mR3vqIdbdJxJ5.jpg",
+    "original_title": "Digger",
+    "cinema_date": "28 septembre 2026",
+    "vote_average": 7.5,
+    "vote_count": 490,
     "genres": [
       "Comédie",
       "Drame"
     ],
-    "is_french": true,
+    "is_french": false,
+    "source": "studio-mapped",
+    "confidence": {
+      "level": "medium",
+      "score": 0.62,
+      "sources": [
+        "studio-mapped"
+      ]
+    },
+    "tier": "mid",
+    "lead_studio": "Warner Bros. Pictures"
+  },
+  {
+    "title": "Spider-Man : Brand New Day",
+    "plex_release": "26 novembre 2026",
+    "tmdb_id": 969681,
+    "poster_path": "/6OEtkkzoyusZDm2uMJojlWZSLR9.jpg",
+    "original_title": "Spider-Man: Brand New Day",
+    "cinema_date": "29 juillet 2026",
+    "vote_average": 8.5,
+    "vote_count": 6414,
+    "genres": [
+      "Science-Fiction",
+      "Action",
+      "Aventure"
+    ],
+    "is_french": false,
     "source": "officielle-fr",
     "confidence": {
       "level": "high",
@@ -496,20 +299,45 @@
         "officielle-fr"
       ]
     },
+    "tier": "blockbuster",
+    "lead_studio": "Marvel Studios"
+  },
+  {
+    "title": "Les matins merveilleux",
+    "plex_release": "26 novembre 2026",
+    "tmdb_id": 1000135,
+    "poster_path": "/hZlmladO4eUrkdwcEn8nfDTFtQa.jpg",
+    "original_title": "Les matins merveilleux",
+    "cinema_date": "29 juillet 2026",
+    "vote_average": 5.8,
+    "vote_count": 10,
+    "genres": [
+      "Romance",
+      "Comédie"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
     "tier": "niche",
     "lead_studio": null
   },
   {
-    "title": "Julien Doré - Le Dernier Pestacle",
-    "plex_release": "30 octobre 2026",
-    "tmdb_id": 1695405,
-    "poster_path": "/tHdKcObNWhX3qOWfNbjYQ3wDf1Q.jpg",
-    "original_title": "Julien Doré - Le Dernier Pestacle",
-    "cinema_date": "2 juillet 2026",
-    "vote_average": 6,
-    "vote_count": 1,
+    "title": "Le Triangle d'or",
+    "plex_release": "26 novembre 2026",
+    "tmdb_id": 1466662,
+    "poster_path": "/gKuRnWDee2OvvzdQf1kI4vqcnhq.jpg",
+    "original_title": "Le Triangle d'or",
+    "cinema_date": "29 juillet 2026",
+    "vote_average": 6.8,
+    "vote_count": 26,
     "genres": [
-      "Musique"
+      "Drame"
     ],
     "is_french": true,
     "source": "prédite",
