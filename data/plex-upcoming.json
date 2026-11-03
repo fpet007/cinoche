@@ -7,7 +7,7 @@
     "original_title": "Resident Evil",
     "cinema_date": "16 septembre 2026",
     "vote_average": 7.3,
-    "vote_count": 1117,
+    "vote_count": 1166,
     "genres": [
       "Horreur",
       "Science-Fiction",
@@ -26,6 +26,32 @@
     "lead_studio": "Columbia Pictures"
   },
   {
+    "title": "Raison et Sentiments",
+    "plex_release": "3 novembre 2026",
+    "tmdb_id": 1503762,
+    "poster_path": "/hpYHHl0P978F6AX5Xeew0fi2ryI.jpg",
+    "original_title": "Sense and Sensibility",
+    "cinema_date": "23 septembre 2026",
+    "vote_average": 7.2,
+    "vote_count": 129,
+    "genres": [
+      "Romance",
+      "Drame",
+      "Histoire"
+    ],
+    "is_french": false,
+    "source": "officielle-us",
+    "confidence": {
+      "level": "high",
+      "score": 0.82,
+      "sources": [
+        "officielle-us"
+      ]
+    },
+    "tier": "mid",
+    "lead_studio": "Focus Features"
+  },
+  {
     "title": "Primetime",
     "plex_release": "3 novembre 2026",
     "tmdb_id": 1375441,
@@ -33,7 +59,7 @@
     "original_title": "Primetime",
     "cinema_date": "23 septembre 2026",
     "vote_average": 6.8,
-    "vote_count": 256,
+    "vote_count": 261,
     "genres": [
       "Drame",
       "Thriller"
@@ -107,7 +133,7 @@
     "original_title": "Heart of the Beast",
     "cinema_date": "23 septembre 2026",
     "vote_average": 7.3,
-    "vote_count": 372,
+    "vote_count": 373,
     "genres": [
       "Aventure",
       "Thriller"
@@ -131,8 +157,8 @@
     "poster_path": "/vIlV0GgQqa39aDG90hfOgdsAdLr.jpg",
     "original_title": "Comète",
     "cinema_date": "15 juillet 2026",
-    "vote_average": 5.4,
-    "vote_count": 5,
+    "vote_average": 5.3,
+    "vote_count": 6,
     "genres": [
       "Drame"
     ],
@@ -156,7 +182,7 @@
     "original_title": "The Odyssey",
     "cinema_date": "15 juillet 2026",
     "vote_average": 8,
-    "vote_count": 4321,
+    "vote_count": 4326,
     "genres": [
       "Aventure",
       "Action",
@@ -208,7 +234,7 @@
     "poster_path": "/3ykToOKrgIlKBOkxpRscXNAkzET.jpg",
     "original_title": "De la Comédie-Française",
     "cinema_date": "22 juillet 2026",
-    "vote_average": 6.8,
+    "vote_average": 6.9,
     "vote_count": 110,
     "genres": [
       "Comédie"
@@ -226,32 +252,6 @@
     "lead_studio": null
   },
   {
-    "title": "Raison et Sentiments",
-    "plex_release": "22 novembre 2026",
-    "tmdb_id": 1503762,
-    "poster_path": "/hpYHHl0P978F6AX5Xeew0fi2ryI.jpg",
-    "original_title": "Sense and Sensibility",
-    "cinema_date": "23 septembre 2026",
-    "vote_average": 7.3,
-    "vote_count": 119,
-    "genres": [
-      "Romance",
-      "Drame",
-      "Histoire"
-    ],
-    "is_french": false,
-    "source": "studio-mapped",
-    "confidence": {
-      "level": "medium",
-      "score": 0.62,
-      "sources": [
-        "studio-mapped"
-      ]
-    },
-    "tier": "mid",
-    "lead_studio": "Focus Features"
-  },
-  {
     "title": "Digger",
     "plex_release": "22 novembre 2026",
     "tmdb_id": 1248832,
@@ -259,7 +259,7 @@
     "original_title": "Digger",
     "cinema_date": "28 septembre 2026",
     "vote_average": 7.5,
-    "vote_count": 491,
+    "vote_count": 492,
     "genres": [
       "Comédie",
       "Drame"
@@ -284,7 +284,7 @@
     "original_title": "Spider-Man: Brand New Day",
     "cinema_date": "29 juillet 2026",
     "vote_average": 8.5,
-    "vote_count": 6448,
+    "vote_count": 6507,
     "genres": [
       "Science-Fiction",
       "Action",
