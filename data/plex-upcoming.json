@@ -6,8 +6,8 @@
     "poster_path": "/pICoWjcKSet6sA3yzxOkP8ChwYI.jpg",
     "original_title": "Resident Evil",
     "cinema_date": "16 septembre 2026",
-    "vote_average": 7.3,
-    "vote_count": 1166,
+    "vote_average": 7.4,
+    "vote_count": 1409,
     "genres": [
       "Horreur",
       "Science-Fiction",
@@ -26,14 +26,39 @@
     "lead_studio": "Columbia Pictures"
   },
   {
+    "title": "Primetime",
+    "plex_release": "3 novembre 2026",
+    "tmdb_id": 1375441,
+    "poster_path": "/8W69bkus937B2OzJapRmw2uY42s.jpg",
+    "original_title": "Primetime",
+    "cinema_date": "23 septembre 2026",
+    "vote_average": 6.8,
+    "vote_count": 281,
+    "genres": [
+      "Thriller",
+      "Drame"
+    ],
+    "is_french": false,
+    "source": "officielle-us",
+    "confidence": {
+      "level": "high",
+      "score": 0.82,
+      "sources": [
+        "officielle-us"
+      ]
+    },
+    "tier": "mid",
+    "lead_studio": "A24"
+  },
+  {
     "title": "Raison et Sentiments",
     "plex_release": "3 novembre 2026",
     "tmdb_id": 1503762,
     "poster_path": "/hpYHHl0P978F6AX5Xeew0fi2ryI.jpg",
     "original_title": "Sense and Sensibility",
     "cinema_date": "23 septembre 2026",
-    "vote_average": 7.2,
-    "vote_count": 129,
+    "vote_average": 7.3,
+    "vote_count": 132,
     "genres": [
       "Romance",
       "Drame",
@@ -50,31 +75,6 @@
     },
     "tier": "mid",
     "lead_studio": "Focus Features"
-  },
-  {
-    "title": "Primetime",
-    "plex_release": "3 novembre 2026",
-    "tmdb_id": 1375441,
-    "poster_path": "/rhF8JALH8wrxKtXSCAB7a09tWsc.jpg",
-    "original_title": "Primetime",
-    "cinema_date": "23 septembre 2026",
-    "vote_average": 6.8,
-    "vote_count": 261,
-    "genres": [
-      "Drame",
-      "Thriller"
-    ],
-    "is_french": false,
-    "source": "officielle-us",
-    "confidence": {
-      "level": "high",
-      "score": 0.82,
-      "sources": [
-        "officielle-us"
-      ]
-    },
-    "tier": "mid",
-    "lead_studio": "A24"
   },
   {
     "title": "La Chaleur",
@@ -182,7 +182,7 @@
     "original_title": "The Odyssey",
     "cinema_date": "15 juillet 2026",
     "vote_average": 8,
-    "vote_count": 4326,
+    "vote_count": 4340,
     "genres": [
       "Aventure",
       "Action",
@@ -259,7 +259,7 @@
     "original_title": "Digger",
     "cinema_date": "28 septembre 2026",
     "vote_average": 7.5,
-    "vote_count": 492,
+    "vote_count": 494,
     "genres": [
       "Comédie",
       "Drame"
@@ -284,7 +284,7 @@
     "original_title": "Spider-Man: Brand New Day",
     "cinema_date": "29 juillet 2026",
     "vote_average": 8.5,
-    "vote_count": 6507,
+    "vote_count": 6534,
     "genres": [
       "Science-Fiction",
       "Action",
