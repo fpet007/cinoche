@@ -7,7 +7,7 @@
     "original_title": "Resident Evil",
     "cinema_date": "16 septembre 2026",
     "vote_average": 7.5,
-    "vote_count": 1614,
+    "vote_count": 1652,
     "genres": [
       "Horreur",
       "Science-Fiction",
@@ -33,7 +33,7 @@
     "original_title": "Primetime",
     "cinema_date": "23 septembre 2026",
     "vote_average": 6.8,
-    "vote_count": 321,
+    "vote_count": 340,
     "genres": [
       "Thriller",
       "Drame"
@@ -58,7 +58,7 @@
     "original_title": "Sense and Sensibility",
     "cinema_date": "23 septembre 2026",
     "vote_average": 7.2,
-    "vote_count": 145,
+    "vote_count": 148,
     "genres": [
       "Romance",
       "Drame",
@@ -109,7 +109,7 @@
     "original_title": "Heart of the Beast",
     "cinema_date": "23 septembre 2026",
     "vote_average": 7.3,
-    "vote_count": 378,
+    "vote_count": 423,
     "genres": [
       "Aventure",
       "Thriller"
@@ -158,7 +158,7 @@
     "original_title": "The Odyssey",
     "cinema_date": "15 juillet 2026",
     "vote_average": 8,
-    "vote_count": 4355,
+    "vote_count": 4358,
     "genres": [
       "Aventure",
       "Action",
@@ -235,7 +235,7 @@
     "original_title": "Digger",
     "cinema_date": "28 septembre 2026",
     "vote_average": 7.5,
-    "vote_count": 498,
+    "vote_count": 501,
     "genres": [
       "Comédie",
       "Drame"
@@ -249,7 +249,7 @@
         "studio-mapped"
       ]
     },
-    "tier": "mid",
+    "tier": "blockbuster",
     "lead_studio": "Warner Bros. Pictures"
   },
   {
@@ -260,7 +260,7 @@
     "original_title": "Spider-Man: Brand New Day",
     "cinema_date": "29 juillet 2026",
     "vote_average": 8.5,
-    "vote_count": 6566,
+    "vote_count": 6580,
     "genres": [
       "Science-Fiction",
       "Action",
