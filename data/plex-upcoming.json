@@ -6,8 +6,8 @@
     "poster_path": "/pICoWjcKSet6sA3yzxOkP8ChwYI.jpg",
     "original_title": "Resident Evil",
     "cinema_date": "16 septembre 2026",
-    "vote_average": 7.5,
-    "vote_count": 1652,
+    "vote_average": 7.4,
+    "vote_count": 1724,
     "genres": [
       "Horreur",
       "Science-Fiction",
@@ -33,7 +33,7 @@
     "original_title": "Primetime",
     "cinema_date": "23 septembre 2026",
     "vote_average": 6.8,
-    "vote_count": 340,
+    "vote_count": 352,
     "genres": [
       "Thriller",
       "Drame"
@@ -57,12 +57,11 @@
     "poster_path": "/hpYHHl0P978F6AX5Xeew0fi2ryI.jpg",
     "original_title": "Sense and Sensibility",
     "cinema_date": "23 septembre 2026",
-    "vote_average": 7.2,
-    "vote_count": 148,
+    "vote_average": 7.3,
+    "vote_count": 153,
     "genres": [
-      "Romance",
       "Drame",
-      "Histoire"
+      "Romance"
     ],
     "is_french": false,
     "source": "officielle-us",
@@ -109,7 +108,7 @@
     "original_title": "Heart of the Beast",
     "cinema_date": "23 septembre 2026",
     "vote_average": 7.3,
-    "vote_count": 423,
+    "vote_count": 474,
     "genres": [
       "Aventure",
       "Thriller"
@@ -154,11 +153,11 @@
     "title": "L'Odyssée",
     "plex_release": "17 novembre 2026",
     "tmdb_id": 1368337,
-    "poster_path": "/kP8jJIkmX0vWEYiqQ9c5zU0dvcn.jpg",
+    "poster_path": "/jKf0p3fhO893ROvRuvuSDsZSvK6.jpg",
     "original_title": "The Odyssey",
     "cinema_date": "15 juillet 2026",
     "vote_average": 8,
-    "vote_count": 4358,
+    "vote_count": 4390,
     "genres": [
       "Aventure",
       "Action",
@@ -235,7 +234,7 @@
     "original_title": "Digger",
     "cinema_date": "28 septembre 2026",
     "vote_average": 7.5,
-    "vote_count": 501,
+    "vote_count": 503,
     "genres": [
       "Comédie",
       "Drame"
@@ -260,7 +259,7 @@
     "original_title": "Spider-Man: Brand New Day",
     "cinema_date": "29 juillet 2026",
     "vote_average": 8.5,
-    "vote_count": 6580,
+    "vote_count": 6592,
     "genres": [
       "Science-Fiction",
       "Action",
