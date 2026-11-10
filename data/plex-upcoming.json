@@ -7,7 +7,7 @@
     "original_title": "Resident Evil",
     "cinema_date": "16 septembre 2026",
     "vote_average": 7.5,
-    "vote_count": 1865,
+    "vote_count": 1952,
     "genres": [
       "Horreur",
       "Science-Fiction",
@@ -33,10 +33,11 @@
     "original_title": "Primetime",
     "cinema_date": "23 septembre 2026",
     "vote_average": 6.8,
-    "vote_count": 386,
+    "vote_count": 398,
     "genres": [
       "Thriller",
-      "Drame"
+      "Drame",
+      "Crime"
     ],
     "is_french": false,
     "source": "officielle-us",
@@ -58,7 +59,7 @@
     "original_title": "Sense and Sensibility",
     "cinema_date": "23 septembre 2026",
     "vote_average": 7.3,
-    "vote_count": 157,
+    "vote_count": 158,
     "genres": [
       "Drame",
       "Romance"
@@ -108,7 +109,7 @@
     "original_title": "Heart of the Beast",
     "cinema_date": "23 septembre 2026",
     "vote_average": 7.3,
-    "vote_count": 517,
+    "vote_count": 544,
     "genres": [
       "Aventure",
       "Thriller"
@@ -153,11 +154,11 @@
     "title": "L'Odyssée",
     "plex_release": "17 novembre 2026",
     "tmdb_id": 1368337,
-    "poster_path": "/jKf0p3fhO893ROvRuvuSDsZSvK6.jpg",
+    "poster_path": "/4aI0cjnT74fNuTjaR4RyuY2uOQf.jpg",
     "original_title": "The Odyssey",
     "cinema_date": "15 juillet 2026",
     "vote_average": 8,
-    "vote_count": 4467,
+    "vote_count": 4506,
     "genres": [
       "Aventure",
       "Action",
@@ -234,7 +235,7 @@
     "original_title": "Digger",
     "cinema_date": "28 septembre 2026",
     "vote_average": 7.5,
-    "vote_count": 506,
+    "vote_count": 508,
     "genres": [
       "Comédie",
       "Drame"
@@ -259,7 +260,7 @@
     "original_title": "Spider-Man: Brand New Day",
     "cinema_date": "29 juillet 2026",
     "vote_average": 8.5,
-    "vote_count": 6637,
+    "vote_count": 6650,
     "genres": [
       "Science-Fiction",
       "Action",
