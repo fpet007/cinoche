@@ -7,7 +7,7 @@
     "original_title": "Resident Evil",
     "cinema_date": "16 septembre 2026",
     "vote_average": 7.5,
-    "vote_count": 2063,
+    "vote_count": 2102,
     "genres": [
       "Horreur",
       "Science-Fiction",
@@ -33,7 +33,7 @@
     "original_title": "Primetime",
     "cinema_date": "23 septembre 2026",
     "vote_average": 6.8,
-    "vote_count": 415,
+    "vote_count": 421,
     "genres": [
       "Thriller",
       "Drame",
@@ -59,7 +59,7 @@
     "original_title": "Sense and Sensibility",
     "cinema_date": "23 septembre 2026",
     "vote_average": 7.2,
-    "vote_count": 163,
+    "vote_count": 165,
     "genres": [
       "Drame",
       "Romance"
@@ -133,7 +133,7 @@
     "original_title": "Heart of the Beast",
     "cinema_date": "23 septembre 2026",
     "vote_average": 7.5,
-    "vote_count": 664,
+    "vote_count": 702,
     "genres": [
       "Aventure",
       "Thriller"
@@ -182,7 +182,7 @@
     "original_title": "The Odyssey",
     "cinema_date": "15 juillet 2026",
     "vote_average": 8,
-    "vote_count": 4678,
+    "vote_count": 4731,
     "genres": [
       "Aventure",
       "Action",
@@ -200,6 +200,30 @@
     },
     "tier": "blockbuster",
     "lead_studio": "Universal Pictures"
+  },
+  {
+    "title": "De la Comédie-Française",
+    "plex_release": "19 novembre 2026",
+    "tmdb_id": 1496491,
+    "poster_path": "/3ykToOKrgIlKBOkxpRscXNAkzET.jpg",
+    "original_title": "De la Comédie-Française",
+    "cinema_date": "22 juillet 2026",
+    "vote_average": 6.8,
+    "vote_count": 112,
+    "genres": [
+      "Comédie"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
   },
   {
     "title": "La Fille dans les nuages",
@@ -228,30 +252,6 @@
     "lead_studio": null
   },
   {
-    "title": "De la Comédie-Française",
-    "plex_release": "19 novembre 2026",
-    "tmdb_id": 1496491,
-    "poster_path": "/3ykToOKrgIlKBOkxpRscXNAkzET.jpg",
-    "original_title": "De la Comédie-Française",
-    "cinema_date": "22 juillet 2026",
-    "vote_average": 6.8,
-    "vote_count": 111,
-    "genres": [
-      "Comédie"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
     "title": "Digger",
     "plex_release": "22 novembre 2026",
     "tmdb_id": 1248832,
@@ -259,7 +259,7 @@
     "original_title": "Digger",
     "cinema_date": "28 septembre 2026",
     "vote_average": 7.5,
-    "vote_count": 512,
+    "vote_count": 515,
     "genres": [
       "Comédie",
       "Drame"
@@ -284,7 +284,7 @@
     "original_title": "Spider-Man: Brand New Day",
     "cinema_date": "29 juillet 2026",
     "vote_average": 8.5,
-    "vote_count": 6730,
+    "vote_count": 6759,
     "genres": [
       "Science-Fiction",
       "Action",
@@ -303,17 +303,16 @@
     "lead_studio": "Marvel Studios"
   },
   {
-    "title": "Les matins merveilleux",
+    "title": "Le Triangle d'or",
     "plex_release": "26 novembre 2026",
-    "tmdb_id": 1000135,
-    "poster_path": "/hZlmladO4eUrkdwcEn8nfDTFtQa.jpg",
-    "original_title": "Les matins merveilleux",
+    "tmdb_id": 1466662,
+    "poster_path": "/gKuRnWDee2OvvzdQf1kI4vqcnhq.jpg",
+    "original_title": "Le Triangle d'or",
     "cinema_date": "29 juillet 2026",
-    "vote_average": 5.8,
-    "vote_count": 10,
+    "vote_average": 6.8,
+    "vote_count": 26,
     "genres": [
-      "Romance",
-      "Comédie"
+      "Drame"
     ],
     "is_french": true,
     "source": "prédite",
@@ -328,16 +327,17 @@
     "lead_studio": null
   },
   {
-    "title": "Le Triangle d'or",
+    "title": "Les matins merveilleux",
     "plex_release": "26 novembre 2026",
-    "tmdb_id": 1466662,
-    "poster_path": "/gKuRnWDee2OvvzdQf1kI4vqcnhq.jpg",
-    "original_title": "Le Triangle d'or",
+    "tmdb_id": 1000135,
+    "poster_path": "/hZlmladO4eUrkdwcEn8nfDTFtQa.jpg",
+    "original_title": "Les matins merveilleux",
     "cinema_date": "29 juillet 2026",
-    "vote_average": 6.8,
-    "vote_count": 26,
+    "vote_average": 5.8,
+    "vote_count": 10,
     "genres": [
-      "Drame"
+      "Romance",
+      "Comédie"
     ],
     "is_french": true,
     "source": "prédite",
