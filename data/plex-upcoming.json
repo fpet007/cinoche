@@ -7,7 +7,7 @@
     "original_title": "Resident Evil",
     "cinema_date": "16 septembre 2026",
     "vote_average": 7.5,
-    "vote_count": 2248,
+    "vote_count": 2293,
     "genres": [
       "Horreur",
       "Science-Fiction",
@@ -33,7 +33,7 @@
     "original_title": "Primetime",
     "cinema_date": "23 septembre 2026",
     "vote_average": 6.8,
-    "vote_count": 434,
+    "vote_count": 440,
     "genres": [
       "Thriller",
       "Drame",
@@ -133,7 +133,7 @@
     "original_title": "Heart of the Beast",
     "cinema_date": "23 septembre 2026",
     "vote_average": 7.6,
-    "vote_count": 889,
+    "vote_count": 924,
     "genres": [
       "Aventure",
       "Thriller"
@@ -182,7 +182,7 @@
     "original_title": "The Odyssey",
     "cinema_date": "15 juillet 2026",
     "vote_average": 8,
-    "vote_count": 4933,
+    "vote_count": 4981,
     "genres": [
       "Aventure",
       "Action",
@@ -200,6 +200,30 @@
     },
     "tier": "blockbuster",
     "lead_studio": "Universal Pictures"
+  },
+  {
+    "title": "De la Comédie-Française",
+    "plex_release": "19 novembre 2026",
+    "tmdb_id": 1496491,
+    "poster_path": "/3ykToOKrgIlKBOkxpRscXNAkzET.jpg",
+    "original_title": "De la Comédie-Française",
+    "cinema_date": "22 juillet 2026",
+    "vote_average": 6.8,
+    "vote_count": 113,
+    "genres": [
+      "Comédie"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
   },
   {
     "title": "La Fille dans les nuages",
@@ -228,30 +252,6 @@
     "lead_studio": null
   },
   {
-    "title": "De la Comédie-Française",
-    "plex_release": "19 novembre 2026",
-    "tmdb_id": 1496491,
-    "poster_path": "/3ykToOKrgIlKBOkxpRscXNAkzET.jpg",
-    "original_title": "De la Comédie-Française",
-    "cinema_date": "22 juillet 2026",
-    "vote_average": 6.8,
-    "vote_count": 113,
-    "genres": [
-      "Comédie"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
     "title": "Digger",
     "plex_release": "22 novembre 2026",
     "tmdb_id": 1248832,
@@ -259,7 +259,7 @@
     "original_title": "Digger",
     "cinema_date": "28 septembre 2026",
     "vote_average": 7.5,
-    "vote_count": 524,
+    "vote_count": 525,
     "genres": [
       "Comédie",
       "Drame"
@@ -284,7 +284,7 @@
     "original_title": "Spider-Man: Brand New Day",
     "cinema_date": "29 juillet 2026",
     "vote_average": 8.5,
-    "vote_count": 6894,
+    "vote_count": 6918,
     "genres": [
       "Science-Fiction",
       "Action",
