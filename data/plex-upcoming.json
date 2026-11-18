@@ -7,7 +7,7 @@
     "original_title": "Resident Evil",
     "cinema_date": "16 septembre 2026",
     "vote_average": 7.5,
-    "vote_count": 2293,
+    "vote_count": 2325,
     "genres": [
       "Horreur",
       "Science-Fiction",
@@ -24,32 +24,6 @@
     },
     "tier": "blockbuster",
     "lead_studio": "Columbia Pictures"
-  },
-  {
-    "title": "Primetime",
-    "plex_release": "3 novembre 2026",
-    "tmdb_id": 1375441,
-    "poster_path": "/8W69bkus937B2OzJapRmw2uY42s.jpg",
-    "original_title": "Primetime",
-    "cinema_date": "23 septembre 2026",
-    "vote_average": 6.8,
-    "vote_count": 440,
-    "genres": [
-      "Thriller",
-      "Drame",
-      "Crime"
-    ],
-    "is_french": false,
-    "source": "officielle-us",
-    "confidence": {
-      "level": "high",
-      "score": 0.82,
-      "sources": [
-        "officielle-us"
-      ]
-    },
-    "tier": "mid",
-    "lead_studio": "A24"
   },
   {
     "title": "Raison et Sentiments",
@@ -75,6 +49,32 @@
     },
     "tier": "mid",
     "lead_studio": "Focus Features"
+  },
+  {
+    "title": "Primetime",
+    "plex_release": "3 novembre 2026",
+    "tmdb_id": 1375441,
+    "poster_path": "/8W69bkus937B2OzJapRmw2uY42s.jpg",
+    "original_title": "Primetime",
+    "cinema_date": "23 septembre 2026",
+    "vote_average": 6.8,
+    "vote_count": 448,
+    "genres": [
+      "Thriller",
+      "Drame",
+      "Crime"
+    ],
+    "is_french": false,
+    "source": "officielle-us",
+    "confidence": {
+      "level": "high",
+      "score": 0.82,
+      "sources": [
+        "officielle-us"
+      ]
+    },
+    "tier": "mid",
+    "lead_studio": "A24"
   },
   {
     "title": "La Chaleur",
@@ -132,8 +132,8 @@
     "poster_path": "/4t1ASmI2IQEAoO8hirEGQ6nMEib.jpg",
     "original_title": "Heart of the Beast",
     "cinema_date": "23 septembre 2026",
-    "vote_average": 7.6,
-    "vote_count": 924,
+    "vote_average": 7.7,
+    "vote_count": 980,
     "genres": [
       "Aventure",
       "Thriller"
@@ -182,7 +182,7 @@
     "original_title": "The Odyssey",
     "cinema_date": "15 juillet 2026",
     "vote_average": 8,
-    "vote_count": 4981,
+    "vote_count": 5031,
     "genres": [
       "Aventure",
       "Action",
@@ -200,30 +200,6 @@
     },
     "tier": "blockbuster",
     "lead_studio": "Universal Pictures"
-  },
-  {
-    "title": "De la Comédie-Française",
-    "plex_release": "19 novembre 2026",
-    "tmdb_id": 1496491,
-    "poster_path": "/3ykToOKrgIlKBOkxpRscXNAkzET.jpg",
-    "original_title": "De la Comédie-Française",
-    "cinema_date": "22 juillet 2026",
-    "vote_average": 6.8,
-    "vote_count": 113,
-    "genres": [
-      "Comédie"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
   },
   {
     "title": "La Fille dans les nuages",
@@ -252,6 +228,30 @@
     "lead_studio": null
   },
   {
+    "title": "De la Comédie-Française",
+    "plex_release": "19 novembre 2026",
+    "tmdb_id": 1496491,
+    "poster_path": "/3ykToOKrgIlKBOkxpRscXNAkzET.jpg",
+    "original_title": "De la Comédie-Française",
+    "cinema_date": "22 juillet 2026",
+    "vote_average": 6.8,
+    "vote_count": 113,
+    "genres": [
+      "Comédie"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
     "title": "Digger",
     "plex_release": "22 novembre 2026",
     "tmdb_id": 1248832,
@@ -259,7 +259,7 @@
     "original_title": "Digger",
     "cinema_date": "28 septembre 2026",
     "vote_average": 7.5,
-    "vote_count": 525,
+    "vote_count": 527,
     "genres": [
       "Comédie",
       "Drame"
@@ -284,7 +284,7 @@
     "original_title": "Spider-Man: Brand New Day",
     "cinema_date": "29 juillet 2026",
     "vote_average": 8.5,
-    "vote_count": 6918,
+    "vote_count": 6940,
     "genres": [
       "Science-Fiction",
       "Action",
