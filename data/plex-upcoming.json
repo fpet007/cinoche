@@ -7,7 +7,7 @@
     "original_title": "Resident Evil",
     "cinema_date": "16 septembre 2026",
     "vote_average": 7.5,
-    "vote_count": 2325,
+    "vote_count": 2370,
     "genres": [
       "Horreur",
       "Science-Fiction",
@@ -33,7 +33,7 @@
     "original_title": "Sense and Sensibility",
     "cinema_date": "23 septembre 2026",
     "vote_average": 7.2,
-    "vote_count": 170,
+    "vote_count": 171,
     "genres": [
       "Drame",
       "Romance"
@@ -58,7 +58,7 @@
     "original_title": "Primetime",
     "cinema_date": "23 septembre 2026",
     "vote_average": 6.8,
-    "vote_count": 448,
+    "vote_count": 455,
     "genres": [
       "Thriller",
       "Drame",
@@ -102,30 +102,6 @@
     "lead_studio": null
   },
   {
-    "title": "Microstar",
-    "plex_release": "5 novembre 2026",
-    "tmdb_id": 1482377,
-    "poster_path": "/mgkVfPKIbsGA1xcBojVHAuOfaot.jpg",
-    "original_title": "Microstar",
-    "cinema_date": "8 juillet 2026",
-    "vote_average": 7,
-    "vote_count": 5,
-    "genres": [
-      "Comédie"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
     "title": "Heart of the Beast",
     "plex_release": "10 novembre 2026",
     "tmdb_id": 1263337,
@@ -133,7 +109,7 @@
     "original_title": "Heart of the Beast",
     "cinema_date": "23 septembre 2026",
     "vote_average": 7.7,
-    "vote_count": 980,
+    "vote_count": 1018,
     "genres": [
       "Aventure",
       "Thriller"
@@ -182,7 +158,7 @@
     "original_title": "The Odyssey",
     "cinema_date": "15 juillet 2026",
     "vote_average": 8,
-    "vote_count": 5031,
+    "vote_count": 5129,
     "genres": [
       "Aventure",
       "Action",
@@ -205,7 +181,7 @@
     "title": "La Fille dans les nuages",
     "plex_release": "19 novembre 2026",
     "tmdb_id": 1151265,
-    "poster_path": "/o4V7Kq7KJhbjgPpzIYYBzfie77o.jpg",
+    "poster_path": "/mWv4HUYAUkjLAPnmkiyoCU2cx0Q.jpg",
     "original_title": "La Fille dans les nuages",
     "cinema_date": "22 juillet 2026",
     "vote_average": 8,
@@ -259,7 +235,7 @@
     "original_title": "Digger",
     "cinema_date": "28 septembre 2026",
     "vote_average": 7.5,
-    "vote_count": 527,
+    "vote_count": 533,
     "genres": [
       "Comédie",
       "Drame"
@@ -284,7 +260,7 @@
     "original_title": "Spider-Man: Brand New Day",
     "cinema_date": "29 juillet 2026",
     "vote_average": 8.5,
-    "vote_count": 6940,
+    "vote_count": 6959,
     "genres": [
       "Science-Fiction",
       "Action",
