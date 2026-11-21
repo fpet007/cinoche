@@ -7,7 +7,7 @@
     "original_title": "Resident Evil",
     "cinema_date": "16 septembre 2026",
     "vote_average": 7.5,
-    "vote_count": 2397,
+    "vote_count": 2418,
     "genres": [
       "Horreur",
       "Science-Fiction",
@@ -58,7 +58,7 @@
     "original_title": "Primetime",
     "cinema_date": "23 septembre 2026",
     "vote_average": 6.8,
-    "vote_count": 463,
+    "vote_count": 467,
     "genres": [
       "Thriller",
       "Drame",
@@ -102,6 +102,30 @@
     "lead_studio": null
   },
   {
+    "title": "Microstar",
+    "plex_release": "5 novembre 2026",
+    "tmdb_id": 1482377,
+    "poster_path": "/mgkVfPKIbsGA1xcBojVHAuOfaot.jpg",
+    "original_title": "Microstar",
+    "cinema_date": "8 juillet 2026",
+    "vote_average": 7,
+    "vote_count": 5,
+    "genres": [
+      "Comédie"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
+  },
+  {
     "title": "Heart of the Beast",
     "plex_release": "10 novembre 2026",
     "tmdb_id": 1263337,
@@ -109,7 +133,7 @@
     "original_title": "Heart of the Beast",
     "cinema_date": "23 septembre 2026",
     "vote_average": 7.8,
-    "vote_count": 1057,
+    "vote_count": 1087,
     "genres": [
       "Aventure",
       "Thriller"
@@ -158,7 +182,7 @@
     "original_title": "The Odyssey",
     "cinema_date": "15 juillet 2026",
     "vote_average": 8,
-    "vote_count": 5191,
+    "vote_count": 5236,
     "genres": [
       "Aventure",
       "Action",
@@ -178,18 +202,16 @@
     "lead_studio": "Universal Pictures"
   },
   {
-    "title": "La Fille dans les nuages",
+    "title": "De la Comédie-Française",
     "plex_release": "19 novembre 2026",
-    "tmdb_id": 1151265,
-    "poster_path": "/mWv4HUYAUkjLAPnmkiyoCU2cx0Q.jpg",
-    "original_title": "La Fille dans les nuages",
+    "tmdb_id": 1496491,
+    "poster_path": "/3ykToOKrgIlKBOkxpRscXNAkzET.jpg",
+    "original_title": "De la Comédie-Française",
     "cinema_date": "22 juillet 2026",
-    "vote_average": 8,
-    "vote_count": 1,
+    "vote_average": 6.8,
+    "vote_count": 114,
     "genres": [
-      "Animation",
-      "Aventure",
-      "Fantastique"
+      "Comédie"
     ],
     "is_french": true,
     "source": "prédite",
@@ -204,16 +226,18 @@
     "lead_studio": null
   },
   {
-    "title": "De la Comédie-Française",
+    "title": "La Fille Dans Les Nuages",
     "plex_release": "19 novembre 2026",
-    "tmdb_id": 1496491,
-    "poster_path": "/3ykToOKrgIlKBOkxpRscXNAkzET.jpg",
-    "original_title": "De la Comédie-Française",
+    "tmdb_id": 1151265,
+    "poster_path": "/mWv4HUYAUkjLAPnmkiyoCU2cx0Q.jpg",
+    "original_title": "La Fille Dans Les Nuages",
     "cinema_date": "22 juillet 2026",
-    "vote_average": 6.8,
-    "vote_count": 113,
+    "vote_average": 8,
+    "vote_count": 1,
     "genres": [
-      "Comédie"
+      "Animation",
+      "Aventure",
+      "Fantastique"
     ],
     "is_french": true,
     "source": "prédite",
@@ -260,7 +284,7 @@
     "original_title": "Spider-Man: Brand New Day",
     "cinema_date": "29 juillet 2026",
     "vote_average": 8.5,
-    "vote_count": 6991,
+    "vote_count": 7012,
     "genres": [
       "Science-Fiction",
       "Action",
