@@ -7,7 +7,7 @@
     "original_title": "Resident Evil",
     "cinema_date": "16 septembre 2026",
     "vote_average": 7.5,
-    "vote_count": 2463,
+    "vote_count": 2505,
     "genres": [
       "Horreur",
       "Science-Fiction",
@@ -26,6 +26,32 @@
     "lead_studio": "Columbia Pictures"
   },
   {
+    "title": "Primetime",
+    "plex_release": "3 novembre 2026",
+    "tmdb_id": 1375441,
+    "poster_path": "/8W69bkus937B2OzJapRmw2uY42s.jpg",
+    "original_title": "Primetime",
+    "cinema_date": "23 septembre 2026",
+    "vote_average": 6.8,
+    "vote_count": 480,
+    "genres": [
+      "Thriller",
+      "Drame",
+      "Crime"
+    ],
+    "is_french": false,
+    "source": "officielle-us",
+    "confidence": {
+      "level": "high",
+      "score": 0.82,
+      "sources": [
+        "officielle-us"
+      ]
+    },
+    "tier": "mid",
+    "lead_studio": "A24"
+  },
+  {
     "title": "Raison et Sentiments",
     "plex_release": "3 novembre 2026",
     "tmdb_id": 1503762,
@@ -33,7 +59,7 @@
     "original_title": "Sense and Sensibility",
     "cinema_date": "23 septembre 2026",
     "vote_average": 7.2,
-    "vote_count": 173,
+    "vote_count": 175,
     "genres": [
       "Drame",
       "Romance"
@@ -51,30 +77,29 @@
     "lead_studio": "Focus Features"
   },
   {
-    "title": "Primetime",
-    "plex_release": "3 novembre 2026",
-    "tmdb_id": 1375441,
-    "poster_path": "/8W69bkus937B2OzJapRmw2uY42s.jpg",
-    "original_title": "Primetime",
-    "cinema_date": "23 septembre 2026",
-    "vote_average": 6.8,
-    "vote_count": 470,
+    "title": "La Chaleur",
+    "plex_release": "5 novembre 2026",
+    "tmdb_id": 1492288,
+    "poster_path": "/42uouj30D7oPf8sPY6ids5QDf55.jpg",
+    "original_title": "La Chaleur",
+    "cinema_date": "8 juillet 2026",
+    "vote_average": 6.1,
+    "vote_count": 26,
     "genres": [
-      "Thriller",
       "Drame",
-      "Crime"
+      "Thriller"
     ],
-    "is_french": false,
-    "source": "officielle-us",
+    "is_french": true,
+    "source": "prédite",
     "confidence": {
-      "level": "high",
-      "score": 0.82,
+      "level": "low",
+      "score": 0.45,
       "sources": [
-        "officielle-us"
+        "prédite"
       ]
     },
-    "tier": "mid",
-    "lead_studio": "A24"
+    "tier": "niche",
+    "lead_studio": null
   },
   {
     "title": "Microstar",
@@ -101,31 +126,6 @@
     "lead_studio": null
   },
   {
-    "title": "La Chaleur",
-    "plex_release": "5 novembre 2026",
-    "tmdb_id": 1492288,
-    "poster_path": "/42uouj30D7oPf8sPY6ids5QDf55.jpg",
-    "original_title": "La Chaleur",
-    "cinema_date": "8 juillet 2026",
-    "vote_average": 6.1,
-    "vote_count": 25,
-    "genres": [
-      "Drame",
-      "Thriller"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
     "title": "Heart of the Beast",
     "plex_release": "10 novembre 2026",
     "tmdb_id": 1263337,
@@ -133,7 +133,7 @@
     "original_title": "Heart of the Beast",
     "cinema_date": "23 septembre 2026",
     "vote_average": 7.8,
-    "vote_count": 1130,
+    "vote_count": 1167,
     "genres": [
       "Aventure",
       "Thriller"
@@ -182,7 +182,7 @@
     "original_title": "The Odyssey",
     "cinema_date": "15 juillet 2026",
     "vote_average": 8,
-    "vote_count": 5298,
+    "vote_count": 5390,
     "genres": [
       "Aventure",
       "Action",
@@ -209,7 +209,7 @@
     "original_title": "De la Comédie-Française",
     "cinema_date": "22 juillet 2026",
     "vote_average": 6.8,
-    "vote_count": 115,
+    "vote_count": 117,
     "genres": [
       "Comédie"
     ],
@@ -259,7 +259,7 @@
     "original_title": "Digger",
     "cinema_date": "28 septembre 2026",
     "vote_average": 7.5,
-    "vote_count": 536,
+    "vote_count": 538,
     "genres": [
       "Comédie",
       "Drame"
@@ -284,7 +284,7 @@
     "original_title": "Spider-Man: Brand New Day",
     "cinema_date": "29 juillet 2026",
     "vote_average": 8.5,
-    "vote_count": 7040,
+    "vote_count": 7060,
     "genres": [
       "Science-Fiction",
       "Action",
