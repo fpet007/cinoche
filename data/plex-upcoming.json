@@ -7,7 +7,7 @@
     "original_title": "Resident Evil",
     "cinema_date": "16 septembre 2026",
     "vote_average": 7.5,
-    "vote_count": 2505,
+    "vote_count": 2528,
     "genres": [
       "Horreur",
       "Science-Fiction",
@@ -32,8 +32,8 @@
     "poster_path": "/8W69bkus937B2OzJapRmw2uY42s.jpg",
     "original_title": "Primetime",
     "cinema_date": "23 septembre 2026",
-    "vote_average": 6.8,
-    "vote_count": 480,
+    "vote_average": 6.7,
+    "vote_count": 482,
     "genres": [
       "Thriller",
       "Drame",
@@ -59,7 +59,7 @@
     "original_title": "Sense and Sensibility",
     "cinema_date": "23 septembre 2026",
     "vote_average": 7.2,
-    "vote_count": 175,
+    "vote_count": 176,
     "genres": [
       "Drame",
       "Romance"
@@ -75,6 +75,30 @@
     },
     "tier": "mid",
     "lead_studio": "Focus Features"
+  },
+  {
+    "title": "Microstar",
+    "plex_release": "5 novembre 2026",
+    "tmdb_id": 1482377,
+    "poster_path": "/3Fvq4Lwve1hGM9BepqarlZLLEvN.jpg",
+    "original_title": "Microstar",
+    "cinema_date": "8 juillet 2026",
+    "vote_average": 7,
+    "vote_count": 5,
+    "genres": [
+      "Comédie"
+    ],
+    "is_french": true,
+    "source": "prédite",
+    "confidence": {
+      "level": "low",
+      "score": 0.45,
+      "sources": [
+        "prédite"
+      ]
+    },
+    "tier": "niche",
+    "lead_studio": null
   },
   {
     "title": "La Chaleur",
@@ -102,38 +126,14 @@
     "lead_studio": null
   },
   {
-    "title": "Microstar",
-    "plex_release": "5 novembre 2026",
-    "tmdb_id": 1482377,
-    "poster_path": "/mgkVfPKIbsGA1xcBojVHAuOfaot.jpg",
-    "original_title": "Microstar",
-    "cinema_date": "8 juillet 2026",
-    "vote_average": 7,
-    "vote_count": 5,
-    "genres": [
-      "Comédie"
-    ],
-    "is_french": true,
-    "source": "prédite",
-    "confidence": {
-      "level": "low",
-      "score": 0.45,
-      "sources": [
-        "prédite"
-      ]
-    },
-    "tier": "niche",
-    "lead_studio": null
-  },
-  {
     "title": "Heart of the Beast",
     "plex_release": "10 novembre 2026",
     "tmdb_id": 1263337,
     "poster_path": "/4t1ASmI2IQEAoO8hirEGQ6nMEib.jpg",
     "original_title": "Heart of the Beast",
     "cinema_date": "23 septembre 2026",
-    "vote_average": 7.8,
-    "vote_count": 1167,
+    "vote_average": 7.9,
+    "vote_count": 1196,
     "genres": [
       "Aventure",
       "Thriller"
@@ -182,7 +182,7 @@
     "original_title": "The Odyssey",
     "cinema_date": "15 juillet 2026",
     "vote_average": 8,
-    "vote_count": 5390,
+    "vote_count": 5427,
     "genres": [
       "Aventure",
       "Action",
@@ -209,7 +209,7 @@
     "original_title": "De la Comédie-Française",
     "cinema_date": "22 juillet 2026",
     "vote_average": 6.8,
-    "vote_count": 117,
+    "vote_count": 118,
     "genres": [
       "Comédie"
     ],
@@ -259,7 +259,7 @@
     "original_title": "Digger",
     "cinema_date": "28 septembre 2026",
     "vote_average": 7.5,
-    "vote_count": 538,
+    "vote_count": 539,
     "genres": [
       "Comédie",
       "Drame"
@@ -284,7 +284,7 @@
     "original_title": "Spider-Man: Brand New Day",
     "cinema_date": "29 juillet 2026",
     "vote_average": 8.5,
-    "vote_count": 7060,
+    "vote_count": 7086,
     "genres": [
       "Science-Fiction",
       "Action",
