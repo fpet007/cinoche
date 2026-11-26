@@ -7,7 +7,7 @@
     "original_title": "Resident Evil",
     "cinema_date": "16 septembre 2026",
     "vote_average": 7.5,
-    "vote_count": 2540,
+    "vote_count": 2567,
     "genres": [
       "Horreur",
       "Science-Fiction",
@@ -32,8 +32,8 @@
     "poster_path": "/8W69bkus937B2OzJapRmw2uY42s.jpg",
     "original_title": "Primetime",
     "cinema_date": "23 septembre 2026",
-    "vote_average": 6.8,
-    "vote_count": 485,
+    "vote_average": 6.7,
+    "vote_count": 490,
     "genres": [
       "Thriller",
       "Drame",
@@ -50,31 +50,6 @@
     },
     "tier": "mid",
     "lead_studio": "A24"
-  },
-  {
-    "title": "Raison et Sentiments",
-    "plex_release": "3 novembre 2026",
-    "tmdb_id": 1503762,
-    "poster_path": "/hpYHHl0P978F6AX5Xeew0fi2ryI.jpg",
-    "original_title": "Sense and Sensibility",
-    "cinema_date": "23 septembre 2026",
-    "vote_average": 7.2,
-    "vote_count": 176,
-    "genres": [
-      "Drame",
-      "Romance"
-    ],
-    "is_french": false,
-    "source": "officielle-us",
-    "confidence": {
-      "level": "high",
-      "score": 0.82,
-      "sources": [
-        "officielle-us"
-      ]
-    },
-    "tier": "mid",
-    "lead_studio": "Focus Features"
   },
   {
     "title": "Microstar",
@@ -133,7 +108,7 @@
     "original_title": "Heart of the Beast",
     "cinema_date": "23 septembre 2026",
     "vote_average": 7.9,
-    "vote_count": 1223,
+    "vote_count": 1235,
     "genres": [
       "Aventure",
       "Thriller"
@@ -182,7 +157,7 @@
     "original_title": "The Odyssey",
     "cinema_date": "15 juillet 2026",
     "vote_average": 8,
-    "vote_count": 5456,
+    "vote_count": 5490,
     "genres": [
       "Aventure",
       "Action",
@@ -205,11 +180,11 @@
     "title": "De la Comédie-Française",
     "plex_release": "19 novembre 2026",
     "tmdb_id": 1496491,
-    "poster_path": "/3ykToOKrgIlKBOkxpRscXNAkzET.jpg",
+    "poster_path": "/tmfj0vwLuFRPeyGXWAYCyZ2zxHQ.jpg",
     "original_title": "De la Comédie-Française",
     "cinema_date": "22 juillet 2026",
     "vote_average": 6.8,
-    "vote_count": 118,
+    "vote_count": 119,
     "genres": [
       "Comédie"
     ],
@@ -259,7 +234,7 @@
     "original_title": "Digger",
     "cinema_date": "28 septembre 2026",
     "vote_average": 7.5,
-    "vote_count": 540,
+    "vote_count": 541,
     "genres": [
       "Comédie",
       "Drame"
@@ -284,7 +259,7 @@
     "original_title": "Spider-Man: Brand New Day",
     "cinema_date": "29 juillet 2026",
     "vote_average": 8.5,
-    "vote_count": 7102,
+    "vote_count": 7117,
     "genres": [
       "Science-Fiction",
       "Action",
